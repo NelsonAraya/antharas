@@ -42,7 +42,8 @@ class RrhhController extends Controller
     public function store(Request $request)
     {
         $usu = new Usuario($request->all());
-        
+        dd($request->all());
+        die();
         $run = str_replace('.','',$request->run);
         $run = str_replace('-','',$request->run);
 
@@ -53,7 +54,7 @@ class RrhhController extends Controller
         $usu->dv= $dv;
         $usu->password = bcrypt($id);
         $usu->save();
-        
+
         session()->flash('success', 'El usuario '.$usu->nombreSimple().' ha sido creado.');
 
         return redirect()->route('usuarios.index');
@@ -78,7 +79,15 @@ class RrhhController extends Controller
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::find($id);
+
+        $cia=Cia::pluck('nombre','id');
+        $cargo=Cargo::pluck('nombre','id');
+        
+        return view('rrhh.edit')
+                ->with('cia',$cia)
+                ->with('cargo',$cargo)
+                ->with('usu',$usuario);
     }
 
     /**

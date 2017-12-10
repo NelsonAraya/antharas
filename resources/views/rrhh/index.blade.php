@@ -33,7 +33,7 @@
 				<a href="" class="btn btn-warning justify-content-center">
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </a>
-				<a href="" class="btn btn-success justify-content-center">
+				<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </a>
                 <a href="" class="btn btn-danger justify-content-center">

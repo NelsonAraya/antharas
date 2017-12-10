@@ -54,6 +54,18 @@ class CargosTableSeeder extends Seeder
         $a = new App\Cargo();
         $a->nombre="COMANDANTE";
         $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="ADMINISTRATIVO CBI";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="CONDUCTOR CBI";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="OPERADOR CBI";
+        $a->save();
      
     }
 }

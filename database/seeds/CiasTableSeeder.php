@@ -55,5 +55,10 @@ class CiasTableSeeder extends Seeder
         $a->numero=14;
         $a->nombre="Cia. Guardiamarina Ernesto Riquelme";
         $a->save();
+
+        $a = new App\Cia();
+        $a->numero=100;
+        $a->nombre="Cuerpo de Bomberos de Iquique";
+        $a->save();
     }
 }
