@@ -17,5 +17,9 @@ class Cia extends Model
 
     	return $this->nombre.' N° '.$this->numero;
     }
+
+    public function vehiculos(){
+        return $this->hasMany(Vehiculo::class,'cia_id','id');
+    }
        
 }

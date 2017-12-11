@@ -23,4 +23,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('rrhh')->group(function () {
     Route::resource('usuarios','RrhhController');
+    Route::resource('conductores','ConductorController');
 });

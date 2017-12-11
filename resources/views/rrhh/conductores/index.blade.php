@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="form-group row">
-	<a href="{{ route('usuarios.create') }}" class="btn btn-info" role="button">Nuevo Usuario</a>
 	<div class="col-md-3 pull-right">
 	    <div class="input-group">
 	      <input type="text" class="form-control" placeholder="Busqueda por...">
@@ -15,11 +14,11 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>ID</th>
+				<th>RUN</th>
 				<th>NOMBRE</th>
 				<th>CARGO</th>
 				<th>CIA</th>
-				<th>ACCION</th>
+				<th>MIS UNIDADES</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,14 +29,8 @@
 				<td>{{ $row->cargo->nombre }}  </td>
 				<td>{{ $row->cia->nombreCompleto() }}  </td>
 				<td>
-				<a href="" class="btn btn-warning justify-content-center">
-                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-                </a>
-				<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">
-                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                </a>
-                <a href="" class="btn btn-danger justify-content-center">
-   		           <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+				<a href="{{ route('conductores.edit',$row->id) }}" class="btn btn-success justify-content-center">
+                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 </a>
 				</td>
 			</tr>

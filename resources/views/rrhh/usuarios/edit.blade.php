@@ -1,8 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('usuarios.store') }}">
+<form method="POST" action="{{ route('usuarios.update',$usu->id) }}">
 	{{ csrf_field() }}
+	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
 	<div class="panel-heading">Editar Usuario</div>
 		<div class="panel-body">
@@ -78,8 +79,10 @@
 				<div class="col-md-2">
 					<label>CONDUCTOR</label>
 					<br>
-					<label class="radio-inline"><input type="radio" name="conductor">SI</label>
-					<label class="radio-inline"><input type="radio" name="conductor">NO</label>	
+					<label class="radio-inline"><input type="radio" @if($usu->conductor=='S')
+					checked  @endif name="conductor" value="si" >SI</label>
+					<label class="radio-inline"><input type="radio" @if($usu->conductor=='N')
+					checked  @endif name="conductor" value="no" >NO</label>	
 				</div>			
 				<div class="col-md-1">
 					<label for="">Modificar</label>

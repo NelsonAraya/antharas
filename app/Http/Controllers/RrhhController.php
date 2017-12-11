@@ -16,7 +16,7 @@ class RrhhController extends Controller
     public function index()
     {
         $usuario = Usuario::orderBy('rol','ASC')->paginate(10);
-        return view('rrhh.index')->with('usu',$usuario);
+        return view('rrhh.usuarios.index')->with('usu',$usuario);
     }
 
     /**
@@ -28,7 +28,7 @@ class RrhhController extends Controller
     {
         $cia=Cia::pluck('nombre','id');
         $cargo=Cargo::pluck('nombre','id');
-        return view('rrhh.create')
+        return view('rrhh.usuarios.create')
                 ->with('cia',$cia)
                 ->with('cargo',$cargo);
     }
@@ -42,8 +42,13 @@ class RrhhController extends Controller
     public function store(Request $request)
     {
         $usu = new Usuario($request->all());
-        dd($request->all());
-        die();
+        
+        if($request->conductor=="si"){
+            $usu->conductor='S';
+        }else{
+            $usu->conductor='N';
+        }
+
         $run = str_replace('.','',$request->run);
         $run = str_replace('-','',$request->run);
 
@@ -84,7 +89,7 @@ class RrhhController extends Controller
         $cia=Cia::pluck('nombre','id');
         $cargo=Cargo::pluck('nombre','id');
         
-        return view('rrhh.edit')
+        return view('rrhh.usuarios.edit')
                 ->with('cia',$cia)
                 ->with('cargo',$cargo)
                 ->with('usu',$usuario);
@@ -99,7 +104,19 @@ class RrhhController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usu = Usuario::find($id);
+        $usu->fill($request->all());
+        if($request->conductor=="si"){
+            $usu->conductor='S';
+        }else{
+            $usu->conductor='N';
+        }
+
+        $usu->save();
+
+        session()->flash('info', 'El usuario '.$usu->nombreSimple().' ha sido Modificado.');
+
+        return redirect()->route('usuarios.index');
     }
 
     /**
