@@ -8,45 +8,31 @@
 	<div class="panel-heading">LISTA MATERIAL MAYOR CBI</div>
 		<div class="panel-body">
 			<div class="form-group row">
-				<div class="col-md-2">
-					<label for="run">RUN</label>
-					<input id="run" name="run" class="form-control" autocomplete="off" 
-					value="{{ $usu->id.$usu->dv }}" autofocus>
-				</div>
-				<div class="col-md-1">
-					<label for="rol">ROL</label>
-					<input id="rol" name="rol" class="form-control" autocomplete="off" 
-					value="{{ $usu->rol }}">
-				</div>
-				<div class="col-md-3">
-					<label for="nombres">NOMBRES</label>
-					<input id="nombres" name="nombres" class="form-control" autocomplete="off"
-					value="{{ $usu->nombres }}">
-				</div>
-				<div class="col-md-2">
-					<label for="paterno">PATERNO</label>
-					<input id="paterno" name="apellidop" class="form-control" autocomplete="off"
-					value="{{ $usu->apellidop }}">
-				</div>
-				<div class="col-md-2">
-					<label for="materno">MATERNO</label>
-					<input id="materno" name="apellidom" class="form-control" autocomplete="off"
-					value="{{ $usu->apellidom }}">
-				</div>
+				@foreach($mat as $clave => $row)
+					@php   $flag=false;  @endphp
+                    @foreach($usu->vehiculos as $veh)
+                        @if($row->id == $veh->id)
+                            @php $flag=true;
+                            break;
+                            @endphp
+                         @else 
+                            @php $flag=false;
+                            @endphp   
+                        @endif
+                    @endforeach 
+					<div class="col-md-1">
+						<label class="checkbox-inline">
+						<input type="checkbox" name="vehiculos[]"
+						@if($flag) checked="checked" @endif	
+						value="{{ $row->id }}">{{ $row->clave }}
+						</label>
+					</div>
+				@endforeach
 			</div>
-
 			<div class="form-group row">
-				<div class="col-md-2">
-					<label>CONDUCTOR</label>
-					<br>
-					<label class="radio-inline"><input type="radio" @if($usu->conductor=='S')
-					checked  @endif name="conductor" value="si" >SI</label>
-					<label class="radio-inline"><input type="radio" @if($usu->conductor=='N')
-					checked  @endif name="conductor" value="no" >NO</label>	
-				</div>			
 				<div class="col-md-1">
 					<label for="">Modificar</label>
-					<button type="submit" class="btn btn-warning">Modificar</button>
+					<button type="submit" class="btn btn-success">Modificar</button>
 				</div>
 			</div>
 		</div>		

@@ -18,9 +18,15 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
+            @auth
             <ul class="nav navbar-nav">
                 <li class="dropdown
-                 @if(Route::currentRouteName()=='usuarios.index')active @endif">
+                 @if(Route::currentRouteName()=='usuarios.index' OR 
+                     Route::currentRouteName()=='usuarios.create' OR 
+                     Route::currentRouteName()=='conductores.index' OR 
+                     Route::currentRouteName()=='usuarios.edit' OR 
+                     Route::currentRouteName()=='conductores.edit'   
+                 )active @endif">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                     role="button" aria-haspopup="true" aria-expanded="false">RRHH
                      <span class="caret"></span>
@@ -29,9 +35,10 @@
                     <li><a href="{{ route('usuarios.index') }}">usuarios</a></li>
                     <li><a href="{{ route('conductores.index') }}">Conductores</a></li>
                   </ul>
-                </li>    
+                </li> 
+                <li class="@if( Route::currentRouteName()=='activacion.index')active  @endif"><a href="{{ route('activacion.index') }}">Activacion</a></li>   
             </ul>
-
+            @endauth
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Usuario;
+use App\Activacion;
 use App\Vehiculo;
-class ConductorController extends Controller
+use Illuminate\Support\Facades\Auth;
+class ActivacionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +16,40 @@ class ConductorController extends Controller
      */
     public function index()
     {
-        $usuario = Usuario::where('conductor','S')->orderBy('rol','ASC')->paginate(10);
-        return view('rrhh.conductores.index')->with('usu',$usuario);
+        $usu = Usuario::find(Auth::user()->id);
+        foreach ($usu->vehiculos as $key =>  $row) {
+            if($row->activacion=='S'){
+                $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+            }
+        }
+        if(empty($a)){
+            return view('activacion.index')->with('usu',$usu);
+        }else{
+            return view('activacion.index')->with('usu',$usu)->with('conductor',$a); 
+        }
+
+    }
+
+    public function activacion($usu,$veh,$estado){
+        
+        $acti = new  Activacion();
+        $vehiculo = Vehiculo::find($veh);
+        $acti->usuario_id=$usu;
+        $acti->vehiculo_id=$veh;
+        $acti->estado=$estado;
+
+        $acti->save();
+        $vehiculo->activacion=$estado;
+        $vehiculo->save();
+        if($estado == 'S'){
+            $a="Activado";
+        }else{
+            $a="Desactivado";
+        }
+        session()->flash('info', 'Unidad '.$vehiculo->clave.' ha sido '.$a.' correctamente');
+
+        return redirect()->route('activacion.index');
+
     }
 
     /**
@@ -58,11 +92,7 @@ class ConductorController extends Controller
      */
     public function edit($id)
     {
-        $usuario = Usuario::find($id);
-        $mat = Vehiculo::where('estado','A')->get();
-        return view('rrhh.conductores.edit')
-                ->with('usu',$usuario)
-                ->with('mat',$mat);
+        //
     }
 
     /**
@@ -74,18 +104,7 @@ class ConductorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $usu = Usuario::find($id);
-
-        $usu->vehiculos()->detach();
-
-        foreach ((array)$request->vehiculos as $row){
-              $usu->vehiculos()->attach($row);
-        }
-
-        session()->flash('success', 'Ha sido Modificado '.$usu->nombreSimple().'');
-
-        return redirect()->route('conductores.index');
+        //
     }
 
     /**

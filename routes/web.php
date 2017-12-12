@@ -25,3 +25,5 @@ Route::prefix('rrhh')->group(function () {
     Route::resource('usuarios','RrhhController');
     Route::resource('conductores','ConductorController');
 });
+ Route::resource('activacion','ActivacionController');
+ Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo');

@@ -36,9 +36,15 @@
       #push,
       #footer {
         height: 60px;
-      }
-      #footer {
+        position: fixed;
+        left:0px;
+        bottom:0px;
+        width:100%;
         background-color: #f5f5f5;
+        display: table;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
       }
 
       /* Lastly, apply responsive CSS fixes as necessary */

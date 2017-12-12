@@ -45,4 +45,8 @@ class Usuario extends Authenticatable
     public function runCompleto() {
       return number_format($this->id, 0,'.','.') . '-' . $this->dv;
     }
+
+    public function vehiculos(){
+        return $this->belongsToMany(Vehiculo::class)->withTimestamps();
+    }
 }
