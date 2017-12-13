@@ -13,9 +13,10 @@ class RrhhController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $usuario = Usuario::orderBy('rol','ASC')->paginate(10);
+        $usuario = Usuario::Nombres($request->q)->orderBy('rol','Asc')->paginate(10);
+        //$usuario = Usuario::orderBy('rol','ASC')->paginate(10);
         return view('rrhh.usuarios.index')->with('usu',$usuario);
     }
 

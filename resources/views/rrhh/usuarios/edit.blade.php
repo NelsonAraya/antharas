@@ -42,8 +42,9 @@
 						@foreach($cia as $key => $value)
 							@if($usu->cia_id== $key)
 								<option value="{{ $key }}" selected> {{ $value }}</option>
-							@endif
+							@else
 								<option value="{{ $key }}"> {{ $value }}</option>
+							@endif
 						@endforeach
 					</select>
 				</div>

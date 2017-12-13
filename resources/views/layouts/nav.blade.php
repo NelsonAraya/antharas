@@ -35,8 +35,34 @@
                     <li><a href="{{ route('usuarios.index') }}">usuarios</a></li>
                     <li><a href="{{ route('conductores.index') }}">Conductores</a></li>
                   </ul>
-                </li> 
-                <li class="@if( Route::currentRouteName()=='activacion.index')active  @endif"><a href="{{ route('activacion.index') }}">Activacion</a></li>   
+                </li>
+                <li class="dropdown
+                 @if( Route::currentRouteName()=='activacion.index' OR 
+                      Route::currentRouteName()=='activacion.cuarteles')active  @endif">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                    role="button" aria-haspopup="true" aria-expanded="false">Activacion
+                     <span class="caret"></span>
+                    </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ route('activacion.index') }}">Activacion</a></li>   
+                    <li><a href="{{ route('activacion.cuarteles') }}">Ver Activaciones</a></li>
+                
+                  </ul>
+                </li>
+                <li class="dropdown 
+                @if( Route::currentRouteName()=='material_mayor.index' OR 
+                     Route::currentRouteName()=='material_mayor.create' OR 
+                     Route::currentRouteName()=='material_mayor.edit')active  @endif">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                    role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
+                     <span class="caret"></span>
+                    </a>
+                  <ul class="dropdown-menu">
+                    <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>   
+                    <li><a href="#">Agregar.</a></li>
+                
+                  </ul>
+                </li>    
             </ul>
             @endauth
             <!-- Right Side Of Navbar -->

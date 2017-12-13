@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Usuario;
 use App\Activacion;
 use App\Vehiculo;
+use App\Cia;
 use Illuminate\Support\Facades\Auth;
 class ActivacionController extends Controller
 {
@@ -50,6 +51,19 @@ class ActivacionController extends Controller
 
         return redirect()->route('activacion.index');
 
+    }
+
+    public function showCuarteles(){
+
+        $cia= Cia::where('numero','!=',100)->get();
+        return view('activacion.show')->with('cia',$cia);
+    }
+
+    public function cuartelesActivos(){
+        
+        $veh = Vehiculo::where('estado','A')->get();
+        return response()->json($veh);
+        
     }
 
     /**

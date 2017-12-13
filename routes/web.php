@@ -22,8 +22,18 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::prefix('rrhh')->group(function () {
-    Route::resource('usuarios','RrhhController');
-    Route::resource('conductores','ConductorController');
+    Route::resource('usuarios','RrhhController')->middleware('auth');
+    Route::resource('conductores','ConductorController')->middleware('auth');
 });
- Route::resource('activacion','ActivacionController');
- Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo');
+
+Route::get('activacion/view', 'ActivacionController@cuartelesActivos')->name('activacion.vista')->middleware('auth');
+
+Route::get('activacion/cuarteles','ActivacionController@showCuarteles')->name('activacion.cuarteles')->middleware('auth');
+
+Route::resource('activacion','ActivacionController')->middleware('auth');
+
+Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo')->middleware('auth');
+
+Route::prefix('admin')->group(function () {
+    Route::resource('material_mayor','MatMayorController')->middleware('auth');
+});

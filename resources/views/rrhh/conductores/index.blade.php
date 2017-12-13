@@ -2,15 +2,18 @@
 
 @section('content')
 
-<div class="form-group row">
+<form method="GET" action="{{ route('conductores.index') }}" class="navbar_form pull-right">
 	<div class="col-md-3 pull-right">
-	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Busqueda por...">
-	      <span class="input-group-btn">
-	        <button class="btn btn-primary" type="button">Go!</button>
-	      </span>
-	    </div><!-- /input-group -->
-  	</div><!-- /.col-lg-6 -->
+		<div class="input-group">
+			<input type="text" class="form-control" name="q" placeholder="Buscar usuario por nombre" autocomplete="off">
+			<span class="input-group-btn">
+				<button class="btn btn-primary" type="submit">
+			    	<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+				</button>
+			</span>
+		</div>
+	</div>
+</form>
 	<table class="table">
 		<thead>
 			<tr>
@@ -37,6 +40,7 @@
 			@endforeach
 		</tbody>
 	</table>
+	{{ $usu->render() }}
 </div>
 
 @endsection

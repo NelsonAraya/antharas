@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Usuario;
 use App\Vehiculo;
-class ConductorController extends Controller
+use App\Cia;
+class MatMayorController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class ConductorController extends Controller
      */
     public function index(Request $request)
     {
-        $usuario = Usuario::Nombres($request->q)->where('conductor','S')->orderBy('rol','Asc')->paginate(10);
-        //$usuario = Usuario::where('conductor','S')->orderBy('rol','ASC')->paginate(10);
-        return view('rrhh.conductores.index')->with('usu',$usuario);
+        $veh = Vehiculo::Clave($request->q)->orderBy('id','ASC')->paginate(10);
+        return view('admin.matmayor.index')->with('veh',$veh);
     }
 
     /**
@@ -26,7 +25,8 @@ class ConductorController extends Controller
      */
     public function create()
     {
-        //
+        $cia=Cia::pluck('nombre','id');      
+        return view('admin.matmayor.create')->with('cia',$cia);
     }
 
     /**
@@ -37,7 +37,16 @@ class ConductorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $veh = new  Vehiculo($request->all());
+        $veh->patente=strtoupper($veh->patente);
+        $veh->clave=strtoupper($veh->clave);
+        $veh->modelo=strtoupper($veh->modelo);
+        $veh->marca=strtoupper($veh->marca);
+        $veh->save();
+
+        session()->flash('info', 'La Unidad '.$veh->clave.' patente:'. $veh->patente.' ha sido creado.');
+
+        return redirect()->route('material_mayor.index');
     }
 
     /**
@@ -59,11 +68,9 @@ class ConductorController extends Controller
      */
     public function edit($id)
     {
-        $usuario = Usuario::find($id);
-        $mat = Vehiculo::where('estado','A')->get();
-        return view('rrhh.conductores.edit')
-                ->with('usu',$usuario)
-                ->with('mat',$mat);
+        $veh = Vehiculo::find($id);
+        $cia = Cia::pluck('nombre','id'); 
+        return view('admin.matmayor.edit')->with('veh',$veh)->with('cia',$cia);
     }
 
     /**
@@ -75,18 +82,7 @@ class ConductorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $usu = Usuario::find($id);
-
-        $usu->vehiculos()->detach();
-
-        foreach ((array)$request->vehiculos as $row){
-              $usu->vehiculos()->attach($row);
-        }
-
-        session()->flash('success', 'Ha sido Modificado '.$usu->nombreSimple().'');
-
-        return redirect()->route('conductores.index');
+        //
     }
 
     /**

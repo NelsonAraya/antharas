@@ -49,4 +49,12 @@ class Usuario extends Authenticatable
     public function vehiculos(){
         return $this->belongsToMany(Vehiculo::class)->withTimestamps();
     }
+
+    public function scopeNombres($query, $name) {
+      if($name != "") {
+        return $query->where('nombres', "LIKE", "%$name%")
+        ->orWhere('apellidop',"LIKE","%$name%")
+        ->orWhere('apellidom',"LIKE","%$name%");  
+      }  
+    }
 }
