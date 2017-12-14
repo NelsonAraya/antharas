@@ -24,6 +24,8 @@
   /*padding: 15px; /* firefox bug fix */
   width: auto;
 }
-
+.panel-primary > .panel-heading {
+  background-color: #1947FF;
+}
 
 
