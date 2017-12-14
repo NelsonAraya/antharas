@@ -78,7 +78,12 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    SISTEMA ANTHARAS CUERPO DE BOMBEROS DE IQUIQUE
+                    <img src="{{ asset('plugins/icon/android-icon-144x144.png') }}">
+                    ANTHARAS 
+                    <img src="{{ asset('plugins/icon/android-icon-144x144.png') }}">
+                    <br>
+                    <br>
+                    SISTEMA ONLINE CBI
                 </div>
             </div>
         </div>

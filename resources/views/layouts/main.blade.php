@@ -94,7 +94,7 @@
 </head>
 <body>       
     @include('layouts.nav')
-    <div id="app" class="container">
+    <div class="container">
         @include('layouts.partials.erros')
         @include('layouts.partials.messages')
         @yield('content')
