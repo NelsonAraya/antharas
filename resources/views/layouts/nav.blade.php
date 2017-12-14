@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-inverse navbar-static-top">
     <div class="container">
         <div class="navbar-header">
 
@@ -9,7 +9,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
             <!-- Branding Image -->
             <a class="navbar-brand" href="{{ url('home') }}">
                 {{ config('app.name') }}

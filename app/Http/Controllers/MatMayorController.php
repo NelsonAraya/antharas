@@ -40,6 +40,15 @@ class MatMayorController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'patente' => 'required',
+            'clave' => 'required|string',
+            'modelo' => 'required',
+            'marca' => 'required',
+            'anio' => 'required',
+            'cia_id' => 'required',
+        ]);
+
         $veh = new  Vehiculo($request->all());
         $veh->patente=strtoupper($veh->patente);
         $veh->clave=strtoupper($veh->clave);

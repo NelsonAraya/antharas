@@ -43,6 +43,19 @@ class RrhhController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'run' => 'required',
+            'nombres' => 'required|string',
+            'apellidop' => 'required',
+            'apellidom' => 'required',
+            'cia_id' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required',
+            'email' => 'required',
+            'cargo_id' => 'required',
+            'conductor' => 'required',
+        ]);
+        
         $usu = new Usuario($request->all());
         
         if($request->conductor=="si"){
