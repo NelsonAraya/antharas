@@ -24,6 +24,8 @@
 							  <div class="panel-body">
 							  	<b>
 							    {{ $mat->clave }}
+							    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
+							    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
 								</b>
 							  </div>
 							</div>
@@ -41,6 +43,8 @@
 @section('js')
 <script type="text/javascript">
 	$(document).ready(function() {
+ 
+    	$('[data-toggle="popover"]').popover();  
 
     function getActivados(){
         
@@ -67,9 +71,11 @@
 					}
 
         			if(value.activacion=='S'){
-        				$('#'+value.id).css('background-color', '#00FF00');	
+        				$('#'+value.id).css('background-color', '#00FF00');
+        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia);
         			}else{
         				$('#'+value.id).css('background-color', 'red');
+        				$('#pop_'+value.id).attr('data-content','<b>Sin Conductor</b>');
         			}
         			
         		});

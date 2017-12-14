@@ -21,19 +21,26 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::prefix('rrhh')->group(function () {
-    Route::resource('usuarios','RrhhController')->middleware('auth');
-    Route::resource('conductores','ConductorController')->middleware('auth');
+Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
+	Route::get('usuarios/{usuarios}/roles','RrhhController@roles')
+	->name('usuarios.roles');
+	Route::match(['put','patch'],'usuarios/roles/{usuarios}','RrhhController@permisos')
+	->name('usuarios.permisos');
+    Route::resource('usuarios','RrhhController');
+    Route::resource('conductores','ConductorController');
 });
 
-Route::get('activacion/view', 'ActivacionController@cuartelesActivos')->name('activacion.vista')->middleware('auth');
+Route::get('activacion/view', 'ActivacionController@cuartelesActivos')->name('activacion.vista')->middleware('auth','role:activacion');
 
-Route::get('activacion/cuarteles','ActivacionController@showCuarteles')->name('activacion.cuarteles')->middleware('auth');
+Route::get('activacion/cuarteles','ActivacionController@showCuarteles')->name('activacion.cuarteles')->middleware('auth','role:activacion');
 
-Route::resource('activacion','ActivacionController')->middleware('auth');
+Route::resource('activacion','ActivacionController',['middleware' => ['role:activacion', 'auth']]);
 
-Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo')->middleware('auth');
+Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo')->middleware('auth','role:activacion');
 
 Route::prefix('admin')->group(function () {
-    Route::resource('material_mayor','MatMayorController')->middleware('auth');
+	Route::match(['put','patch'],'material_mayor/revision/{material_mayor}','MatMayorController@revision')->name('material_mayor.revision')->middleware('auth','role:adminCBI');
+	Route::match(['put','patch'],'material_mayor/permiso/{material_mayor}','MatMayorController@permiso')->name('material_mayor.permiso')->middleware('auth','role:adminCBI');
+	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');		
+    Route::resource('material_mayor','MatMayorController',['middleware' => ['role:adminCBI', 'auth']]);
 });

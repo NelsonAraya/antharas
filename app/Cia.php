@@ -15,7 +15,11 @@ class Cia extends Model
     
     public function nombreCompleto(){
 
-    	return $this->nombre.' N° '.$this->numero;
+    	if($this->numero==100){
+           return $this->nombre;  
+        }else{
+        return $this->nombre.' N° '.$this->numero;
+        }
     }
 
     public function vehiculos(){

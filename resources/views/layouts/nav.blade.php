@@ -20,49 +20,53 @@
             <!-- Left Side Of Navbar -->
             @auth
             <ul class="nav navbar-nav">
-                <li class="dropdown
-                 @if(Route::currentRouteName()=='usuarios.index' OR 
-                     Route::currentRouteName()=='usuarios.create' OR 
-                     Route::currentRouteName()=='conductores.index' OR 
-                     Route::currentRouteName()=='usuarios.edit' OR 
-                     Route::currentRouteName()=='conductores.edit'   
-                 )active @endif">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                    role="button" aria-haspopup="true" aria-expanded="false">RRHH
-                     <span class="caret"></span>
-                    </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{ route('usuarios.index') }}">usuarios</a></li>
-                    <li><a href="{{ route('conductores.index') }}">Conductores</a></li>
-                  </ul>
-                </li>
-                <li class="dropdown
-                 @if( Route::currentRouteName()=='activacion.index' OR 
-                      Route::currentRouteName()=='activacion.cuarteles')active  @endif">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                    role="button" aria-haspopup="true" aria-expanded="false">Activacion
-                     <span class="caret"></span>
-                    </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{ route('activacion.index') }}">Activacion</a></li>   
-                    <li><a href="{{ route('activacion.cuarteles') }}">Ver Activaciones</a></li>
-                
-                  </ul>
-                </li>
-                <li class="dropdown 
-                @if( Route::currentRouteName()=='material_mayor.index' OR 
-                     Route::currentRouteName()=='material_mayor.create' OR 
-                     Route::currentRouteName()=='material_mayor.edit')active  @endif">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                    role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
-                     <span class="caret"></span>
-                    </a>
-                  <ul class="dropdown-menu">
-                    <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>   
-                    <li><a href="#">Agregar.</a></li>
-                
-                  </ul>
-                </li>    
+                @if(Auth::user()->hasRole('rrhh'))
+                  <li class="dropdown
+                   @if(Route::currentRouteName()=='usuarios.index' OR 
+                       Route::currentRouteName()=='usuarios.create' OR 
+                       Route::currentRouteName()=='conductores.index' OR 
+                       Route::currentRouteName()=='usuarios.edit' OR 
+                       Route::currentRouteName()=='conductores.edit'   
+                   )active @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">RRHH
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('usuarios.index') }}">usuarios</a></li>
+                      <li><a href="{{ route('conductores.index') }}">Conductores</a></li>
+                    </ul>
+                  </li>
+                @endif
+                @if(Auth::user()->hasRole('activacion'))
+                  <li class="dropdown
+                   @if( Route::currentRouteName()=='activacion.index' OR 
+                        Route::currentRouteName()=='activacion.cuarteles')active  @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">Activacion
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('activacion.index') }}">Activacion</a></li>   
+                      <li><a href="{{ route('activacion.cuarteles') }}">Ver Activaciones</a></li>
+                  
+                    </ul>
+                  </li>
+                @endif
+                @if(Auth::user()->hasRole('adminCBI'))
+                  <li class="dropdown 
+                  @if( Route::currentRouteName()=='material_mayor.index' OR 
+                       Route::currentRouteName()=='material_mayor.create' OR 
+                       Route::currentRouteName()=='material_mayor.edit')active  @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>   
+                    </ul>
+                  </li>
+                @endif    
             </ul>
             @endauth
             <!-- Right Side Of Navbar -->

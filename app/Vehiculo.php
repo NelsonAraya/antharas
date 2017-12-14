@@ -27,4 +27,16 @@ class Vehiculo extends Model
       }  
     }
 
+    public function revisiones(){
+        return $this->hasMany(RevicionTecnica::class,'vehiculo_id','id');
+    }
+
+    public function permisos(){
+        return $this->hasMany(PermisoCirculacion::class,'vehiculo_id','id');
+    }
+
+    public function seguros(){
+        return $this->hasMany(SeguroVehiculo::class,'vehiculo_id','id');
+    }
+
 }

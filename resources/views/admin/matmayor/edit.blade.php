@@ -50,9 +50,113 @@
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-success">Modificar</button>
+				</div>	
+			</div>
+</form>
+			<div class="form-group row">
+				<div class="col-md-4">
+					<form method="POST" action="{{ route('material_mayor.revision',$veh->id) }}">
+						{{ csrf_field() }}
+						{{ method_field('PUT') }}
+					<label>Agregar Revision Tecnica</label>
+				    <div class="input-group col-md-6">
+					    <input type="date" name="fecha_vencimiento" class="form-control">
+					    <span class="input-group-btn">
+					    	<button class="btn btn-primary" type="submit">Agregar</button>
+					    </span>
+					</div>
+					</form>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Fecha Vencimiento Revision</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($rev as $row)
+							<tr>
+								<td> {{ $row->fecha_vencimiento }} </td>
+								<td>
+								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					            </a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{{ $rev->render() }}
+				</div>
+				<div class="col-md-4">
+				<form method="POST" action="{{ route('material_mayor.permiso',$veh->id) }}">
+						{{ csrf_field() }}
+						{{ method_field('PUT') }}
+					<label>Agregar Permiso Circulacion</label>
+				    <div class="input-group col-md-6">
+					    <input type="date" name="fecha_vencimiento" class="form-control">
+					    <span class="input-group-btn">
+					    	<button class="btn btn-primary" type="submit">Agregar</button>
+					    </span>
+					</div>
+					</form>								
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Fecha Vencimiento Permiso</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($per as $row)
+							<tr>
+								<td> {{ $row->fecha_vencimiento }} </td>
+								<td>
+								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					            </a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{{ $per->render() }}
+				</div>
+				<div class="col-md-4">
+			<form method="POST" action="{{ route('material_mayor.seguro',$veh->id) }}">
+						{{ csrf_field() }}
+						{{ method_field('PUT') }}
+					<label>Agregar Seguro</label>
+				    <div class="input-group col-md-6">
+					    <input type="date" name="fecha_vencimiento" class="form-control">
+					    <span class="input-group-btn">
+					    	<button class="btn btn-primary" type="submit">Agregar</button>
+					    </span>
+					</div>
+					</form>					
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Fecha Vencimiento Seguro</th>
+								<th>Accion</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach ($seg as $row)
+							<tr>
+								<td> {{ $row->fecha_vencimiento }} </td>
+								<td>
+								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					            </a>
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+					</table>
+					{{ $seg->render() }}
 				</div>
 			</div>
 		</div>		
 	</div>
-</form>
 @endsection

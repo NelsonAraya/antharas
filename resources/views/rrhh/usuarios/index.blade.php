@@ -23,7 +23,7 @@
 				<th>RUN</th>
 				<th>NOMBRE</th>
 				<th>CARGO</th>
-				<th>CIA</th>
+				<th>DOTACION</th>
 				<th>ACCION</th>
 			</tr>
 		</thead>
@@ -35,7 +35,8 @@
 				<td>{{ $row->cargo->nombre }}  </td>
 				<td>{{ $row->cia->nombreCompleto() }}  </td>
 				<td>
-				<a href="" class="btn btn-warning justify-content-center">
+				<a href="{{ route('usuarios.roles',$row->id) }}" 
+					class="btn btn-warning justify-content-center">
                     <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
                 </a>
 				<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">

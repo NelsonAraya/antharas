@@ -89,6 +89,7 @@
         }
       }
     </style>
+    @yield('css')
 </head>
 <body>       
     @include('layouts.nav')

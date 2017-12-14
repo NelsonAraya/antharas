@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cia;
 use App\Cargo;
 use App\Usuario;
+use App\Role;
 class RrhhController extends Controller
 {
     /**
@@ -129,5 +130,26 @@ class RrhhController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function roles($id){
+        
+        $usu = Usuario::find($id);
+        $rol = Role::pluck('descripcion','id');
+        return view('rrhh.usuarios.roles')->with('usu',$usu)->with('roles',$rol);
+    }
+
+    public function permisos(Request $request,$id){
+
+        $usu = Usuario::find($id);
+        $usu->roles()->detach();
+
+        foreach ((array)$request->roles as $row){
+              $usu->roles()->attach($row);
+        }
+
+        session()->flash('info', 'Permisos Actualizados Correctamente');
+
+        return redirect()->route('usuarios.roles',$usu->id);
+        
     }
 }

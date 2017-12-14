@@ -11,6 +11,9 @@ class UsuariosTableSeeder extends Seeder
      */
     public function run()
     {
+        $role = App\Role::where('nombre','adminCBI')->first();
+        $role2 = App\Role::where('nombre','rrhh')->first();
+        
         $usu = new App\Usuario();
         $usu->id=17096233;
         $usu->dv='8';
@@ -24,6 +27,8 @@ class UsuariosTableSeeder extends Seeder
         $usu->cargo_id=1;
         $usu->email='tu@mail.cl';
         $usu->password=bcrypt('antharas');
+        $usu->roles()->attach($role);
+        $usu->roles()->attach($role2);
         $usu->save();
     }
 }
