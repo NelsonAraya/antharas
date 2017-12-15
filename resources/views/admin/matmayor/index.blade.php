@@ -4,7 +4,9 @@
 
 <div class="form-group row">
 <form method="GET" action="{{ route('material_mayor.index') }}" class="navbar_form pull-right">
+	<div class="col-md-1">
 		<a href="{{ route('material_mayor.create') }}" class="btn btn-info" role="button">Nuevo Vehiculo</a>
+	</div>	
 	<div class="col-md-3 pull-right">
 		<div class="input-group">
 			<input type="text" class="form-control" name="q" placeholder="Buscar Unidad por Clave" autocomplete="off">
@@ -21,9 +23,9 @@
 			<tr>
 				<th>PATENTE</th>
 				<th>CLAVE</th>
-				<th>MODELO</th>
-				<th>MARCA</th>
-				<th>CIA ASIGNADA</th>
+				<th class="hidden-xs">MODELO</th>
+				<th class="hidden-xs">MARCA</th>
+				<th class="hidden-xs">CIA ASIGNADA</th>
 				<th>ESTADO</th>
 				<th>ACCION</th>
 			</tr>
@@ -33,9 +35,9 @@
 			<tr>
 				<td> {{ $row->patente }} </td>
 				<td>{{ $row->clave }}  </td>
-				<td>{{ $row->modelo }}  </td>
-				<td>{{ $row->marca }}  </td>
-				<td> {{ $row->cia->nombreCompleto() }} </td>
+				<td class="hidden-xs">{{ $row->modelo }}  </td>
+				<td class="hidden-xs">{{ $row->marca }}  </td>
+				<td class="hidden-xs"> {{ $row->cia->nombreCompleto() }} </td>
 				<td> @if($row->estado=='A')Activo @else Inactivo @endif </td>
 				<td>
 				<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-warning justify-content-center">

@@ -19,9 +19,9 @@
 			<tr>
 				<th>RUN</th>
 				<th>NOMBRE</th>
-				<th>CARGO</th>
-				<th>CIA</th>
-				<th>MIS UNIDADES</th>
+				<th class="hidden-xs">CARGO</th>
+				<th class="hidden-xs">CIA</th>
+				<th style="width: 100px;">UNIDADES</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,8 +29,8 @@
 			<tr>
 				<td> {{ $row->runCompleto() }} </td>
 				<td>{{ $row->nombreSimple() }}  </td>
-				<td>{{ $row->cargo->nombre }}  </td>
-				<td>{{ $row->cia->nombreCompleto() }}  </td>
+				<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
+				<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>
 				<td>
 				<a href="{{ route('conductores.edit',$row->id) }}" class="btn btn-success justify-content-center">
                     <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>

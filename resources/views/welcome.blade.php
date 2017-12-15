@@ -46,7 +46,7 @@
             }
 
             .title {
-                font-size: 84px;
+                font-size: 65px;
             }
 
             .links > a {
@@ -78,13 +78,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    <img src="{{ asset('plugins/icon/android-icon-144x144.png') }}">
                     ANTHARAS 
-                    <img src="{{ asset('plugins/icon/android-icon-144x144.png') }}">
-                    <br>
-                    <br>
-                    SISTEMA ONLINE CBI
                 </div>
+                <footer>© Sistema de administración CBI.</footer>
             </div>
         </div>
     </body>

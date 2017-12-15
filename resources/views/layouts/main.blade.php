@@ -45,50 +45,35 @@
     <!-- Styles -->
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-       <style type="text/css">
-
-      /* Sticky footer styles
-      -------------------------------------------------- */
-
-      html,
-      body {
-        height: 100%;
-        /* The html and body elements cannot have any padding or margin. */
-      }
-
-      /* Wrapper for page content to push down footer */
-      #wrap {
-        min-height: 100%;
-        height: auto !important;
-        height: 100%;
-        /* Negative indent footer by it's height */
-        margin: 0 auto -60px;
-      }
-
+    <style type="text/css">
+    /* Sticky footer styles-- */
+    html {
+      position: relative;
+      min-height: 100%;
+    }
+    body {
+      /* Margin bottom by footer height */
+      margin-bottom: 60px;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
       /* Set the fixed height of the footer here */
-      #push,
-      #footer {
-        height: 60px;
-        position: fixed;
-        left:0px;
-        bottom:0px;
-        width:100%;
-        background-color: #f5f5f5;
-        display: table;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      /* Lastly, apply responsive CSS fixes as necessary */
-      @media (max-width: 767px) {
-        #footer {
-          margin-left: -20px;
-          margin-right: -20px;
-          padding-left: 20px;
-          padding-right: 20px;
-        }
-      }
+      height: 60px;
+      background-color: #f5f5f5;
+    }
+    /* Custom page CSS
+    -------------------------------------------------- */
+    /* Not required for template or sticky footer method. */
+    .container2 {
+      width: auto;
+      max-width: 680px;
+      padding: 0 15px;
+    }
+    .container .text-muted {
+      margin: 20px 0;
+    }
     </style>
     @yield('css')
 </head>
@@ -99,12 +84,11 @@
         @include('layouts.partials.messages')
         @yield('content')
     </div>
-    <div id="footer">
-          <div class="container">
-            <p class="text-muted credit">  © Copyright <a href="#">Nelson Araya</a></p>
-          </div>
-    </div>
-
+    <footer class="footer">
+      <div class="container2">
+            <p class="text-muted">© Copyright <a>Nelson Araya</a></p>
+      </div>
+    </footer>
     <!-- Scripts -->
     <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>

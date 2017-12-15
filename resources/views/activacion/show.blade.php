@@ -6,7 +6,7 @@
 	<thead>
 		<tr>
 			@foreach($cia as $row)
-				<th  style="width: 7%;">{{ $row->numero }}</th>
+				<th  style="width: 11%; text-align: center; border: 1px solid green;">{{ $row->numero }}</th>
 			@endforeach
 		</tr>
 	</thead>
@@ -19,7 +19,7 @@
 				@foreach($row->vehiculos as $mat)
 					@if($mat->estado=='A')
 					<tr>
-						<td>
+						<td style=" width: 11%;">
 							<div id="{{ $mat->id }}" class="panel panel-default">
 							  <div class="panel-body">
 							  	<b>

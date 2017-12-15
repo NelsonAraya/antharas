@@ -3,9 +3,10 @@
 @section('content')
 
 <div class="form-group row">
-	
 <form method="GET" action="{{ route('usuarios.index') }}" class="navbar_form pull-right">
-	<a href="{{ route('usuarios.create') }}" class="btn btn-info" role="button">Nuevo Usuario</a>
+	<div class="col-md-1">
+		<a href="{{ route('usuarios.create') }}" class="btn btn-info" role="button">Nuevo Usuario</a>
+	</div>
 	<div class="col-md-3 pull-right">
 		<div class="input-group">
 			<input type="text" class="form-control" name="q" placeholder="Buscar usuario por nombre" autocomplete="off">
@@ -17,23 +18,26 @@
 		</div>
 	</div>
 </form>
+
 	<table class="table">
 		<thead>
 			<tr>
 				<th>RUN</th>
 				<th>NOMBRE</th>
-				<th>CARGO</th>
-				<th>DOTACION</th>
-				<th>ACCION</th>
+				<th class="hidden-xs">CARGO</th>
+				<th class="hidden-xs">DOTACION</th>
+				<th style="width: 100px;">ACCION</th>
 			</tr>
 		</thead>
 		<tbody>
 			@foreach ($usu as $row)
 			<tr>
 				<td> {{ $row->runCompleto() }} </td>
-				<td>{{ $row->nombreSimple() }}  </td>
-				<td>{{ $row->cargo->nombre }}  </td>
-				<td>{{ $row->cia->nombreCompleto() }}  </td>
+				<td>{{ $row->nombreSimple() }} 
+					<span class="hidden-lg"><br>({{ $row->cargo->nombre }})</span> 
+				</td>
+				<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
+				<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>
 				<td>
 				<a href="{{ route('usuarios.roles',$row->id) }}" 
 					class="btn btn-warning justify-content-center">
@@ -42,15 +46,12 @@
 				<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">
                     <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                 </a>
-                <a href="" class="btn btn-danger justify-content-center">
-   		           <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                </a>
 				</td>
 			</tr>
 			@endforeach
 		</tbody>
 	</table>
-	{{ $usu->render() }}
+	{{ $usu->render() }}	
 </div>
 
 @endsection
