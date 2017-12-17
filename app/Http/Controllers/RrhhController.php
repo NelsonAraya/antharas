@@ -119,6 +119,19 @@ class RrhhController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'run' => 'required',
+            'nombres' => 'required|string',
+            'apellidop' => 'required',
+            'apellidom' => 'required',
+            'cia_id' => 'required',
+            'telefono' => 'required',
+            'direccion' => 'required',
+            'email' => 'required',
+            'cargo_id' => 'required',
+            'conductor' => 'required',
+        ]);
+
         $usu = Usuario::find($id);
         $usu->fill($request->all());
         if($request->conductor=="si"){

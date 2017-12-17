@@ -34,7 +34,7 @@
 			<tr>
 				<td> {{ $row->runCompleto() }} </td>
 				<td>{{ $row->nombreSimple() }} 
-					<span class="hidden-lg"><br>({{ $row->cargo->nombre }})</span> 
+					<span class="hidden-lg hidden-md"><br>({{ $row->cargo->nombre }})</span> 
 				</td>
 				<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
 				<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>

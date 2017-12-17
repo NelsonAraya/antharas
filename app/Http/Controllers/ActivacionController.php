@@ -7,6 +7,7 @@ use App\Usuario;
 use App\Activacion;
 use App\Vehiculo;
 use App\Cia;
+use App\RevicionTecnica;
 use Illuminate\Support\Facades\Auth;
 class ActivacionController extends Controller
 {
@@ -19,14 +20,16 @@ class ActivacionController extends Controller
     {
         $usu = Usuario::find(Auth::user()->id);
         foreach ($usu->vehiculos as $key =>  $row) {
+            $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
             if($row->activacion=='S'){
                 $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
             }
         }
         if(empty($a)){
-            return view('activacion.index')->with('usu',$usu);
+            return view('activacion.index')->with('usu',$usu)->with('rev',$b);
         }else{
-            return view('activacion.index')->with('usu',$usu)->with('conductor',$a); 
+            return view('activacion.index')->with('usu',$usu)
+            ->with('conductor',$a)->with('rev',$b); 
         }
 
     }

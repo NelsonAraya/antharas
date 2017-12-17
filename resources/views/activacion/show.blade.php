@@ -6,7 +6,7 @@
 	<thead>
 		<tr>
 			@foreach($cia as $row)
-				<th  style="width: 11%; text-align: center; border: 1px solid green;">{{ $row->numero }}</th>
+				<th  style="width: 11%; text-align: center; border: 1px solid green;">Cia N°{{ $row->numero }}</th>
 			@endforeach
 		</tr>
 	</thead>

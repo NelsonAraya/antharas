@@ -4,6 +4,7 @@
 <h1>MIS UNIDADES</h1>
 <div class="form-group row">
 	@foreach($usu->vehiculos as $row)
+		@php $control=false; @endphp 
 		@if($row->estado=='A')
 				@php 
 			  		$nom = "";
@@ -19,12 +20,21 @@
 			  			@break
 			  		@endif
 				@endforeach
+			@endisset
+			@isset ($rev)
+				@foreach ($rev as $revision)
+					@if($row->id == $revision['vehiculo_id'])
+						@if($revision['fecha_vencimiento']<= date('Y-m-d'))
+							@php $control=true; @endphp 
+						@endif
+					@endif
+				@endforeach
 			@endisset	
 			<div class="col-md-3">
 				<label for="conductor">{{ $row->clave }}</label>
 				<input type="text" id="conductor" class="form-control" readonly="" value="{{ @$nom }}">
 				<br>
-				<a @if($row->activacion=='S')
+				<a @if($row->activacion=='S' OR $control ==true)
 						href="#"
 						disabled
 					@else	
@@ -38,6 +48,12 @@
 						href="{{ route('activacion.vehiculo',[$usu->id,$row->id,'N']) }}" 
 					@endif
 						class="btn btn-danger" role="button">Desactivar</a>
+				@if($control)
+					<br><br>
+					<div class="alert alert-warning">
+	  					<strong>Atencion!</strong> Vehiculo con papeles vencidos.
+					</div>
+				@endif
 			</div>
 		@endif	
 	@endforeach
