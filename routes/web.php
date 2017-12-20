@@ -36,6 +36,11 @@ Route::get('activacion/cuarteles','ActivacionController@showCuarteles')->name('a
 
 Route::resource('activacion','ActivacionController',['middleware' => ['role:activacion', 'auth']]);
 
+Route::get('bitacora/search', 'BitacoraController@searchConductor')->middleware('auth','role:bitacora');
+Route::get('bitacora/searchVol', 'BitacoraController@searchObac')->middleware('auth','role:bitacora');
+Route::get('bitacora/{bitacora}/show', 'BitacoraController@verBitacora')->name('bitacora.ver')->middleware('auth','role:bitacora');
+Route::resource('bitacora','BitacoraController',['middleware' => ['role:bitacora', 'auth']]);
+
 Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo')->middleware('auth','role:activacion');
 
 Route::prefix('admin')->group(function () {

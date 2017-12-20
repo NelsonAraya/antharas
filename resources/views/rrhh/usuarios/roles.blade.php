@@ -68,7 +68,7 @@ input:checked + .slider:before {
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
-	  <div class="panel-heading">PERMISOS ANTHARAS</div>
+	  <div class="panel-heading">PERMISOS ANTHARAS -- {{ $usu->nombreSimple() }}</div>
 	  <div class="panel-body">
 	  	<div class="form-group row">
 	  		@foreach($roles  as $key => $rol)

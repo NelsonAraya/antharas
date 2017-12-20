@@ -65,7 +65,21 @@
                       <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>   
                     </ul>
                   </li>
-                @endif    
+                @endif
+                @if(Auth::user()->hasRole('bitacora'))
+                  <li class="dropdown 
+                  @if( Route::currentRouteName()=='bitacora.index' OR 
+                       Route::currentRouteName()=='bitacora.show' OR
+                       Route::currentRouteName()=='bitacora.ver')active  @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">Bitacoras
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('bitacora.index') }}">Listado Unidades</a></li>   
+                    </ul>
+                  </li>
+                @endif      
             </ul>
             @endauth
             <!-- Right Side Of Navbar -->

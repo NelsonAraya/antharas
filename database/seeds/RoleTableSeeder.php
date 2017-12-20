@@ -25,5 +25,10 @@ class RoleTableSeeder extends Seeder
 		$a->nombre = 'adminCBI';
 		$a->descripcion = 'Modulos AdminCBI';
 		$a->save();
+
+		$a = new App\Role();
+		$a->nombre = 'bitacora';
+		$a->descripcion = 'Modulos Bitacoras';
+		$a->save();
     }
 }

@@ -39,4 +39,8 @@ class Vehiculo extends Model
         return $this->hasMany(SeguroVehiculo::class,'vehiculo_id','id');
     }
 
+    public function bitacoras(){
+        return $this->hasMany(Bitacora::class,'vehiculo_id','id');
+    }
+
 }
