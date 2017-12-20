@@ -20,17 +20,22 @@ class ActivacionController extends Controller
     {
         $usu = Usuario::find(Auth::user()->id);
         if($usu->conductor=='S'){
-            foreach ($usu->vehiculos as $key =>  $row) {
-                $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
-                if($row->activacion=='S'){
-                    $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+            if(count($usu->vehiculos)>=1){
+                foreach ($usu->vehiculos as $key =>  $row) {
+                    $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
+                    if($row->activacion=='S'){
+                        $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+                    }
                 }
-            }
-            if(empty($a)){
-                return view('activacion.index')->with('usu',$usu)->with('rev',$b);
+                if(empty($a)){
+                    return view('activacion.index')->with('usu',$usu)->with('rev',$b);
+                }else{
+                    return view('activacion.index')->with('usu',$usu)
+                    ->with('conductor',$a)->with('rev',$b); 
+                }
             }else{
-                return view('activacion.index')->with('usu',$usu)
-                ->with('conductor',$a)->with('rev',$b); 
+             session()->flash('danger', 'Usted no tiene ninguna Unidad Asignada');
+             return redirect()->route('home'); 
             }
         }else{
              session()->flash('danger', 'Usted no esta habilitado como Conductor');
