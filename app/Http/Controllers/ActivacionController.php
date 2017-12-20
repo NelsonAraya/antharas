@@ -19,17 +19,22 @@ class ActivacionController extends Controller
     public function index()
     {
         $usu = Usuario::find(Auth::user()->id);
-        foreach ($usu->vehiculos as $key =>  $row) {
-            $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
-            if($row->activacion=='S'){
-                $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+        if($usu->conductor=='S'){
+            foreach ($usu->vehiculos as $key =>  $row) {
+                $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
+                if($row->activacion=='S'){
+                    $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+                }
             }
-        }
-        if(empty($a)){
-            return view('activacion.index')->with('usu',$usu)->with('rev',$b);
+            if(empty($a)){
+                return view('activacion.index')->with('usu',$usu)->with('rev',$b);
+            }else{
+                return view('activacion.index')->with('usu',$usu)
+                ->with('conductor',$a)->with('rev',$b); 
+            }
         }else{
-            return view('activacion.index')->with('usu',$usu)
-            ->with('conductor',$a)->with('rev',$b); 
+             session()->flash('danger', 'Usted no esta habilitado como Conductor');
+             return redirect()->route('home');
         }
 
     }
