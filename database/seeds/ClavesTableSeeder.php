@@ -25,5 +25,10 @@ class ClavesTableSeeder extends Seeder
         $a->clave='10-0-1';
         $a->descripcion="Llamado Estructural";
         $a->save();
+
+        $a = new App\Clave();
+        $a->clave='10-0-2';
+        $a->descripcion="Llamado Estructural";
+        $a->save();
     }
 }
