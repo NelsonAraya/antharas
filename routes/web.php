@@ -49,3 +49,5 @@ Route::prefix('admin')->group(function () {
 	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');		
     Route::resource('material_mayor','MatMayorController',['middleware' => ['role:adminCBI', 'auth']]);
 });
+
+Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);

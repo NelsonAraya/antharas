@@ -27,6 +27,11 @@ class RoleTableSeeder extends Seeder
 		$a->save();
 
 		$a = new App\Role();
+		$a->nombre = 'adminCIA';
+		$a->descripcion = 'Modulos AdminCIA';
+		$a->save();
+
+		$a = new App\Role();
 		$a->nombre = 'bitacora';
 		$a->descripcion = 'Modulos Bitacoras';
 		$a->save();

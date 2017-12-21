@@ -94,7 +94,15 @@
 					<label for="licencia">LICENCIA</label>
 					<input type="date" id="licencia" name="fecha_licencia" class="form-control"
 					value="{{ $usu->fecha_licencia }}">
-				</div>			
+				</div>
+				<div class="col-md-2">
+					<label for="estado">ESTADO</label>
+					<select id="estado" name="estado" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="A" @if($usu->estado=='A') selected  @endif> Activo</option>
+						<option value="I" @if($usu->estado=='I') selected  @endif> Inactivo</option>
+					</select>
+				</div>				
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-warning">Modificar</button>

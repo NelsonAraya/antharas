@@ -65,6 +65,12 @@ class RrhhController extends Controller
             $usu->conductor='N';
         }
 
+        $usu->nombres = strtolower($usu->nombres);
+        $usu->apellidop = strtolower($usu->apellidop);
+        $usu->apellidom = strtolower($usu->apellidom);
+        $usu->direccion = strtolower($usu->direccion);
+        $usu->email = strtolower($usu->email);
+
         $run = str_replace('.','',$request->run);
         $run = str_replace('-','',$request->run);
 
@@ -141,7 +147,12 @@ class RrhhController extends Controller
         }else{
             $usu->conductor='N';
         }
-
+        $usu->nombres = strtolower($usu->nombres);
+        $usu->apellidop = strtolower($usu->apellidop);
+        $usu->apellidom = strtolower($usu->apellidom);
+        $usu->direccion = strtolower($usu->direccion);
+        $usu->email = strtolower($usu->email);
+        
         $usu->save();
 
         session()->flash('info', 'El usuario '.$usu->nombreSimple().' ha sido Modificado.');
