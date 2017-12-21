@@ -66,7 +66,8 @@
 					}else if(a==value.activacion){
 						
 					}else{
-						document.getElementById('tono').play();
+						//document.getElementById('tono').play();
+						$('#tono').get(0).play();
 						$('#'+value.id).data('estado',value.activacion);
 					}
 

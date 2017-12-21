@@ -4,6 +4,18 @@
 <h1>MIS UNIDADES</h1>
 <div class="form-group row">
 	@isset($usu)
+		@if($usu->fecha_licencia==null OR $usu->fecha_licencia<=date('Y-m-d') )
+			@php $control_licencia=true; @endphp
+		@else
+			@php $control_licencia=false; @endphp  
+		@endif
+		@if($control_licencia)
+		<div class="col-md-12">
+			<div class="alert alert-danger">
+		  		<strong>Atencion!</strong> Su licencia esta Vencida o no Esta registrada.
+			</div>
+		</div>
+		@endif	
 		@foreach($usu->vehiculos as $row)
 			@php $control=false; @endphp 
 			@if($row->estado=='A')
@@ -35,7 +47,7 @@
 					<label for="conductor">{{ $row->clave }}</label>
 					<input type="text" id="conductor" class="form-control" readonly="" value="{{ @$nom }}">
 					<br>
-					<a @if($row->activacion=='S' OR $control ==true)
+					<a @if($row->activacion=='S' OR $control ==true OR $control_licencia == true)
 							href="#"
 							disabled
 						@else	

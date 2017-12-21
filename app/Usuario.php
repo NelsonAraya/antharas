@@ -15,7 +15,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'rol','nombres','apellidop','apellidom','telefono','direccion','cia_id','cargo_id','email'
+        'rol','nombres','apellidop','apellidom','telefono','direccion','cia_id','cargo_id','email','fecha_nacimiento','fecha_licencia'
     ];
 
     /**
@@ -31,7 +31,7 @@ class Usuario extends Authenticatable
 
         $this->nombres=explode(' ',$this->nombres)[0];
 
-        return $this->nombres.' '.$this->apellidop.' '.$this->apellidom;
+        return ucwords($this->nombres.' '.$this->apellidop.' '.$this->apellidom);
     }
 
     public function cargo(){

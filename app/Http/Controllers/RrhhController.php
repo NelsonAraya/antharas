@@ -54,6 +54,7 @@ class RrhhController extends Controller
             'email' => 'required',
             'cargo_id' => 'required',
             'conductor' => 'required',
+            'fecha_nacimiento' => 'required',
         ]);
         
         $usu = new Usuario($request->all());
@@ -130,6 +131,7 @@ class RrhhController extends Controller
             'email' => 'required',
             'cargo_id' => 'required',
             'conductor' => 'required',
+            'fecha_nacimiento' => 'required',
         ]);
 
         $usu = Usuario::find($id);

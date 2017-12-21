@@ -47,6 +47,14 @@
 				</div>		
 			</div>
 			<div class="form-group row">
+				<div class="col-md-2">
+					<label for="estado">ESTADO</label>
+					<select id="estado" name="estado" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="A" @if($veh->estado=='A') selected  @endif> Activo</option>
+						<option value="I" @if($veh->estado=='I') selected  @endif> Inactivo</option>
+					</select>
+				</div>	
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-success">Modificar</button>

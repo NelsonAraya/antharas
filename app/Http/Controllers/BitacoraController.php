@@ -19,7 +19,7 @@ class BitacoraController extends Controller
         if($usu->conductor=='S'){
             return view('bitacora.index')->with('usu',$usu);
         }else{
-         $veh = Vehiculo::where('cia_id',auth()->user()->cia_id)->orderBy('id','ASC')->get();
+         $veh = Vehiculo::where('cia_id',auth()->user()->cia_id)->where('estado','A')->orderBy('id','ASC')->get();
             return view('bitacora.index')->with('veh',$veh);
         }
 

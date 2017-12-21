@@ -48,11 +48,51 @@ class CargosTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cargo();
+        $a->nombre="MAQUINISTA CIA";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="OTRO CIA";
+        $a->save();
+
+        $a = new App\Cargo();
         $a->nombre="AYUDANTE CIA";
         $a->save();
 
         $a = new App\Cargo();
         $a->nombre="COMANDANTE";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="2° COMANDANTE";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="3° COMANDANTE";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="AYUDANTE GENERAL";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="INSPECTOR CBI";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="SUPERINTENDENTE";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="VICE-SUPERINTENDENTE";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="TESORERO GENERAL";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="SECRETARIO GENERAL";
         $a->save();
 
         $a = new App\Cargo();

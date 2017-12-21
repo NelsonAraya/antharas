@@ -21,6 +21,7 @@ class UsuariosTableSeeder extends Seeder
         $usu->nombres='Nelson Antonio';
         $usu->apellidop='Araya';
         $usu->apellidom='Vacca';
+        $usu->fecha_nacimiento='1989-05-30';
         $usu->telefono=123456;
         $usu->direccion='los chunchos 3474';
         $usu->cia_id=4;

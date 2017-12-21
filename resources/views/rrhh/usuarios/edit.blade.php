@@ -33,6 +33,11 @@
 					<input id="materno" name="apellidom" class="form-control" autocomplete="off"
 					value="{{ $usu->apellidom }}">
 				</div>
+				<div class="col-md-2">
+					<label for="nacimiento">NACIMIENTO</label>
+					<input type="date" id="nacimiento" name="fecha_nacimiento" class="form-control"
+					value="{{ $usu->fecha_nacimiento }}">
+				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-md-3">
@@ -84,6 +89,11 @@
 					checked  @endif name="conductor" value="si" >SI</label>
 					<label class="radio-inline"><input type="radio" @if($usu->conductor=='N')
 					checked  @endif name="conductor" value="no" >NO</label>	
+				</div>
+				<div class="col-md-2">
+					<label for="licencia">LICENCIA</label>
+					<input type="date" id="licencia" name="fecha_licencia" class="form-control"
+					value="{{ $usu->fecha_licencia }}">
 				</div>			
 				<div class="col-md-1">
 					<label for="">Modificar</label>

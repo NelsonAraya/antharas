@@ -20,6 +20,7 @@ class CreateUsuariosTable extends Migration
             $table->string('nombres');
             $table->string('apellidop');
             $table->string('apellidom');
+            $table->date('fecha_nacimiento');
             $table->integer('telefono');
             $table->string('direccion');
             $table->integer('cia_id')->unsigned();
@@ -28,6 +29,7 @@ class CreateUsuariosTable extends Migration
             $table->foreign('cargo_id')->references('id')->on('cargos');
             $table->string('email',150)->unique()->nullable();
             $table->enum('conductor',['S','N'])->default('N');
+            $table->date('fecha_licencia')->nullable();
             $table->string('password');
             $table->enum('estado',['A','I'])->default('A');
             $table->rememberToken();

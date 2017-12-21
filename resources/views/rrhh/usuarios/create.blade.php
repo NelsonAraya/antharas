@@ -27,6 +27,10 @@
 					<label for="materno">MATERNO</label>
 					<input id="materno" name="apellidom" class="form-control" autocomplete="off">
 				</div>
+				<div class="col-md-2">
+					<label for="nacimiento">NACIMIENTO</label>
+					<input type="date" name="fecha_nacimiento" id="nacimiento" class="form-control">	
+				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-md-3">
@@ -66,7 +70,11 @@
 					<br>
 					<label class="radio-inline"><input type="radio" name="conductor" value="si">SI</label>
 					<label class="radio-inline"><input type="radio" name="conductor" value="no">NO</label>	
-				</div>	
+				</div>
+				<div class="col-md-2">
+					<label for="licencia">LICENCIA</label>
+					<input type="date" name="fecha_licencia" id="licencia" class="form-control">	
+				</div>		
 				<div class="col-md-1">
 					<label for="">Registrar</label>
 					<button type="submit" class="btn btn-success">Registrar</button>
