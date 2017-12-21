@@ -56,6 +56,7 @@
       /* Margin bottom by footer height */
       margin-bottom: 60px;
     }
+
     .footer {
       position: absolute;
       bottom: 0;
@@ -75,15 +76,19 @@
     .container .text-muted {
       margin: 20px 0;
     }
+.marca-de-agua {
+    background: url({{ asset('img/logo.jpg') }});
+    background-repeat: repeat-x repeat-y;
+}
     </style>
     @yield('css')
 </head>
-<body>       
+<body class="marca-de-agua">       
     @include('layouts.nav')
     <div class="container">
-        @include('layouts.partials.erros')
-        @include('layouts.partials.messages')
-        @yield('content')
+            @include('layouts.partials.erros')
+            @include('layouts.partials.messages')
+            @yield('content')
     </div>
     <footer class="footer">
       <div class="container2">
