@@ -1,0 +1,19 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Emergencia extends Model
+{
+    protected $table = 'emergencias';
+    protected $fillable = ['fecha_emergencia','hora_emergencia','direccion','usuario_id','clave_id'];
+
+    public function clave(){
+        return $this->belongsTo(Clave::class,'clave_id','id');
+    }
+
+    public function usuario(){
+        return $this->belongsTo(Usuario::class,'usuario_id','id');
+    }
+}

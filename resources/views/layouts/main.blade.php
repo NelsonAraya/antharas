@@ -45,6 +45,7 @@
     <!-- Styles -->
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('plugins/jquery-ui/jquery-ui.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('plugins/chosen/chosen.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <style type="text/css">
     /* Sticky footer styles-- */
@@ -99,6 +100,7 @@
     <script src="{{ asset('plugins/jquery/jquery-3.2.1.min.js') }}"></script>
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('plugins/chosen/chosen.jquery.min.js') }}"></script>
     @yield('js')
 </body>
 </html>
