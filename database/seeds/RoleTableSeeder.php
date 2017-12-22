@@ -40,5 +40,10 @@ class RoleTableSeeder extends Seeder
 		$a->nombre = 'partes';
 		$a->descripcion = 'Modulos Partes';
 		$a->save();
+
+		$a = new App\Role();
+		$a->nombre = 'emergencia';
+		$a->descripcion = 'Modulos de Emergencias';
+		$a->save();
     }
 }

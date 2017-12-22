@@ -10,7 +10,7 @@ use App\EmergenciaCia;
 use App\Vehiculo;
 use App\EmergenciaUnidad;
 use Illuminate\Support\Facades\Auth;
-class PartesController extends Controller
+class EmergenciaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,9 @@ class PartesController extends Controller
      */
     public function index()
     {
+        $emergencia = Emergencia::orderBy('id','DESC')->paginate(10);
         
+        return view('emergencia.index')->with('eme',$emergencia);
     }
 
     /**
@@ -29,7 +31,11 @@ class PartesController extends Controller
      */
     public function create()
     {
-        
+        $clave=Clave::pluck('clave','id');
+        $cia=Cia::pluck('nombre','id');
+        $veh = Vehiculo::where('estado','A')->get();
+        return view('emergencia.create')->with('clave',$clave)
+                ->with('cia',$cia)->with('veh',$veh);
     }
 
     /**
@@ -40,7 +46,27 @@ class PartesController extends Controller
      */
     public function store(Request $request)
     {
+        $eme = new Emergencia($request->all());
+        $eme->usuario_id=Auth::user()->id;
+        $eme->save();
 
+        foreach ($request->cias as  $row) {
+            $eme_cia = new EmergenciaCia();
+            $eme_cia->emergencia_id=$eme->id;
+            $eme_cia->cia_id=$row;
+            $eme_cia->save();
+        }
+
+        foreach ($request->uni as  $row) {
+            $uni_cia = new EmergenciaUnidad();
+            $uni_cia->emergencia_id=$eme->id;
+            $uni_cia->vehiculo_id=$row;
+            $uni_cia->save();
+        }
+        
+        session()->flash('info', 'Emergencia creada Correctamente');
+
+        return redirect()->route('emergencia.index');
     }
 
     /**
@@ -62,7 +88,13 @@ class PartesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $eme = Emergencia::find($id);
+        $cia=Cia::pluck('nombre','id');
+        $veh = Vehiculo::where('estado','A')->get();
+        $clave=Clave::pluck('clave','id');
+        return view ('emergencia.edit')->with('eme',$eme)
+                    ->with('cia',$cia)->with('veh',$veh)
+                    ->with('clave',$clave);
     }
 
     /**

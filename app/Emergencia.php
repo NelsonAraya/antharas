@@ -16,4 +16,10 @@ class Emergencia extends Model
     public function usuario(){
         return $this->belongsTo(Usuario::class,'usuario_id','id');
     }
+    public function cias(){
+        return $this->hasMany(EmergenciaCia::class,'emergencia_id','id');
+    }
+    public function unidades(){
+        return $this->hasMany(EmergenciaUnidad::class,'emergencia_id','id');
+    }
 }

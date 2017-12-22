@@ -4,9 +4,9 @@
 
 <div class="form-group row">
 	<div class="col-md-12">
-		<form method="GET" action="{{ route('partesonline.index') }}" class="navbar_form pull-right">
+		<form method="GET" action="{{ route('emergencia.index') }}" class="navbar_form pull-right">
 			<div class="col-md-1">
-				<a href="{{ route('partesonline.create') }}" class="btn btn-info" 
+				<a href="{{ route('emergencia.create') }}" class="btn btn-info" 
 				role="button">Nueva Emergencia</a>
 			</div>
 			<div class="col-md-3 pull-right">
@@ -34,22 +34,29 @@
 						<th>FECHA</th>
 						<th class="hidden-xs">HORA</th>
 						<th class="hidden-xs">DIRECCION</th>
-						<th class="hidden-xs">OPERADOR</th>
+						<th class="hidden-xs">COMPAÑIAS</th>
 						<th style="width: 100px;">ACCION</th>
 					</tr>
 				</thead>
 				<tbody>
 					@foreach ($eme as $row)
 					<tr>
+						@php $cia="" @endphp
+						@foreach($row->cias as $cias)
+						   @php	 $cia=$cia.$cias->cia->numero.'-'; @endphp
+						@endforeach
+						
+						@php $a=rtrim($cia,'-'); @endphp
+						
 						<td> {{ $row->clave->clave }} </td>
 						<td>{{ date('d-m-Y',strtotime($row->fecha_emergencia)) }} </td>
 						<td class="hidden-xs">{{ $row->hora_emergencia }}  </td>
 						<td class="hidden-xs">{{ $row->direccion }}  </td>
-						<td class="hidden-xs">{{ $row->usuario->nombreSimple() }}  </td>
+						<td class="hidden-xs">{{ $a }}  </td>
 						<td>
-						<a href="" 
+						<a href="{{ route('emergencia.edit',$row->id) }}" 
 							class="btn btn-success justify-content-center">
-		                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                </a>
 						</td>
 					</tr>

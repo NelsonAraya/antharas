@@ -92,16 +92,16 @@
                     </ul>
                   </li>
                 @endif
-                @if(Auth::user()->hasRole('partes'))
+                @if(Auth::user()->hasRole('emergencia'))
                   <li class="dropdown
-                  @if(Route::currentRouteName()=='partesonline.index' OR 
-                      Route::currentRouteName()=='partesonline.create') active @endif">
+                  @if(Route::currentRouteName()=='emergencia.index' OR 
+                      Route::currentRouteName()=='emergencia.create') active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                      role="button" aria-haspopup="true" aria-expanded="false">Partes Online
+                      role="button" aria-haspopup="true" aria-expanded="false">Emergencias
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('partesonline.index') }}">Partes Central</a></li>   
+                      <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>   
                     </ul>
                   </li>
                 @endif         

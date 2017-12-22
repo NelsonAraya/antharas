@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('partesonline.store') }}">
+<form method="POST" action="{{ route('emergencia.update',$eme->id) }}">
 	{{ csrf_field() }}
 	<div class="panel panel-primary">
 	<div class="panel-heading">Crear Emergencia</div>
@@ -9,22 +9,29 @@
 			<div class="form-group row">
 				<div class="col-md-2">
 					<label for="fecha">FECHA</label>
-					<input type="date" id="fecha" name="fecha_emergencia" class="form-control">
+					<input type="date" id="fecha" name="fecha_emergencia" class="form-control"
+					value ="{{ $eme->fecha_emergencia }}">
 				</div>
 				<div class="col-md-2">
 					<label for="hora">HORA</label>
-					<input type="time" id="hora" name="hora_emergencia" class="form-control" autocomplete="off">
+					<input type="time" id="hora" name="hora_emergencia" class="form-control" autocomplete="off"
+					value="{{ $eme->hora_emergencia }}">
 				</div>
 				<div class="col-md-5">
 					<label for="dire">DIRECCION</label>
-					<input id="dire" name="direccion" class="form-control" autocomplete="off">
+					<input id="dire" name="direccion" class="form-control" autocomplete="off" 
+					value="{{ $eme->direccion }}">
 				</div>
 				<div class="col-md-3">
 					<label for="clave">CLAVE</label>
 					<select id="clave" name="clave_id" class="form-control">
 						<option value="">--Seleccione--</option>
 						@foreach($clave as $key => $value)
-							<option value="{{ $key }}"> {{ $value }}</option>
+							@if($eme->clave_id== $key)
+								<option  selected value="{{ $key }}"> {{ $value }}</option>
+							@else
+								<option value="{{ $key }}"> {{ $value }}</option>
+							@endif	
 						@endforeach
 					</select>
 				</div>
@@ -33,10 +40,16 @@
 				<div class="col-md-12">
 					<label for="cias">COMPAÑIAS</label>
 					<select id="cias" data-placeholder="Seleccione Compañias" name="cias[]" multiple 
-					class="chosen-select">
+					class=" form-control chosen-select">
 						@foreach($cia as $key => $value)
+						@php $control=false;  @endphp
 							@if($key != 10)
-								<option  value="{{ $key }}"> {{ $value }}</option>
+								@foreach($eme->cias as $row)
+									 @if($row->cia->id==$key)
+									 	@php $control=true;  @endphp
+									 @endif
+								@endforeach
+								<option @if($control) selected @endif  value="{{ $key }}"> {{ $value }}</option>
 							@endif	
 						@endforeach
 					</select>
@@ -46,9 +59,9 @@
 				<div class="col-md-12">
 					<label for="uni">UNIDADES</label>
 					<select id="uni" data-placeholder="Seleccione Unidades" name="uni[]" multiple 
-					class="chosen-select">
+					class="form-control chosen-select">
 						@foreach($veh as $row)
-								<option  value="{{ $key }}"> {{ $row->clave }}</option>
+								<option  value="{{ $row->id }}"> {{ $row->clave }}</option>
 						@endforeach
 					</select>
 				</div>	

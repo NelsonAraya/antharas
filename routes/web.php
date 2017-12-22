@@ -51,4 +51,5 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);
+Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
 Route::resource('partesonline','PartesController',['middleware' => ['role:partes', 'auth']]);
