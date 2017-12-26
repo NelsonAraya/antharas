@@ -57,6 +57,11 @@ class CiasTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cia();
+        $a->numero=16;
+        $a->nombre="Cia. Chanavayita";
+        $a->save();
+
+        $a = new App\Cia();
         $a->numero=100;
         $a->nombre="Cuerpo de Bomberos de Iquique";
         $a->save();

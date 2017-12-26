@@ -106,7 +106,28 @@ class EmergenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $eme = Emergencia::find($id);
+        $eme->fill($request->all());
+        $eme->save();
+
+        EmergenciaCia::where('emergencia_id',$id)->delete();
+        foreach ($request->cias as  $row) {
+            $eme_cia = new EmergenciaCia();
+            $eme_cia->emergencia_id=$eme->id;
+            $eme_cia->cia_id=$row;
+            $eme_cia->save();
+        }
+        EmergenciaUnidad::where('emergencia_id',$id)->delete();
+        foreach ($request->uni as  $row) {
+            $uni_cia = new EmergenciaUnidad();
+            $uni_cia->emergencia_id=$eme->id;
+            $uni_cia->vehiculo_id=$row;
+            $uni_cia->save();
+        }
+
+        session()->flash('info', 'Emergencia Modificada Correctamente');
+
+        return redirect()->route('emergencia.index');
     }
 
     /**

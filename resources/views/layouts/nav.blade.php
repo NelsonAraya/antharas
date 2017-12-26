@@ -104,7 +104,21 @@
                       <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>   
                     </ul>
                   </li>
-                @endif         
+                @endif
+                @if(Auth::user()->hasRole('partes'))
+                  <li class="dropdown
+                  @if(Route::currentRouteName()=='partesonline.index' OR 
+                      Route::currentRouteName()=='partesonline.show' OR 
+                      Route::currentRouteName()=='partesonline.lista') active @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">Partes Online
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('partesonline.index') }}">Ver / Ingresar</a></li>   
+                    </ul>
+                  </li>
+                @endif          
             </ul>
             @endauth
             <!-- Right Side Of Navbar -->

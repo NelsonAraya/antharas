@@ -35,7 +35,7 @@
 					<select id="cias" data-placeholder="Seleccione Compañias" name="cias[]" multiple 
 					class=" form-control chosen-select">
 						@foreach($cia as $key => $value)
-							@if($key != 10)
+							@if($key != 11)
 								<option  value="{{ $key }}"> {{ $value }}</option>
 							@endif	
 						@endforeach

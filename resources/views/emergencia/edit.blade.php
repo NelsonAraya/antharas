@@ -3,6 +3,7 @@
 @section('content')
 <form method="POST" action="{{ route('emergencia.update',$eme->id) }}">
 	{{ csrf_field() }}
+	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
 	<div class="panel-heading">Crear Emergencia</div>
 		<div class="panel-body">
@@ -43,7 +44,7 @@
 					class=" form-control chosen-select">
 						@foreach($cia as $key => $value)
 						@php $control=false;  @endphp
-							@if($key != 10)
+							@if($key != 11)
 								@foreach($eme->cias as $row)
 									 @if($row->cia->id==$key)
 									 	@php $control=true;  @endphp
@@ -61,15 +62,35 @@
 					<select id="uni" data-placeholder="Seleccione Unidades" name="uni[]" multiple 
 					class="form-control chosen-select">
 						@foreach($veh as $row)
-								<option  value="{{ $row->id }}"> {{ $row->clave }}</option>
+							@php $control=false;  @endphp
+								@foreach($eme->unidades as $uni)
+									 @if($uni->vehiculo_id==$row->id)
+									 	@php $control=true;  @endphp
+									 @endif
+								@endforeach
+								<option  @if($control) selected @endif value="{{ $row->id }}"> {{ $row->clave }}</option>
 						@endforeach
 					</select>
 				</div>	
 			</div>
 			<div class="form-group row">
 				<div class="col-md-1">
-					<label for="">Registrar</label>
-					<button type="submit" class="btn btn-success">Registrar</button>
+					<label for="">Modificar</label>
+					<button type="submit" class="btn btn-success">Modificar</button>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-md-12">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>COMPAÑIA</th>
+								<th>FECHA ENVIO</th>
+								<th>USUARIO</th>
+								<th>VER</th>
+							</tr>
+						</thead>
+					</table>
 				</div>
 			</div>
 		</div>		

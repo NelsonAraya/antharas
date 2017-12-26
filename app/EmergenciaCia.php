@@ -9,7 +9,7 @@ class EmergenciaCia extends Model
     protected $table = 'emergencia_cias';
     protected $fillable = ['emergencia_id','cia_id'];
 
-    public function parte(){
+    public function emergencia(){
         return $this->belongsTo(Emergencia::class,'emergencia_id','id');
     }
     public function cia(){

@@ -52,4 +52,7 @@ Route::prefix('admin')->group(function () {
 
 Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
+
+Route::get('partesonline/{parte}/lista', 'PartesController@lista')->name('partesonline.lista')->middleware('auth','role:partes');
+Route::match(['put','patch'],'partesonline/lista/{parte}','PartesController@listaParte')->name('partesonline.listaparte')->middleware('auth','role:partes');
 Route::resource('partesonline','PartesController',['middleware' => ['role:partes', 'auth']]);

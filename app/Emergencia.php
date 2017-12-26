@@ -22,4 +22,8 @@ class Emergencia extends Model
     public function unidades(){
         return $this->hasMany(EmergenciaUnidad::class,'emergencia_id','id');
     }
+
+    public function partes(){
+        return $this->hasMany(ParteOnline::class,'emergencia_id','id');
+    }
 }
