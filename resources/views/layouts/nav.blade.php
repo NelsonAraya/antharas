@@ -95,14 +95,16 @@
                 @if(Auth::user()->hasRole('emergencia'))
                   <li class="dropdown
                   @if(Route::currentRouteName()=='emergencia.index' OR 
-                      Route::currentRouteName()=='emergencia.create' OR 
+                      Route::currentRouteName()=='emergencia.create' OR
+                      Route::currentRouteName()=='emergencia.showCantidad' OR  
                       Route::currentRouteName()=='emergencia.edit') active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">Emergencias
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>   
+                      <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>
+                      <li><a href="{{ route('emergencia.showCantidad') }}">Cantidad x Clave</a></li>   
                     </ul>
                   </li>
                 @endif

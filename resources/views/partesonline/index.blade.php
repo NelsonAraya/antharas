@@ -30,6 +30,7 @@
 						<th>CLAVE</th>
 						<th class="hidden-xs">DIRECCION</th>
 						<th class="hidden-xs">CIAS</th>
+						<th>ESTADO</th>
 						<th style="width: 100px;">ACCION</th>
 					</tr>
 				</thead>
@@ -38,6 +39,7 @@
 
 						@php $control=false; @endphp
 						@php $control_estado=false; @endphp
+						@php $estado="Sin Parte"; @endphp
 						@php $cia="" @endphp
 
 						@foreach($row->emergencia->cias as $cias)
@@ -49,9 +51,9 @@
 						@foreach($row->emergencia->partes as $parte)
 								@if($parte->cia_id==Auth::user()->cia_id)
 									@if($parte->estado=='T')
-										@php $control_estado=true; @endphp
+										@php $control_estado=true; $estado='Terminado'; @endphp
 									@else
-										@php $control=true; @endphp	
+										@php $control=true; $estado='Creado'; @endphp	
 									@endif
 
 									@php $id_parte=$parte->id; @endphp
@@ -63,6 +65,7 @@
 						<td>{{ $row->emergencia->clave->clave }} </td>
 						<td class="hidden-xs">{{ $row->emergencia->direccion }}  </td>
 						<td class="hidden-xs">{{ $a }}</td>
+						<td>{{ $estado }}</td>
 						<td>
 						@if($control==false AND $control_estado==false )	
 						<a href="{{ route('partesonline.show',$row->emergencia->id) }}" 

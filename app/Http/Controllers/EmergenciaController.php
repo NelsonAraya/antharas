@@ -78,7 +78,7 @@ class EmergenciaController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -141,5 +141,17 @@ class EmergenciaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function showEmergencia(Request $request){
+
+        $clave = Clave::orderBy('id','ASC')->get();
+        if($request->q!=""){
+            
+            foreach ($clave as $key => $row) {
+                $e = Emergencia::where('clave_id',$row->id)->whereYear('created_at',$request->q)->count();
+                $clave[$key]->cantidad = $e;
+            }
+        }
+         return view('emergencia.show')->with('clave',$clave);
     }
 }

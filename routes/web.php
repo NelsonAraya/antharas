@@ -51,6 +51,8 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);
+
+Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('emergencia.showCantidad')->middleware('auth','role:emergencia');
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
 
 Route::get('partesonline/{parte}/lista', 'PartesController@lista')->name('partesonline.lista')->middleware('auth','role:partes');

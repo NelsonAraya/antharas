@@ -79,6 +79,7 @@
 					<button type="submit" class="btn btn-success">Modificar</button>
 				</div>
 			</div>
+			<h3>PARTES RECIBIDOS</h3>
 			<div class="form-group row">
 				<div class="col-md-12">
 					<table class="table">
@@ -86,7 +87,7 @@
 							<tr>
 								<th>COMPAÑIA</th>
 								<th>FECHA ENVIO</th>
-								<th>USUARIO</th>
+								<th>ENVIADO POR</th>
 								<th>VER</th>
 							</tr>
 						</thead>
@@ -96,7 +97,12 @@
 									<td>{{ $row->cia->nombreCompleto() }}</td>
 									<td>{{ $row->created_at }}</td>
 									<td>{{ $row->responsable->nombreSimple() }}</td>
-									<td></td>
+									<td>
+										<a href="" 
+										class="btn btn-success justify-content-center">
+		                    			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+		                				</a>
+									</td>
 								</tr>
 							@endforeach
 						</tbody>
