@@ -7,6 +7,7 @@ use App\Emergencia;
 use App\EmergenciaCia;
 use App\Usuario;
 use App\ParteOnline;
+use App\ParteAsistencia;
 use Illuminate\Support\Facades\Auth;
 class PartesController extends Controller
 {
@@ -109,7 +110,19 @@ class PartesController extends Controller
     }
     public function listaParte(Request $request, $id){
 
-        dd($id);
+        foreach ($request->lista as $row) {
+            $asis = new ParteAsistencia();
+            $asis->parte_id=$id;
+            $asis->usuario_id=$row;
+            $asis->save();
+        }
+        $parte = ParteOnline::find($id);
+        $parte->estado='T';
+        $parte->save();
+
+        session()->flash('info', 'Asistencia Actualizada');
+
+        return redirect()->route('partesonline.index');
 
     }
 

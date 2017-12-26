@@ -35,26 +35,36 @@
 				</thead>
 				<tbody>
 					@foreach ($eme as $row)
+
 						@php $control=false; @endphp
+						@php $control_estado=false; @endphp
 						@php $cia="" @endphp
+
 						@foreach($row->emergencia->cias as $cias)
 						   @php	 $cia=$cia.$cias->cia->numero.'-'; @endphp
 						@endforeach
-						
+
 						@php $a=rtrim($cia,'-'); @endphp
+
 						@foreach($row->emergencia->partes as $parte)
 								@if($parte->cia_id==Auth::user()->cia_id)
-									@php $control=true; @endphp
+									@if($parte->estado=='T')
+										@php $control_estado=true; @endphp
+									@else
+										@php $control=true; @endphp	
+									@endif
+
 									@php $id_parte=$parte->id; @endphp
 								@endif
 						@endforeach
-					<tr @if($control) class="info" @endif>
+
+					<tr @if($control_estado) class="success" @elseif($control) class="info"  @endif>
 						<td> {{ date('d-m-Y',strtotime($row->emergencia->fecha_emergencia)) }} </td>
 						<td>{{ $row->emergencia->clave->clave }} </td>
 						<td class="hidden-xs">{{ $row->emergencia->direccion }}  </td>
 						<td class="hidden-xs">{{ $a }}</td>
 						<td>
-						@if($control==false)	
+						@if($control==false AND $control_estado==false )	
 						<a href="{{ route('partesonline.show',$row->emergencia->id) }}" 
 							class="btn btn-warning justify-content-center">
 		                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -64,6 +74,12 @@
 						<a href="{{ route('partesonline.lista',$id_parte) }}" 
 						class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+		                </a>
+		                @endif
+		               	@if($control_estado)
+						<a href="" 
+						class="btn btn-success justify-content-center">
+		                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
 		                </a>
 		                @endif
 						</td>

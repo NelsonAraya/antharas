@@ -9,6 +9,7 @@ use App\Cia;
 use App\EmergenciaCia;
 use App\Vehiculo;
 use App\EmergenciaUnidad;
+use App\ParteOnline;
 use Illuminate\Support\Facades\Auth;
 class EmergenciaController extends Controller
 {
@@ -91,10 +92,11 @@ class EmergenciaController extends Controller
         $eme = Emergencia::find($id);
         $cia=Cia::pluck('nombre','id');
         $veh = Vehiculo::where('estado','A')->get();
+        $parte = ParteOnline::where('emergencia_id',$id)->where('estado','T')->get();
         $clave=Clave::pluck('clave','id');
         return view ('emergencia.edit')->with('eme',$eme)
                     ->with('cia',$cia)->with('veh',$veh)
-                    ->with('clave',$clave);
+                    ->with('clave',$clave)->with('parte',$parte);
     }
 
     /**

@@ -19,4 +19,11 @@ class ParteOnline extends Model
     public function responsable(){
         return $this->belongsTo(Usuario::class,'usuario_responsable','id');
     }
+    public function asistencias(){
+        return $this->hasMany(ParteAsistencia::class,'parte_id','id');
+    }
+
+    public function cia(){
+        return $this->belongsTo(Cia::class,'cia_id','id');
+    }
 }

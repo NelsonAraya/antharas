@@ -90,6 +90,16 @@
 								<th>VER</th>
 							</tr>
 						</thead>
+						<tbody>
+							@foreach($parte as $row)
+								<tr>
+									<td>{{ $row->cia->nombreCompleto() }}</td>
+									<td>{{ $row->created_at }}</td>
+									<td>{{ $row->responsable->nombreSimple() }}</td>
+									<td></td>
+								</tr>
+							@endforeach
+						</tbody>
 					</table>
 				</div>
 			</div>

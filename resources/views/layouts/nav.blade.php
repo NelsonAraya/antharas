@@ -95,7 +95,8 @@
                 @if(Auth::user()->hasRole('emergencia'))
                   <li class="dropdown
                   @if(Route::currentRouteName()=='emergencia.index' OR 
-                      Route::currentRouteName()=='emergencia.create') active @endif">
+                      Route::currentRouteName()=='emergencia.create' OR 
+                      Route::currentRouteName()=='emergencia.edit') active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">Emergencias
                        <span class="caret"></span>
