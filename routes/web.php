@@ -24,6 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
 	Route::get('usuarios/{usuarios}/roles','RrhhController@roles')
 	->name('usuarios.roles');
+	Route::get('usuarios/asistencia','RrhhController@asistencia')
+	->name('usuarios.asistencia');
+	Route::post('usuarios/asistencia/lista', 'RrhhController@asistenciaLista')
+	->name('usuarios.asistencialista');
 	Route::match(['put','patch'],'usuarios/roles/{usuarios}','RrhhController@permisos')
 	->name('usuarios.permisos');
     Route::resource('usuarios','RrhhController');

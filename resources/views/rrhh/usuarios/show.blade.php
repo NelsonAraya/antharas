@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="col-md-6">
-	<form method="POST" action="{{ route('cia.busquedalista',Auth::user()->cia_id)}}">
+	<form method="POST" action="{{ route('usuarios.asistencialista')}}">
 	{{ csrf_field() }}
-	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
 	<div class="panel-heading">Seleccione Rangos de Busqueda</div>
 		<div class="panel-body">
@@ -30,7 +29,16 @@
 					<label class="radio-inline"><input type="radio" name="tipo" value="2">Solo Año</label>
 				</div>
 			</div>
-			<div class="form-group row">		
+			<div class="form-group row">
+				<div class="col-md-8">
+					<label for="cia">DOTACION</label>
+					<select id="cia" name="cia_id" class="form-control">
+						<option value="">--Seleccione--</option>
+						@foreach($cia as $row)
+							<option value="{{ $row->id }}"> {{ $row->nombreCompleto() }}</option>
+						@endforeach
+					</select>
+				</div>		
 				<div class="col-md-1">
 					<label for="">Agregar</label>
 					<button type="submit" id="btn_guardar" class="btn btn-success">Agregar</button>
@@ -43,7 +51,7 @@
 <div class="col-md-6">
 	@isset($usu)
 		<div class="panel panel-primary">
-  		<div class="panel-heading">Lista de Usuarios EMERGENCIAS TOTALES : {{ $cantidad }}</div>
+  		<div class="panel-heading">Lista de Usuarios CIA : {{ $nom_cia->nombreCompleto() }} EMERGENCIAS TOTALES : {{ $cantidad }}</div>
   			<div class="panel-body">
   				<table class="table">
   					<thead>

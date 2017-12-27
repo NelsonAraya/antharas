@@ -7,6 +7,7 @@ use App\Cia;
 use App\Cargo;
 use App\Usuario;
 use App\Role;
+use App\Emergencia;
 class RrhhController extends Controller
 {
     /**
@@ -190,5 +191,100 @@ class RrhhController extends Controller
 
         return redirect()->route('usuarios.roles',$usu->id);
         
+    }
+    public function asistencia(){
+        $cia = Cia::where('numero','!=',100)->orderBy('numero','ASC')->get();
+        return view('rrhh.usuarios.show')->with('cia',$cia);
+    }
+    public function asistenciaLista(Request $request){
+
+        $request->validate([
+            'tipo' => 'required',
+            'cia_id' => 'required',
+        ]);
+         $cia_array = Cia::where('numero','!=',100)->orderBy('numero','ASC')->get();
+         $nom_cia=Cia::find($request->cia_id);
+        if($request->tipo==1){
+            
+            $request->validate([
+            'inicio' => 'required',
+            'termino'=> 'required',
+            ]);
+
+            $obj_eme=Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
+            $cantidad=0;
+                foreach ($obj_eme as $row) {
+                    foreach ($row->cias as $cia) {
+                        if($cia->cia_id==$request->cia_id){
+                            $cantidad++;
+                        }
+                    }
+                }
+            $eme = Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
+            $usu = Usuario::where('cia_id',$request->cia_id)->orderBy('rol','ASC')->get();
+            foreach ($usu as $key => $row) {
+                $usu[$key]->asistido=0;
+                $usu[$key]->porcentaje=0;
+                foreach ($eme as $emergencia) {
+                    foreach ($emergencia->partes as $partes) {
+                        if($partes->cia_id==$request->cia_id){
+                            foreach ($partes->asistencias as $asis) {
+                               if($asis->usuario_id==$row->id){
+                                    $usu[$key]->asistido++;
+                               }
+                            }
+                        }
+                    }
+                }
+                if($cantidad==0){
+                  $usu[$key]->porcentaje=0;  
+                }else{
+                $usu[$key]->porcentaje = round(($usu[$key]->asistido*100)/$cantidad,1);
+                }
+            }      
+            return view ('rrhh.usuarios.show')->with('usu',$usu)
+                    ->with('cantidad',$cantidad)->with('cia',$cia_array)
+                    ->with('nom_cia',$nom_cia);
+        }else{
+            $request->validate([
+            'anio' => 'required',
+            ]);
+
+            $obj_eme = Emergencia::whereYear('fecha_emergencia',$request->anio)->get();
+            $cantidad=0;
+                foreach ($obj_eme as $row) {
+                    foreach ($row->cias as $cia) {
+                        if($cia->cia_id==$request->cia_id){
+                            $cantidad++;
+                        }
+                    }
+                }
+            $eme = Emergencia::whereYear('fecha_emergencia',$request->anio)->get();
+            $usu = Usuario::where('cia_id',$request->cia_id)->orderBy('rol','ASC')->get();
+            foreach ($usu as $key => $row) {
+                $usu[$key]->asistido=0;
+                $usu[$key]->porcentaje=0;
+                foreach ($eme as $emergencia) {
+                    foreach ($emergencia->partes as $partes) {
+                        if($partes->cia_id==$request->cia_id){
+                            foreach ($partes->asistencias as $asis) {
+                               if($asis->usuario_id==$row->id){
+                                    $usu[$key]->asistido++;
+                               }
+                            }
+                        }
+                    }
+                }
+                if($cantidad==0){
+                  $usu[$key]->porcentaje=0;  
+                }else{
+                  $usu[$key]->porcentaje = round(($usu[$key]->asistido*100)/$cantidad,1);
+                }
+            }
+            return view ('rrhh.usuarios.show')->with('usu',$usu)
+                        ->with('cantidad',$cantidad)->with('cia',$cia_array)
+                        ->with('nom_cia',$nom_cia);
+        }
+
     }
 }

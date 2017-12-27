@@ -108,7 +108,15 @@ class CiaController extends Controller
             'termino'=> 'required',
             ]);
 
-            $cantidad=Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->count();
+            $obj_eme=Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
+                $cantidad=0;
+                foreach ($obj_eme as $row) {
+                    foreach ($row->cias as $cia) {
+                        if($cia->cia_id==$id){
+                            $cantidad++;
+                        }
+                    }
+                }
             $eme = Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
             $usu = Usuario::where('cia_id',$id)->orderBy('rol','ASC')->get();
             foreach ($usu as $key => $row) {
@@ -137,7 +145,15 @@ class CiaController extends Controller
             'anio' => 'required',
             ]);
 
-            $cantidad = Emergencia::whereYear('fecha_emergencia',$request->anio)->count();
+            $obj_eme = Emergencia::whereYear('fecha_emergencia',$request->anio)->get();
+            $cantidad=0;
+                foreach ($obj_eme as $row) {
+                    foreach ($row->cias as $cia) {
+                        if($cia->cia_id==$id){
+                            $cantidad++;
+                        }
+                    }
+                }
             $eme = Emergencia::whereYear('fecha_emergencia',$request->anio)->get();
             $usu = Usuario::where('cia_id',$id)->orderBy('rol','ASC')->get();
             foreach ($usu as $key => $row) {

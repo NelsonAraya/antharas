@@ -2,43 +2,45 @@
 
 @section('content')
 <audio id="tono" src="{{ asset('sonidos/tono.mp3') }}" preload="auto"></audio>
-<table class="table">
-	<thead>
-		<tr>
-			@foreach($cia as $row)
-				<th  style="width: 11%; text-align: center; border: 1px solid green;">Cia N°{{ $row->numero }}</th>
-			@endforeach
-		</tr>
-	</thead>
-
-<tbody>
-	<tr>
-		@foreach($cia as $row)
-			<td >
-				<table>
-				@foreach($row->vehiculos as $mat)
-					@if($mat->estado=='A')
-					<tr>
-						<td style=" width: 11%;">
-							<div id="{{ $mat->id }}" class="panel panel-default">
-							  <div class="panel-body">
-							  	<b>
-							    {{ $mat->clave }}
-							    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
-							    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
-								</b>
-							  </div>
-							</div>
-  						</td>
-					</tr>
-					@endif
+<div class="table-responsive">
+	<table class="table">
+		<thead>
+			<tr>
+				@foreach($cia as $row)
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
 				@endforeach
-				</table>		
-			</td>
-		@endforeach
-	</tr>	
-</tbody>
-</table>   
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@foreach($cia as $row)
+					<td >
+						<table>
+						@foreach($row->vehiculos as $mat)
+							@if($mat->estado=='A')
+							<tr>
+								<td style=" width: 10%;">
+									<div id="{{ $mat->id }}" class="panel panel-default">
+									  <div class="panel-body">
+									  	<b>
+									    {{ $mat->clave }}
+									    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
+									    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
+										</b>
+									  </div>
+									</div>
+		  						</td>
+							</tr>
+							@endif
+						@endforeach
+						</table>		
+					</td>
+				@endforeach
+			</tr>	
+		</tbody>
+	</table>   	
+</div>
+
 @endsection
 @section('js')
 <script type="text/javascript">

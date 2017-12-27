@@ -25,7 +25,9 @@
                        Route::currentRouteName()=='usuarios.create' OR 
                        Route::currentRouteName()=='conductores.index' OR 
                        Route::currentRouteName()=='usuarios.edit' OR 
-                       Route::currentRouteName()=='conductores.edit'   
+                       Route::currentRouteName()=='conductores.edit' OR 
+                       Route::currentRouteName()=='usuarios.asistencia' OR
+                       Route::currentRouteName()=='usuarios.asistencialista'    
                    )active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">RRHH
@@ -34,6 +36,7 @@
                     <ul class="dropdown-menu">
                       <li><a href="{{ route('usuarios.index') }}">usuarios</a></li>
                       <li><a href="{{ route('conductores.index') }}">Conductores</a></li>
+                      <li><a href="{{ route('usuarios.asistencia') }}">Asistencias</a></li>
                     </ul>
                   </li>
                 @endif
