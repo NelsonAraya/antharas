@@ -111,7 +111,7 @@ class CiaController extends Controller
             $cantidad=Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->count();
             $eme = Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
             $usu = Usuario::where('cia_id',$id)->orderBy('rol','ASC')->get();
-                        foreach ($usu as $key => $row) {
+            foreach ($usu as $key => $row) {
                 $usu[$key]->asistido=0;
                 $usu[$key]->porcentaje=0;
                 foreach ($eme as $emergencia) {
@@ -154,7 +154,11 @@ class CiaController extends Controller
                         }
                     }
                 }
-                $usu[$key]->porcentaje = round(($usu[$key]->asistido*100)/$cantidad,1);
+                if($cantidad==0){
+                  $usu[$key]->porcentaje=0;  
+                }else{
+                  $usu[$key]->porcentaje = round(($usu[$key]->asistido*100)/$cantidad,1);
+                }
             }
             return view ('cia.show')->with('usu',$usu)->with('cantidad',$cantidad);
         }
