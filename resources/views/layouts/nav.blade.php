@@ -68,13 +68,16 @@
                 @endif
                 @if(Auth::user()->hasRole('adminCIA'))
                   <li class="dropdown
-                  @if( Route::currentRouteName()=='cia.index') active @endif">
+                  @if( Route::currentRouteName()=='cia.index' OR 
+                       Route::currentRouteName()=='cia.busqueda' OR 
+                       Route::currentRouteName()=='cia.busquedalista') active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">AdminCIA
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('cia.index') }}">Ver Listado Cia</a></li>   
+                      <li><a href="{{ route('cia.index') }}">Ver Listado Cia</a></li>
+                      <li><a href="{{ route('cia.busqueda')}}">Ver Asistencia Cia</a></li>   
                     </ul>
                   </li>
                 @endif

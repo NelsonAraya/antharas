@@ -47,7 +47,7 @@
 						<td>
 						<a href="" 
 							class="btn btn-success justify-content-center">
-		                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+		                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 		                </a>
 						</td>
 					</tr>

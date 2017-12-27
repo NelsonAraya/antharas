@@ -20,7 +20,7 @@
 <div class="form-group row">		
 	<div class="col-md-12">
 		<div class="panel panel-primary">
-  		<div class="panel-heading">Listado de Emergencias</div>
+  		<div class="panel-heading">Cantidad de Emergencias x Claves Año : {{ @$_GET['q'] }}</div>
   		<div class="panel-body">
 	  		<table class="table">
 				<thead>
