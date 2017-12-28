@@ -58,6 +58,9 @@ Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('eme
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
 
 Route::get('partesonline/{parte}/lista', 'PartesController@lista')->name('partesonline.lista')->middleware('auth','role:partes');
+
+Route::get('partesonline/{parte}/pdf', 'PartesController@partePDF')->name('partesonline.pdf')->middleware('auth','role:partes');
+
 Route::match(['put','patch'],'partesonline/lista/{parte}','PartesController@listaParte')->name('partesonline.listaparte')->middleware('auth','role:partes');
 Route::resource('partesonline','PartesController',['middleware' => ['role:partes', 'auth']]);
 

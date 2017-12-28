@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
         Laraveles\Spanish\SpanishServiceProvider::class,
+        Codedge\Fpdf\FpdfServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -225,6 +226,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
 
     ],
 

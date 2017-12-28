@@ -80,7 +80,7 @@
 		                </a>
 		                @endif
 		               	@if($control_estado)
-						<a href="" 
+						<a href="{{ route('partesonline.pdf',$id_parte) }}" 
 						class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
 		                </a>
