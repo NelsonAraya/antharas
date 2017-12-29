@@ -59,13 +59,16 @@
                   <li class="dropdown 
                   @if( Route::currentRouteName()=='material_mayor.index' OR 
                        Route::currentRouteName()=='material_mayor.create' OR 
-                       Route::currentRouteName()=='material_mayor.edit')active  @endif">
+                       Route::currentRouteName()=='material_mayor.edit' OR 
+                       Route::currentRouteName()=='claves.index' OR
+                       Route::currentRouteName()=='claves.create' )active  @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>   
+                      <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>
+                      <li><a href="{{ route('claves.index')}}">Agregar Claves</a></li>     
                     </ul>
                   </li>
                 @endif

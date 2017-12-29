@@ -52,6 +52,7 @@ Route::prefix('admin')->group(function () {
 	Route::match(['put','patch'],'material_mayor/permiso/{material_mayor}','MatMayorController@permiso')->name('material_mayor.permiso')->middleware('auth','role:adminCBI');
 	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');		
     Route::resource('material_mayor','MatMayorController',['middleware' => ['role:adminCBI', 'auth']]);
+    Route::resource('claves','ClaveController',['middleware' => ['role:adminCBI', 'auth']]);
 });
 
 Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('emergencia.showCantidad')->middleware('auth','role:emergencia');
