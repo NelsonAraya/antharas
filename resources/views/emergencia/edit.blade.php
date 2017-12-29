@@ -98,7 +98,7 @@
 									<td>{{ $row->created_at }}</td>
 									<td>{{ $row->responsable->nombreSimple() }}</td>
 									<td>
-										<a href="" 
+										<a href="{{ route('emergencia.pdf',$row->id) }}" 
 										class="btn btn-success justify-content-center">
 		                    			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                				</a>

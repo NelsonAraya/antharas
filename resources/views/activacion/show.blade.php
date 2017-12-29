@@ -1,5 +1,41 @@
 @extends('layouts.main')
+@section('css')
+<style type="text/css">
+	
+.parpadea {
+  
+  animation-name: parpadeo;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
 
+  -webkit-animation-name:parpadeo;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-timing-function: linear;
+  -webkit-animation-iteration-count: infinite;
+}
+
+@-moz-keyframes parpadeo{  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes parpadeo {  
+  0% { opacity: 1.0; }
+  50% { opacity: 0.0; }
+   100% { opacity: 1.0; }
+}
+
+@keyframes parpadeo {  
+  0% { opacity: 1.0; }
+   50% { opacity: 0.0; }
+  100% { opacity: 1.0; }
+}
+
+
+</style>
+@endsection
 @section('content')
 <audio id="tono" src="{{ asset('sonidos/tono.mp3') }}" preload="auto"></audio>
 <div class="table-responsive">
@@ -55,7 +91,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     	});	
-
     $.ajax({
         url : "{{ URL::route('activacion.vista') }}",
         success : function(data){
@@ -70,7 +105,11 @@
 					}else{
 						//document.getElementById('tono').play();
 						$('#tono').get(0).play();
-						$('#'+value.id).data('estado',value.activacion);
+						$('#'+value.id).data('estado',value.activacion).addClass('parpadea');
+						
+						$('#'+value.id).click(function(e) {  
+      						$(this).removeClass('parpadea');
+    					});
 					}
 
         			if(value.activacion=='S'){

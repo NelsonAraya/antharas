@@ -27,6 +27,7 @@ class UsuariosTableSeeder extends Seeder
         $usu->cia_id=4;
         $usu->cargo_id=1;
         $usu->email='tu@mail.cl';
+        $usu->fecha_ingresocbi='2005-01-01';
         $usu->password=bcrypt('antharas');
         $usu->roles()->attach($role);
         $usu->roles()->attach($role2);

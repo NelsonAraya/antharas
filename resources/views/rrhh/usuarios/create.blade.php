@@ -74,6 +74,10 @@
 				<div class="col-md-2">
 					<label for="licencia">LICENCIA</label>
 					<input type="date" name="fecha_licencia" id="licencia" class="form-control">	
+				</div>
+				<div class="col-md-2">
+					<label for="ingreso">INGRESO CBI</label>
+					<input type="date" name="fecha_ingresocbi" id="ingreso" class="form-control">	
 				</div>		
 				<div class="col-md-1">
 					<label for="">Registrar</label>

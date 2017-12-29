@@ -96,6 +96,11 @@
 					value="{{ $usu->fecha_licencia }}">
 				</div>
 				<div class="col-md-2">
+					<label for="ingreso">INGRESO CBI</label>
+					<input type="date" id="ingreso" name="fecha_ingresocbi" class="form-control"
+					value="{{ $usu->fecha_ingresocbi }}">
+				</div>
+				<div class="col-md-2">
 					<label for="estado">ESTADO</label>
 					<select id="estado" name="estado" class="form-control">
 						<option value="">--Seleccione--</option>
@@ -103,6 +108,8 @@
 						<option value="I" @if($usu->estado=='I') selected  @endif> Inactivo</option>
 					</select>
 				</div>				
+			</div>
+			<div class="form-group row">
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-warning">Modificar</button>

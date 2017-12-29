@@ -12,4 +12,8 @@ class EmergenciaUnidad extends Model
     public function parte(){
         return $this->belongsTo(Emergencia::class,'emergencia_id','id');
     }
+
+    public function vehiculo(){
+        return $this->belongsTo(Vehiculo::class,'vehiculo_id','id');
+    }
 }

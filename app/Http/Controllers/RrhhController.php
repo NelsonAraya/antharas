@@ -52,10 +52,10 @@ class RrhhController extends Controller
             'cia_id' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
-            'email' => 'required',
             'cargo_id' => 'required',
             'conductor' => 'required',
             'fecha_nacimiento' => 'required',
+            'fecha_ingresocbi' => 'required',
         ]);
         
         $usu = new Usuario($request->all());
@@ -135,10 +135,10 @@ class RrhhController extends Controller
             'cia_id' => 'required',
             'telefono' => 'required',
             'direccion' => 'required',
-            'email' => 'required',
             'cargo_id' => 'required',
             'conductor' => 'required',
             'fecha_nacimiento' => 'required',
+            'fecha_ingresocbi' => 'required',
         ]);
 
         $usu = Usuario::find($id);

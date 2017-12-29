@@ -140,7 +140,41 @@ class PartesController extends Controller
     public function partePDF($id){
         $parte = ParteOnline::find($id);
         $emergencia = Emergencia::find($parte->emergencia_id);
+       
+        /*
+        function Header() {
+            $this->SetFont('Arial','B',14)
+            //Movimiento hacia la derecha 'Informe de Servicio'
+            $this->Image(asset('img/logo_pdf.jpg'), 10, 10, 20)
+            $this->Image(asset('img/logo_pdf.jpg'), 190, 10, 20)
+            $this->Image(asset('img/marcadeagua.png'), 40, 80, 130, 150)
+            $this->SetXY(35,15)
+            $this->Cell(150, 7, 'Informe de Servicio Cuerpo de Bomberos de Iquique', 1, 2, 'C')
+            $this->Ln(13)
+        }
 
+        function Footer() {
+            $this->SetY(-14);
+            $this->SetFont('Arial','B',8);
+            $this->Cell(0,10,utf8_decode('Cuerpo Bomberos de Iquique - Página ').$this->PageNo(),0,0,'C');
+        }
+         */
+        $cia="";
+        $a="";
+        foreach($emergencia->cias as $cias){
+         $cia=$cia.$cias->cia->numero.'-';
+        }
+
+        $a=rtrim($cia,'-');
+
+        $uni="";
+        $b="";
+        foreach($emergencia->unidades as $unis){
+         $uni=$uni.$unis->vehiculo->clave.'-';
+        }
+
+        $b=rtrim($uni,'-');  
+    
     $pdf=new Fpdf('P','mm','letter');
     $pdf->AddPage();
     $pdf->Line(10, 50, 205, 50);
@@ -188,7 +222,7 @@ class PartesController extends Controller
     $pdf->Cell(0,0, utf8_decode("FECHA :"), 0, 0, 'L');
     $pdf->SetXY(160,55);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(35,0, utf8_decode($emergencia->fecha_emergencia), 0, 0, 'C');
+    $pdf->Cell(35,0, utf8_decode(date('d-m-Y',strtotime($emergencia->fecha_emergencia))), 0, 0, 'C');
     $pdf->Line(158, 57, 200,57);
     $pdf->SetXY(12,70);
     $pdf->SetFont('Arial', 'B', 12);
@@ -202,14 +236,14 @@ class PartesController extends Controller
     $pdf->Cell(0,0, utf8_decode("CIAS ASISTENTES :"), 0, 0, 'L');
     $pdf->SetXY(126,70);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(75,0, utf8_decode('BOMBAS ASISTENTES'), 0, 0, 'C');
+    $pdf->Cell(75,0, utf8_decode($a), 0, 0, 'C');
     $pdf->Line(125,72, 200,72);
     $pdf->SetXY(12,80);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("UNIDADES ASISTENTES :"), 0, 0, 'L');
     $pdf->SetXY(66,80);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(134,0, utf8_decode('UNIDADES ASISTENTES'), 0, 0, 'C');
+    $pdf->Cell(134,0, utf8_decode($b), 0, 0, 'C');
     $pdf->Line(65,82, 200,82);
     $pdf->Line(10,85, 205,85);//separador 
     $pdf->Line(10,95, 60,95);
@@ -229,29 +263,16 @@ class PartesController extends Controller
     $pdf->Cell(0,0, utf8_decode("DIRECCION :"), 0, 0, 'L');
     $pdf->SetXY(40,105);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(125,0, utf8_decode($emergencia->direccion), 0, 0, 'C');
-    $pdf->Line(38,107, 165,107);
-    $pdf->SetXY(170,105);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("Nº :"), 0, 0, 'L');
-    $pdf->SetXY(177,105);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(23,0, utf8_decode(''), 0, 0, 'C');
-    $pdf->Line(177,107, 200,107);
+    $pdf->Cell(125,0, utf8_decode($emergencia->direccion), 0, 0, 'L');
+    $pdf->Line(38,107, 200,107);
     $pdf->SetXY(12,115);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("BLOCK :"), 0, 0, 'L');
-    $pdf->SetXY(32,115);
+    $pdf->Cell(0,0, utf8_decode("ANEXO :"), 0, 0, 'L');
+    $pdf->SetXY(40,113);
     $pdf->SetFont('Arial','', 12);
+    $pdf->Cell(125,0, utf8_decode($parte->anexo_direccion), 0, 0, 'L');
+    $pdf->Line(38,115, 200,115);
     $pdf->Cell(20,0, utf8_decode(''), 0, 0, 'C');
-    $pdf->Line(30,117, 52,117);
-    $pdf->SetXY(55,115);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("DPTO :"), 0, 0, 'L');
-    $pdf->SetXY(70,115);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(20,0, utf8_decode(''), 0, 0, 'C');
-    $pdf->Line(68,117, 90,117);
     $pdf->Line(10,127, 205,127);//SEPARADOR
     $pdf->Line(10,137, 60,137);
     $pdf->Line(60,137, 60,127);
@@ -264,28 +285,28 @@ class PartesController extends Controller
     $pdf->Cell(0,0, utf8_decode("RUT :"), 0, 0, 'L');
     $pdf->SetXY(24,145);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(37,0, utf8_decode($parte->run_afectado), 0, 0, 'C');
-    $pdf->Line(23,147, 60,147);
+    $pdf->Cell(37,0, utf8_decode($parte->run_afectado), 0, 0, 'L');
+    $pdf->Line(23,147, 50,147);
     $pdf->SetXY(12,155);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("NOMBRE :"), 0, 0, 'L');
     $pdf->SetXY(35,155);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(75,0, utf8_decode($parte->afectado), 0, 0, 'C');
+    $pdf->Cell(75,0, strtoupper(utf8_decode($parte->afectado)), 0, 0, 'L');
     $pdf->Line(33,157, 110,157);
     $pdf->SetXY(12,165);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("RELACION LUGAR :"), 0, 0, 'L');
-    $pdf->SetXY(55,165);
+    $pdf->Cell(0,0, utf8_decode("RELACION :"), 0, 0, 'L');
+    $pdf->SetXY(38,165);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(55,0, utf8_decode($parte->relacion), 0, 0, 'C');
-    $pdf->Line(53,167, 110,167);
+    $pdf->Cell(55,0, utf8_decode($parte->relacion), 0, 0, 'L');
+    $pdf->Line(37,167, 110,167);
     $pdf->SetXY(12,175);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("SEGURO :"), 0, 0, 'L');
     $pdf->SetXY(35,175);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(75,0, utf8_decode($parte->seguro), 0, 0, 'C');
+    $pdf->Cell(75,0, utf8_decode($parte->seguro), 0, 0, 'L');
     $pdf->Line(33,177, 110,177);
     $pdf->Line(120,137, 140,137);
     $pdf->Line(140,137, 140,127);
@@ -306,6 +327,39 @@ class PartesController extends Controller
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(75,0, utf8_decode($parte->obacCbi->rol.' '.$parte->obacCbi->nombreSimple()), 0, 0, 'C');
     $pdf->Line(122,177, 200,177);
+    $pdf->Line(10,200, 10,250);
+    $pdf->Line(10,250, 205,250);
+    $pdf->Line(205,250, 205,200);
+    $pdf->SetXY(12,205);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(0,0, utf8_decode("DATOS SOLO RESCATE"), 0, 0, 'L');
+    $pdf->Line(10,210, 65,210);
+    $pdf->Line(65,210, 65,200);
+    $pdf->SetXY(12,220);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(0,0, utf8_decode("OP. DE RESCATE :"), 0, 0, 'L');
+    $pdf->Line(50,222, 65,222);
+    $pdf->SetXY(52,220);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(0,0, utf8_decode($parte->op_rescate), 0, 0, 'L');
+    $pdf->SetXY(80,220);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(0,0, utf8_decode("CANT. VEH. :"), 0, 0, 'L');
+    $pdf->Line(106,222, 120,222);
+
+    $pdf->SetXY(108,220);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(0,0, utf8_decode($parte->vehiculos), 0, 0, 'L');
+
+
+    $pdf->SetXY(130,220);
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(0,0, utf8_decode("LESIONADOS:"), 0, 0, 'L');
+    $pdf->Line(159,222, 173,222);
+
+    $pdf->SetXY(161,220);
+    $pdf->SetFont('Arial','',11);
+    $pdf->Cell(0,0, utf8_decode($parte->lesionados), 0, 0, 'L');
 /*********************************  SEGUNDA PAGINA  *************************************************/
     $pdf->AddPage(); 
     $pdf->Line(10, 50, 205, 50);
@@ -336,29 +390,24 @@ class PartesController extends Controller
     $pdf->SetXY(125,44);
     $pdf->SetFont('Arial','', 12);
     $pdf->Cell(100, 0, utf8_decode($parte->responsable->rol.' '.$parte->responsable->nombreSimple()), 0,0, 'L');
-    $pdf->Line(10, 60, 130, 60);
-    $pdf->Line(130, 60, 130, 50);
+    $pdf->Line(10, 60, 205, 60);
+    $pdf->Line(40, 60, 40, 50);
     $pdf->SetXY(12,55);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("CAUSA :"), 0, 0, 'L');     
-    $pdf->SetXY(35,55);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(90, 0, utf8_decode($parte->causa), 0,0, 'C');
-    $pdf->Line(10, 70, 205, 70);
-    $pdf->Line(130, 70, 130, 60);
-    $pdf->SetXY(12,65);
+    $pdf->Cell(0,0, utf8_decode("CAUSA"), 0, 0, 'L');     
+    $pdf->SetXY(45,55);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("LUGAR AMAGADO :"), 0, 0, 'L');
-    $pdf->SetXY(60,65);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(65, 0, utf8_decode(''), 0,0, 'C');
-    $pdf->SetXY(135,55);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("OBSERVACION CAUSA:"), 0, 0, 'L');
-    $pdf->Line(10, 110, 205, 110);//SEPARADOR
-    $pdf->SetXY(12,75);
+    $pdf->Cell(0,0, utf8_decode("LUGAR AMAGADO:"), 0, 0, 'L');
+
+    $pdf->SetXY(90,55);
     $pdf->SetFont('Arial', '', 12);
-    $pdf->MultiCell(0,5,utf8_decode(''), 0, 1);
+    $pdf->Cell(0,0, utf8_decode($parte->tipo), 0, 0, 'L'); 
+
+
+    $pdf->Line(10, 110, 205, 110);//SEPARADOR
+    $pdf->SetXY(12,62);
+    $pdf->SetFont('Arial', '', 12);
+    $pdf->MultiCell(0,5,utf8_decode($parte->causa), 0, 1);
     $pdf->SetXY(12,115);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("ORIGEN"), 0, 0, 'L');
@@ -394,7 +443,7 @@ class PartesController extends Controller
     $pdf->SetXY(12,210);
     $pdf->SetFont('Arial', '', 12);
     $pdf->MultiCell(0,5,utf8_decode($parte->trabajo), 0, 1);
-/*******************************  TERCERA PAGINA ASISTENCIA  *************************************************
+/*******************************  TERCERA PAGINA ASISTENCIA  *************************************************/
     $pdf->AddPage(); 
     $pdf->Line(10, 50, 205, 50);
     $pdf->Line(10, 50, 10, 250);
@@ -412,94 +461,40 @@ class PartesController extends Controller
     $pdf->Cell(0, 0, utf8_decode("Compañia :"), 0, 0, 'L');
     $pdf->SetXY(110,35);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(100, 0, utf8_decode($nom_cia." Nº".$row->inf_enviado_por_cia), 0, 0, 'L');
+    $pdf->Cell(100, 0, utf8_decode($parte->cia->nombreCompleto()), 0, 0, 'L');
     $pdf->SetXY(10,44);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("Fecha/Hora Envio :"), 0, 0, 'L');
     $pdf->SetXY(50,44);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(45, 0, utf8_decode($row->inf_fecha_envio." / ".$row->inf_hora_envio), 0,0, 'L');
+    $pdf->Cell(45, 0, utf8_decode($parte->created_at), 0,0, 'L');
     $pdf->SetXY(95,44);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("Responsable :"), 0, 0, 'L'); 
     $pdf->SetXY(125,44);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(100, 0, utf8_decode($row->inf_enviado_por_vol." ".$nom_responsable), 0,0, 'L');
+    $pdf->Cell(100, 0, utf8_decode($parte->responsable->rol.' '.$parte->responsable->nombreSimple()), 0,0, 'L');
     $pdf->SetXY(12,55);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(88,0, utf8_decode("NOMINA VOLUNTARIOS ASISTIDO"), 0, 0, 'C');
     
     $ind=58;
     $X=12;
-    while($vol= fetch_object($lista))
-     {  
-                $ind=$ind+6;
+    foreach ($parte->asistencias as $row) {
+        $ind=$ind+6;
                 if($ind>=245){
                 $X=105;
                 $ind=64;
                 }
                 $pdf->SetXY($X,$ind);
                 $pdf->SetFont('Arial', '', 12);  
-                $pdf->Cell(88,0,utf8_decode($vol->asi_fk_vol_pk_rol." - ".$vol->vol_nombre), 0, 0,'L');
-      }     
-    
-    
+                $pdf->Cell(88,0,utf8_decode($row->usuario->rol." - ".$row->usuario->nombreSimple()), 0, 0,'L');
+    }  
     $pdf->SetXY(105,55);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(90,0, utf8_decode("NOMINA VOLUNTARIOS ASISTIDO"), 0, 0, 'C');
     $ind=58;
- if($contar->total>=1){
-    $pdf->AddPage(); 
-    $pdf->Line(10, 50, 205, 50);
-    $pdf->Line(10, 50, 10, 250);
-    $pdf->Line(10, 250, 205, 250);
-    $pdf->Line(205, 250, 205, 50);
-    $pdf->Line(102, 50, 102, 250);
-    $pdf->SetXY(35,35);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0, 0, utf8_decode("Nº Informe :"), 0, 0, 'L');
-    $pdf->SetXY(60,35);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(20, 0, utf8_decode($row->inf_contador_cia), 0, 0, 'C');
-    $pdf->SetXY(83,35);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0, 0, utf8_decode("Compañia :"), 0, 0, 'L');
-    $pdf->SetXY(110,35);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(100, 0, utf8_decode($nom_cia." Nº".$row->inf_enviado_por_cia), 0, 0, 'L');
-    $pdf->SetXY(10,44);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("Fecha/Hora Envio :"), 0, 0, 'L');
-    $pdf->SetXY(50,44);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(45, 0, utf8_decode($row->inf_fecha_envio." / ".$row->inf_hora_envio), 0,0, 'L');
-    $pdf->SetXY(95,44);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("Responsable :"), 0, 0, 'L'); 
-    $pdf->SetXY(125,44);
-    $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(100, 0, utf8_decode($row->inf_enviado_por_vol." ".$nom_responsable), 0,0, 'L');
-    $pdf->SetXY(12,55);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(88,0, utf8_decode("ABONO VOLUNTARIOS OTRAS CIA"), 0, 0, 'C');
-    $ind=58;
-    $X=12;
-    $pdf->SetXY(105,55);
-    $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(90,0, utf8_decode("ABONO VOLUNTARIOS OTRAS CIA"), 0, 0, 'C');
-    while($vol_a= fetch_object($abono))
-     {
-                $ind=$ind+6;
-                if($ind>=245){
-                $X=105;
-                $ind=64;
-                }
-                $pdf->SetXY($X,$ind);
-                $pdf->SetFont('Arial', '', 12);  
-                $pdf->Cell(88,0,utf8_decode($vol_a->vol_rol." - ".$vol_a->vol_nombre), 0, 0,'L');
-      }                 
-   }
-            */         
-    $pdf->Output("PARTE_.pdf","D");
+                
+    $pdf->Output("PARTEONLINE.pdf","D");
     }
 }
