@@ -12,6 +12,7 @@ use App\EmergenciaUnidad;
 use App\ParteOnline;
 use Illuminate\Support\Facades\Auth;
 use Codedge\Fpdf\Fpdf\Fpdf;
+use App\Pdf;
 class EmergenciaController extends Controller
 {
     /**
@@ -194,7 +195,7 @@ class EmergenciaController extends Controller
 
         $b=rtrim($uni,'-');  
     
-    $pdf=new Fpdf('P','mm','letter');
+    $pdf=new Pdf('P','mm','letter');
     $pdf->AddPage();
     $pdf->Line(10, 50, 205, 50);
     $pdf->Line(10, 50, 10, 200);
