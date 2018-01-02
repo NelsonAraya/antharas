@@ -23,6 +23,8 @@
 					<input id="dire" name="direccion" class="form-control" autocomplete="off" 
 					value="{{ $eme->direccion }}">
 				</div>
+			</div>
+			<div class="form-group row">
 				<div class="col-md-3">
 					<label for="clave">CLAVE</label>
 					<select id="clave" name="clave_id" class="form-control">
@@ -34,6 +36,19 @@
 								<option value="{{ $key }}"> {{ $value }}</option>
 							@endif	
 						@endforeach
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label for="comuna">COMUNA</label>
+					<select id="comuna" name="comuna" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option @if($eme->comuna=='IQUIQUE') selected @endif value="IQUIQUE">IQUIQUE</option>
+						<option @if($eme->comuna=='ALTO HOSPICIO') selected @endif value="ALTO HOSPICIO">ALTO HOSPICIO</option>
+						<option @if($eme->comuna=='CAMIÑA') selected @endif value="CAMIÑA">CAMIÑA</option>
+						<option @if($eme->comuna=='COLCHANE') selected @endif value="COLCHANE">COLCHANE</option>
+						<option @if($eme->comuna=='HUARA') selected @endif value="HUARA">HUARA</option>
+						<option @if($eme->comuna=='PICA') selected @endif value="PICA">PICA</option>
+						<option @if($eme->comuna=='POZO ALMONTE') selected @endif value="POZO ALMONTE">POZO ALMONTE</option>
 					</select>
 				</div>
 			</div>

@@ -256,7 +256,7 @@ class PartesController extends Controller
     $pdf->Cell(0,0, utf8_decode("COMUNA :"), 0, 0, 'L');
     $pdf->SetXY(108,90);
     $pdf->SetFont('Arial','', 12);
-    $pdf->Cell(40,0, utf8_decode('COMUNA'), 0, 0, 'C');
+    $pdf->Cell(40,0, utf8_decode($emergencia->comuna), 0, 0, 'C');
     $pdf->Line(106,92, 150,92);
     $pdf->SetXY(12,105);
     $pdf->SetFont('Arial', 'B', 12);

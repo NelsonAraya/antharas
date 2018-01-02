@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuario;
 use App\Vehiculo;
+use App\Activacion;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 class ConductorController extends Controller
 {
     /**
@@ -98,5 +101,29 @@ class ConductorController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function reporte($id){
+
+        $acti = Activacion::where('usuario_id',$id)->orderBy('id','DESC')->limit(100)->get();
+        $usu = Usuario::find($id);
+        $perPage =10;
+        
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        
+        if ($currentPage == 1) {
+            $start = 0;
+        }
+        else {
+            $start = ($currentPage - 1) * $perPage;
+        }
+
+        $currentPageCollection = $acti->slice($start, $perPage)->all();
+
+        $paginated = new LengthAwarePaginator($currentPageCollection, count($acti), $perPage);
+
+        $paginated->setPath(LengthAwarePaginator::resolveCurrentPath());
+
+        return view('rrhh.conductores.reporte')->with('acti',$paginated)->with('usu',$usu);
+        
     }
 }

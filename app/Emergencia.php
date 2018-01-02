@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Emergencia extends Model
 {
     protected $table = 'emergencias';
-    protected $fillable = ['fecha_emergencia','hora_emergencia','direccion','usuario_id','clave_id'];
+    protected $fillable = ['fecha_emergencia','hora_emergencia','direccion','usuario_id','clave_id','comuna'];
 
     public function clave(){
         return $this->belongsTo(Clave::class,'clave_id','id');

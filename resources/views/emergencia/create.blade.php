@@ -19,6 +19,8 @@
 					<label for="dire">DIRECCION</label>
 					<input id="dire" name="direccion" class="form-control" autocomplete="off">
 				</div>
+			</div>
+			<div class="form-group row">
 				<div class="col-md-3">
 					<label for="clave">CLAVE</label>
 					<select id="clave" name="clave_id" class="form-control">
@@ -26,6 +28,19 @@
 						@foreach($clave as $key => $value)
 							<option value="{{ $key }}"> {{ $value }}</option>
 						@endforeach
+					</select>
+				</div>
+				<div class="col-md-3">
+					<label for="comuna">COMUNA</label>
+					<select id="comuna" name="comuna" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="IQUIQUE">IQUIQUE</option>
+						<option value="ALTO HOSPICIO">ALTO HOSPICIO</option>
+						<option value="CAMIÑA">CAMIÑA</option>
+						<option value="COLCHANE">COLCHANE</option>
+						<option value="HUARA">HUARA</option>
+						<option value="PICA">PICA</option>
+						<option value="POZO ALMONTE">POZO ALMONTE</option>
 					</select>
 				</div>
 			</div>

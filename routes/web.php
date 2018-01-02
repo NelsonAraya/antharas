@@ -31,6 +31,9 @@ Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
 	Route::match(['put','patch'],'usuarios/roles/{usuarios}','RrhhController@permisos')
 	->name('usuarios.permisos');
     Route::resource('usuarios','RrhhController');
+
+    Route::get('conductores/{id}/reporte','ConductorController@reporte')
+	->name('conductores.reporte');
     Route::resource('conductores','ConductorController');
 });
 

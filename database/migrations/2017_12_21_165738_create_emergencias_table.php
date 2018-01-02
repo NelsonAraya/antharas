@@ -18,6 +18,7 @@ class CreateEmergenciasTable extends Migration
             $table->date('fecha_emergencia');
             $table->time('hora_emergencia');
             $table->string('direccion',200);
+            $table->string('comuna',200);
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->integer('clave_id')->unsigned();

@@ -12,10 +12,26 @@
 			@else
 				@php $control_licencia=false; @endphp  
 			@endif
+			@if($usu->fecha_licencia!=null)
+				@php $fecha_aviso = strtotime('-60 day',strtotime($usu->fecha_licencia)); @endphp
+				@php $fecha_aviso = date('Y-m-d',$fecha_aviso); @endphp
+				@if($fecha_aviso<=date('Y-m-d'))
+					@php $control_aviso=true; @endphp
+				@else
+					@php $control_aviso=false; @endphp
+				@endif
+			@endif
 		@if($control_licencia)
 		<div class="col-md-12">
 			<div class="alert alert-danger">
 		  		<strong>Atencion!</strong> Su licencia esta Vencida o no Esta registrada.
+			</div>
+		</div>
+		@endif
+		@if($control_aviso)
+		<div class="col-md-12">
+			<div class="alert alert-warning">
+		  		<strong>Atencion!</strong> Su licencia esta por Vencer.
 			</div>
 		</div>
 		@endif	
