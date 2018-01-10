@@ -7,6 +7,7 @@
   		<div class="panel-heading">Listado de Unidades</div>
   		<div class="panel-body">
   		@isset($usu)
+  			@php $control_aviso=false; @endphp
 			@if($usu->fecha_licencia==null OR $usu->fecha_licencia<=date('Y-m-d') )
 				@php $control_licencia=true; @endphp
 			@else
