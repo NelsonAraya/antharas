@@ -93,7 +93,9 @@
     </div>
     <footer class="footer">
       <div class="container2">
-            <p class="text-muted">© Copyright <a>Nelson Araya</a></p>
+            <p class="text-muted">Copyright © 2018 | Todos los derechos reservados | Desarrollado por 
+                <a href="mailto:programmer.nelson@gmail.com">Nelson Araya</a> | Antharas System
+            </p>
       </div>
     </footer>
     <!-- Scripts -->
