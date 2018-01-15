@@ -96,20 +96,6 @@
         success : function(data){
         		$.each( data, function( key, value ) {
 
-        			var a = $('#'+value.id).data('estado');
-        			
-        			if(a === undefined || a === null){
-  						$('#'+value.id).data('estado',value.activado);
-					}else if(a==value.activado){
-						
-					}else{
-						$('#'+value.id).data('estado',value.activado).addClass('parpadea');
-						
-						$('#'+value.id).click(function(e) {  
-      						$(this).removeClass('parpadea');
-    					});
-					}
-
         			if(value.activado=='S'){
         				$('#'+value.id).css('background-color', '#00FF00');
         			}else{

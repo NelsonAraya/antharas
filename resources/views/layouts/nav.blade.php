@@ -115,7 +115,7 @@
                     <ul class="dropdown-menu">
                       <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>
                       <li><a href="{{ route('emergencia.showCantidad') }}">Cantidad x Clave</a></li>
-                      <li><a href="{{ route('emergencia.volActivos') }}">Vol Activos</a></li>   
+                      <li><a href="{{ route('emergencia.volActivos') }}">Voluntarios Activos</a></li>   
                     </ul>
                   </li>
                 @endif
