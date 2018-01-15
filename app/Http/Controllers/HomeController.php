@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Usuario;
+use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     /**
@@ -23,6 +24,23 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $usu = Usuario::find(Auth::user()->id);
+        return view('home')->with('usu',$usu);
+    }
+
+    public function myActivacion($id,$estado){
+
+        $usu = Usuario::find($id);
+        $usu->activado = $estado;
+        $usu->save();
+        if($estado=='S'){
+            $n ='ACTIVADO';
+        }else{
+            $n ='DESACTIVADO';
+        }
+        session()->flash('info', 'Ha modificado su estado de CUARTEL a: '.$n);
+
+        return redirect()->route('home');
+
     }
 }

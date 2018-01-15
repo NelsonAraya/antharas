@@ -33,6 +33,7 @@ class CreateUsuariosTable extends Migration
             $table->date('fecha_licencia')->nullable();
             $table->string('password');
             $table->enum('estado',['A','I'])->default('A');
+            $table->enum('activado',['S','N'])->default('N');
             $table->rememberToken();
             $table->timestamps();
             $table->primary('id');

@@ -20,6 +20,8 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/myactivacion/{usuario}/{estado}','HomeController@myActivacion')->name('home.activacion');
+
 
 Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
 	Route::get('usuarios/{usuarios}/roles','RrhhController@roles')
@@ -59,6 +61,10 @@ Route::prefix('admin')->group(function () {
 });
 
 Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('emergencia.showCantidad')->middleware('auth','role:emergencia');
+
+Route::get('emergencia/viewActivos', 'EmergenciaController@volActivos')->name('emergencia.vista')->middleware('auth','role:emergencia');
+
+Route::get('emergencia/volActivos','EmergenciaController@verVoluntarios')->name('emergencia.volActivos')->middleware('auth','role:emergencia');
 Route::get('emergencia/{id}/pdf','EmergenciaController@partePDF')->name('emergencia.pdf')->middleware('auth','role:emergencia');
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
 

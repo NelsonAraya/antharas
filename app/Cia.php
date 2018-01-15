@@ -10,7 +10,7 @@ class Cia extends Model
     protected $fillable = ['numero','nombre'];
 
     public function usuarios(){
-        return $this->hasMany(Usuario::class,'cia_id','id');
+        return $this->hasMany(Usuario::class,'cia_id','id')->orderBy('rol','ASC');
     }
     
     public function nombreCompleto(){

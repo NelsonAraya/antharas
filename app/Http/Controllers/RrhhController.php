@@ -65,12 +65,22 @@ class RrhhController extends Controller
         }else{
             $usu->conductor='N';
         }
+        if(isset($request->email)){
+            $usu->email = strtolower($request->email);
+        }else{
+            $usu->email= null;
+        }
+
+        if(isset($request->rol)){
+            $usu->rol = $request->rol;
+        }else{
+            $usu->rol= null;
+        }
 
         $usu->nombres = strtolower($usu->nombres);
         $usu->apellidop = strtolower($usu->apellidop);
         $usu->apellidom = strtolower($usu->apellidom);
         $usu->direccion = strtolower($usu->direccion);
-        $usu->email = strtolower($usu->email);
 
         $run = str_replace('.','',$request->run);
         $run = str_replace('-','',$request->run);
