@@ -266,7 +266,7 @@ class PartesController extends Controller
     $pdf->SetFont('Arial','', 12);
     $pdf->Cell(125,0, utf8_decode($emergencia->direccion), 0, 0, 'L');
     $pdf->Line(38,107, 200,107);
-    $pdf->SetXY(12,115);
+    $pdf->SetXY(12,114);
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(0,0, utf8_decode("ANEXO :"), 0, 0, 'L');
     $pdf->SetXY(40,113);
