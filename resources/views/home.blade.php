@@ -16,13 +16,13 @@
                 	disabled   
                 	@else 
                 	href="{{ route('home.activacion',[$usu->id,'S']) }}" 
-                	@endif class="btn btn-success" role="button">Activar</a>
+                	@endif class="btn btn-success" role="button">Activado</a>
 				<a @if($usu->activado =='S') 
 					href="{{ route('home.activacion',[$usu->id,'N']) }}" 
 					@else
 					href="#"
 					disabled
-					@endif class="btn btn-danger" role="button">Desactivar</a>
+					@endif class="btn btn-danger" role="button">Desactivado</a>
             </div>
         </div>
     </div>

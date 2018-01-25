@@ -86,7 +86,7 @@
 							<tr>
 								<td> {{ $row->fecha_vencimiento }} </td>
 								<td>
-								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+								<a href="#" class="btn btn-danger justify-content-center">
 					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					            </a>
 								</td>
@@ -120,7 +120,7 @@
 							<tr>
 								<td> {{ $row->fecha_vencimiento }} </td>
 								<td>
-								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+								<a href="#" class="btn btn-danger justify-content-center">
 					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					            </a>
 								</td>
@@ -154,7 +154,7 @@
 							<tr>
 								<td> {{ $row->fecha_vencimiento }} </td>
 								<td>
-								<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-danger justify-content-center">
+								<a href="#" class="btn btn-danger justify-content-center">
 					                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
 					            </a>
 								</td>

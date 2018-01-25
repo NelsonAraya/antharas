@@ -114,6 +114,10 @@
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-warning">Modificar</button>
 				</div>
+				<div class="col-md-2">
+					<label for="">Restablecer Password</label>
+					<a href="{{ route('usuarios.restablecer',$usu->id) }}" class="btn btn-info" role="button">Restablecer</a>
+				</div>
 			</div>
 		</div>		
 	</div>

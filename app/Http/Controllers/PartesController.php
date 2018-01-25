@@ -54,8 +54,8 @@ class PartesController extends Controller
     public function show($id)
     {
         $eme = Emergencia::find($id);
-        $obac_cia =Usuario::where('cia_id',Auth::user()->cia_id)->get();
-        $obac_cbi =Usuario::where('cia_id','!=',11)->get();
+        $obac_cia =Usuario::where('cia_id',Auth::user()->cia_id)->where('estado','A')->get();
+        $obac_cbi =Usuario::where('cia_id','!=',11)->where('estado','A')->get();
         return view('partesonline.show')->with('eme',$eme)
                 ->with('obac_cia',$obac_cia)->with('obac_cbi',$obac_cbi);
     }
@@ -106,7 +106,7 @@ class PartesController extends Controller
     }
     public function lista($id){
         $parte = ParteOnline::find($id);
-        $usu = Usuario::where('cia_id',Auth::user()->cia_id)->orderBy('rol','ASC')->get();
+        $usu = Usuario::where('cia_id',Auth::user()->cia_id)->where('estado','A')->orderBy('rol','ASC')->get();
         return view('partesonline.lista')->with('parte',$parte)->with('usu',$usu);
 
     }
