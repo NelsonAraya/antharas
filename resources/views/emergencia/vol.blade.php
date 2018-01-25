@@ -81,17 +81,31 @@
     $.ajax({
         url : "{{ URL::route('emergencia.vista') }}",
         success : function(data){
-        		var cia1=0;
-        		var cia2=0;
-        		var cia4=0;
-        		var cia5=0;
-        		var cia6=0;
-        		var cia7=0;
-        		var cia11=0;
-        		var cia12=0;
-        		var cia14=0;
-        		var cia16=0;
+
+        			var cia1=0;
+					var cia2=0;
+					var cia4=0;
+					var cia5=0;
+					var cia6=0;
+					var cia7=0;
+					var cia11=0;
+					var cia12=0;
+					var cia14=0;
+					var cia16=0;
+        		
         		$.each( data, function( key, value ) {
+
+        			
+			       $('#cia_1').text(cia1);
+			       $('#cia_2').text(cia2);
+			       $('#cia_3').text(cia4);
+			       $('#cia_4').text(cia5);
+			       $('#cia_5').text(cia6);
+			       $('#cia_6').text(cia7);
+			       $('#cia_7').text(cia11);
+			       $('#cia_8').text(cia12);
+			       $('#cia_9').text(cia14);
+			       $('#cia_10').text(cia16);
 
         			if(value.activado=='S'){
         				$('#'+value.id).css('background-color', '#00FF00');
@@ -139,6 +153,8 @@
 
         			}else{
         				$('#'+value.id).css('background-color', 'red');
+
+
         			}
         			
         		});
