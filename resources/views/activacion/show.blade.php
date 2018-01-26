@@ -37,7 +37,7 @@
 </style>
 @endsection
 @section('content')
-<audio id="tono" src="{{ asset('sonidos/tono.mp3') }}" preload="auto"></audio>
+<audio id="tono" src="{{ asset('sonidos/evento.ton') }}" preload="auto"></audio>
 <div class="table-responsive">
 	<table class="table">
 		<thead>
