@@ -19,6 +19,9 @@ Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+Route::get('changepassword', 'RrhhController@changePassword')->name('changepassword');
+Route::post('password', 'RrhhController@nuevaPassword')->name('nuevaPassword');
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/myactivacion/{usuario}/{estado}','HomeController@myActivacion')->name('home.activacion');
 

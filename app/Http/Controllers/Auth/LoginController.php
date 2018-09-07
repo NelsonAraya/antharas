@@ -56,6 +56,7 @@ class LoginController extends Controller
                 ->withInput(request([$this->username()]));
         }
     }
+
     public function username(){
         return 'run';
     }

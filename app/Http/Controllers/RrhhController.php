@@ -8,6 +8,8 @@ use App\Cargo;
 use App\Usuario;
 use App\Role;
 use App\Emergencia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 class RrhhController extends Controller
 {
     /**
@@ -319,5 +321,41 @@ class RrhhController extends Controller
         session()->flash('info', 'Contraseña Restablecida a '.$usu->nombreSimple());
 
         return redirect()->route('usuarios.index');
+    }
+
+    public function changePassword(){
+        
+        return view('rrhh.usuarios.change'); 
+    }
+    public function nuevaPassword(Request $request){
+        $request->validate([
+            'password' => 'required',
+            'nueva_password' => 'required|string|min:6|max:12',
+            'nueva_password2' => 'required|string|min:6|max:12',
+        ]);  
+        
+        if(Hash::check($request->password,Auth::user()->password)){
+            
+            if($request->nueva_password!=$request->nueva_password2){
+             
+             session()->flash('danger', 'Contraseñas no coinciden');
+
+             return redirect()->route('home');
+            }
+            else{
+                 $usu = Usuario::find(Auth::user()->id);
+                 $usu->password = bcrypt($request->nueva_password);
+                 $usu->save();
+                
+                 session()->flash('info', 'Contraseñas Cambiada con Exito!');
+
+                return redirect()->route('home');
+            }
+        }else{
+
+            session()->flash('danger', 'Contraseña Incorrecta');
+
+            return redirect()->route('home');
+        }
     }
 }
