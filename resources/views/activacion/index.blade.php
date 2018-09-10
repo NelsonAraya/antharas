@@ -60,9 +60,11 @@
 								@if($revision['fecha_vencimiento']<= date('Y-m-d'))
 									@php $control=true; @endphp 
 								@endif
+							@else
+								@php $control=true; @endphp
 							@endif
 						@endforeach
-					@endisset	
+					@endisset
 					<div class="col-md-3">
 						<label for="conductor">{{ $row->clave }}</label>
 						<input type="text" id="conductor" class="form-control" readonly="" value="{{ @$nom }}">
