@@ -43,7 +43,12 @@
 		<thead>
 			<tr>
 				@foreach($cia as $row)
+					@if ($row->numero == 100)
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">CBI
+					</th>
+					@else
 					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
+					@endif
 				@endforeach
 			</tr>
 		</thead>

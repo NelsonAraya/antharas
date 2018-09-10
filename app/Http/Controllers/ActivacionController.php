@@ -68,7 +68,8 @@ class ActivacionController extends Controller
 
     public function showCuarteles(){
 
-        $cia= Cia::where('numero','!=',100)->get();
+        //$cia= Cia::where('numero','!=',100)->get();
+        $cia= Cia::get();
         return view('activacion.show')->with('cia',$cia);
     }
 

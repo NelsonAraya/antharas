@@ -24,7 +24,7 @@
 									  <div class="panel-body">
 									  	<b>
 									    {{ $usu->rol }}
-									    <a id="pop_{{ $usu->id }}" href="#" data-toggle="popover" data-trigger="focus"
+									    <a id="pop_{{ $usu->id }}" data-toggle="popover" data-trigger="focus"
 									    data-content="<b>Nombre: </b>{{ $usu->nombreSimple() }} <br> <b>Cargo: </b> {{ $usu->cargo->nombre }}" 
 									    data-html="true"><span class="glyphicon glyphicon-search"></span></a>
 										</b>
