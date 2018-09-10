@@ -41,7 +41,7 @@ class LoginController extends Controller
         * Limpiar run y dividir en ID y DV
         */
         $credentials['id'] = str_replace('.','',$credentials['run']);
-        $credentials['id'] = str_replace('-','',$credentials['run']);
+        $credentials['id'] = str_replace('-','',$credentials['id']);
 
         unset($credentials['run']);
         

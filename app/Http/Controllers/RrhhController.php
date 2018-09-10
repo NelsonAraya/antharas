@@ -85,7 +85,7 @@ class RrhhController extends Controller
         $usu->direccion = strtolower($usu->direccion);
 
         $run = str_replace('.','',$request->run);
-        $run = str_replace('-','',$request->run);
+        $run = str_replace('-','',$run);
 
         $dv = substr($run, -1);
         $id = substr($run, 0, -1);
