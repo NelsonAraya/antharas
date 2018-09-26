@@ -37,7 +37,8 @@
 		</div>
 		@endif	
 			@foreach($usu->vehiculos as $row)
-				@php $control=false; @endphp 
+				@php $control=true; @endphp
+				@php $id=$row->id; @endphp 
 				@if($row->estado=='A')
 						@php 
 					  		$nom = "";
@@ -45,7 +46,7 @@
 					  	@endphp
 					@isset($conductor)
 						@foreach($conductor as $con)
-					  		@if($row->id == $con->vehiculo_id)
+					  		@if($id == $con->vehiculo_id)
 					  		@php 
 					  			$nom = $con->usuario->nombreSimple();
 					  			$chofer = $con->usuario->id;
@@ -56,12 +57,14 @@
 					@endisset
 					@isset ($rev)
 						@foreach ($rev as $revision)
-							@if($row->id == $revision['vehiculo_id'])
+							@if($id == $revision['vehiculo_id'])
 								@if($revision['fecha_vencimiento']<= date('Y-m-d'))
-									@php $control=true; @endphp 
-								@endif
+									@php $control=true; @endphp
+								@else
+									@php $control=false; @endphp
+								@endif	
 							@else
-								@php $control=true; @endphp
+								
 							@endif
 						@endforeach
 					@endisset
@@ -69,7 +72,7 @@
 						<label for="conductor">{{ $row->clave }}</label>
 						<input type="text" id="conductor" class="form-control" readonly="" value="{{ @$nom }}">
 						<br>
-						<a @if($row->activacion=='S' OR $control ==true OR $control_licencia == true)
+						<a @if($row->activacion=='S' OR $control == true OR $control_licencia == true)
 								href="#"
 								disabled
 							@else	

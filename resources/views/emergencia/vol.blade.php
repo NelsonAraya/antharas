@@ -19,8 +19,8 @@
 						@foreach($row->usuarios as $usu)
 							@if($usu->estado=='A')
 							<tr>
-								<td style=" width: 10%;">
-									<div id="{{ $usu->id }}" class="panel panel-default">
+								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
+									<div id="_{{ $usu->id }}" class="panel panel-default">
 									  <div class="panel-body">
 									  	<b>
 									    {{ $usu->rol }}
@@ -109,7 +109,8 @@
 			       $('#cia_10').text(cia16);
 
         			if(value.activado=='S'){
-        				$('#'+value.id).css('background-color', '#00FF00');
+        				$('#'+value.id).show();
+        				$('#_'+value.id).css('background-color', '#00FF00');
 
         				switch (value.cia_id) {
 						    case 1:
@@ -153,7 +154,8 @@
 						}
 
         			}else{
-        				$('#'+value.id).css('background-color', 'red');
+        				$('#'+value.id).hide();
+        				$('#_'+value.id).css('background-color', 'red');
 
 
         			}
