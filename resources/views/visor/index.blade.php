@@ -137,6 +137,7 @@
  			if(document.getElementById('tabla_uni').style.display=="none"){
  				$("#tabla_vol").hide("slow");
  				$("#tabla_uni").show("slow");
+ 				$(this).html("Ver Voluntarios");
  				$(this).removeClass( "btn-info" ).addClass( "btn-primary" );
  			}else{
  				$("#tabla_uni").hide("slow");
