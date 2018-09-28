@@ -503,7 +503,8 @@ class EmergenciaController extends Controller
 
     public function verVoluntarios(){
 
-        $cia= Cia::where('numero','!=',100)->get();
+        //$cia= Cia::where('numero','!=',100)->get();
+        $cia= Cia::get();
         return view('visor.index')->with('cia',$cia);
     }
 
