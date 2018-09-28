@@ -504,7 +504,7 @@ class EmergenciaController extends Controller
     public function verVoluntarios(){
 
         $cia= Cia::where('numero','!=',100)->get();
-        return view('emergencia.vol')->with('cia',$cia);
+        return view('visor.index')->with('cia',$cia);
     }
 
     public function volActivos(){
