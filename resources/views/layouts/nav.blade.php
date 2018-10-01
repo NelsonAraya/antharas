@@ -10,9 +10,16 @@
                 <span class="icon-bar"></span>
             </button>
             <!-- Branding Image -->
+            @auth
             <a class="navbar-brand" href="{{ url('home') }}">
                 {{ config('app.name') }}
             </a>
+            @endauth
+            @guest
+            <a class="navbar-brand" href="#">
+                {{ config('app.name') }}
+            </a>
+            @endguest
         </div>
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -146,7 +153,7 @@
 
                         <ul class="dropdown-menu">
                             <li><a href="{{ route('changepassword') }}">Cambio Contraseña</a></li>
-                            <li><a href="{{ route('emergencia.volActivos') }}">Bomberos Activos</a></li>
+                            <li><a href="{{ route('visor') }}">Bomberos Activos</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

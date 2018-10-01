@@ -182,7 +182,7 @@
         }
     	});	
     $.ajax({
-        url : "{{ URL::route('emergencia.vista') }}",
+        url : "{{ URL::route('visor.vol') }}",
         success : function(data){
 
         			var cia_x1=0;
@@ -215,7 +215,10 @@
         				$('#_'+value.id).css('background-color', '#F7F319');
         			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
         				$('#_'+value.id).css('background-color', 'red');
-        			}else{
+        			}else if(value.cargo_id== 13 || value.cargo_id== 14 || value.cargo_id== 15){
+        				$('#_'+value.id).css('background-color', '#2B79EA');
+        			}
+        			else{
         				$('#_'+value.id).css('background-color', '#00FF00');
         			}
         				
@@ -271,9 +274,10 @@
         	headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-    	});	
+    	});
+    		
     $.ajax({
-        url : "{{ URL::route('activacion.vista') }}",
+        url : "{{ URL::route('visor.cuartel') }}",
         success : function(data){
         		$.each( data, function( key, value ) {
 
