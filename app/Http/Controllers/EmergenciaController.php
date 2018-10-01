@@ -21,6 +21,10 @@ class EmergenciaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(){
+
+         $this->middleware('auth', ['except' => ['verVoluntarios']]);
+    }
     public function index()
     {
         $emergencia = Emergencia::orderBy('id','DESC')->paginate(10);

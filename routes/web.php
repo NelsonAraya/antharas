@@ -69,7 +69,8 @@ Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('eme
 
 Route::get('emergencia/viewActivos', 'EmergenciaController@volActivos')->name('emergencia.vista')->middleware('auth','role:emergencia');
 
-Route::get('visor/volActivos','EmergenciaController@verVoluntarios')->name('emergencia.volActivos')->middleware('guest');
+Route::get('visor/volActivos','EmergenciaController@verVoluntarios')->name('emergencia.volActivos');
+
 Route::get('emergencia/{id}/pdf','EmergenciaController@partePDF')->name('emergencia.pdf')->middleware('auth','role:emergencia');
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
 
