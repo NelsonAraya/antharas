@@ -210,62 +210,56 @@
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 
-        			if(value.activado=='S'){
-        				$('#'+value.id).show();
-        				if(value.cargo_id==8){
-        					$('#_'+value.id).css('background-color', 'red');
-        				}else{
-        					$('#_'+value.id).css('background-color', '#00FF00');
-        				}
-        				
-        				switch (value.cia_id) {
-						    case 1:
-						        cia_x1 +=1;
-						        $('#cia_1').text(cia_x1);
-						        break;
-						    case 2:
-						        cia_x2 +=1;
-						        $('#cia_2').text(cia_x2);
-						        break;
-						    case 3:
-						        cia_x4 +=1;
-						        $('#cia_3').text(cia_x4);
-						        break;
-						    case 4:
-						        cia_x5 +=1;
-						        $('#cia_4').text(cia_x5);
-						        break;
-						    case 5:
-						        cia_x6 +=1;
-						        $('#cia_5').text(cia_x6);
-						        break;
-						    case 6:
-						        cia_x7 +=1;
-						        $('#cia_6').text(cia_x7);
-						        break;
-						    case 7:
-						        cia_x11 +=1;
-						        $('#cia_7').text(cia_x11);
-						        break;
-						    case 8:
-						        cia_iqq +=1;
-						        $('#cia_8').text(cia_x12);
-						        break;
-						    case 9:
-						        cia_x14 +=1;
-						        $('#cia_9').text(cia_x14);
-						        break;
-						    case 10:
-						        cia_x16 +=1;
-						        $('#cia_10').text(cia_x16);
-						}
-
-        			}else{
-        				$('#'+value.id).hide();
+        			$('#'+value.id).show();
+        			if(value.cargo_id==5){
+        				$('#_'+value.id).css('background-color', '#F7F319');
+        			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
         				$('#_'+value.id).css('background-color', 'red');
-
-
+        			}else{
+        				$('#_'+value.id).css('background-color', '#00FF00');
         			}
+        				
+        			switch (value.cia_id) {
+						case 1:
+						    cia_x1 +=1;
+						    $('#cia_1').text(cia_x1);
+						    break;
+						case 2:
+						    cia_x2 +=1;
+						    $('#cia_2').text(cia_x2);
+						    break;
+						case 3:
+						    cia_x4 +=1;
+						    $('#cia_3').text(cia_x4);
+						    break;
+						case 4:
+						    cia_x5 +=1;
+						    $('#cia_4').text(cia_x5);
+						    break;
+						case 5:
+						    cia_x6 +=1;
+						    $('#cia_5').text(cia_x6);
+						    break;
+						case 6:
+						    cia_x7 +=1;
+						    $('#cia_6').text(cia_x7);
+						    break;
+						case 7:
+						    cia_x11 +=1;
+						    $('#cia_7').text(cia_x11);
+						    break;
+						case 8:
+						    cia_iqq +=1;
+						    $('#cia_8').text(cia_x12);
+						    break;
+						case 9:
+						    cia_x14 +=1;
+						    $('#cia_9').text(cia_x14);
+						    break;
+						case 10:
+						    cia_x16 +=1;
+						    $('#cia_10').text(cia_x16);
+					}
         			
         		});
             }
