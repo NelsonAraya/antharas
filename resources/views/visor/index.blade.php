@@ -209,7 +209,7 @@
 			       $('#cia_8').text(cia_x12);
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
-
+			    if(value.activado=='S'){
         			$('#'+value.id).show();
         			if(value.cargo_id==5){
         				$('#_'+value.id).css('background-color', '#F7F319');
@@ -263,7 +263,9 @@
 						    cia_x16 +=1;
 						    $('#cia_10').text(cia_x16);
 					}
-        			
+        		}else{
+        			$('#'+value.id).hide();
+        		}
         		});
             }
         });
