@@ -9,20 +9,22 @@
                 Bienvenido a ANTHARAS el sistema ONLINE DEL CBI
                 <br>
                 <br>
+                @if($usu->cia_id!=11)
                 Mi Activacion en CUARTEL 
                 <br>
-                <a @if($usu->activado=='S') 
-                	href="#"
-                	disabled   
-                	@else 
-                	href="{{ route('home.activacion',[$usu->id,'S']) }}" 
-                	@endif class="btn btn-success" role="button">Activado</a>
-				<a @if($usu->activado =='S') 
-					href="{{ route('home.activacion',[$usu->id,'N']) }}" 
-					@else
-					href="#"
-					disabled
-					@endif class="btn btn-danger" role="button">Desactivado</a>
+                    <a @if($usu->activado=='S') 
+                    	href="#"
+                    	disabled   
+                    	@else 
+                    	href="{{ route('home.activacion',[$usu->id,'S']) }}" 
+                    	@endif class="btn btn-success" role="button">Activado</a>
+    				<a @if($usu->activado =='S') 
+    					href="{{ route('home.activacion',[$usu->id,'N']) }}" 
+    					@else
+    					href="#"
+    					disabled
+    					@endif class="btn btn-danger" role="button">Desactivado</a>
+                 @endif       
             </div>
         </div>
     </div>
