@@ -242,8 +242,8 @@
 						    case 7:
 						        cia_x11 +=1;
 						        $('#cia_7').text(cia_x11);
+						        break;
 						    case 8:
-						    	alert("hola");
 						        cia_iqq +=1;
 						        $('#cia_8').text(cia_iqq);
 						        break;
