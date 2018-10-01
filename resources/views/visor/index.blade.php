@@ -152,27 +152,27 @@
 
     	$('[data-toggle="popover"]').popover();  
     	
-    	var cia1=0;
-		var cia2=0;
-		var cia4=0;
-		var cia5=0;
-		var cia6=0;
-		var cia7=0;
-		var cia11=0;
-		var cia12=0;
-		var cia14=0;
-		var cia16=0;
+    	var cia_x1=0;
+		var cia_x2=0;
+		var cia_x4=0;
+		var cia_x5=0;
+		var cia_x6=0;
+		var cia_x7=0;
+		var cia_x11=0;
+		var cia_x12=0;
+		var cia_x14=0;
+		var cia_x16=0;
 
-       $('#cia_1').text(cia1);
-       $('#cia_2').text(cia2);
-       $('#cia_3').text(cia4);
-       $('#cia_4').text(cia5);
-       $('#cia_5').text(cia6);
-       $('#cia_6').text(cia7);
-       $('#cia_7').text(cia11);
-       $('#cia_8').text(cia12);
-       $('#cia_9').text(cia14);
-       $('#cia_10').text(cia16);
+       $('#cia_1').text(cia_x1);
+       $('#cia_2').text(cia_x2);
+       $('#cia_3').text(cia_x4);
+       $('#cia_4').text(cia_x5);
+       $('#cia_5').text(cia_x6);
+       $('#cia_6').text(cia_x7);
+       $('#cia_7').text(cia_x11);
+       $('#cia_8').text(cia_x12);
+       $('#cia_9').text(cia_x14);
+       $('#cia_10').text(cia_x16);
 
     function getActivados(){
         
@@ -185,30 +185,30 @@
         url : "{{ URL::route('emergencia.vista') }}",
         success : function(data){
 
-        			var cia1=0;
-					var cia2=0;
-					var cia4=0;
-					var cia5=0;
-					var cia6=0;
-					var cia7=0;
-					var cia11=0;
-					var cia12=0;
-					var cia14=0;
-					var cia16=0;
+        			var cia_x1=0;
+					var cia_x2=0;
+					var cia_x4=0;
+					var cia_x5=0;
+					var cia_x6=0;
+					var cia_x7=0;
+					var cia_x11=0;
+					var cia_x12=0;
+					var cia_x14=0;
+					var cia_x16=0;
         		
         		$.each( data, function( key, value ) {
 
         			
-			       $('#cia_1').text(cia1);
-			       $('#cia_2').text(cia2);
-			       $('#cia_3').text(cia4);
-			       $('#cia_4').text(cia5);
-			       $('#cia_5').text(cia6);
-			       $('#cia_6').text(cia7);
-			       $('#cia_7').text(cia11);
-			       $('#cia_8').text(cia12);
-			       $('#cia_9').text(cia14);
-			       $('#cia_10').text(cia16);
+			       $('#cia_1').text(cia_x1);
+			       $('#cia_2').text(cia_x2);
+			       $('#cia_3').text(cia_x4);
+			       $('#cia_4').text(cia_x5);
+			       $('#cia_5').text(cia_x6);
+			       $('#cia_6').text(cia_x7);
+			       $('#cia_7').text(cia_x11);
+			       $('#cia_8').text(cia_x12);
+			       $('#cia_9').text(cia_x14);
+			       $('#cia_10').text(cia_x16);
 
         			if(value.activado=='S'){
         				$('#'+value.id).show();
@@ -216,43 +216,43 @@
 
         				switch (value.cia_id) {
 						    case 1:
-						        cia1 +=1;
-						        $('#cia_1').text(cia1);
+						        cia_x1 +=1;
+						        $('#cia_1').text(cia_x1);
 						        break;
 						    case 2:
-						        cia2 +=1;
-						        $('#cia_2').text(cia2);
+						        cia_x2 +=1;
+						        $('#cia_2').text(cia_x2);
 						        break;
 						    case 3:
-						        cia4 +=1;
-						        $('#cia_3').text(cia4);
+						        cia_x4 +=1;
+						        $('#cia_3').text(cia_x4);
 						        break;
 						    case 4:
-						        cia5 +=1;
-						        $('#cia_4').text(cia5);
+						        cia_x5 +=1;
+						        $('#cia_4').text(cia_x5);
 						        break;
 						    case 5:
-						        cia6 +=1;
-						        $('#cia_5').text(cia6);
+						        cia_x6 +=1;
+						        $('#cia_5').text(cia_x6);
 						        break;
 						    case 6:
-						        cia7 +=1;
-						        $('#cia_6').text(cia7);
+						        cia_x7 +=1;
+						        $('#cia_6').text(cia_x7);
 						        break;
 						    case 7:
-						        cia11 +=1;
-						        $('#cia_7').text(cia11);
+						        cia_x11 +=1;
+						        $('#cia_7').text(cia_x11);
 						    case 8:
-						        cia12 +=1;
-						        $('#cia_8').text(cia12);
+						        cia_x12 +=1;
+						        $('#cia_8').text(cia_x12);
 						        break;
 						    case 9:
-						        cia14 +=1;
-						        $('#cia_9').text(cia14);
+						        cia_x14 +=1;
+						        $('#cia_9').text(cia_x14);
 						        break;
 						    case 10:
-						        cia16 +=1;
-						        $('#cia_10').text(cia16);
+						        cia_x16 +=1;
+						        $('#cia_10').text(cia_x16);
 						}
 
         			}else{
