@@ -159,7 +159,7 @@
 		var cia_x6=0;
 		var cia_x7=0;
 		var cia_x11=0;
-		var cia_x12=0;
+		var cia_iqq=0;
 		var cia_x14=0;
 		var cia_x16=0;
 
@@ -170,7 +170,7 @@
        $('#cia_5').text(cia_x6);
        $('#cia_6').text(cia_x7);
        $('#cia_7').text(cia_x11);
-       $('#cia_8').text(cia_x12);
+       $('#cia_8').text(cia_iqq);
        $('#cia_9').text(cia_x14);
        $('#cia_10').text(cia_x16);
 
@@ -192,7 +192,7 @@
 					var cia_x6=0;
 					var cia_x7=0;
 					var cia_x11=0;
-					var cia_x12=0;
+					var cia_iqq=0;
 					var cia_x14=0;
 					var cia_x16=0;
         		
@@ -206,7 +206,7 @@
 			       $('#cia_5').text(cia_x6);
 			       $('#cia_6').text(cia_x7);
 			       $('#cia_7').text(cia_x11);
-			       $('#cia_8').text(cia_x12);
+			       $('#cia_8').text(cia_iqq);
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 
@@ -243,8 +243,8 @@
 						        cia_x11 +=1;
 						        $('#cia_7').text(cia_x11);
 						    case 8:
-						        cia_x12 +=1;
-						        $('#cia_8').text(cia_x12);
+						        cia_iqq +=1;
+						        $('#cia_8').text(cia_iqq);
 						        break;
 						    case 9:
 						        cia_x14 +=1;
