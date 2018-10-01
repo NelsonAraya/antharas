@@ -510,7 +510,7 @@ class EmergenciaController extends Controller
 
     public function volActivos(){
         
-        $usu = Usuario::where('estado','A')->get();
+        $usu = Usuario::where('estado','A')->where('activado','S')->get();
 
         return response()->json($usu);
         
