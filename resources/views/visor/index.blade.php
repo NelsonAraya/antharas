@@ -68,10 +68,12 @@
 									  <div class="panel-body">
 									  	<b>
 									    {{ $usu->rol }}
-									    <a id="pop_{{ $usu->id }}" href="javascript://" data-toggle="popover" 
-									    	data-trigger="focus"
+									    <a id="pop_{{ $usu->id }}" href="javascript://" 
+									    data-toggle="popover" data-trigger="focus"
 									    data-content="<b>Nombre: </b>{{ $usu->nombreSimple() }} <br> <b>Cargo: </b> {{ $usu->cargo->nombre }}" 
-									    data-html="true"><span class="glyphicon glyphicon-search"></span></a>
+									    data-html="true"><span class="glyphicon glyphicon-search" 
+									    style="color:black"></span></a>
+									   <div id="__{{ $usu->id }}"></div>
 										</b>
 									  </div>
 									</div>
@@ -133,6 +135,7 @@
 
 @endsection
 @section('js')
+<script src="{{ asset('js/timer.jquery.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
  		$( "#btn" ).click(function() {
@@ -210,13 +213,14 @@
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 			    if(value.activado=='S'){
+			    	$('#__'+value.id).timer('start');
         			$('#'+value.id).show();
         			if(value.cargo_id==5){
         				$('#_'+value.id).css('background-color', '#F7F319');
         			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
         				$('#_'+value.id).css('background-color', 'red');
         			}else if(value.cargo_id== 13 || value.cargo_id== 14 || value.cargo_id== 15){
-        				$('#_'+value.id).css('background-color', '#2B79EA');
+        				$('#_'+value.id).css('background-color', '#0068FF');
         			}
         			else{
         				$('#_'+value.id).css('background-color', '#00FF00');
@@ -265,6 +269,7 @@
 					}
         		}else{
         			$('#'+value.id).hide();
+        			$('#__'+value.id).timer('reset');
         		}
         		});
             }
