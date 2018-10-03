@@ -17,7 +17,7 @@ class NotLogin extends Controller
 
     public function volActivos(){
         
-        $usu = Usuario::where('estado','A')->get();
+        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado']);
 
         return response()->json($usu);
         
@@ -25,7 +25,7 @@ class NotLogin extends Controller
 
     public function cuartelesActivos(){
         
-        $veh = Vehiculo::where('estado','A')->get();
+        $veh = Vehiculo::where('estado','A')->get(['id','clave','activacion','estado']);
 
         foreach($veh as $row ){
             if($row->activacion=='S'){

@@ -155,10 +155,12 @@
                             <li><a href="{{ route('changepassword') }}">Cambio Contraseña</a></li>
                             <li><a href="{{ route('visor') }}">Bomberos Activos</a></li>
                             <li>
+                              <a href="{{ route('home.reporte',Auth::user()->id) }}">Mis Activaciones</a></li>
+                            <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">
-                                    Logout
+                                    Cerrar sesion
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

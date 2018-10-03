@@ -53,6 +53,9 @@
 						<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 		                </a>
+		                <a href="{{ route('home.reporte',$row->id) }}" class="btn btn-info justify-content-center">
+		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+		                </a>
 						</td>
 					</tr>
 					@endforeach

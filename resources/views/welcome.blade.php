@@ -75,6 +75,8 @@
 
             .content {
                 text-align: center;
+                position: relative;
+                display: inline-block;
             }
 
             .title {
@@ -115,5 +117,6 @@
                 <footer>© Sistema de administración CBI.</footer>
             </div>
         </div>
+        
     </body>
 </html>
