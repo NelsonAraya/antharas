@@ -33,7 +33,31 @@
   100% { opacity: 1.0; }
 }
 
-
+.teniente {
+    border: 2px solid #dddddd;
+    border-radius: 0;
+    border-color: red;
+}
+.capitan {
+    border: 2px solid #dddddd;
+    border-radius: 0;
+    border-color: #FFFF00;
+}
+.comandante {
+    border: 2px solid #dddddd;
+    border-radius: 0;
+    border-color: #2853FF;
+}
+.voluntario {
+    border: 2px solid #dddddd;
+    border-radius: 0;
+    border-color: #2DF002;
+}
+.inspectores {
+    border: 2px solid #dddddd;
+    border-radius: 0;
+    border-color: #FF8A29;
+}
 </style>
 @endsection
 @section('content')
@@ -48,8 +72,8 @@
 			<tr>
 				@foreach($cia as $row)
 					@if ($row->numero != 100)
-					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}
-					Activos : <span id="cia_{{ $row->id }}"></span>
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
+					En Cuartel : <span id="cia_{{ $row->id }}"></span>
 					</th>
 					@endif
 				@endforeach
@@ -245,18 +269,40 @@
 			    	$('#_'+value.id).css("background-position","center");
 			    	$('#_'+value.id).css("background-size","100% 100%");
         			$('#'+value.id).show();
-        			/*
+        			
         			if(value.cargo_id==5){
-        				$('#_'+value.id).css('background-color', '#F7F319');
+        				$('#_'+value.id).removeClass('voluntario');
+        				$('#_'+value.id).removeClass('comandante');
+        				$('#_'+value.id).removeClass('teniente');
+        				$('#_'+value.id).removeClass('inspectores');
+        				$('#_'+value.id).addClass('capitan');
         			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
-        				$('#_'+value.id).css('background-color', 'red');
+        				$('#_'+value.id).removeClass('voluntario');
+        				$('#_'+value.id).removeClass('comandante');
+        				$('#_'+value.id).removeClass('capitan');
+        				$('#_'+value.id).removeClass('inspectores');
+        				$('#_'+value.id).addClass('teniente');
         			}else if(value.cargo_id== 13 || value.cargo_id== 14 || value.cargo_id== 15){
-        				$('#_'+value.id).css('background-color', '#0068FF');
+        				$('#_'+value.id).removeClass('voluntario');
+        				$('#_'+value.id).removeClass('capitan');
+        				$('#_'+value.id).removeClass('teniente');
+        				$('#_'+value.id).removeClass('inspectores');
+        				$('#_'+value.id).addClass('comandante');
+        			}else if(value.cargo_id == 17){
+        				$('#_'+value.id).removeClass('capitan');
+        				$('#_'+value.id).removeClass('comandante');
+        				$('#_'+value.id).removeClass('teniente');
+        				$('#_'+value.id).removeClass('voluntario');
+        				$('#_'+value.id).addClass('inspectores');
         			}
         			else{
-        				$('#_'+value.id).css('background-color', '#00FF00');
+        				$('#_'+value.id).removeClass('capitan');
+        				$('#_'+value.id).removeClass('comandante');
+        				$('#_'+value.id).removeClass('teniente');
+        				$('#_'+value.id).removeClass('inspectores');
+        				$('#_'+value.id).addClass('voluntario');
         			}
-        			*/	
+        				
         			switch (value.cia_id) {
 						case 1:
 						    cia_x1 +=1;
