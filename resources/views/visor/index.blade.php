@@ -34,28 +34,28 @@
 }
 
 .teniente {
-    border: 2px solid #dddddd;
-    border-radius: 0;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
     border-color: red;
 }
 .capitan {
-    border: 2px solid #dddddd;
-    border-radius: 0;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
     border-color: #FFFF00;
 }
 .comandante {
-    border: 2px solid #dddddd;
-    border-radius: 0;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
     border-color: #2853FF;
 }
 .voluntario {
-    border: 2px solid #dddddd;
-    border-radius: 0;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
     border-color: #2DF002;
 }
 .inspectores {
-    border: 2px solid #dddddd;
-    border-radius: 0;
+    border: 3px solid #dddddd;
+    border-radius: 5px;
     border-color: #FF8A29;
 }
 </style>
