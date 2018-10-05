@@ -32,6 +32,12 @@ class Usuario extends Authenticatable
 
         return ucwords($this->nombres.' '.$this->apellidop.' '.$this->apellidom);
     }
+    public function soloNombre(){
+
+        $this->nombres=explode(' ',$this->nombres)[0];
+
+        return ucwords($this->nombres.' '.$this->apellidop);
+    }
 
     public function cargo(){
         return $this->belongsTo(Cargo::class,'cargo_id','id');

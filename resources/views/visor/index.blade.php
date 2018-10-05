@@ -66,14 +66,14 @@
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
 									<div id="_{{ $usu->id }}" class="panel panel-default">
 									  <div class="panel-body">
+									  	<img id="img_{{ $usu->id }}" style="width:100%">
 									  	<b>
-									    {{ $usu->rol }}
 									    <a id="pop_{{ $usu->id }}" href="javascript://" 
 									    data-toggle="popover" data-trigger="focus"
-									    data-content="<b>Nombre: </b>{{ $usu->nombreSimple() }} <br> <b>Cargo: </b> {{ $usu->cargo->nombre }}" 
-									    data-html="true"><span class="glyphicon glyphicon-search" 
-									    style="color:black"></span></a>
-									   <div id="__{{ $usu->id }}"></div>
+									    data-content="<b>Rol: </b> {{ $usu->rol }} <br>
+									    <b>Nombre: </b>{{ $usu->nombreSimple() }} <br> <b>Cargo: </b> {{ $usu->cargo->nombre }}" 
+									    data-html="true"><span class="glyphicon glyphicon-search"></span>
+										</a>
 										</b>
 									  </div>
 									</div>
@@ -138,6 +138,23 @@
 <script src="{{ asset('js/timer.jquery.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+
+		function imageExists(url){
+
+    		var image = new Image();
+
+    		image.src = url;
+
+		    if (!image.complete) {
+		        return false;
+		    }
+		    else if (image.height === 0) {
+		        return false;
+		    }
+
+    		return true;
+		}
+
  		$( "#btn" ).click(function() {
  			if(document.getElementById('tabla_uni').style.display=="none"){
  				$("#tabla_vol").hide("slow");
@@ -213,8 +230,22 @@
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 			    if(value.activado=='S'){
-			    	$('#__'+value.id).timer('start');
+			    	//$('#__'+value.id).timer('start');
+			    	var a = '{{ URL::asset('/usuarios/') }}/'+value.id+'.jpg';
+			    	b=imageExists(a);
+			    	if(b){
+			    		//c="http://127.0.0.1:8000/usuarios/"+value.id+'.jpg?time'+ new Date();
+			    		$('#_'+value.id).css("background-image","url('"+a+"')");
+			    	}else{
+			    		c='{{ URL::asset('/usuarios/') }}/avatar.jpg';
+						$('#_'+value.id).css("background-image","url('"+c+"')");
+			    	}
+			    	
+			    	$('#_'+value.id).css("background-repeat","no-repeat");
+			    	$('#_'+value.id).css("background-position","center");
+			    	$('#_'+value.id).css("background-size","100% 100%");
         			$('#'+value.id).show();
+        			/*
         			if(value.cargo_id==5){
         				$('#_'+value.id).css('background-color', '#F7F319');
         			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
@@ -225,7 +256,7 @@
         			else{
         				$('#_'+value.id).css('background-color', '#00FF00');
         			}
-        				
+        			*/	
         			switch (value.cia_id) {
 						case 1:
 						    cia_x1 +=1;
@@ -269,7 +300,7 @@
 					}
         		}else{
         			$('#'+value.id).hide();
-        			$('#__'+value.id).timer('reset');
+        			//$('#__'+value.id).timer('reset');
         		}
         		});
             }
