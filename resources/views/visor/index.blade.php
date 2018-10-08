@@ -93,7 +93,6 @@
 								$sinfoto = $sinfoto."/avatar.jpg";
 								$control= public_path("usuarios\\".$usu->rol.'.jpg');
 							 @endphp
-							 {{ $control }}
 							<tr>
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
 									<div id="_{{ $usu->id }}" class="panel panel-default"
