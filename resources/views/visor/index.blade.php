@@ -288,13 +288,13 @@
         			*/
         			$('#'+value.id).show();
         			
-        			if(value.cargo_id==5){
+        			if(value.cargo_id==9){
         				$('#_'+value.id).removeClass('voluntario');
         				$('#_'+value.id).removeClass('comandante');
         				$('#_'+value.id).removeClass('teniente');
         				$('#_'+value.id).removeClass('inspectores');
         				$('#_'+value.id).addClass('capitan');
-        			}else if(value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 || value.cargo_id== 9 ){
+        			}else if(value.cargo_id== 5 || value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 ){
         				$('#_'+value.id).removeClass('voluntario');
         				$('#_'+value.id).removeClass('comandante');
         				$('#_'+value.id).removeClass('capitan');
