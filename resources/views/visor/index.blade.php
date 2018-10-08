@@ -91,7 +91,7 @@
 								$foto = $foto."/".$usu->rol.".jpg"; 
 								$sinfoto = URL::asset('/usuarios/') ;
 								$sinfoto = $sinfoto."/avatar.jpg";
-								$control= public_path("usuarios\\".$usu->rol.'.jpg');
+								$control= public_path("usuarios/".$usu->rol.'.jpg');
 							 @endphp
 							<tr>
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
