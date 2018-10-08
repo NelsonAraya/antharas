@@ -84,7 +84,7 @@
 				@foreach($cia as $row)
 					<td >
 						<table>
-						@foreach($row->usuarios as $usu)
+						@foreach($row->usuariosCargoVisor as $usu)
 							@if($usu->estado=='A')
 							@php
 								$foto = URL::asset('/usuarios/') ;

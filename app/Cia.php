@@ -12,6 +12,11 @@ class Cia extends Model
     public function usuarios(){
         return $this->hasMany(Usuario::class,'cia_id','id')->orderBy('rol','ASC');
     }
+
+    public function usuariosCargoVisor(){
+        return $this->hasMany(Usuario::class,'cia_id','id')
+        ->orderByRaw("FIELD(cargo_id ,5,6,7,8,9,13,14,15) DESC")->orderBy('rol','ASC');
+    }
     
     public function nombreCompleto(){
 
