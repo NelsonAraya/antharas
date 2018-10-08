@@ -86,9 +86,26 @@
 						<table>
 						@foreach($row->usuarios as $usu)
 							@if($usu->estado=='A')
+							@php
+								$foto = URL::asset('/usuarios/') ;
+								$foto = $foto."/".$usu->rol.".jpg"; 
+								$sinfoto = URL::asset('/usuarios/') ;
+								$sinfoto = $sinfoto."/avatar.jpg";
+								$control= public_path("usuarios\\".$usu->rol.'.jpg');
+							 @endphp
 							<tr>
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
-									<div id="_{{ $usu->id }}" class="panel panel-default">
+									<div id="_{{ $usu->id }}" class="panel panel-default"
+										@if (file_exists($control))
+										style="background-image: url('{{$foto}}'); 
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%"
+										@else
+										style="background-image: url('{{$sinfoto}}'); 
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%"
+										@endif
+										>
 									  <div class="panel-body">
 									  	<img id="img_{{ $usu->id }}" style="width:100%">
 									  	<b>
@@ -254,7 +271,7 @@
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 			    if(value.activado=='S'){
-			    	//$('#__'+value.id).timer('start');
+			    	/*$('#__'+value.id).timer('start');
 			    	var a = '{{ URL::asset('/usuarios/') }}/'+value.id+'.jpg';
 			    	b=imageExists(a);
 			    	if(b){
@@ -268,6 +285,7 @@
 			    	$('#_'+value.id).css("background-repeat","no-repeat");
 			    	$('#_'+value.id).css("background-position","center");
 			    	$('#_'+value.id).css("background-size","100% 100%");
+        			*/
         			$('#'+value.id).show();
         			
         			if(value.cargo_id==5){
