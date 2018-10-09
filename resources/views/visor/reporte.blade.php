@@ -16,7 +16,7 @@
 					@foreach($acti as $row)
 						<tr>
 							<td>@if($row->estado=='S') ACTIVO   @else INACTIVO   @endif</td>
-							<td>{{ date('d-m-Y h:i:s',strtotime($row->created_at)) }}</td>
+							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
 						</tr>
 					@endforeach
 				</tbody>
