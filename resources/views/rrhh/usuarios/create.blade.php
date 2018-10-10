@@ -78,7 +78,17 @@
 				<div class="col-md-2">
 					<label for="ingreso">INGRESO CBI</label>
 					<input type="date" name="fecha_ingresocbi" id="ingreso" class="form-control">	
+				</div>
+				<div class="col-md-2">
+					<label for="operativo">OPERATIVO</label>
+					<select id="operativo" name="operativo" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="S">OPERATIVO</option>
+						<option value="N">NO OPERATIVO</option>
+					</select>	
 				</div>		
+			</div>
+			<div class="form-group row">
 				<div class="col-md-1">
 					<label for="">Registrar</label>
 					<button type="submit" class="btn btn-success">Registrar</button>

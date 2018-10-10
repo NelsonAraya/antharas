@@ -58,6 +58,7 @@ class RrhhController extends Controller
             'conductor' => 'required',
             'fecha_nacimiento' => 'required',
             'fecha_ingresocbi' => 'required',
+            'operativo' => 'required',
         ]);
         
         $usu = new Usuario($request->all());
@@ -151,6 +152,7 @@ class RrhhController extends Controller
             'conductor' => 'required',
             'fecha_nacimiento' => 'required',
             'fecha_ingresocbi' => 'required',
+            'operativo' => 'required',
         ]);
 
         $usu = Usuario::find($id);

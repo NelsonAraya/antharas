@@ -110,6 +110,19 @@
 				</div>				
 			</div>
 			<div class="form-group row">
+				<div class="col-md-2">
+					<label for="operativo">OPERATIVO</label>
+					<select id="operativo" name="operativo" class="form-control">
+						<option value="">--Seleccione--</option>
+						@if($usu->operativo=='S')
+						<option value="S" selected>OPERATIVO</option>
+						<option value="N">NO OPERATIVO</option>
+						@else
+						<option value="S">OPERATIVO</option>
+						<option value="N" selected>NO OPERATIVO</option>
+						@endif
+					</select>
+				</div>
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-warning">Modificar</button>

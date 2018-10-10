@@ -9,7 +9,7 @@
                 Bienvenido a ANTHARAS el sistema ONLINE DEL CBI
                 <br>
                 <br>
-                @if($usu->cia_id!=11)
+                @if($usu->cia_id!=11 && $usu->operativo =='S')
                 Mi Activacion en CUARTEL 
                 <br>
                     <a @if($usu->activado=='S') 
@@ -24,6 +24,8 @@
     					href="#"
     					disabled
     					@endif class="btn btn-danger" role="button">Inactivo</a>
+                 @else
+                    <span><b>USTED NO ES OPERATIVO NO PUEDE ACTIVARSE EN CUARTEL</b></span>       
                  @endif       
             </div>
         </div>
