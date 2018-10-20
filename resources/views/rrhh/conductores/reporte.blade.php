@@ -18,7 +18,7 @@
 						<tr>
 							<td>{{ $row->vehiculo->clave}}</td>
 							<td>@if($row->estado=='S') ACTIVADO   @else DESACTIVADO   @endif</td>
-							<td>{{ date('d-m-Y h:i:s',strtotime($row->created_at)) }}</td>
+							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
 						</tr>
 					@endforeach
 				</tbody>
