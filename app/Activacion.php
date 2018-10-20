@@ -9,6 +9,9 @@ class Activacion extends Model
     protected $table = 'activaciones';
     protected $fillable = ['usuario_id','vehiculo_id','estado'];
 
+    public function horaActivacion(){
+    	return date('d-m-Y H:i:s',strtotime($this->created_at)); 
+    }
     public function vehiculo(){
         return $this->belongsTo(Vehiculo::class,'vehiculo_id','id');
     }

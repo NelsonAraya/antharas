@@ -401,7 +401,7 @@
 
         			if(value.activacion=='S'){
         				$('#'+value.id).css('background-color', '#00FF00');
-        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia);
+        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia +'<br><b>Hora Activacion:</b> '+value.hora);
         			}else{
         				$('#'+value.id).css('background-color', 'red');
         				$('#pop_'+value.id).attr('data-content','<b>Sin Conductor</b>');
