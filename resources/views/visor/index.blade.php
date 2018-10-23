@@ -95,19 +95,17 @@
 							 @endphp
 							<tr>
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
-									<div id="_{{ $usu->id }}" class="panel panel-default"
+									<div id="_{{ $usu->id }}" class="panel panel-default op"
 										@if (file_exists($control))
-										style="background-image: url('{{$foto}}'); 
+										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
 										background-repeat: no-repeat; background-position: center;
-										background-size:100% 100%"
+										background-size:100% 100%; cursor: pointer"
 										@else
-										style="background-image: url('{{$sinfoto}}'); 
+										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
 										background-repeat: no-repeat; background-position: center;
-										background-size:100% 100%"
+										background-size:100% 100%; cursor: pointer"
 										@endif
 										>
-									  <div class="panel-body">
-									  	<img id="img_{{ $usu->id }}" style="width:100%">
 									  	<b>
 									    <a id="pop_{{ $usu->id }}" href="javascript://" 
 									    data-toggle="popover" data-trigger="focus"
@@ -116,7 +114,7 @@
 									    data-html="true"><span class="glyphicon glyphicon-search"></span>
 										</a>
 										</b>
-									  </div>
+									 
 									</div>
 		  						</td>
 							</tr>
@@ -153,14 +151,12 @@
 							@if($mat->estado=='A')
 							<tr>
 								<td style=" width: 10%;">
-									<div id="{{ $mat->id }}" class="panel panel-default">
-									  <div class="panel-body">
+									<div id="{{ $mat->id }}" class="panel panel-default un" style="width: 100px; height: 50px; cursor: pointer;">
 									  	<b>
 									    {{ $mat->clave }}
 									    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
 									    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
 										</b>
-									  </div>
 									</div>
 		  						</td>
 							</tr>
@@ -179,6 +175,76 @@
 <script src="{{ asset('js/timer.jquery.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		@auth
+	    	@if(Auth::user()->cargo_id == 24)
+
+				$(document).on('dblclick','.op',function(e){
+					
+					var flag = true;
+					if (e.target !== this){
+						flag = false;  
+					}else{
+						flag= true;
+					}
+
+					if(flag){	
+					var str = this.id;
+				    var res = str.slice(1);
+				    var url = "{{ URL::route('visor.activacion',['vol','N']) }}";
+				    var url2 = url.replace('vol',res);
+	 				$.ajaxSetup({
+	        			headers: {
+	            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        			}
+	    			});
+	    		
+				    $.ajax({
+				        url : url2,
+				        success : function(data){
+				        		
+				        		alert("Usuario Desactivado");
+				        		
+				            }
+				        });
+					
+					}
+				})
+
+				$(document).on('dblclick','.un',function(e){
+
+					var flag = true;
+					if (e.target !== this){
+						flag = false;  
+					}else{
+						flag= true;
+					}
+					var str = this.id;
+					var conductor = $(this).data('conductor');
+				    var url = "{{ URL::route('visor.unidad',['usu','uni','N']) }}";
+				    var url3 = url.replace('usu',conductor).replace('uni',str);
+				    console.log($(this).hasClass("parpadea"));
+				    if('rgb(0, 255, 0)' === $(this).css("background-color") ){
+				    	console.log($(this).hasClass("parpadea"));
+				    	if(flag){
+		 				$.ajaxSetup({
+		        			headers: {
+		            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		        			}
+		    			});
+		    		
+					    $.ajax({
+					        url : url3,
+					        success : function(data){
+					        		
+					        		alert("Unidad Desactivada");
+					        		
+					            }
+					        });
+						}
+				    }
+				})
+			@endif
+    	@endauth
 
 		function imageExists(url){
 
@@ -401,6 +467,7 @@
 
         			if(value.activacion=='S'){
         				$('#'+value.id).css('background-color', '#00FF00');
+        				$('#'+value.id).data('conductor',value.conductor);
         				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia +'<br><b>Hora Activacion:</b> '+value.hora);
         			}else{
         				$('#'+value.id).css('background-color', 'red');
@@ -411,7 +478,6 @@
             }
         });
     }
-
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
 });

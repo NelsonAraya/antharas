@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Usuario;
 use App\Logactivacion;
+use App\Activacion;
+use App\Vehiculo;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -52,6 +54,39 @@ class HomeController extends Controller
 
         return redirect()->route('home');
 
+    }
+
+    public function opActivacion($id,$estado){
+
+        $estado='N';
+        $usu = Usuario::find($id);
+        $usu->activado = $estado;
+        $usu->save();
+        
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$id;
+        $log->estado=$estado;
+        $log->operador_id=Auth::user()->id;
+        $log->save();
+      
+
+    }
+    
+    public function opActivacionUnidad($usu,$veh,$estado){
+        
+        $estado='N';
+        $acti = new  Activacion();
+        $vehiculo = Vehiculo::find($veh);
+        $acti->usuario_id=$usu;
+        $acti->vehiculo_id=$veh;
+        $acti->operador_id=Auth::user()->id;
+        $acti->estado=$estado;
+
+        $acti->save();
+        $vehiculo->activacion=$estado;
+        $vehiculo->save();
+       
     }
 
     public function reporte($id){

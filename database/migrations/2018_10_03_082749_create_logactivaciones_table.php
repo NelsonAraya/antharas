@@ -17,6 +17,8 @@ class CreateLogactivacionesTable extends Migration
             $table->increments('id');
             $table->integer('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('usuarios');
+            $table->integer('operador_id')->unsigned()->nullable();
+            $table->foreign('operador_id')->references('id')->on('usuarios');
             $table->enum('estado',['S','N']);
             $table->timestamps();
         });

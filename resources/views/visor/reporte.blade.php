@@ -15,7 +15,16 @@
 				<tbody>
 					@foreach($acti as $row)
 						<tr>
-							<td>@if($row->estado=='S') ACTIVO   @else INACTIVO   @endif</td>
+							<td>
+								@if($row->estado=='S')
+								 	ACTIVO  
+							 	@else 
+							 		INACTIVO
+							 		@if($row->operador_id!=null)
+							 		SALIDA FORZADA POR OPERADOR CBI
+							 		@endif  
+							 	@endif
+							</td>
 							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
 						</tr>
 					@endforeach

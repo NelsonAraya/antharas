@@ -32,6 +32,7 @@ class NotLogin extends Controller
                 $row->usu=Activacion::where('vehiculo_id',$row->id)->latest()->first();
                 $row->usucia =$row->usu->usuario->cia->nombreCompleto();
                 $row->hora = $row->usu->horaActivacion();
+                $row->conductor = $row->usu->usuario->id;
                 $row->usu= $row->usu->usuario->nombreSimple();
             }
         }

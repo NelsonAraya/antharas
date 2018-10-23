@@ -19,6 +19,8 @@ class CreateActivacionesTable extends Migration
             $table->foreign('usuario_id')->references('id')->on('usuarios');
             $table->integer('vehiculo_id')->unsigned();
             $table->foreign('vehiculo_id')->references('id')->on('vehiculos');
+            $table->integer('operador_id')->unsigned()->nullable();
+            $table->foreign('operador_id')->references('id')->on('usuarios');
             $table->enum('estado',['S','N']);
             $table->timestamps();
         });

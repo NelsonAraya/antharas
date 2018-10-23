@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Activacion extends Model
 {
     protected $table = 'activaciones';
-    protected $fillable = ['usuario_id','vehiculo_id','estado'];
+    protected $fillable = ['usuario_id','vehiculo_id','estado','operador_id'];
 
     public function horaActivacion(){
     	return date('d-m-Y H:i:s',strtotime($this->created_at)); 

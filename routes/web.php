@@ -72,6 +72,9 @@ Route::get('emergencia/viewActivos', 'EmergenciaController@volActivos')->name('e
 Route::get('visor/volActivos','NotLogin@verVoluntarios')->name('visor');
 Route::get('visor/viewActivos', 'NotLogin@volActivos')->name('visor.vol');
 Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.cuartel');
+Route::get('visor/operador/{usuario}/{estado}','HomeController@opActivacion')->name('visor.activacion');
+
+Route::get('visor/operadorUnidad/{usuario}/{unidad}/{estado}','HomeController@opActivacionUnidad')->name('visor.unidad');
 
 Route::get('emergencia/{id}/pdf','EmergenciaController@partePDF')->name('emergencia.pdf')->middleware('auth','role:emergencia');
 Route::resource('emergencia','EmergenciaController',['middleware' => ['role:emergencia', 'auth']]);
