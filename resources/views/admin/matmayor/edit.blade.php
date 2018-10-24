@@ -48,6 +48,15 @@
 			</div>
 			<div class="form-group row">
 				<div class="col-md-2">
+					<label for="orden">ORDEN</label>
+					<select id="orden" name="orden" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="1" @if($veh->orden=='1') selected  @endif >PRIMERO</option>
+						<option value="2" @if($veh->orden=='2') selected  @endif >SEGUNDO</option>
+						<option value="3" @if($veh->orden=='3') selected  @endif >TERCERO</option>
+					</select>
+				</div>
+				<div class="col-md-2">
 					<label for="estado">ESTADO</label>
 					<select id="estado" name="estado" class="form-control">
 						<option value="">--Seleccione--</option>

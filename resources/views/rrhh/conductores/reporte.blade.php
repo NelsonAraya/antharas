@@ -17,7 +17,17 @@
 					@foreach($acti as $row)
 						<tr>
 							<td>{{ $row->vehiculo->clave}}</td>
-							<td>@if($row->estado=='S') ACTIVADO   @else DESACTIVADO   @endif</td>
+							<td>
+								@if($row->estado=='S') 
+								ACTIVADO   
+								@else 
+									@if($row->operador_id==null)
+									DESACTIVADO 
+									@else
+									DESACTIVADO POR OPERADOR
+									@endif  
+								@endif
+							</td>
 							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
 						</tr>
 					@endforeach

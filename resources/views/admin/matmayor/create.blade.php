@@ -38,6 +38,15 @@
 				</div>		
 			</div>
 			<div class="form-group row">	
+				<div class="col-md-2">
+					<label for="orden">ORDEN</label>
+					<select id="orden" name="orden" class="form-control">
+						<option value="">--Seleccione--</option>
+						<option value="1">PRIMERO</option>
+						<option value="2">SEGUNDO</option>
+						<option value="3">TERCERO</option>
+					</select>
+				</div>
 				<div class="col-md-1">
 					<label for="">Registrar</label>
 					<button type="submit" class="btn btn-success">Registrar</button>

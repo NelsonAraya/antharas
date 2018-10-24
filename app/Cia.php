@@ -28,7 +28,7 @@ class Cia extends Model
     }
 
     public function vehiculos(){
-        return $this->hasMany(Vehiculo::class,'cia_id','id');
+        return $this->hasMany(Vehiculo::class,'cia_id','id')->orderBy('orden','ASC');
     }
        
 }

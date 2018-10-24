@@ -47,6 +47,7 @@ class MatMayorController extends Controller
             'marca' => 'required',
             'anio' => 'required',
             'cia_id' => 'required',
+            'orden' => 'required',
         ]);
 
         $veh = new  Vehiculo($request->all());
