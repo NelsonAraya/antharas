@@ -34,6 +34,13 @@ class NotLogin extends Controller
                 $row->hora = $row->usu->horaActivacion();
                 $row->conductor = $row->usu->usuario->id;
                 $row->usu= $row->usu->usuario->nombreSimple();
+            }else{
+                 $row->usu=Activacion::where('vehiculo_id',$row->id)->where('estado','N')->latest()->first();
+                 if(empty($row->usu)){
+                    $row->hora="Sin Datos";
+                 }else{
+                    $row->hora = $row->usu->horaActivacion();
+                 }  
             }
         }
         return response()->json($veh);
