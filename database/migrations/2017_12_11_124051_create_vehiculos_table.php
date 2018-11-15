@@ -22,7 +22,7 @@ class CreateVehiculosTable extends Migration
             $table->integer('anio');
             $table->integer('cia_id')->unsigned();
             $table->foreign('cia_id')->references('id')->on('cias');
-            $table->integer('orden')->->nullable();
+            $table->integer('orden')->nullable();
             $table->enum('estado',['A','I'])->default('A');
             $table->enum('activacion',['S','N'])->default('N');
             $table->timestamps();

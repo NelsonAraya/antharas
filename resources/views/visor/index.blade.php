@@ -134,10 +134,10 @@
 			<tr>
 				@foreach($cia as $row)
 					@if ($row->numero == 100)
-					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">CBI
+					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">CBI
 					</th>
 					@else
-					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
+					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
 					@endif
 				@endforeach
 			</tr>
@@ -149,16 +149,16 @@
 						<table>
 						@foreach($row->vehiculos as $mat)
 							@if($mat->estado=='A')
-							<tr>
-								<td style=" width: 10%;">
-									<div id="{{ $mat->id }}" class="panel panel-default un" style="width: 100px; height: 50px; cursor: pointer;">
+							<tr style="width: 10px;">
+							<!--	<td> -->
+									<div id="{{ $mat->id }}" class="panel panel-default un" style="width: 100%; height: 50px; cursor: pointer;">
 									  	<b>
 									    {{ $mat->clave }}
 									    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
 									    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
 										</b>
 									</div>
-		  						</td>
+		  					<!--	</td> -->
 							</tr>
 							@endif
 						@endforeach
