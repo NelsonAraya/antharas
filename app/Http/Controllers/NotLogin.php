@@ -17,7 +17,7 @@ class NotLogin extends Controller
 
     public function volActivos(){
         
-        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado']);
+        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor']);
 
         return response()->json($usu);
         

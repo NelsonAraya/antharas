@@ -58,6 +58,15 @@
     border-radius: 5px;
     border-color: #FF8A29;
 }
+
+.conductor{
+    
+    /*border-right: 3px white solid;*/
+	border-left: 3px black solid;
+	border-top: 3px black solid;
+	/*border-bottom: 3px white solid;*/
+}
+
 </style>
 @endsection
 @section('content')
@@ -337,21 +346,12 @@
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
 			    if(value.activado=='S'){
-			    	/*$('#__'+value.id).timer('start');
-			    	var a = '{{ URL::asset('/usuarios/') }}/'+value.id+'.jpg';
-			    	b=imageExists(a);
-			    	if(b){
-			    		//c="http://127.0.0.1:8000/usuarios/"+value.id+'.jpg?time'+ new Date();
-			    		$('#_'+value.id).css("background-image","url('"+a+"')");
-			    	}else{
-			    		c='{{ URL::asset('/usuarios/') }}/avatar.jpg';
-						$('#_'+value.id).css("background-image","url('"+c+"')");
-			    	}
-			    	
-			    	$('#_'+value.id).css("background-repeat","no-repeat");
-			    	$('#_'+value.id).css("background-position","center");
-			    	$('#_'+value.id).css("background-size","100% 100%");
-        			*/
+			    		
+			    		if(value.activado_conductor=='S'){
+			    			$('#_'+value.id).addClass('conductor');
+			    		}else{
+			    			$('#_'+value.id).removeClass('conductor	');
+			    		}
         			$('#'+value.id).show();
         			
         			if(value.cargo_id==9){

@@ -8,6 +8,7 @@ use App\Activacion;
 use App\Vehiculo;
 use App\Cia;
 use App\RevicionTecnica;
+use App\Logactivacion;
 use Illuminate\Support\Facades\Auth;
 class ActivacionController extends Controller
 {
@@ -46,7 +47,7 @@ class ActivacionController extends Controller
 
     public function activacion($usu,$veh,$estado){
         
-        $acti = new  Activacion();
+        $acti = new Activacion();
         $vehiculo = Vehiculo::find($veh);
         $acti->usuario_id=$usu;
         $acti->vehiculo_id=$veh;
@@ -55,6 +56,23 @@ class ActivacionController extends Controller
         $acti->save();
         $vehiculo->activacion=$estado;
         $vehiculo->save();
+
+        $u = Usuario::find($usu);
+        $u->activado = $estado;
+        $u->activado_conductor = $estado;
+        $u->save();
+        
+        $log = new Logactivacion();
+        $flag=Logactivacion::where('usuario_id',$usu)->latest()->first();
+        
+        if($flag->estado!=$estado){
+
+            $log->usuario_id=$usu;
+            $log->estado=$estado;
+            $log->save();
+        }
+        
+
         if($estado == 'S'){
             $a="Activado";
         }else{

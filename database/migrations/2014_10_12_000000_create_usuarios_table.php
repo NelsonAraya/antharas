@@ -34,6 +34,7 @@ class CreateUsuariosTable extends Migration
             $table->string('password');
             $table->enum('estado',['A','I'])->default('A');
             $table->enum('activado',['S','N'])->default('N');
+            $table->enum('activado_conductor',['S','N'])->default('N');
             $table->enum('operativo',['S','N'])->default('N');
             $table->rememberToken();
             $table->timestamps();
