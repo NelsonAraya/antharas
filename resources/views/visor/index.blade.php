@@ -81,7 +81,7 @@
 			<tr>
 				@foreach($cia as $row)
 					@if ($row->numero != 100)
-					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
 					En Cuartel : <span id="cia_{{ $row->id }}"></span>
 					</th>
 					@endif
