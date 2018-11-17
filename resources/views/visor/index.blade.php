@@ -94,7 +94,7 @@
 					<td >
 						<table>
 						@foreach($row->usuariosCargoVisor as $usu)
-							@if($usu->estado=='A')
+							@if($usu->estado=='A' && $usu->cia_id!=11)
 							@php
 								$foto = URL::asset('/usuarios/') ;
 								$foto = $foto."/".$usu->rol.".jpg"; 

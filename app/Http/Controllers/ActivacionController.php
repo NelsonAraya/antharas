@@ -64,14 +64,18 @@ class ActivacionController extends Controller
         
         $log = new Logactivacion();
         $flag=Logactivacion::where('usuario_id',$usu)->latest()->first();
-        
-        if($flag->estado!=$estado){
+        if(is_null($flag)){
 
             $log->usuario_id=$usu;
             $log->estado=$estado;
             $log->save();
         }
-        
+        elseif($flag->estado!=$estado){
+
+            $log->usuario_id=$usu;
+            $log->estado=$estado;
+            $log->save();
+        }
 
         if($estado == 'S'){
             $a="Activado";
