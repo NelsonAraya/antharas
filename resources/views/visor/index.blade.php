@@ -391,61 +391,61 @@
         				
         			switch (value.cia_id) {
 						case 1:
-							if(control_conductor=false){
+							if(control_conductor==false){
 						    	cia_x1 +=1;
 							}
 						    $('#cia_1').text(cia_x1);
 						    break;
 						case 2:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x2 +=1;
 							}
 						    $('#cia_2').text(cia_x2);
 						    break;
 						case 3:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x4 +=1;
 							}
 						    $('#cia_3').text(cia_x4);
 						    break;
 						case 4:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x5 +=1;
 							}
 						    $('#cia_4').text(cia_x5);
 						    break;
 						case 5:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x6 +=1;
 							}
 						    $('#cia_5').text(cia_x6);
 						    break;
 						case 6:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x7 +=1;
 							}
 						    $('#cia_6').text(cia_x7);
 						    break;
 						case 7:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x11 +=1;
 							}
 						    $('#cia_7').text(cia_x11);
 						    break;
 						case 8:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x12 +=1;
 							}
 						    $('#cia_8').text(cia_x12);
 						    break;
 						case 9:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x14 +=1;
 							}
 						    $('#cia_9').text(cia_x14);
 						    break;
 						case 10:
-						    if(control_conductor=false){
+						    if(control_conductor==false){
 						    	cia_x16 +=1;
 							}
 						    $('#cia_10').text(cia_x16);
