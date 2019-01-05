@@ -7,6 +7,7 @@ use App\Cia;
 use App\Usuario;
 use App\Vehiculo;
 use App\Activacion;
+use Illuminate\Support\Facades\Auth;
 class NotLogin extends Controller
 {
     public function verVoluntarios(){
@@ -75,13 +76,24 @@ class NotLogin extends Controller
                     $foto=url('/usuarios').'/'.$usu->rol.'.jpg';
                 }else{
                      $foto=url('/usuarios').'/avatar.jpg';                }
-                
-        return "<img src='$foto' width='200' height='200' class='img-responsive $cargo $conductor'>
-                <br>
-                <b>NOMBRE :</b>".$usu->nombreSimple()."<br>
-                <b> CARGO :</b>".$usu->cargo->nombre." <b>ROL :</b>".$usu->rol."<br>
-                <hr>
-                <b>ESPECIALIDADES:</b><br>
-                ".$stringEspecialidades;
+                $operador='';
+                if (Auth::check()) {
+                   if(Auth::user()->cargo_id == 24){
+                    $operador="<br><a id='$usu->id' class='btn btn-danger op'>Desactivar</a>";
+                   }
+                }
+        return "<div class='row'>
+                    <div class='col-md-6'>
+                         <img src='$foto' width='200px' height='200px' class='img-responsive $cargo $conductor'>".$operador."
+                    </div>
+                    <div class='col-md-6'>
+                         <b>NOMBRE :</b>".$usu->nombreSimple()."<br>
+                         <b> CARGO :</b>".$usu->cargo->nombre." <b>ROL :</b>".$usu->rol."<br>
+                        <hr>
+                        <b>ESPECIALIDADES:</b><br>
+                         ".$stringEspecialidades."
+                    </div>
+                </div>";
+               
    }
 }

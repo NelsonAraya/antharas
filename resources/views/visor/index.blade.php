@@ -193,7 +193,7 @@
 		@auth
 	    	@if(Auth::user()->cargo_id == 24)
 
-				$(document).on('dblclick','.op',function(e){
+				$(document).on('click','.op',function(e){
 					
 					var flag = true;
 					if (e.target !== this){
@@ -204,9 +204,8 @@
 
 					if(flag){	
 					var str = this.id;
-				    var res = str.slice(1);
 				    var url = "{{ URL::route('visor.activacion',['vol','N']) }}";
-				    var url2 = url.replace('vol',res);
+				    var url2 = url.replace('vol',str);
 	 				$.ajaxSetup({
 	        			headers: {
 	            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -217,6 +216,7 @@
 				        url : url2,
 				        success : function(data){
 				        		
+				        		$('#modal').modal('hide');
 				        		alert("Usuario Desactivado");
 				        		
 				            }
@@ -267,8 +267,6 @@
     		 var x = "{{ URL::route('visor.usuario','id') }}";
 			 var x2 = x.replace('id',id);
     		 $('.modal-body').load(x2,function(){});
- 
-
 		});
 
     	$('.modal').on('hidden.bs.modal', function(){

@@ -72,7 +72,8 @@
                        Route::currentRouteName()=='claves.index' OR
                        Route::currentRouteName()=='claves.create' OR
                        Route::currentRouteName()=='especialidades.index' OR
-                       Route::currentRouteName()=='especialidades.create'
+                       Route::currentRouteName()=='especialidades.create' OR 
+                       Route::currentRouteName()=='especialidades.show'
                         )active  @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
