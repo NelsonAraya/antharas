@@ -56,6 +56,9 @@
 		                <a href="{{ route('home.reporte',$row->id) }}" class="btn btn-info justify-content-center">
 		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                </a>
+		                 <a href="{{ route('usuarios.especialidad',$row->id) }}" class="btn btn-primary justify-content-center">
+		                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+		                </a>
 						</td>
 					</tr>
 					@endforeach

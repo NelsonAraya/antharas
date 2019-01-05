@@ -54,7 +54,9 @@ class Usuario extends Authenticatable
     public function vehiculos(){
         return $this->belongsToMany(Vehiculo::class)->withTimestamps();
     }
-
+    public function especialidades(){
+        return $this->belongsToMany(Especialidad::class)->withTimestamps();
+    }
     public function scopeNombres($query, $name) {
       if($name != "") {
         return $query->where('nombres', "LIKE", "%$name%")

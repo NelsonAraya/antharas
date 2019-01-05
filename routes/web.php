@@ -37,6 +37,10 @@ Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
 	->name('usuarios.asistencialista');
 	Route::match(['put','patch'],'usuarios/roles/{usuarios}','RrhhController@permisos')
 	->name('usuarios.permisos');
+	Route::get('usuarios/{usuarios}/especialidad','RrhhController@especialidad')
+	->name('usuarios.especialidad');
+	Route::match(['put','patch'],'usuarios/{usuarios}/especialidades','RrhhController@updateEspecialidad')
+	->name('usuarios.updateEspecialidad');
     Route::resource('usuarios','RrhhController');
 
     Route::get('conductores/{id}/reporte','ConductorController@reporte')
@@ -62,6 +66,7 @@ Route::prefix('admin')->group(function () {
 	Route::match(['put','patch'],'material_mayor/permiso/{material_mayor}','MatMayorController@permiso')->name('material_mayor.permiso')->middleware('auth','role:adminCBI');
 	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');		
     Route::resource('material_mayor','MatMayorController',['middleware' => ['role:adminCBI', 'auth']]);
+    Route::resource('especialidades','EspecialidadController',['middleware' => ['role:adminCBI', 'auth']]);
     Route::resource('claves','ClaveController',['middleware' => ['role:adminCBI', 'auth']]);
 });
 
@@ -73,6 +78,7 @@ Route::get('visor/volActivos','NotLogin@verVoluntarios')->name('visor');
 Route::get('visor/viewActivos', 'NotLogin@volActivos')->name('visor.vol');
 Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.cuartel');
 Route::get('visor/operador/{usuario}/{estado}','HomeController@opActivacion')->name('visor.activacion');
+Route::get('visor/{usuario}','NotLogin@usuariosActivos')->name('visor.usuario');
 
 Route::get('visor/operadorUnidad/{usuario}/{unidad}/{estado}','HomeController@opActivacionUnidad')->name('visor.unidad');
 

@@ -35,7 +35,9 @@
                        Route::currentRouteName()=='conductores.edit' OR 
                        Route::currentRouteName()=='usuarios.asistencia' OR
                        Route::currentRouteName()=='usuarios.asistencialista' OR 
-                       Route::currentRouteName()=='conductores.reporte'    
+                       Route::currentRouteName()=='conductores.reporte' OR 
+                       Route::currentRouteName()=='usuarios.roles' OR
+                       Route::currentRouteName()=='usuarios.especialidad'
                    )active @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">RRHH
@@ -68,14 +70,18 @@
                        Route::currentRouteName()=='material_mayor.create' OR 
                        Route::currentRouteName()=='material_mayor.edit' OR 
                        Route::currentRouteName()=='claves.index' OR
-                       Route::currentRouteName()=='claves.create' )active  @endif">
+                       Route::currentRouteName()=='claves.create' OR
+                       Route::currentRouteName()=='especialidades.index' OR
+                       Route::currentRouteName()=='especialidades.create'
+                        )active  @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
                       role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('material_mayor.index') }}">Agregar Mat. Mayor</a></li>
-                      <li><a href="{{ route('claves.index')}}">Agregar Claves</a></li>     
+                      <li><a href="{{ route('material_mayor.index') }}">Material Mayor</a></li>
+                      <li><a href="{{ route('claves.index')}}">Claves Radiales</a></li>
+                      <li><a href="{{ route('especialidades.index')}}">Especialidades</a></li>      
                     </ul>
                   </li>
                 @endif

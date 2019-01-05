@@ -8,6 +8,7 @@ use App\Cargo;
 use App\Usuario;
 use App\Role;
 use App\Emergencia;
+use App\Especialidad;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class RrhhController extends Controller
@@ -359,5 +360,26 @@ class RrhhController extends Controller
 
             return redirect()->route('home');
         }
+    }
+    public function especialidad($id){
+
+        $usu = Usuario::find($id);
+        $esp = Especialidad::pluck('descripcion','id');      
+        return view('rrhh.usuarios.especialidad')->with('usu',$usu)->with('esp',$esp);
+    }
+
+    public function updateEspecialidad(Request $request,$id){
+
+        $usu = Usuario::find($id);
+        $usu->especialidades()->detach();
+
+        foreach ((array)$request->especialidades as $row){
+              $usu->especialidades()->attach($row);
+        }
+
+        session()->flash('info', 'Especialiades Actualizados Correctamente');
+
+        return redirect()->route('usuarios.especialidad',$usu->id);
+        
     }
 }

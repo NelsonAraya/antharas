@@ -114,16 +114,7 @@
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@endif
-										>
-									  	<b>
-									    <a id="pop_{{ $usu->id }}" href="javascript://" 
-									    data-toggle="popover" data-trigger="focus"
-									    data-content="<b>Rol: </b> {{ $usu->rol }} <br>
-									    <b>Nombre: </b>{{ $usu->nombreSimple() }} <br> <b>Cargo: </b> {{ $usu->cargo->nombre }}" 
-									    data-html="true"><span class="glyphicon glyphicon-search"></span>
-										</a>
-										</b>
-									 
+										>							 
 									</div>
 		  						</td>
 							</tr>
@@ -178,7 +169,22 @@
 		</tbody>
 	</table>   	
 </div>
+<div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="Mnombre">DATOS DE USUARIO</h4>
+      </div>
+      <div class="modal-body">
 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
 @section('js')
 <script src="{{ asset('js/timer.jquery.min.js') }}"></script>
@@ -254,6 +260,20 @@
 				})
 			@endif
     	@endauth
+    	$(".op").on('click', function(event){
+    		var id = $(this).attr("id");
+    		id = id.substring(1);
+    		 $('#modal').modal('show');
+    		 var x = "{{ URL::route('visor.usuario','id') }}";
+			 var x2 = x.replace('id',id);
+    		 $('.modal-body').load(x2,function(){});
+ 
+
+		});
+
+    	$('.modal').on('hidden.bs.modal', function(){
+    		 $("#modal .modal-body").html('');
+		});
 
 		function imageExists(url){
 

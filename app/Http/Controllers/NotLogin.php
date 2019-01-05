@@ -46,4 +46,42 @@ class NotLogin extends Controller
         return response()->json($veh);
         
     }
+    public function usuariosActivos($id){
+        $usu = Usuario::find($id);
+        $stringEspecialidades="";
+        foreach ($usu->especialidades as $key) {
+                 $stringEspecialidades=$stringEspecialidades.$key->descripcion.' (<b>'.$key->clave.'</b>) <br>';   
+                }
+                $stringEspecialidades=strtoupper($stringEspecialidades);
+                if($usu->cargo_id==9){
+                    $cargo ="capitan";
+                }elseif($usu->cargo_id==5 OR $usu->cargo_id==6 OR $usu->cargo_id==7 OR $usu->cargo_id==8 ){
+                    $cargo="teniente";
+                }elseif($usu->cargo_id==13 OR $usu->cargo_id==14 OR $usu->cargo_id==15){
+                    $cargo="comandante";
+                }elseif($usu->cargo_id==17){
+                    $cargo="inspectores";
+                }else{
+                    $cargo="voluntario";
+                }
+                if($usu->activado_conductor=='S'){
+                    $conductor="conductor";
+                }else{
+                    $conductor="";
+                }
+
+                $control= public_path("usuarios/".$usu->rol.'.jpg');
+                if (file_exists($control)){
+                    $foto=url('/usuarios').'/'.$usu->rol.'.jpg';
+                }else{
+                     $foto=url('/usuarios').'/avatar.jpg';                }
+                
+        return "<img src='$foto' width='200' height='200' class='img-responsive $cargo $conductor'>
+                <br>
+                <b>NOMBRE :</b>".$usu->nombreSimple()."<br>
+                <b> CARGO :</b>".$usu->cargo->nombre." <b>ROL :</b>".$usu->rol."<br>
+                <hr>
+                <b>ESPECIALIDADES:</b><br>
+                ".$stringEspecialidades;
+   }
 }
