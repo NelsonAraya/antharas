@@ -62,7 +62,7 @@ class EspecialidadController extends Controller
         $total = 0;
         $flag = false;
         foreach ($usu as $k  => $row) {
-            $flag=false;
+            $flag=true;
             foreach ($row->especialidades as $key) {
                 if($key->id == $id){
                     $total++;
