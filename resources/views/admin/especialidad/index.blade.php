@@ -33,7 +33,7 @@
 			<tbody>
 				@foreach ($esp as $row)
 				<tr>
-					<td class="hidden-xs">{{ $row->descripcion }}  </td>
+					<td>{{ $row->descripcion }}  </td>
 					<td>
 					<a href="{{ route('especialidades.show',$row->id) }}" class="btn btn-info justify-content-center">
 	                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
