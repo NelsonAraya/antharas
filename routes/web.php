@@ -95,3 +95,5 @@ Route::resource('partesonline','PartesController',['middleware' => ['role:partes
 Route::get('cia/busqueda', 'CiaController@busqueda')->name('cia.busqueda')->middleware('auth','role:adminCIA');
 Route::match(['put','patch'],'cia/busqueda/{cia}', 'CiaController@busquedalista')->name('cia.busquedalista')->middleware('auth','role:adminCIA');
 Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);
+
+Route::resource('ficha','FichaController',['middleware' => ['role:ficha', 'auth']]);

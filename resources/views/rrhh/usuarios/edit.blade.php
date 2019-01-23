@@ -123,6 +123,18 @@
 						@endif
 					</select>
 				</div>
+				<div class="col-md-2">
+					<label for="sanguineo">GRUPO SANGUINEO</label>
+					<select id="sanguineo" name="sanguineo_id" class="form-control">
+						<option value="">--Seleccione--</option>
+						@foreach($grupo as $key => $value)
+							@if($usu->sanguineo_id== $key)
+								<option value="{{ $key }}" selected> {{ $value }}</option>
+							@endif
+							<option value="{{ $key }}"> {{ $value }}</option>
+						@endforeach
+					</select>	
+				</div>		
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-warning">Modificar</button>

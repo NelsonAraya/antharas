@@ -101,6 +101,20 @@
                     </ul>
                   </li>
                 @endif
+                @if(Auth::user()->hasRole('ficha'))
+                  <li class="dropdown
+                  @if( Route::currentRouteName()=='ficha.index' OR 
+                       Route::currentRouteName()=='ficha.edit') active @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">Ficha Clinica
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('ficha.index') }}">Ver Fichas</a></li>
+                      <li><a href="#">xxx</a></li>   
+                    </ul>
+                  </li>
+                @endif
                 @if(Auth::user()->hasRole('bitacora'))
                   <li class="dropdown 
                   @if( Route::currentRouteName()=='bitacora.index' OR 

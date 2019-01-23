@@ -15,7 +15,7 @@ class Usuario extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'rol','nombres','apellidop','apellidom','telefono','direccion','cia_id','cargo_id','email','fecha_nacimiento','fecha_licencia','estado','fecha_ingresocbi','operativo'];
+        'rol','nombres','apellidop','apellidom','telefono','direccion','cia_id','cargo_id','email','fecha_nacimiento','fecha_licencia','estado','fecha_ingresocbi','operativo','sanguineo_id','cronico'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -47,6 +47,10 @@ class Usuario extends Authenticatable
         return $this->belongsTo(Cia::class,'cia_id','id');
     }
 
+    public function grupoSanguineo(){
+        return $this->belongsTo(GrupoSanguineo::class,'sanguineo_id','id');
+    }
+
     public function runCompleto() {
       return number_format($this->id, 0,'.','.') . '-' . $this->dv;
     }
@@ -57,6 +61,11 @@ class Usuario extends Authenticatable
     public function especialidades(){
         return $this->belongsToMany(Especialidad::class)->withTimestamps();
     }
+
+    public function enfermedades(){
+        return $this->belongsToMany(Enfermedad::class)->withTimestamps();
+    }
+
     public function scopeNombres($query, $name) {
       if($name != "") {
         return $query->where('nombres', "LIKE", "%$name%")
@@ -95,5 +104,9 @@ class Usuario extends Authenticatable
     */
     public function hasRole($role){
     return null !== $this->roles()->where('nombre', $role)->first();
+    }
+
+    public function ficha() {
+        return $this->hasOne(Ficha::class,'usuario_id','id');
     }
 }

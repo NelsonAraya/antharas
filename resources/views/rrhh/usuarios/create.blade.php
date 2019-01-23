@@ -86,7 +86,16 @@
 						<option value="S">OPERATIVO</option>
 						<option value="N">NO OPERATIVO</option>
 					</select>	
-				</div>		
+				</div>
+				<div class="col-md-2">
+					<label for="sanguineo">GRUPO SANGUINEO</label>
+					<select id="sanguineo" name="sanguineo_id" class="form-control">
+						<option value="">--Seleccione--</option>
+						@foreach($grupo as $key => $value)
+							<option value="{{ $key }}"> {{ $value }}</option>
+						@endforeach
+					</select>	
+				</div>				
 			</div>
 			<div class="form-group row">
 				<div class="col-md-1">

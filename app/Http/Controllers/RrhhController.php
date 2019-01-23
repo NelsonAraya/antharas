@@ -9,6 +9,7 @@ use App\Usuario;
 use App\Role;
 use App\Emergencia;
 use App\Especialidad;
+use App\GrupoSanguineo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 class RrhhController extends Controller
@@ -34,9 +35,11 @@ class RrhhController extends Controller
     {
         $cia=Cia::pluck('nombre','id');
         $cargo=Cargo::pluck('nombre','id');
+        $grupo=GrupoSanguineo::pluck('nombre','id');
         return view('rrhh.usuarios.create')
                 ->with('cia',$cia)
-                ->with('cargo',$cargo);
+                ->with('cargo',$cargo)
+                ->with('grupo',$grupo);
     }
 
     /**
@@ -60,6 +63,7 @@ class RrhhController extends Controller
             'fecha_nacimiento' => 'required',
             'fecha_ingresocbi' => 'required',
             'operativo' => 'required',
+            'sanguineo_id' => 'required',
         ]);
         
         $usu = new Usuario($request->all());
@@ -125,11 +129,12 @@ class RrhhController extends Controller
 
         $cia=Cia::pluck('nombre','id');
         $cargo=Cargo::pluck('nombre','id');
-        
+         $grupo=GrupoSanguineo::pluck('nombre','id');
         return view('rrhh.usuarios.edit')
                 ->with('cia',$cia)
                 ->with('cargo',$cargo)
-                ->with('usu',$usuario);
+                ->with('usu',$usuario)
+                ->with('grupo',$grupo);
     }
 
     /**
