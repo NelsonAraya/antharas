@@ -184,6 +184,13 @@ input:checked + .slider:before {
 				</div>
 			</div>
 			<div class="form-group row">
+				<div class="col-md-12">
+					<label for="otras">OTRAS ENFERMEDADES</label>
+  					<textarea class="form-control" name="otras" rows="3" id="otras" 
+  					style="overflow:auto;resize:none">@if($usu->ficha != null ) {{ $usu->ficha->otras }}  @endif</textarea>
+				</div>
+			</div>
+			<div class="form-group row">
 		
 				<div class="col-md-1">
 					<label for="">Guardar</label>

@@ -99,6 +99,7 @@ class FichaController extends Controller
             $ficha->quirurgicos = $request->quiru;
             $ficha->alergias = $request->alergia;
             $ficha->tratamientos = $request->trata;
+            $ficha->otras = $request->otras;
             $usu->ficha()->save($ficha);
         }else{
             $usu->ficha->peso = $request->peso;
@@ -107,6 +108,7 @@ class FichaController extends Controller
             $usu->ficha->quirurgicos = $request->quiru;
             $usu->ficha->alergias = $request->alergia;
             $usu->ficha->tratamientos = $request->trata;
+            $usu->ficha->otras = $request->otras;
             $usu->ficha->save();
         }
         

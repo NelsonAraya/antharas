@@ -23,6 +23,7 @@ class CreateFichasTable extends Migration
             $table->string('quirurgicos')->nullable();
             $table->string('alergias')->nullable();
             $table->string('tratamientos')->nullable();
+            $table->string('otras')->nullable();
             $table->timestamps();
         });
     }
