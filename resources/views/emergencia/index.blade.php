@@ -54,7 +54,7 @@
 						<td class="hidden-xs">{{ $row->direccion }}  </td>
 						<td class="hidden-xs">{{ $a }}  </td>
 						<td>
-						<a href="{{ route('emergencia.edit',$row->id) }}" 
+						<a href="{{ route('emergencia.edit',$row->getHashId()) }}" 
 							class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                </a>

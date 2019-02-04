@@ -10,6 +10,7 @@ use App\Cia;
 use App\RevicionTecnica;
 use App\Logactivacion;
 use Illuminate\Support\Facades\Auth;
+use Vinkla\Hashids\Facades\Hashids;
 class ActivacionController extends Controller
 {
     /**
@@ -47,6 +48,8 @@ class ActivacionController extends Controller
 
     public function activacion($usu,$veh,$estado){
         
+        $usu = Hashids::decode($usu)[0];
+        $veh = Hashids::decode($veh)[0];
         $acti = new Activacion();
         $vehiculo = Vehiculo::find($veh);
         $acti->usuario_id=$usu;

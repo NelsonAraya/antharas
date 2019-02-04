@@ -10,6 +10,7 @@ use App\Vehiculo;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Vinkla\Hashids\Facades\Hashids;
 class HomeController extends Controller
 {
     /**
@@ -35,6 +36,7 @@ class HomeController extends Controller
 
     public function myActivacion($id,$estado){
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $usu->activado = $estado;
         $usu->save();
@@ -86,11 +88,23 @@ class HomeController extends Controller
         $acti->save();
         $vehiculo->activacion=$estado;
         $vehiculo->save();
-       
+        
+        $u = Usuario::find($usu);
+        $u->activado=$estado;
+        $u->activado_conductor=$estado;
+        $u->save();
+
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$usu;
+        $log->estado=$estado;
+        $log->operador_id=Auth::user()->id;
+        $log->save();       
     }
 
     public function reporte($id){
 
+        $id = Hashids::decode($id)[0];
         $acti = Logactivacion::where('usuario_id',$id)->orderBy('id','DESC')->limit(100)->get();
         $usu = Usuario::find($id);
         $perPage =10;

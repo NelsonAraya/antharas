@@ -8,6 +8,7 @@ use App\ParteOnline;
 use App\ParteAsistencia;
 use App\Emergencia;
 use Illuminate\Support\Facades\Auth;
+use Vinkla\Hashids\Facades\Hashids;
 class CiaController extends Controller
 {
     /**
@@ -53,6 +54,7 @@ class CiaController extends Controller
      */
     public function show($id)
     {
+        $id = Hashids::decode($id)[0];
         $cia = Cia::find($id);
         return view ('cia.show')->with('cia',$cia);
     }
@@ -107,6 +109,8 @@ class CiaController extends Controller
             'inicio' => 'required',
             'termino'=> 'required',
             ]);
+            
+            $id = Hashids::decode($id)[0];
 
             $obj_eme=Emergencia::whereBetween('fecha_emergencia',[$request->inicio,$request->termino])->get();
                 $cantidad=0;
@@ -144,6 +148,8 @@ class CiaController extends Controller
             $request->validate([
             'anio' => 'required',
             ]);
+            
+            $id = Hashids::decode($id)[0];
 
             $obj_eme = Emergencia::whereYear('fecha_emergencia',$request->anio)->get();
             $cantidad=0;

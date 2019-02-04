@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('usuarios.update',$usu->id) }}">
+<form method="POST" action="{{ route('usuarios.update',$usu->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
@@ -141,7 +141,7 @@
 				</div>
 				<div class="col-md-2">
 					<label for="">Restablecer Password</label>
-					<a href="{{ route('usuarios.restablecer',$usu->id) }}" class="btn btn-info" role="button">Restablecer</a>
+					<a href="{{ route('usuarios.restablecer',$usu->getHashId()) }}" class="btn btn-info" role="button">Restablecer</a>
 				</div>
 			</div>
 		</div>		

@@ -43,7 +43,7 @@
 						<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
 						<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>
 						<td>
-		                 <a href="{{ route('ficha.edit',$row->id) }}" class="btn btn-success justify-content-center">
+		                 <a href="{{ route('ficha.edit',$row->getHashId()) }}" class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 		                </a>
 						</td>

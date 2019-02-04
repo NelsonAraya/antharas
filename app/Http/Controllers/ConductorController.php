@@ -8,6 +8,7 @@ use App\Vehiculo;
 use App\Activacion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Vinkla\Hashids\Facades\Hashids;
 class ConductorController extends Controller
 {
     /**
@@ -62,6 +63,7 @@ class ConductorController extends Controller
      */
     public function edit($id)
     {
+        $id = Hashids::decode($id)[0];
         $usuario = Usuario::find($id);
         $mat = Vehiculo::where('estado','A')->get();
         return view('rrhh.conductores.edit')
@@ -78,7 +80,7 @@ class ConductorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
 
         $usu->vehiculos()->detach();
@@ -104,6 +106,7 @@ class ConductorController extends Controller
     }
     public function reporte($id){
 
+        $id = Hashids::decode($id)[0];
         $acti = Activacion::where('usuario_id',$id)->orderBy('id','DESC')->limit(100)->get();
         $usu = Usuario::find($id);
         $perPage =10;

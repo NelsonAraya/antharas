@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Especialidad;
 use App\Usuario;
+use Vinkla\Hashids\Facades\Hashids;
 class EspecialidadController extends Controller
 {
     /**
@@ -57,6 +58,7 @@ class EspecialidadController extends Controller
      */
     public function show($id){
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::where('cia_id','!=',11)->orderBy('rol','ASC')->get();
         $esp = Especialidad::find($id);
         $total = 0;

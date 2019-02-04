@@ -56,7 +56,7 @@
 										@php $control=true; $estado='Creado'; @endphp	
 									@endif
 
-									@php $id_parte=$parte->id; @endphp
+									@php $id_parte=$parte->getHashId(); @endphp
 								@endif
 						@endforeach
 
@@ -68,7 +68,7 @@
 						<td>{{ $estado }}</td>
 						<td>
 						@if($control==false AND $control_estado==false )	
-						<a href="{{ route('partesonline.show',$row->emergencia->id) }}" 
+						<a href="{{ route('partesonline.show',$row->emergencia->getHashId()) }}" 
 							class="btn btn-warning justify-content-center">
 		                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 		                </a>

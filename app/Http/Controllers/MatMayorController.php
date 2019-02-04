@@ -8,6 +8,7 @@ use App\Cia;
 use App\PermisoCirculacion;
 use App\RevicionTecnica;
 use App\SeguroVehiculo;
+use Vinkla\Hashids\Facades\Hashids;
 class MatMayorController extends Controller
 {
     /**
@@ -81,6 +82,7 @@ class MatMayorController extends Controller
      */
     public function edit($id)
     {
+        $id = Hashids::decode($id)[0];
         $veh = Vehiculo::find($id);
         $cia = Cia::pluck('nombre','id'); 
         $rev = RevicionTecnica::where('vehiculo_id',$id)->
@@ -103,6 +105,7 @@ class MatMayorController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $id = Hashids::decode($id)[0];
         $veh = Vehiculo::find($id);
         $veh->fill($request->all());
         $veh->patente=strtoupper($veh->patente);
@@ -136,9 +139,10 @@ class MatMayorController extends Controller
      */
     public function revision(Request $request, $id)
     {
+        $id2 = Hashids::decode($id)[0];
         $rev = new RevicionTecnica();
         $rev->fecha_vencimiento=$request->fecha_vencimiento;
-        $rev->vehiculo_id=$id;
+        $rev->vehiculo_id=$id2;
         $rev->save();
 
         session()->flash('info', 'Revision Tecnica Agregada Correctamente');
@@ -148,9 +152,10 @@ class MatMayorController extends Controller
 
     public function permiso(Request $request, $id)
     {
+        $id2 = Hashids::decode($id)[0];
         $rev = new PermisoCirculacion();
         $rev->fecha_vencimiento=$request->fecha_vencimiento;
-        $rev->vehiculo_id=$id;
+        $rev->vehiculo_id=$id2;
         $rev->save();
 
         session()->flash('info', 'Permiso de Circulacion Agregado Correctamente');
@@ -159,9 +164,10 @@ class MatMayorController extends Controller
     }
     public function seguro(Request $request, $id)
     {
+        $id2 = Hashids::decode($id)[0];
         $rev = new SeguroVehiculo();
         $rev->fecha_vencimiento=$request->fecha_vencimiento;
-        $rev->vehiculo_id=$id;
+        $rev->vehiculo_id=$id2;
         $rev->save();
 
         session()->flash('info', 'Seguro Agregado Correctamente');

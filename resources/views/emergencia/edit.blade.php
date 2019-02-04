@@ -113,7 +113,7 @@
 									<td>{{ $row->created_at }}</td>
 									<td>{{ $row->responsable->nombreSimple() }}</td>
 									<td>
-										<a href="{{ route('emergencia.pdf',$row->id) }}" 
+										<a href="{{ route('emergencia.pdf',$row	->getHashId()) }}" 
 										class="btn btn-success justify-content-center">
 		                    			<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                				</a>

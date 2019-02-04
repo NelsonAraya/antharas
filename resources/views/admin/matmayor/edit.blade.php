@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('material_mayor.update',$veh->id) }}">
+<form method="POST" action="{{ route('material_mayor.update',$veh->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
@@ -72,7 +72,7 @@
 </form>
 			<div class="form-group row">
 				<div class="col-md-4">
-					<form method="POST" action="{{ route('material_mayor.revision',$veh->id) }}">
+					<form method="POST" action="{{ route('material_mayor.revision',$veh->getHashId()) }}">
 						{{ csrf_field() }}
 						{{ method_field('PUT') }}
 					<label>Agregar Revision Tecnica</label>
@@ -106,7 +106,7 @@
 					{{ $rev->render() }}
 				</div>
 				<div class="col-md-4">
-				<form method="POST" action="{{ route('material_mayor.permiso',$veh->id) }}">
+				<form method="POST" action="{{ route('material_mayor.permiso',$veh->getHashId()) }}">
 						{{ csrf_field() }}
 						{{ method_field('PUT') }}
 					<label>Agregar Permiso Circulacion</label>
@@ -140,7 +140,7 @@
 					{{ $per->render() }}
 				</div>
 				<div class="col-md-4">
-			<form method="POST" action="{{ route('material_mayor.seguro',$veh->id) }}">
+			<form method="POST" action="{{ route('material_mayor.seguro',$veh->getHashId()) }}">
 						{{ csrf_field() }}
 						{{ method_field('PUT') }}
 					<label>Agregar Seguro</label>

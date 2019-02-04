@@ -6,7 +6,7 @@ use App\Usuario;
 use App\Enfermedad;
 use App\Ficha;
 use Illuminate\Http\Request;
-
+use Vinkla\Hashids\Facades\Hashids;
 class FichaController extends Controller
 {
     /**
@@ -61,6 +61,7 @@ class FichaController extends Controller
      */
     public function edit($id)
     {
+        $id = Hashids::decode($id)[0];
         $usuario = Usuario::find($id);
         $enf=Enfermedad::pluck('nombre','id');
         $edad=$this->CalculaEdad($usuario->fecha_nacimiento);
@@ -80,6 +81,7 @@ class FichaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
        
 
@@ -100,6 +102,10 @@ class FichaController extends Controller
             $ficha->alergias = $request->alergia;
             $ficha->tratamientos = $request->trata;
             $ficha->otras = $request->otras;
+            $ficha->contacto1 = $request->contacto1;
+            $ficha->fono1 = $request->fono1;
+            $ficha->contacto2 = $request->contacto2;
+            $ficha->fono2 = $request->fono2;
             $usu->ficha()->save($ficha);
         }else{
             $usu->ficha->peso = $request->peso;
@@ -109,6 +115,10 @@ class FichaController extends Controller
             $usu->ficha->alergias = $request->alergia;
             $usu->ficha->tratamientos = $request->trata;
             $usu->ficha->otras = $request->otras;
+            $usu->ficha->contacto1 = $request->contacto1;
+            $usu->ficha->fono1 = $request->fono1;
+            $usu->ficha->contacto2 = $request->contacto2;
+            $usu->ficha->fono2 = $request->fono2;
             $usu->ficha->save();
         }
         

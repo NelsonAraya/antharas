@@ -4,8 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Codedge\Fpdf\Fpdf\Fpdf;
+
 class Pdf extends Fpdf
 {
+
+    
     public function Header() {
 	
 		$this->SetFont('Arial','B',14);

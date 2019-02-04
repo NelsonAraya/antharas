@@ -169,6 +169,8 @@ return [
          */
         Laraveles\Spanish\SpanishServiceProvider::class,
         Codedge\Fpdf\FpdfServiceProvider::class,
+        Vinkla\Hashids\HashidsServiceProvider::class,
+        Cedextech\TraitGenerator\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -227,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
+        'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
 
     ],
 

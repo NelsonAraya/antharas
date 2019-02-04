@@ -12,6 +12,7 @@ use App\Especialidad;
 use App\GrupoSanguineo;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Vinkla\Hashids\Facades\Hashids;
 class RrhhController extends Controller
 {
     /**
@@ -65,7 +66,7 @@ class RrhhController extends Controller
             'operativo' => 'required',
             'sanguineo_id' => 'required',
         ]);
-        
+
         $usu = new Usuario($request->all());
         
         if($request->conductor=="si"){
@@ -125,6 +126,7 @@ class RrhhController extends Controller
      */
     public function edit($id)
     {
+        $id = Hashids::decode($id)[0];
         $usuario = Usuario::find($id);
 
         $cia=Cia::pluck('nombre','id');
@@ -161,6 +163,7 @@ class RrhhController extends Controller
             'operativo' => 'required',
         ]);
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $usu->fill($request->all());
         if($request->conductor=="si"){
@@ -204,14 +207,14 @@ class RrhhController extends Controller
         //
     }
     public function roles($id){
-        
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $rol = Role::pluck('descripcion','id');
         return view('rrhh.usuarios.roles')->with('usu',$usu)->with('roles',$rol);
     }
 
     public function permisos(Request $request,$id){
-
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $usu->roles()->detach();
 
@@ -221,7 +224,7 @@ class RrhhController extends Controller
 
         session()->flash('info', 'Permisos Actualizados Correctamente');
 
-        return redirect()->route('usuarios.roles',$usu->id);
+        return redirect()->route('usuarios.roles',$usu->getHashId());
         
     }
     public function asistencia(){
@@ -322,6 +325,7 @@ class RrhhController extends Controller
 
     public function restablecerPassword($id){
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $usu->password = bcrypt($id);
         $usu->save();
@@ -368,6 +372,7 @@ class RrhhController extends Controller
     }
     public function especialidad($id){
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $esp = Especialidad::pluck('descripcion','id');      
         return view('rrhh.usuarios.especialidad')->with('usu',$usu)->with('esp',$esp);
@@ -375,6 +380,7 @@ class RrhhController extends Controller
 
     public function updateEspecialidad(Request $request,$id){
 
+        $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $usu->especialidades()->detach();
 
@@ -384,7 +390,7 @@ class RrhhController extends Controller
 
         session()->flash('info', 'Especialiades Actualizados Correctamente');
 
-        return redirect()->route('usuarios.especialidad',$usu->id);
+        return redirect()->route('usuarios.especialidad',$usu->getHashId());
         
     }
 }

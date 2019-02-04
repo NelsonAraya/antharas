@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HashIdTrait;
 
 class Emergencia extends Model
 {
+    use HashIdTrait;
+    
     protected $table = 'emergencias';
     protected $fillable = ['fecha_emergencia','hora_emergencia','direccion','usuario_id','clave_id','comuna'];
 

@@ -27,11 +27,11 @@
 							<td class="hidden-xs"> {{ $row->cia->nombreCompleto() }} </td>
 							<td> @if($row->estado=='A')Activo @else Inactivo @endif </td>
 							<td>
-							<a href="{{ route('bitacora.show',$row->id) }}" 
+							<a href="{{ route('bitacora.show',$row->getHashId()) }}" 
 								class="btn btn-success justify-content-center">
 			                    <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
 			                </a>
-			               	<a href="{{ route('bitacora.ver',$row->id) }}" 
+			               	<a href="{{ route('bitacora.ver',$row->getHashId()) }}" 
 								class="btn btn-info justify-content-center">
 			                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 			                </a>
@@ -49,11 +49,11 @@
 							<td class="hidden-xs"> {{ $row->cia->nombreCompleto() }} </td>
 							<td> @if($row->estado=='A')Activo @else Inactivo @endif </td>
 							<td>
-							<a href="{{ route('bitacora.show',$row->id) }}" 
+							<a href="{{ route('bitacora.show',$row->getHashId()) }}" 
 								class="btn btn-success justify-content-center">
 			                    <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
 			                </a>
-			                <a href="{{ route('bitacora.ver',$row->id) }}" 
+			                <a href="{{ route('bitacora.ver',$row->getHashId()) }}" 
 								class="btn btn-info justify-content-center">
 			                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 			                </a>

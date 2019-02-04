@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="col-md-6">
-	<form method="POST" action="{{ route('cia.busquedalista',Auth::user()->cia_id)}}">
+	<form method="POST" action="{{ route('cia.busquedalista',Auth::user()->cia->getHashId())}}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">

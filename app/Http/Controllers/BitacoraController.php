@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Vehiculo;
 use App\Usuario;
 use App\Bitacora;
+use Vinkla\Hashids\Facades\Hashids;
 class BitacoraController extends Controller
 {
     /**
@@ -54,7 +55,8 @@ class BitacoraController extends Controller
      */
     public function show($id)
     {
-        $bi=Bitacora::where('vehiculo_id',$id)->latest()->first();
+        $id2 = Hashids::decode($id)[0];
+        $bi=Bitacora::where('vehiculo_id',$id2)->latest()->first();
         return view('bitacora.show')->with('veh',$id)->with('bi',$bi);
     }
 
@@ -90,7 +92,7 @@ class BitacoraController extends Controller
             'servicio' => 'required',
             'direccion' => 'required',
         ]);
-
+        $id = Hashids::decode($id)[0];
         $bitacora = new Bitacora($request->all());
         $bitacora->vehiculo_id=$id;
         $bitacora->save();
@@ -140,7 +142,7 @@ class BitacoraController extends Controller
 
     }
     public function verBitacora($id){
-
+        $id = Hashids::decode($id)[0];
         $veh = Vehiculo::find($id);
         $bitacora = Bitacora::where('vehiculo_id',$id)->orderBy('id','ASC')->paginate(10);
          return view('bitacora.ver')->with('bitacora',$bitacora)->with('veh',$veh);

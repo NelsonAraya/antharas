@@ -37,10 +37,10 @@
 						<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
 						<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>
 						<td>
-						<a href="{{ route('conductores.edit',$row->id) }}" class="btn btn-success justify-content-center">
+						<a href="{{ route('conductores.edit',$row->getHashId()) }}" class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 		                </a>
-		                <a href="{{ route('conductores.reporte',$row->id) }}" class="btn btn-info justify-content-center">
+		                <a href="{{ route('conductores.reporte',$row->getHashId()) }}" class="btn btn-info justify-content-center">
 		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                </a>
 						</td>

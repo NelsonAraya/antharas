@@ -64,7 +64,7 @@ input:checked + .slider:before {
 @endsection
 
 @section('content')
-<form method="POST" action="{{ route('usuarios.updateEspecialidad',$usu->id) }}">
+<form method="POST" action="{{ route('usuarios.updateEspecialidad',$usu->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">

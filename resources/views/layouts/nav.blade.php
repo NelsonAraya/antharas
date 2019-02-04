@@ -110,8 +110,7 @@
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('ficha.index') }}">Ver Fichas</a></li>
-                      <li><a href="#">xxx</a></li>   
+                      <li><a href="{{ route('ficha.index') }}">Ver Fichas</a></li> 
                     </ul>
                   </li>
                 @endif
@@ -177,7 +176,7 @@
                             <li><a href="{{ route('changepassword') }}">Cambio Contraseña</a></li>
                             <li><a href="{{ route('visor') }}">Bomberos Activos</a></li>
                             <li>
-                              <a href="{{ route('home.reporte',Auth::user()->id) }}">Mis Activaciones</a></li>
+                              <a href="{{ route('home.reporte',Auth::user()->getHashId()) }}">Mis Activaciones</a></li>
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault();

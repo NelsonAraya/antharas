@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HashIdTrait;
 
 class Especialidad extends Model
 {
+    use HashIdTrait;
+    
     protected $table = 'especialidads';
     protected $fillable = ['id','clave','descripcion'];
 

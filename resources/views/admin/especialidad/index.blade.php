@@ -35,7 +35,7 @@
 				<tr>
 					<td>{{ $row->descripcion }}  </td>
 					<td>
-					<a href="{{ route('especialidades.show',$row->id) }}" class="btn btn-info justify-content-center">
+					<a href="{{ route('especialidades.show',$row->getHashId()) }}" class="btn btn-info justify-content-center">
 	                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 	                </a>
 					</td>

@@ -62,7 +62,7 @@ input:checked + .slider:before {
 </style>
 @endsection
 @section('content')
-<form method="POST" action="{{ route('ficha.update',$usu->id) }}">
+<form method="POST" action="{{ route('ficha.update',$usu->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
@@ -144,6 +144,30 @@ input:checked + .slider:before {
 					<label for="imc">IMC</label>
 					<input id="imc" name="imc" class="form-control" autocomplete="off"
 					value="@if($usu->ficha != null ) {{ $usu->ficha->imc }}  @endif">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-md-4">
+					<label for="ct1">NOMBRE CONTACTO</label>
+					<input id="ct1" name="contacto1" class="form-control" autocomplete="off"
+					value="{{ $usu->ficha->contacto1 }}">
+				</div>
+				<div class="col-md-2">
+					<label for="fono1">TELEFONO CONTACTO</label>
+					<input id="fono1" name="fono1" class="form-control" autocomplete="off"
+					value="{{ $usu->ficha->fono1 }}">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-md-4">
+					<label for="ct2">NOMBRE CONTACTO</label>
+					<input id="ct2" name="contacto2" class="form-control" autocomplete="off"
+					value="{{ $usu->ficha->contacto2 }}">
+				</div>
+				<div class="col-md-2">
+					<label for="fono2">TELEFONO CONTACTO</label>
+					<input id="fono2" name="fono2" class="form-control" autocomplete="off"
+					value="{{ $usu->ficha->fono2 }}">
 				</div>
 			</div>
 			<div class="form-group row">

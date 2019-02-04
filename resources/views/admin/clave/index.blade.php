@@ -37,7 +37,7 @@
 					<td> {{ $row->clave }} </td>
 					<td class="hidden-xs">{{ $row->descripcion }}  </td>
 					<td>
-					<a href="{{ route('claves.edit',$row->id) }}" class="btn btn-warning justify-content-center">
+					<a href="{{ route('claves.edit',$row->getHashId()) }}" class="btn btn-warning justify-content-center">
 	                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 	                </a>
 					</td>

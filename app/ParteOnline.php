@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HashIdTrait;
 
 class ParteOnline extends Model
 {
+    use HashIdTrait;
+    
     protected $table = 'parte_onlines';
     protected $fillable = ['obac_cia','obac_cbi','anexo_direccion','tipo','afectado','relacion','seguro','causa',
 							'origen','danio','info','trabajo','op_rescate','lesionados','vehiculos'];

@@ -46,17 +46,17 @@
 						<td class="hidden-xs">{{ $row->cargo->nombre }}  </td>
 						<td class="hidden-xs">{{ $row->cia->nombreCompleto() }}  </td>
 						<td>
-						<a href="{{ route('usuarios.roles',$row->id) }}" 
+						<a href="{{ route('usuarios.roles',$row->getHashId()) }}" 
 							class="btn btn-warning justify-content-center">
 		                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 		                </a>
-						<a href="{{ route('usuarios.edit',$row->id) }}" class="btn btn-success justify-content-center">
+						<a href="{{ route('usuarios.edit',$row->getHashId()) }}" class="btn btn-success justify-content-center">
 		                    <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
 		                </a>
-		                <a href="{{ route('home.reporte',$row->id) }}" class="btn btn-info justify-content-center">
+		                <a href="{{ route('home.reporte',$row->getHashId()) }}" class="btn btn-info justify-content-center">
 		                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
 		                </a>
-		                 <a href="{{ route('usuarios.especialidad',$row->id) }}" class="btn btn-primary justify-content-center">
+		                 <a href="{{ route('usuarios.especialidad',$row->getHashId()) }}" class="btn btn-primary justify-content-center">
 		                    <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
 		                </a>
 						</td>

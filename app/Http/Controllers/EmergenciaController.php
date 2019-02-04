@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Pdf;
 use App\Usuario;
+use Vinkla\Hashids\Facades\Hashids;
 class EmergenciaController extends Controller
 {
     /**
@@ -96,6 +97,7 @@ class EmergenciaController extends Controller
      */
     public function edit($id)
     {
+        $id = Hashids::decode($id)[0];
         $eme = Emergencia::find($id);
         $cia=Cia::pluck('nombre','id');
         $veh = Vehiculo::where('estado','A')->get();
@@ -115,6 +117,7 @@ class EmergenciaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $id = Hashids::decode($id)[0];
         $eme = Emergencia::find($id);
         $eme->fill($request->all());
         $eme->save();
@@ -163,6 +166,8 @@ class EmergenciaController extends Controller
     }
 
     public function partePDF($id) {
+        
+        $id = Hashids::decode($id)[0];
         $parte = ParteOnline::find($id);
         $emergencia = Emergencia::find($parte->emergencia_id);
 

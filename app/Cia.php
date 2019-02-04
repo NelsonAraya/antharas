@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HashIdTrait;
 
 class Cia extends Model
 {
+    use HashIdTrait;
+    
     protected $table = 'cias';
     protected $fillable = ['numero','nombre'];
 

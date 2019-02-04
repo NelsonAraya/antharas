@@ -8,6 +8,7 @@ use App\Usuario;
 use App\Vehiculo;
 use App\Activacion;
 use Illuminate\Support\Facades\Auth;
+use Vinkla\Hashids\Facades\Hashids;
 class NotLogin extends Controller
 {
     public function verVoluntarios(){
@@ -48,6 +49,7 @@ class NotLogin extends Controller
         
     }
     public function usuariosActivos($id){
+        //$id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
         $stringEspecialidades="";
         foreach ($usu->especialidades as $key) {

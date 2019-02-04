@@ -45,7 +45,7 @@
 					<td class="hidden-xs"> {{ $row->cia->nombreCompleto() }} </td>
 					<td> @if($row->estado=='A')Activo @else Inactivo @endif </td>
 					<td>
-					<a href="{{ route('material_mayor.edit',$row->id) }}" class="btn btn-warning justify-content-center">
+					<a href="{{ route('material_mayor.edit',$row->getHashId()) }}" class="btn btn-warning justify-content-center">
 	                    <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 	                </a>
 					</td>

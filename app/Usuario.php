@@ -3,11 +3,13 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use App\Traits\HashIdTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
 {
     use Notifiable;
+    use HashIdTrait;
 
     /**
      * The attributes that are mass assignable.

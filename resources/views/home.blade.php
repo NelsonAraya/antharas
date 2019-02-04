@@ -16,10 +16,10 @@
                     	href="#"
                     	disabled   
                     	@else 
-                    	href="{{ route('home.activacion',[$usu->id,'S']) }}" 
+                    	href="{{ route('home.activacion',[$usu->getHashId(),'S']) }}" 
                     	@endif class="btn btn-success" role="button">Activo</a>
     				<a @if($usu->activado =='S') 
-    					href="{{ route('home.activacion',[$usu->id,'N']) }}" 
+    					href="{{ route('home.activacion',[$usu->getHashId(),'N']) }}" 
     					@else
     					href="#"
     					disabled

@@ -11,6 +11,7 @@ use App\ParteAsistencia;
 use Illuminate\Support\Facades\Auth;
 use Codedge\Fpdf\Fpdf\Fpdf;
 use App\Pdf;
+use Vinkla\Hashids\Facades\Hashids;
 class PartesController extends Controller
 {
     /**
@@ -53,6 +54,7 @@ class PartesController extends Controller
      */
     public function show($id)
     {
+        $id = Hashids::decode($id)[0];
         $eme = Emergencia::find($id);
         $obac_cia =Usuario::where('cia_id',Auth::user()->cia_id)->where('estado','A')->get();
         $obac_cbi =Usuario::where('cia_id','!=',11)->where('estado','A')->get();
@@ -80,6 +82,7 @@ class PartesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $id = Hashids::decode($id)[0];
         $parte=ParteOnline::where('cia_id',Auth::user()->cia_id)
                 ->whereYear('created_at',date('Y'))->latest()->first();
         if($parte==null){
@@ -105,13 +108,14 @@ class PartesController extends Controller
 
     }
     public function lista($id){
+        $id = Hashids::decode($id)[0];
         $parte = ParteOnline::find($id);
         $usu = Usuario::where('cia_id',Auth::user()->cia_id)->where('estado','A')->orderBy('rol','ASC')->get();
         return view('partesonline.lista')->with('parte',$parte)->with('usu',$usu);
 
     }
     public function listaParte(Request $request, $id){
-
+        $id = Hashids::decode($id)[0];
         foreach ($request->lista as $row) {
             $asis = new ParteAsistencia();
             $asis->parte_id=$id;
@@ -139,6 +143,7 @@ class PartesController extends Controller
         //
     }
     public function partePDF($id){
+        $id = Hashids::decode($id)[0];
         $parte = ParteOnline::find($id);
         $emergencia = Emergencia::find($parte->emergencia_id);
        

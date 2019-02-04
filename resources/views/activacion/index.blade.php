@@ -76,14 +76,14 @@
 								href="#"
 								disabled
 							@else	
-						 		href="{{ route('activacion.vehiculo',[$usu->id,$row->id,'S']) }}" 
+						 		href="{{ route('activacion.vehiculo',[$usu->getHashId(),$row->getHashId(),'S']) }}" 
 						 	@endif
 						 		class="btn btn-success" role="button">Activar</a>
 						<a  @if($row->activacion=='N' OR ($chofer!= Auth::user()->id))  
 								href="#"
 								disabled
 							@else	 
-								href="{{ route('activacion.vehiculo',[$usu->id,$row->id,'N']) }}" 
+								href="{{ route('activacion.vehiculo',[$usu->getHashId(),$row->getHashId(),'N']) }}" 
 							@endif
 								class="btn btn-danger" role="button">Desactivar</a>
 						@if($control)

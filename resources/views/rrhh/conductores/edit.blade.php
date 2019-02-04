@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('conductores.update',$usu->id) }}">
+<form method="POST" action="{{ route('conductores.update',$usu->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
