@@ -27,13 +27,19 @@ class ActivacionController extends Controller
                     $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
                     if($row->activacion=='S'){
                         $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+                        $cantidad_material=0;
+                        foreach ($a as $key => $ind) {
+                            if($ind->usuario_id==Auth::user()->id){
+                                $cantidad_material++;
+                            }
+                        }
                     }
                 }
                 if(empty($a)){
                     return view('activacion.index')->with('usu',$usu)->with('rev',$b);
                 }else{
                     return view('activacion.index')->with('usu',$usu)
-                    ->with('conductor',$a)->with('rev',$b); 
+                    ->with('conductor',$a)->with('rev',$b)->with('myactivo',$cantidad_material); 
                 }
             }else{
              session()->flash('danger', 'Usted no tiene ninguna Unidad Asignada');
@@ -52,32 +58,36 @@ class ActivacionController extends Controller
         $veh = Hashids::decode($veh)[0];
         $acti = new Activacion();
         $vehiculo = Vehiculo::find($veh);
+        $u = Usuario::find($usu);
+
         $acti->usuario_id=$usu;
         $acti->vehiculo_id=$veh;
         $acti->estado=$estado;
-
+        $acti->tipo=$u->tipo_conductor;
         $acti->save();
         $vehiculo->activacion=$estado;
         $vehiculo->save();
 
-        $u = Usuario::find($usu);
         $u->activado = $estado;
         $u->activado_conductor = $estado;
         $u->save();
         
         $log = new Logactivacion();
         $flag=Logactivacion::where('usuario_id',$usu)->latest()->first();
+
         if(is_null($flag)){
 
             $log->usuario_id=$usu;
             $log->estado=$estado;
             $log->save();
+
         }
         elseif($flag->estado!=$estado){
 
             $log->usuario_id=$usu;
             $log->estado=$estado;
             $log->save();
+
         }
 
         if($estado == 'S'){
@@ -113,7 +123,25 @@ class ActivacionController extends Controller
         return response()->json($veh);
         
     }
+    public function tipo_conductor($usuario,$tipo){
 
+         $id = Hashids::decode($usuario)[0];
+         $u = Usuario::find($id);
+         $u->tipo_conductor = $tipo;
+         $u->save();
+         if($tipo=='C'){
+            $t="Cuartelero";
+         }
+         else {
+             $t="Bombero";
+         }
+
+
+         session()->flash('info', 'Su estado de Conductor ahora es '.$t);
+
+        return redirect()->route('activacion.index');
+        
+    }   
     /**
      * Show the form for creating a new resource.
      *

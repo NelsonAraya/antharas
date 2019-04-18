@@ -19,7 +19,7 @@ class NotLogin extends Controller
 
     public function volActivos(){
         
-        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor']);
+        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor','tipo_conductor']);
 
         return response()->json($usu);
         
@@ -35,6 +35,11 @@ class NotLogin extends Controller
                 $row->usucia =$row->usu->usuario->cia->nombreCompleto();
                 $row->hora = $row->usu->horaActivacion();
                 $row->conductor = $row->usu->usuario->id;
+                if($row->usu->usuario->tipo_conductor=='C'){
+                    $row->tipo_conductor='Cuartelero';
+                }else{
+                    $row->tipo_conductor='Bombero';
+                }
                 $row->usu= $row->usu->usuario->nombreSimple();
             }else{
                  $row->usu=Activacion::where('vehiculo_id',$row->id)->where('estado','N')->latest()->first();
@@ -80,7 +85,7 @@ class NotLogin extends Controller
                      $foto=url('/usuarios').'/avatar.jpg';                }
                 $operador='';
                 if (Auth::check()) {
-                   if(Auth::user()->cargo_id == 24){
+                   if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 5 ){
                     $operador="<br><a id='$usu->id' class='btn btn-danger op'>Desactivar</a>";
                    }
                 }

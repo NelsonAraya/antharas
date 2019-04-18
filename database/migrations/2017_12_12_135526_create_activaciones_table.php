@@ -22,6 +22,7 @@ class CreateActivacionesTable extends Migration
             $table->integer('operador_id')->unsigned()->nullable();
             $table->foreign('operador_id')->references('id')->on('usuarios');
             $table->enum('estado',['S','N']);
+            $table->enum('tipo',['C','B']);
             $table->timestamps();
         });
     }

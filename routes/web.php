@@ -61,6 +61,8 @@ Route::resource('bitacora','BitacoraController',['middleware' => ['role:bitacora
 
 Route::get('activacion/{usuario}/{vehiculo}/{estado}','ActivacionController@Activacion')->name('activacion.vehiculo')->middleware('auth','role:activacion');
 
+Route::get('activacion/{usuario}/{tipo}','ActivacionController@tipo_conductor')->name('activacion.tipo')->middleware('auth','role:activacion');
+
 Route::prefix('admin')->group(function () {
 	Route::match(['put','patch'],'material_mayor/revision/{material_mayor}','MatMayorController@revision')->name('material_mayor.revision')->middleware('auth','role:adminCBI');
 	Route::match(['put','patch'],'material_mayor/permiso/{material_mayor}','MatMayorController@permiso')->name('material_mayor.permiso')->middleware('auth','role:adminCBI');

@@ -6,6 +6,29 @@
 	<div class="panel panel-primary">
   		<div class="panel-heading">Listado de Unidades</div>
   		<div class="panel-body">
+  					<div class="col-md-3">
+  						<label>ESTADO ACTUAL : 
+  							@if($usu->tipo_conductor=='C') CUARTELERO @else BOMBERO @endif
+  						</label>
+  						@if(!isset($myactivo))
+  							@php	$myactivo=0; @endphp
+  						@endif
+						<div class="btn-group">
+						<a @if($usu->tipo_conductor=='C' OR $usu->activado_conductor=='S' OR $myactivo>=1) 
+                    	href="#"
+                    	disabled   
+                    	@else 
+                    	href="{{ route('activacion.tipo',[$usu->getHashId(),'C']) }}" 
+                    	@endif class="btn btn-primary" role="button">Cuartelero</a>
+						  
+						<a @if($usu->tipo_conductor=='C' AND $usu->activado_conductor=='N' AND $myactivo==0) 
+                    	href="{{ route('activacion.tipo',[$usu->getHashId(),'B']) }}" 
+    					@else
+    					href="#"
+    					disabled
+    					@endif class="btn btn-success" role="button">Bombero</a>
+						</div>
+					</div>
   		@isset($usu)
   			@php $control_aviso=false; @endphp
 			@if($usu->fecha_licencia==null OR $usu->fecha_licencia<=date('Y-m-d') )

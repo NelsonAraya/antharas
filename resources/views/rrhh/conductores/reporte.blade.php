@@ -10,6 +10,7 @@
 					<tr>
 						<th>VEHICULO</th>
 						<th>ESTADO</th>
+						<th>TIPO</th>
 						<th>FECHA</th>
 					</tr>
 				</thead>
@@ -27,6 +28,15 @@
 									DESACTIVADO POR OPERADOR
 									@endif  
 								@endif
+							</td>
+							<td>
+								@if($row->tipo=='C')
+									CUARTELERO
+								@elseif($row->tipo=='B')
+									BOMBERO
+								@else
+										
+								@endif		
 							</td>
 							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
 						</tr>

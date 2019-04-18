@@ -191,7 +191,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		@auth
-	    	@if(Auth::user()->cargo_id == 24)
+	    	@if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 5 )
 
 				$(document).on('click','.op',function(e){
 					
@@ -363,7 +363,7 @@
 			       $('#cia_8').text(cia_x12);
 			       $('#cia_9').text(cia_x14);
 			       $('#cia_10').text(cia_x16);
-			    if(value.activado=='S'){
+			    if(value.activado=='S' && value.tipo_conductor=='B'){
 			    		
 			    		if(value.activado_conductor=='S'){
 			    			$('#_'+value.id).addClass('conductor');
@@ -508,7 +508,7 @@
         			if(value.activacion=='S'){
         				$('#'+value.id).css('background-color', '#00FF00');
         				$('#'+value.id).data('conductor',value.conductor);
-        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia +'<br><b>Hora Activacion:</b> '+value.hora);
+        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia +'<br><b>Hora Activacion:</b> '+value.hora+'<br><b>Estado:</b> ' +value.tipo_conductor);
         			}else{
         				$('#'+value.id).css('background-color', 'red');
         				$('#pop_'+value.id).attr('data-content','<b>Desactivado :'+value.hora+'</b>');

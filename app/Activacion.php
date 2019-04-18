@@ -10,7 +10,7 @@ class Activacion extends Model
     use HashIdTrait;
     
     protected $table = 'activaciones';
-    protected $fillable = ['usuario_id','vehiculo_id','estado','operador_id'];
+    protected $fillable = ['usuario_id','vehiculo_id','estado','operador_id','tipo'];
 
     public function horaActivacion(){
     	return date('d-m-Y H:i:s',strtotime($this->created_at)); 
