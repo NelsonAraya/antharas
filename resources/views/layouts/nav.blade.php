@@ -68,7 +68,8 @@
                   <li class="dropdown 
                   @if( Route::currentRouteName()=='material_mayor.index' OR 
                        Route::currentRouteName()=='material_mayor.create' OR 
-                       Route::currentRouteName()=='material_mayor.edit' OR 
+                       Route::currentRouteName()=='material_mayor.edit' OR
+                        Route::currentRouteName()=='material_mayor.maestro' OR 
                        Route::currentRouteName()=='claves.index' OR
                        Route::currentRouteName()=='claves.create' OR
                        Route::currentRouteName()=='especialidades.index' OR
@@ -139,8 +140,8 @@
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{{ route('emergencia.index') }}">Ver Listado</a></li>
-                      <li><a href="{{ route('emergencia.showCantidad') }}">Cantidad x Clave</a></li>
+                      <li><a href="{{ route('emergencia.index') }}">Nueva / Listado</a></li>
+                      <li><a href="{{ route('emergencia.showCantidad') }}">Estadistica</a></li>
                     </ul>
                   </li>
                 @endif

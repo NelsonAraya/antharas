@@ -66,7 +66,10 @@ Route::get('activacion/{usuario}/{tipo}','ActivacionController@tipo_conductor')-
 Route::prefix('admin')->group(function () {
 	Route::match(['put','patch'],'material_mayor/revision/{material_mayor}','MatMayorController@revision')->name('material_mayor.revision')->middleware('auth','role:adminCBI');
 	Route::match(['put','patch'],'material_mayor/permiso/{material_mayor}','MatMayorController@permiso')->name('material_mayor.permiso')->middleware('auth','role:adminCBI');
-	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');		
+	Route::match(['put','patch'],'material_mayor/seguro/{material_mayor}','MatMayorController@seguro')->name('material_mayor.seguro')->middleware('auth','role:adminCBI');
+	
+	Route::match(['get'],'material_mayor/{material_mayor}/maestro','MatMayorController@maestro')->name('material_mayor.maestro')->middleware('auth','role:adminCBI');			
+    
     Route::resource('material_mayor','MatMayorController',['middleware' => ['role:adminCBI', 'auth']]);
     Route::resource('especialidades','EspecialidadController',['middleware' => ['role:adminCBI', 'auth']]);
     Route::resource('claves','ClaveController',['middleware' => ['role:adminCBI', 'auth']]);

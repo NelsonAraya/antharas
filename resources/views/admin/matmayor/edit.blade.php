@@ -67,6 +67,12 @@
 				<div class="col-md-1">
 					<label for="">Modificar</label>
 					<button type="submit" class="btn btn-success">Modificar</button>
+				</div>
+				<div class="col-md-1">
+					<label for="">Maestro</label>
+						<a href="{{ route('material_mayor.maestro',$veh->getHashId()) }}" class="btn btn-success justify-content-center">
+		                    <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+		                </a>
 				</div>	
 			</div>
 </form>

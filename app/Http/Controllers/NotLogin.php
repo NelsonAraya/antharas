@@ -85,7 +85,7 @@ class NotLogin extends Controller
                      $foto=url('/usuarios').'/avatar.jpg';                }
                 $operador='';
                 if (Auth::check()) {
-                   if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 5 ){
+                   if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 ){
                     $operador="<br><a id='$usu->id' class='btn btn-danger op'>Desactivar</a>";
                    }
                 }

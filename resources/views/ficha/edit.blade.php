@@ -150,24 +150,24 @@ input:checked + .slider:before {
 				<div class="col-md-4">
 					<label for="ct1">NOMBRE CONTACTO</label>
 					<input id="ct1" name="contacto1" class="form-control" autocomplete="off"
-					value="{{ $usu->ficha->contacto1 }}">
+					value="@if($usu->ficha != null ){{ $usu->ficha->contacto1 }} @endif">
 				</div>
 				<div class="col-md-2">
 					<label for="fono1">TELEFONO CONTACTO</label>
 					<input id="fono1" name="fono1" class="form-control" autocomplete="off"
-					value="{{ $usu->ficha->fono1 }}">
+					value="@if($usu->ficha != null ){{ $usu->ficha->fono1 }} @endif">
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-md-4">
 					<label for="ct2">NOMBRE CONTACTO</label>
 					<input id="ct2" name="contacto2" class="form-control" autocomplete="off"
-					value="{{ $usu->ficha->contacto2 }}">
+					value="@if($usu->ficha != null ){{ $usu->ficha->contacto2 }} @endif">
 				</div>
 				<div class="col-md-2">
 					<label for="fono2">TELEFONO CONTACTO</label>
 					<input id="fono2" name="fono2" class="form-control" autocomplete="off"
-					value="{{ $usu->ficha->fono2 }}">
+					value="@if($usu->ficha != null ){{ $usu->ficha->fono2 }} @endif">
 				</div>
 			</div>
 			<div class="form-group row">

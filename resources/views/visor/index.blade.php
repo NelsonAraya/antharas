@@ -191,7 +191,7 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		@auth
-	    	@if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 5 )
+	    	@if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 )
 
 				$(document).on('click','.op',function(e){
 					
