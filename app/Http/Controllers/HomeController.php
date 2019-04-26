@@ -80,12 +80,7 @@ class HomeController extends Controller
         $estado='N';
         $acti = new  Activacion();
         $vehiculo = Vehiculo::find($veh);
-        $acti->usuario_id=$usu;
-        $acti->vehiculo_id=$veh;
-        $acti->operador_id=Auth::user()->id;
-        $acti->estado=$estado;
 
-        $acti->save();
         $vehiculo->activacion=$estado;
         $vehiculo->save();
         
@@ -93,6 +88,13 @@ class HomeController extends Controller
         $u->activado=$estado;
         $u->activado_conductor=$estado;
         $u->save();
+
+        $acti->usuario_id=$usu;
+        $acti->vehiculo_id=$veh;
+        $acti->operador_id=Auth::user()->id;
+        $acti->estado=$estado;
+        $acti->tipo = $u->tipo_conductor;
+        $acti->save();
 
         $log = new  Logactivacion();
 

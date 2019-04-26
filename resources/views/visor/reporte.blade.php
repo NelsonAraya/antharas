@@ -21,7 +21,7 @@
 							 	@else 
 							 		INACTIVO
 							 		@if($row->operador_id!=null)
-							 		SALIDA FORZADA POR OPERADOR CBI
+							 		SALIDA FORZADA POR ADMINISTRADOR 
 							 		@endif  
 							 	@endif
 							</td>

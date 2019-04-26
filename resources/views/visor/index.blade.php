@@ -195,13 +195,12 @@
 
 				$(document).on('click','.op',function(e){
 					
-					var flag = true;
-					if (e.target !== this){
-						flag = false;  
+					var flag = false;
+					if(e.target.id.indexOf('_')){
+						flag=true;
 					}else{
-						flag= true;
+						flag=false;
 					}
-
 					if(flag){	
 					var str = this.id;
 				    var url = "{{ URL::route('visor.activacion',['vol','N']) }}";

@@ -25,7 +25,7 @@
 									@if($row->operador_id==null)
 									DESACTIVADO 
 									@else
-									DESACTIVADO POR OPERADOR
+									DESACTIVADO POR ADMINISTRADOR
 									@endif  
 								@endif
 							</td>
@@ -34,8 +34,6 @@
 									CUARTELERO
 								@elseif($row->tipo=='B')
 									BOMBERO
-								@else
-										
 								@endif		
 							</td>
 							<td>{{ date('d-m-Y H:i:s',strtotime($row->created_at)) }}</td>
