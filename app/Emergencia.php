@@ -29,4 +29,10 @@ class Emergencia extends Model
     public function partes(){
         return $this->hasMany(ParteOnline::class,'emergencia_id','id');
     }
+
+    public function scopeDirecciones($query, $name) {
+      if($name != "") {
+        return $query->where('direccion', "LIKE", "%$name%");
+      }  
+    }
 }

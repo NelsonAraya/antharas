@@ -26,10 +26,13 @@ class EmergenciaController extends Controller
 
          $this->middleware('auth', ['except' => ['verVoluntarios']]);
     }
-    public function index()
+    public function index(Request $request)
     {
-        $emergencia = Emergencia::orderBy('id','DESC')->paginate(10);
-        
+        $emergencia = Emergencia::Direcciones($request->q)->orderBy('id','DESC')->paginate(10);
+        foreach ($emergencia as $row) {
+            $cantidad = ParteOnline::where('emergencia_id',$row->id)->where('estado','T')->count();
+            $row->cantidad_partes=$cantidad;
+        }
         return view('emergencia.index')->with('eme',$emergencia);
     }
 
