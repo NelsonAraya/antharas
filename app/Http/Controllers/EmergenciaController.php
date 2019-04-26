@@ -43,7 +43,7 @@ class EmergenciaController extends Controller
      */
     public function create()
     {
-        $clave=Clave::pluck('clave','id');
+        $clave=Clave::orderBy('id','ASC')->pluck('clave','id');
         $cia=Cia::pluck('nombre','id');
         $veh = Vehiculo::where('estado','A')->get();
         return view('emergencia.create')->with('clave',$clave)
