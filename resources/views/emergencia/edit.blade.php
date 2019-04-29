@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<form method="POST" action="{{ route('emergencia.update',$eme->id) }}">
+<form method="POST" action="{{ route('emergencia.update',$eme->getHashId()) }}">
 	{{ csrf_field() }}
 	{{ method_field('PUT') }}
 	<div class="panel panel-primary">
