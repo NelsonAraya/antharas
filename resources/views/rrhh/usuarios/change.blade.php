@@ -13,11 +13,11 @@
 				</div>
 				<div class="col-md-4">
 					<label for="pas1">NUEVA CONTRASEÑA</label>
-					<input id="pass1" type="password" name="nueva_password" class="form-control" autocomplete="off">
+					<input id="pass1" type="password" name="nueva_password" class="form-control" autocomplete="off" minlength="6" maxlength="12">
 				</div>
 				<div class="col-md-4">
 					<label for="pass2">REPETIR NUEVA CONTRASEÑA</label>
-					<input id="pass2" type="password" name="nueva_password2" class="form-control" autocomplete="off">
+					<input id="pass2" type="password" name="nueva_password2" class="form-control" autocomplete="off" minlength="6" maxlength="12">
 				</div>
 			</div>
 			

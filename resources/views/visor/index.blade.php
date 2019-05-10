@@ -70,10 +70,11 @@
 </style>
 @endsection
 @section('content')
-<div class="form-group row">
-	<div class="col-md-1">
-		<a id="btn" href="#" class="btn btn-info" role="button">Ver Unidades</a>
-	</div>
+<div class="btn-group">
+	<a id="btn" href="#" class="btn btn-info" role="button">Ver Unidades</a>
+	@if(Auth::user()->hasRole('tono'))
+	<a id="btn_tono" href="#" class="btn btn-danger" role="button">Tonos de Cuartel</a>
+	@endif
 </div>	
 <div id="tabla_vol" class="table-responsive">
 	<table class="table">
@@ -128,6 +129,15 @@
 	</table>   	
 </div>
 <audio id="tono" src="{{ asset('sonidos/evento.ton') }}" preload="auto"></audio>
+<audio id="cuartel_1" src="{{ asset('sonidos/1.wav') }}" preload="auto"></audio>
+<audio id="cuartel_2" src="{{ asset('sonidos/2.wav') }}" preload="auto"></audio>
+<audio id="cuartel_4" src="{{ asset('sonidos/4.wav') }}" preload="auto"></audio>
+<audio id="cuartel_5" src="{{ asset('sonidos/5.wav') }}" preload="auto"></audio>
+<audio id="cuartel_6" src="{{ asset('sonidos/6.wav') }}" preload="auto"></audio>
+<audio id="cuartel_7" src="{{ asset('sonidos/7.wav') }}" preload="auto"></audio>
+<audio id="cuartel_11" src="{{ asset('sonidos/11.wav') }}" preload="auto"></audio>
+<audio id="cuartel_12" src="{{ asset('sonidos/12.wav') }}" preload="auto"></audio>
+<audio id="cuartel_14" src="{{ asset('sonidos/14.wav') }}" preload="auto"></audio>
 <div id="tabla_uni" class="table-responsive" style="display: none">
 	<table class="table">
 		<thead>
@@ -169,6 +179,34 @@
 		</tbody>
 	</table>   	
 </div>
+@if(Auth::user()->hasRole('tono'))
+<div id="tabla_tono" class="table-responsive" style="display: none">
+	<table class="table">
+		<thead>
+			<tr>
+				@foreach($cia as $row)
+					@if ($row->numero != 100)
+					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}
+					</th>
+					@endif
+				@endforeach
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@foreach($cia as $row)
+					@if ($row->numero != 100)
+					<td>
+						<a id="cuartel_{{ $row->numero }}" href="#" 
+							class="btn btn-success btn-group btn-lg tono" role="button">TONO</a>
+					</td>
+					@endif
+				@endforeach
+			</tr>	
+		</tbody>
+	</table>	
+</div>
+@endif	
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -291,17 +329,43 @@
  		$( "#btn" ).click(function() {
  			if(document.getElementById('tabla_uni').style.display=="none"){
  				$("#tabla_vol").hide("slow");
+ 				$("#tabla_tono").hide("slow");
  				$("#tabla_uni").show("slow");
  				$(this).html("Ver Voluntarios");
  				$(this).removeClass( "btn-info" ).addClass( "btn-primary" );
  			}else{
  				$("#tabla_uni").hide("slow");
+ 				$("#tabla_tono").hide("slow");
  				$("#tabla_vol").show("slow");
  				$(this).html("Ver Unidades");
  				$(this).removeClass( "btn-primary" ).addClass( "btn-info" );
  			}
 		});
 
+		$( "#btn_tono" ).click(function() {
+ 			if(document.getElementById('tabla_tono').style.display=="none"){
+ 				$("#tabla_vol").hide("slow");
+ 				$("#tabla_uni").hide("slow");
+ 				$("#tabla_tono").show("slow");
+ 			}
+		});
+		@if(Auth::user()->hasRole('tono'))
+		
+		$(".tono").on('click', function(event){
+    		var id = $(this).attr("id");;
+    		var url = "{{ URL::route('visor.tono','N') }}";
+			var url2 = url.replace('N',id);
+
+			$.ajaxSetup({
+		    	headers: 
+		    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+		    			});
+		    		
+			$.ajax({
+				url : url2,
+				});
+		});
+		@endif
 
     	$('[data-toggle="popover"]').popover();  
     	
@@ -517,8 +581,100 @@
             }
         });
     }
+    
+    var audios = [];
+	var loading = 0;
+	var index =0;
+	function tocar(t){
+    	for (var i = 0; i < t.length; i++) {
+    		var str = t[i];
+  			var res = str.split("_");
+    		//AddNote(res[1]+'.wav');
+    		AddNote(t[i]); 	
+    	}
+    	StartPlayingAll();
+    }
+	function AddNote(name) {
+		var audio =document.getElementById(name);
+		 audios.push(audio);
+		/*
+	   loading++;
+	   var audio = document.createElement("audio");
+	   audio.addEventListener("canplaythrough", function () {
+	      loading--;
+	      if (loading == 0) // All files are preloaded
+	         StartPlayingAll();
+	      }, false);
+	   		var x = "{{ asset('sonidos/xxx') }}";
+			var x2 = x.replace('xxx',name);
+	      audio.src = x2;
+	      audios.push(audio);
+	      */
+	}
+function playNext(index) {
+    audios[index].play();
+    $(audios[index]).bind("ended", function(){
+        index++;
+        if(index < audios.length){
+            playNext(index);          
+        }
+    });
+
+}
+	function StartPlayingAll() {
+   		
+   		audios[index].play();
+        $(audios[index]).bind("ended", function(){
+             index = index + 1;
+             if(index < audios.length){
+                playNext(index);          
+             }else{
+             	audios.length=0;
+             	loading=0;
+             	index=0;
+             }                        
+        });
+	}
+
+    function getTonos(){
+        
+        $.ajaxSetup({
+        	headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    	});
+    		
+    $.ajax({
+        url : "{{ URL::route('visor.evento') }}",
+        success : function(data){
+        		var t = [];
+        		var ind=0;
+        		$.each( data, function( key, value ) {
+
+        			var a = $('#'+value.nombre).data('estado');
+        			
+        			if(a === undefined || a === null){
+  						$('#'+value.nombre).data('estado',value.estado);
+					}else if(a==value.estado){
+						
+					}else{
+						//document.getElementById(value.nombre).play();
+						t[ind]=value.nombre;
+						//$('#'+value.nombre).get(0).play(); 						
+						ind++;
+						$('#'+value.nombre).data('estado',value.estado);						
+					}
+        				
+        		});
+        		if(t.length>0){
+        			tocar(t);
+        		}
+            }
+        });
+    }
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
+    setInterval(getTonos, 3000);
 });
    
 </script>

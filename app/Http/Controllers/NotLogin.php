@@ -7,8 +7,10 @@ use App\Cia;
 use App\Usuario;
 use App\Vehiculo;
 use App\Activacion;
+use App\Tono;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
+
 class NotLogin extends Controller
 {
     public function verVoluntarios(){
@@ -102,5 +104,27 @@ class NotLogin extends Controller
                     </div>
                 </div>";
                
+   }
+   public function tonoCuartel($nombre){
+
+    $tono = Tono::where('nombre',$nombre)->get();
+    $estado="";
+    if($tono[0]->estado=='A'){
+       $estado='N';
+    }else{
+        $estado='A';
+    }
+
+    $t = Tono::find($tono[0]->id);
+    $t->estado=$estado;
+    $t->save();
+
+   }
+
+   public function eventoCuartel(){
+     
+     $a = Tono::get();
+     return response()->json($a);
+
    }
 }
