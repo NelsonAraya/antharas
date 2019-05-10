@@ -353,23 +353,25 @@
  				$("#tabla_tono").show("slow");
  			}
 		});
-		@if(Auth::user()->hasRole('tono'))
-		
-		$(".tono").on('click', function(event){
-    		var id = $(this).attr("id");;
-    		var url = "{{ URL::route('visor.tono','N') }}";
-			var url2 = url.replace('N',id);
+		@auth
+			@if(Auth::user()->hasRole('tono'))
+			
+			$(".tono").on('click', function(event){
+	    		var id = $(this).attr("id");;
+	    		var url = "{{ URL::route('visor.tono','N') }}";
+				var url2 = url.replace('N',id);
 
-			$.ajaxSetup({
-		    	headers: 
-		    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-		    			});
-		    		
-			$.ajax({
-				url : url2,
-				});
-		});
-		@endif
+				$.ajaxSetup({
+			    	headers: 
+			    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+			    			});
+			    		
+				$.ajax({
+					url : url2,
+					});
+			});
+			@endif
+		 @endauth	
 
     	$('[data-toggle="popover"]').popover();  
     	
