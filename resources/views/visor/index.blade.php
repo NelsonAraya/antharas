@@ -72,9 +72,11 @@
 @section('content')
 <div class="btn-group">
 	<a id="btn" href="#" class="btn btn-info" role="button">Ver Unidades</a>
-	@if(Auth::user()->hasRole('tono'))
-	<a id="btn_tono" href="#" class="btn btn-danger" role="button">Tonos de Cuartel</a>
-	@endif
+	@auth
+		@if(Auth::user()->hasRole('tono'))
+		<a id="btn_tono" href="#" class="btn btn-danger" role="button">Tonos de Cuartel</a>
+		@endif
+	@endauth
 </div>	
 <div id="tabla_vol" class="table-responsive">
 	<table class="table">
@@ -179,6 +181,7 @@
 		</tbody>
 	</table>   	
 </div>
+@auth
 @if(Auth::user()->hasRole('tono'))
 <div id="tabla_tono" class="table-responsive" style="display: none">
 	<table class="table">
@@ -206,7 +209,8 @@
 		</tbody>
 	</table>	
 </div>
-@endif	
+@endif
+@endauth	
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
