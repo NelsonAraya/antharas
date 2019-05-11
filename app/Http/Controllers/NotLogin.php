@@ -118,6 +118,9 @@ class NotLogin extends Controller
     $t = Tono::find($tono[0]->id);
     $t->estado=$estado;
     $t->save();
+    
+    $a=$nombre;
+    return response()->json($a);
 
    }
 

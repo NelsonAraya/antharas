@@ -207,7 +207,8 @@
 				@endforeach
 			</tr>	
 		</tbody>
-	</table>	
+	</table>
+	<a id="tono_cuartel" href="#" class="btn btn-primary btn-group btn-lg" role="button">TOCAR</a>	
 </div>
 @endif
 @endauth	
@@ -355,9 +356,9 @@
 		});
 		@auth
 			@if(Auth::user()->hasRole('tono'))
-			
+			/*
 			$(".tono").on('click', function(event){
-	    		var id = $(this).attr("id");;
+	    		var id = $(this).attr("id");
 	    		var url = "{{ URL::route('visor.tono','N') }}";
 				var url2 = url.replace('N',id);
 
@@ -369,6 +370,46 @@
 				$.ajax({
 					url : url2,
 					});
+			});*/
+			$(".tono").on('click', function(event){
+				if($(this).hasClass("btn-danger")){
+		    		$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}else{
+        			$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+        		}
+				
+			});
+			$("#tono_cuartel").on('click', function(event){
+				 var opcion = confirm("¿Seguro en Enviar Tonos de Cuartel?");
+				  if (opcion == true) {
+			    		 $(".tono").each(function(){
+		    				if($(this).hasClass("btn-danger")){
+		    					var id = this.id
+					    		var url = "{{ URL::route('visor.tono','N') }}";
+								var url2 = url.replace('N',id);
+
+								$.ajaxSetup({
+							    	headers: 
+							    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+							    			});
+					    		
+								$.ajax({
+									url : url2,
+									success : function(data){
+										
+			    		 				$(".tono").each(function(){
+											if(this.id==data){
+												$(this).removeClass('btn-danger');
+		        								$(this).addClass('btn-success');
+											}															
+										});
+									}
+								});
+		    				}
+		  				});
+			    	}
 			});
 			@endif
 		 @endauth	
@@ -589,44 +630,30 @@
     }
     
     var audios = [];
-	var loading = 0;
 	var index =0;
+
 	function tocar(t){
+		index=0;
+		audios = [];
     	for (var i = 0; i < t.length; i++) {
-    		var str = t[i];
-  			var res = str.split("_");
-    		//AddNote(res[1]+'.wav');
-    		AddNote(t[i]); 	
+
+    		var audio =document.getElementById(t[i]);
+		    audios.push(audio); 	
     	}
     	StartPlayingAll();
     }
-	function AddNote(name) {
-		var audio =document.getElementById(name);
-		 audios.push(audio);
-		/*
-	   loading++;
-	   var audio = document.createElement("audio");
-	   audio.addEventListener("canplaythrough", function () {
-	      loading--;
-	      if (loading == 0) // All files are preloaded
-	         StartPlayingAll();
-	      }, false);
-	   		var x = "{{ asset('sonidos/xxx') }}";
-			var x2 = x.replace('xxx',name);
-	      audio.src = x2;
-	      audios.push(audio);
-	      */
-	}
-function playNext(index) {
-    audios[index].play();
-    $(audios[index]).bind("ended", function(){
-        index++;
-        if(index < audios.length){
-            playNext(index);          
-        }
-    });
 
-}
+	function playNext(index) {
+	    audios[index].play();
+	    $(audios[index]).bind("ended", function(){
+	        index++;
+	        if(index < audios.length){
+	            playNext(index);          
+	        }
+	    });
+
+	}
+
 	function StartPlayingAll() {
    		
    		audios[index].play();
@@ -634,11 +661,7 @@ function playNext(index) {
              index = index + 1;
              if(index < audios.length){
                 playNext(index);          
-             }else{
-             	audios.length=0;
-             	loading=0;
-             	index=0;
-             }                        
+             }                      
         });
 	}
 
@@ -664,9 +687,7 @@ function playNext(index) {
 					}else if(a==value.estado){
 						
 					}else{
-						//document.getElementById(value.nombre).play();
-						t[ind]=value.nombre;
-						//$('#'+value.nombre).get(0).play(); 						
+						t[ind]=value.nombre;						
 						ind++;
 						$('#'+value.nombre).data('estado',value.estado);						
 					}
@@ -680,7 +701,7 @@ function playNext(index) {
     }
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
-    setInterval(getTonos, 3000);
+    setInterval(getTonos, 4000);
 });
    
 </script>
