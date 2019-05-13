@@ -66,18 +66,34 @@
 	border-top: 3px black solid;
 	/*border-bottom: 3px white solid;*/
 }
+.linea{
 
+    display: inline-block;
+}
+.material{
+	width: 100%;
+	height: 50px;
+	position: relative;
+	cursor: pointer;
+}
+.material p{
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 20px;
+}
 </style>
 @endsection
 @section('content')
-<div class="btn-group">
-	<a id="btn" href="#" class="btn btn-info" role="button">Ver Unidades</a>
+	<a id="btn" href="#" class="btn btn-info btn-lg linea" role="button">Ver Unidades</a>
 	@auth
 		@if(Auth::user()->hasRole('tono'))
-		<a id="btn_tono" href="#" class="btn btn-danger" role="button">Tonos de Cuartel</a>
+		<a id="btn_tono" href="#" class="btn btn-danger btn-lg linea" role="button">Consola de Tonos</a>
 		@endif
 	@endauth
-</div>	
 <div id="tabla_vol" class="table-responsive">
 	<table class="table">
 		<thead>
@@ -163,12 +179,8 @@
 							@if($mat->estado=='A')
 							<tr style="width: 10px;">
 							<!--	<td> -->
-									<div id="{{ $mat->id }}" class="panel panel-default un" style="width: 100%; height: 50px; cursor: pointer;">
-									  	<b>
-									    {{ $mat->clave }}
-									    <a id="pop_{{ $mat->id }}" href="#" data-toggle="popover" data-trigger="focus"
-									    data-content="Sin Datos" data-html="true"><span class="glyphicon glyphicon-search"></span></a>
-										</b>
+									<div id="{{ $mat->getHashId() }}" class="panel panel-default un material">
+									   <p><b>{{ $mat->clave }}</b></p>  
 									</div>
 		  					<!--	</td> -->
 							</tr>
@@ -201,14 +213,25 @@
 					@if ($row->numero != 100)
 					<td>
 						<a id="cuartel_{{ $row->numero }}" href="#" 
-							class="btn btn-success btn-group btn-lg tono" role="button">TONO</a>
+							class="btn btn-success btn-group btn-lg tono" role="button">
+								Tono <span class="glyphicon glyphicon-bullhorn"></span>
+							</a>
 					</td>
 					@endif
 				@endforeach
 			</tr>	
 		</tbody>
 	</table>
-	<a id="tono_cuartel" href="#" class="btn btn-primary btn-group btn-lg" role="button">TOCAR</a>	
+	<a id="tono_cuartel" href="#" class="btn btn-primary btn-group btn-lg" role="button">
+		<span class="glyphicon glyphicon-play"></span> Tocar
+	</a>
+	<br>
+	<br>
+	<div class="btn-group">
+	  <a type="button" class="btn btn-default  btn-lg">10-0-1</a>
+	  <a type="button" class="btn btn-default  btn-lg">10-4-1</a>
+	  <a type="button" class="btn btn-default  btn-lg">INCENDIO</a>
+	</div>
 </div>
 @endif
 @endauth	
@@ -218,6 +241,22 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="Mnombre">DATOS DE USUARIO</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="modal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="Mnombre">DATOS DE MATERIAL MAYOR</h4>
       </div>
       <div class="modal-body">
 
@@ -267,6 +306,38 @@
 					}
 				})
 
+				$(document).on('click','.un',function(e){
+					var flag = false;
+					if(e.target.id.indexOf('__')==0){
+						flag=true;
+					}else{
+						flag=false;
+					}
+
+					if(flag){	
+					var uni = this.id;
+					var usu = $(this).data('conductor');
+				    var url = "{{ URL::route('visor.unidad',['usu','uni','N']) }}"
+				    var url3 = url.replace('uni',uni.substr(2,2)).replace('usu',usu);
+	 				$.ajaxSetup({
+	        			headers: {
+	            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	        			}
+	    			});
+	    			
+				    $.ajax({
+				        url : url3,
+				        success : function(data){
+				        		
+				        		$('#modal2').modal('hide');
+				        		alert("Unidad Desactivada");
+				        		
+				            }
+				        });
+										
+					}
+				})
+				/*
 				$(document).on('dblclick','.un',function(e){
 
 					var flag = true;
@@ -300,6 +371,7 @@
 						}
 				    }
 				})
+				*/
 			@endif
     	@endauth
     	$(".op").on('click', function(event){
@@ -310,6 +382,15 @@
 			 var x2 = x.replace('id',id);
     		 $('.modal-body').load(x2,function(){});
 		});
+
+    	$(".un").on('click', function(event){
+    		var id = $(this).attr("id");
+    		$('#modal2').modal('show');
+    		 var x = "{{ URL::route('visor.info','id') }}";
+			 var x2 = x.replace('id',id);
+    		 $('.modal-body').load(x2,function(){});
+		});
+
 
     	$('.modal').on('hidden.bs.modal', function(){
     		 $("#modal .modal-body").html('');
@@ -398,13 +479,14 @@
 								$.ajax({
 									url : url2,
 									success : function(data){
-										
+										/*
 			    		 				$(".tono").each(function(){
 											if(this.id==data){
 												$(this).removeClass('btn-danger');
 		        								$(this).addClass('btn-success');
 											}															
 										});
+										*/
 									}
 								});
 		    				}
@@ -598,30 +680,28 @@
         url : "{{ URL::route('visor.cuartel') }}",
         success : function(data){
         		$.each( data, function( key, value ) {
-
-        			var a = $('#'+value.id).data('estado');
+        			var a = $('#'+value.id2).data('estado');
         			
         			if(a === undefined || a === null){
-  						$('#'+value.id).data('estado',value.activacion);
+  						$('#'+value.id2).data('estado',value.activacion);
 					}else if(a==value.activacion){
 						
 					}else{
 						//document.getElementById('tono').play();
 						$('#tono').get(0).play();
-						$('#'+value.id).data('estado',value.activacion).addClass('parpadea');
+						$('#'+value.id2).data('estado',value.activacion).addClass('parpadea');
 						
-						$('#'+value.id).click(function(e) {  
+						$('#'+value.id2).click(function(e) {  
       						$(this).removeClass('parpadea');
     					});
 					}
 
         			if(value.activacion=='S'){
-        				$('#'+value.id).css('background-color', '#00FF00');
-        				$('#'+value.id).data('conductor',value.conductor);
-        				$('#pop_'+value.id).attr('data-content','<b>Conductor:</b> '+value.usu+'<br><b>Dotacion:</b> '+value.usucia +'<br><b>Hora Activacion:</b> '+value.hora+'<br><b>Estado:</b> ' +value.tipo_conductor);
+        				$('#'+value.id2).css('background-color', '#00FF00');
+        				$('#'+value.id2).data('conductor',value.conductor);
+        				
         			}else{
-        				$('#'+value.id).css('background-color', 'red');
-        				$('#pop_'+value.id).attr('data-content','<b>Desactivado :'+value.hora+'</b>');
+        				$('#'+value.id2).css('background-color', 'red');
         			}
         			
         		});
@@ -631,21 +711,43 @@
     
     var audios = [];
 	var index =0;
-
+	var tono = [];
 	function tocar(t){
 		index=0;
 		audios = [];
+		tono = [];
     	for (var i = 0; i < t.length; i++) {
 
     		var audio =document.getElementById(t[i]);
-		    audios.push(audio); 	
+		    audios.push(audio);
+		    tono.push(t[i]); 	
     	}
     	StartPlayingAll();
     }
 
 	function playNext(index) {
+		@auth
+			@if(Auth::user()->hasRole('tono'))		
+				$(".tono").each(function(){
+					if(this.id==tono[index]){
+				    $(this).addClass('parpadea');
+					}															
+				});
+			@endif
+		@endauth
 	    audios[index].play();
 	    $(audios[index]).bind("ended", function(){
+	    @auth
+			@if(Auth::user()->hasRole('tono'))
+		    	$(".tono").each(function(){
+					if(this.id==tono[index]){
+				    $(this).removeClass('parpadea');
+				    $(this).removeClass('btn-danger');
+				    $(this).addClass('btn-success');
+					}															
+				});
+			@endif
+		@endauth		
 	        index++;
 	        if(index < audios.length){
 	            playNext(index);          
@@ -655,9 +757,29 @@
 	}
 
 	function StartPlayingAll() {
-   		
+
+		@auth
+			@if(Auth::user()->hasRole('tono'))		
+				$(".tono").each(function(){
+					if(this.id==tono[index]){
+				    $(this).addClass('parpadea');
+					}															
+				});
+			@endif
+		@endauth
    		audios[index].play();
         $(audios[index]).bind("ended", function(){
+		@auth
+			@if(Auth::user()->hasRole('tono'))
+		    	$(".tono").each(function(){
+					if(this.id==tono[index]){
+				    $(this).removeClass('parpadea');
+				    $(this).removeClass('btn-danger');
+				    $(this).addClass('btn-success');
+					}															
+				});
+			@endif
+		@endauth		
              index = index + 1;
              if(index < audios.length){
                 playNext(index);          

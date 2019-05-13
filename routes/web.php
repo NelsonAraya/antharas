@@ -85,6 +85,7 @@ Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.c
 Route::get('visor/evento','NotLogin@eventoCuartel')->name('visor.evento');
 Route::get('visor/operador/{usuario}/{estado}','HomeController@opActivacion')->name('visor.activacion');
 Route::get('visor/{usuario}','NotLogin@usuariosActivos')->name('visor.usuario');
+Route::get('visor/{usuario}/unidad','NotLogin@infoUnidad')->name('visor.info');
 Route::get('visor/{nombre}/tono','NotLogin@tonoCuartel')->name('visor.tono');
 
 

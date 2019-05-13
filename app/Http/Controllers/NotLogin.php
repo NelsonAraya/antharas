@@ -8,6 +8,7 @@ use App\Usuario;
 use App\Vehiculo;
 use App\Activacion;
 use App\Tono;
+use App\RevicionTecnica;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -33,23 +34,34 @@ class NotLogin extends Controller
 
         foreach($veh as $row ){
             if($row->activacion=='S'){
-                $row->usu=Activacion::where('vehiculo_id',$row->id)->latest()->first();
-                $row->usucia =$row->usu->usuario->cia->nombreCompleto();
-                $row->hora = $row->usu->horaActivacion();
-                $row->conductor = $row->usu->usuario->id;
+                $tmp= Vehiculo::find($row->id);
+                $id= $tmp->getHashId();
+                $row->id2= $id;
+                //$conductor=Activacion::where('vehiculo_id',$row->id)->latest()->first();
+                //$row->usucia =$row->usu->usuario->cia->nombreCompleto();
+                //$row->hora = $row->usu->horaActivacion();
+                //$row->conductor = $conductor->usuario->id;
+                /*
                 if($row->usu->usuario->tipo_conductor=='C'){
                     $row->tipo_conductor='Cuartelero';
                 }else{
                     $row->tipo_conductor='Bombero';
                 }
                 $row->usu= $row->usu->usuario->nombreSimple();
+                */
             }else{
-                 $row->usu=Activacion::where('vehiculo_id',$row->id)->where('estado','N')->latest()->first();
+                $tmp= Vehiculo::find($row->id);
+                $id= $tmp->getHashId();
+                $row->id2= $id;
+                /*
+                 $row->usu=Activacion::where('vehiculo_id',$row->id)
+                            ->where('estado','N')->latest()->first();               
                  if(empty($row->usu)){
                     $row->hora="Sin Datos";
                  }else{
                     $row->hora = $row->usu->horaActivacion();
-                 }  
+                 } 
+                 */ 
             }
         }
         return response()->json($veh);
@@ -84,7 +96,8 @@ class NotLogin extends Controller
                 if (file_exists($control)){
                     $foto=url('/usuarios').'/'.$usu->rol.'.jpg';
                 }else{
-                     $foto=url('/usuarios').'/avatar.jpg';                }
+                     $foto=url('/usuarios').'/avatar.jpg'; 
+                }
                 $operador='';
                 if (Auth::check()) {
                    if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 ){
@@ -118,7 +131,6 @@ class NotLogin extends Controller
     $t = Tono::find($tono[0]->id);
     $t->estado=$estado;
     $t->save();
-    
     $a=$nombre;
     return response()->json($a);
 
@@ -129,5 +141,87 @@ class NotLogin extends Controller
      $a = Tono::get();
      return response()->json($a);
 
+   }
+
+    public function infoUnidad($id){
+        $id = Hashids::decode($id)[0];
+        $unidad = Vehiculo::find($id);
+    
+        $revision=RevicionTecnica::where('vehiculo_id',$id)->latest()->first();
+        if($revision === null){
+            $rev='00-00-0000';
+        }else{
+            $rev = date('d-m-Y',strtotime($revision->fecha_vencimiento));
+        }
+        
+        $control= public_path("vehiculos/".$unidad->id.'.jpg');
+           if (file_exists($control)){
+               $foto=url('/vehiculos').'/'.$unidad->id.'.jpg';
+            }else{
+               $foto=url('/vehiculos').'/avatar.jpg'; 
+             }
+             if($unidad->activacion=='S'){
+                $acti='<span class="text-success">Activado</span>';
+                $usu=Activacion::where('vehiculo_id',$id)->latest()->first();
+                
+                $usucia =$usu->usuario->cia->nombreCompleto();
+                $hora = $usu->horaActivacion();
+                $licencia = date('d-m-Y',strtotime($usu->usuario->fecha_licencia));
+                if($usu->usuario->tipo_conductor=='C'){
+                    $tipo_conductor='Cuartelero';
+                }else{
+                    $tipo_conductor='Bombero';
+                }
+                $conductor=$usu->usuario->id;
+                $usu = $usu->usuario->nombreSimple();
+                if (Auth::check()) {
+                   if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 ){
+                    $id2=$unidad->getHashId();
+                   $btneliminar="<a id='__$id2' data-conductor='$conductor' class='btn btn-danger un'>Desactivar</a>";
+                   }
+                }
+                return "<div class='row'>
+                            <div class='col-md-6'>
+                                 <img src='$foto' width='200px' height='200px' class='img-responsive'>
+                                 PATENTE <b>".$unidad->patente."</b><br>".$btneliminar." 
+                            </div>
+                            <div class='col-md-6'>
+                                 <b>CLAVE :</b>".$unidad->clave."<br>
+                                 <b>ESTADO :</b><b>".$acti."</b><br>
+                                 <b>REVISION :</b>".$rev."<br>
+                                <hr>
+                                <b>DATOS CONDUCTOR:</b><br>
+                                <b>NOMBRE :</b>".$usu."<br>
+                                <b>DOTACION :</b>".$usucia."<br>
+                                <b>HORA ACTIVACION :</b>".$hora."<br>
+                                <b>LICENCIA :</b>".$licencia."<br>
+                                <b>ESTADO :</b>".$tipo_conductor."
+                            </div>
+                        </div>";             
+
+             }else{
+                $acti='<span class="text-danger">Desactivado</span>';
+                $usu=Activacion::where('vehiculo_id',$id)->where('estado','N')->latest()->first();
+                 if(empty($usu)){
+                    $hora="Sin Datos";
+                 }else{
+                    $hora = $usu->horaActivacion();
+                 }
+            return "<div class='row'>
+                            <div class='col-md-6'>
+                                 <img src='$foto' width='200px' height='200px' class='img-responsive'>
+                                 PATENTE <b>".$unidad->patente."</b> 
+                            </div>
+                            <div class='col-md-6'>
+                                 <b>CLAVE :</b>".$unidad->clave."<br>
+                                 <b>ESTADO :</b><b>".$acti."</b><br>
+                                 <b>REVISION :</b>".$rev."<br>
+                                <hr>
+                                <b>DATOS CONDUCTOR:</b><br>
+                                <b>HORA ACTIVACION :</b>".$hora."<br>
+                            </div>
+                        </div>";   
+             }
+               
    }
 }

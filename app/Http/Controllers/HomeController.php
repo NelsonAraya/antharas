@@ -79,6 +79,7 @@ class HomeController extends Controller
         
         $estado='N';
         $acti = new  Activacion();
+        $veh = Hashids::decode($veh)[0];
         $vehiculo = Vehiculo::find($veh);
 
         $vehiculo->activacion=$estado;
