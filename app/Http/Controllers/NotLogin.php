@@ -153,13 +153,14 @@ class NotLogin extends Controller
         }else{
             $rev = date('d-m-Y',strtotime($revision->fecha_vencimiento));
         }
-        
+        /*
         $control= public_path("vehiculos/".$unidad->id.'.jpg');
            if (file_exists($control)){
                $foto=url('/vehiculos').'/'.$unidad->id.'.jpg';
             }else{
                $foto=url('/vehiculos').'/avatar.jpg'; 
              }
+        */     
              if($unidad->activacion=='S'){
                 $acti='<span class="text-success">Activado</span>';
                 $usu=Activacion::where('vehiculo_id',$id_deco)->latest()->first();
