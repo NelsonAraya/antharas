@@ -153,14 +153,14 @@ class NotLogin extends Controller
         }else{
             $rev = date('d-m-Y',strtotime($revision->fecha_vencimiento));
         }
-        /*
+        
         $control= public_path("vehiculos/".$unidad->id.'.jpg');
            if (file_exists($control)){
                $foto=url('/vehiculos').'/'.$unidad->id.'.jpg';
             }else{
                $foto=url('/vehiculos').'/avatar.jpg'; 
              }
-        */     
+             
              if($unidad->activacion=='S'){
                 $acti='<span class="text-success">Activado</span>';
                 $usu=Activacion::where('vehiculo_id',$id_deco)->latest()->first();
@@ -181,6 +181,7 @@ class NotLogin extends Controller
                    $btneliminar="<a id='__$id2' data-conductor='$conductor' class='btn btn-danger un'>Desactivar</a>";
                    }
                 }
+                /*
                 return "<div class='row'>
                             <div class='col-md-6'>
                                  <img src='$foto' width='200px' height='200px' class='img-responsive'>
@@ -197,6 +198,25 @@ class NotLogin extends Controller
                                 <b>HORA ACTIVACION :</b>".$hora."<br>
                                 <b>LICENCIA :</b>".$licencia."<br>
                                 <b>ESTADO :</b>".$tipo_conductor."
+                            </div>
+                        </div>";
+                        */
+                         return "<div class='row'>
+                            <div class='col-md-6'>
+                                 <img src='' width='200px' height='200px' class='img-responsive'>
+                                 PATENTE <b></b><br> 
+                            </div>
+                            <div class='col-md-6'>
+                                 <b>CLAVE :</b><br>
+                                 <b>ESTADO :</b><b></b><br>
+                                 <b>REVISION :</b><br>
+                                <hr>
+                                <b>DATOS CONDUCTOR:</b><br>
+                                <b>NOMBRE :</b><br>
+                                <b>DOTACION :</b><br>
+                                <b>HORA ACTIVACION :</b><br>
+                                <b>LICENCIA :</b><br>
+                                <b>ESTADO :</b>
                             </div>
                         </div>";             
 
