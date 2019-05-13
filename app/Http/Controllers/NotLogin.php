@@ -146,14 +146,14 @@ class NotLogin extends Controller
     public function infoUnidad($id){
         $id = Hashids::decode($id)[0];
         $unidad = Vehiculo::find($id);
-    
+        /*
         $revision=RevicionTecnica::where('vehiculo_id',$id)->latest()->first();
         if($revision === null){
             $rev='00-00-0000';
         }else{
             $rev = date('d-m-Y',strtotime($revision->fecha_vencimiento));
         }
-        
+        */
         $control= public_path("vehiculos/".$unidad->id.'.jpg');
            if (file_exists($control)){
                $foto=url('/vehiculos').'/'.$unidad->id.'.jpg';
