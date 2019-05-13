@@ -144,16 +144,16 @@ class NotLogin extends Controller
    }
 
     public function infoUnidad($id){
-        $id = Hashids::decode($id)[0];
-        $unidad = Vehiculo::find($id);
-        /*
-        $revision=RevicionTecnica::where('vehiculo_id',$id)->latest()->first();
+        $id_deco = Hashids::decode($id)[0];
+        $unidad = Vehiculo::find($id_deco);
+        
+        $revision=RevicionTecnica::where('vehiculo_id',$id_deco)->latest()->first();
         if($revision === null){
             $rev='00-00-0000';
         }else{
             $rev = date('d-m-Y',strtotime($revision->fecha_vencimiento));
         }
-        */
+        
         $control= public_path("vehiculos/".$unidad->id.'.jpg');
            if (file_exists($control)){
                $foto=url('/vehiculos').'/'.$unidad->id.'.jpg';
@@ -162,7 +162,7 @@ class NotLogin extends Controller
              }
              if($unidad->activacion=='S'){
                 $acti='<span class="text-success">Activado</span>';
-                $usu=Activacion::where('vehiculo_id',$id)->latest()->first();
+                $usu=Activacion::where('vehiculo_id',$id_deco)->latest()->first();
                 
                 $usucia =$usu->usuario->cia->nombreCompleto();
                 $hora = $usu->horaActivacion();
@@ -201,7 +201,7 @@ class NotLogin extends Controller
 
              }else{
                 $acti='<span class="text-danger">Desactivado</span>';
-                $usu=Activacion::where('vehiculo_id',$id)->where('estado','N')->latest()->first();
+                $usu=Activacion::where('vehiculo_id',$id_deco)->where('estado','N')->latest()->first();
                  if(empty($usu)){
                     $hora="Sin Datos";
                  }else{
