@@ -175,13 +175,14 @@ class NotLogin extends Controller
                 }
                 $conductor=$usu->usuario->id;
                 $usu = $usu->usuario->nombreSimple();
+                $btneliminar='';
                 if (Auth::check()) {
                    if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 ){
                     $id2=$unidad->getHashId();
                    $btneliminar="<a id='__$id2' data-conductor='$conductor' class='btn btn-danger un'>Desactivar</a>";
                    }
                 }
-                /*
+
                 return "<div class='row'>
                             <div class='col-md-6'>
                                  <img src='$foto' width='200px' height='200px' class='img-responsive'>
@@ -200,25 +201,7 @@ class NotLogin extends Controller
                                 <b>ESTADO :</b>".$tipo_conductor."
                             </div>
                         </div>";
-                        */
-                         return "<div class='row'>
-                            <div class='col-md-6'>
-                                 <img src='' width='200px' height='200px' class='img-responsive'>
-                                 PATENTE <b></b><br> 
-                            </div>
-                            <div class='col-md-6'>
-                                 <b>CLAVE :</b><br>
-                                 <b>ESTADO :</b><b></b><br>
-                                 <b>REVISION :</b><br>
-                                <hr>
-                                <b>DATOS CONDUCTOR:</b><br>
-                                <b>NOMBRE :</b><br>
-                                <b>DOTACION :</b><br>
-                                <b>HORA ACTIVACION :</b><br>
-                                <b>LICENCIA :</b><br>
-                                <b>ESTADO :</b>
-                            </div>
-                        </div>";             
+                                    
 
              }else{
                 $acti='<span class="text-danger">Desactivado</span>';
