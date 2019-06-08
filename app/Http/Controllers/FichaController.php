@@ -121,7 +121,7 @@ class FichaController extends Controller
             $usu->ficha->fono2 = ($request->fono2)? $request->fono2: null;
             $usu->ficha->save();
         }
-        
+        dd("hola");
         $usu->save();
         
         $usu->enfermedades()->detach();
