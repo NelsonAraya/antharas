@@ -209,7 +209,7 @@ class RrhhController extends Controller
     public function roles($id){
         $id = Hashids::decode($id)[0];
         $usu = Usuario::find($id);
-        $rol = Role::pluck('descripcion','id');
+        $rol = Role::get(['id','descripcion','estado']);
         return view('rrhh.usuarios.roles')->with('usu',$usu)->with('roles',$rol);
     }
 

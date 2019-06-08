@@ -81,8 +81,8 @@ class FichaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $id = Hashids::decode($id)[0];
-        $usu = Usuario::find($id);
+        $id2 = Hashids::decode($id)[0];
+        $usu = Usuario::find($id2);
        
 
         if(isset($request->cronico)){

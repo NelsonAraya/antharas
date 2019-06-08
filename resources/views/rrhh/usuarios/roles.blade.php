@@ -75,20 +75,24 @@ input:checked + .slider:before {
 	  			  		@php
 	  					$flag=false;
 	  					@endphp
+	
 	  			@foreach($usu->roles as $row)
-	  				@if($row->id == $key)
+	  				@if($row->id == $rol->id)
 	  					@php
 	  					$flag=true;
 	  					@endphp
 	  				@endif
 	  			@endforeach
-	  			<div class="col-md-1">
-	  				<label class="switch checkbox-inline"><input type="checkbox" 
-	  					@if($flag) checked="checked" @endif name="roles[]" value="{{ $key }}">
-	  					<span class="slider round"></span>
-	  				</label>
-	  				{{ $rol }}
-	  			</div>
+	  			@if($rol->estado!=0)
+		  			<div class="col-md-1">
+		  				<label class="switch checkbox-inline"><input type="checkbox" 
+		  					@if($flag) checked="checked" @endif
+		  					 name="roles[]" value="{{ $rol->id }}">
+		  					<span class="slider round"></span>
+		  				</label>
+		  				{{ $rol->descripcion }}
+		  			</div>
+	  			@endif
 	  		@endforeach
 	  	</div>
 	  	<div class="form-group row">

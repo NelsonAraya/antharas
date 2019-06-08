@@ -114,7 +114,7 @@
                 <div class="title m-b-md">
                     ANTHARAS 
                 </div>
-                <footer>© Sistema de administración CBI.</footer>
+                <footer>© Sistema de administración para el. {{config('app.bombero')}} </footer>
             </div>
         </div>
         

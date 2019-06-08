@@ -6,7 +6,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">HOME</div>
             <div class="panel-body">
-                Bienvenido a ANTHARAS el sistema ONLINE DEL CBI
+                Bienvenido a ANTHARAS sistema ONLINE PARA EL {{config('app.bombero')}}
                 <br>
                 <br>
                 @if($usu->cia_id!=11 && $usu->operativo =='S')
