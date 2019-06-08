@@ -156,6 +156,9 @@
 <audio id="cuartel_11" src="{{ asset('sonidos/11.wav') }}" preload="auto"></audio>
 <audio id="cuartel_12" src="{{ asset('sonidos/12.wav') }}" preload="auto"></audio>
 <audio id="cuartel_14" src="{{ asset('sonidos/14.wav') }}" preload="auto"></audio>
+<audio id="tono_estructural" src="{{ asset('sonidos/estructural.mp3') }}" preload="auto"></audio>
+<audio id="tono_incendio" src="{{ asset('sonidos/incendio.mp3') }}" preload="auto"></audio>
+<audio id="tono_rescate" src="{{ asset('sonidos/rescate.mp3') }}" preload="auto"></audio>
 <div id="tabla_uni" class="table-responsive" style="display: none">
 	<table class="table">
 		<thead>
@@ -222,16 +225,17 @@
 			</tr>	
 		</tbody>
 	</table>
+	<br>
+	<div class="btn-group">
+	  <a type="button" id="btn_estructural" class="btn btn-success tono2 btn-lg">ESTRUCTURAL</a>
+	  <a type="button" id="btn_rescate" class="btn btn-success tono2 btn-lg">RESCATE</a>
+	  <a type="button" id="btn_incendio" class="btn btn-success tono2 btn-lg">INCENDIO</a>
+	</div>
+	<br>
+	<br>
 	<a id="tono_cuartel" href="#" class="btn btn-primary btn-group btn-lg" role="button">
 		<span class="glyphicon glyphicon-play"></span> Tocar
 	</a>
-	<br>
-	<br>
-	<div class="btn-group">
-	  <a type="button" class="btn btn-default  btn-lg">10-0-1</a>
-	  <a type="button" class="btn btn-default  btn-lg">10-4-1</a>
-	  <a type="button" class="btn btn-default  btn-lg">INCENDIO</a>
-	</div>
 </div>
 @endif
 @endauth	
@@ -337,41 +341,6 @@
 										
 					}
 				})
-				/*
-				$(document).on('dblclick','.un',function(e){
-
-					var flag = true;
-					if (e.target !== this){
-						flag = false;  
-					}else{
-						flag= true;
-					}
-					var str = this.id;
-					var conductor = $(this).data('conductor');
-				    var url = "{{ URL::route('visor.unidad',['usu','uni','N']) }}";
-				    var url3 = url.replace('usu',conductor).replace('uni',str);
-				    console.log($(this).hasClass("parpadea"));
-				    if('rgb(0, 255, 0)' === $(this).css("background-color") ){
-				    	console.log($(this).hasClass("parpadea"));
-				    	if(flag){
-		 				$.ajaxSetup({
-		        			headers: {
-		            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-		        			}
-		    			});
-		    		
-					    $.ajax({
-					        url : url3,
-					        success : function(data){
-					        		
-					        		alert("Unidad Desactivada");
-					        		
-					            }
-					        });
-						}
-				    }
-				})
-				*/
 			@endif
     	@endauth
     	$(".op").on('click', function(event){
@@ -437,21 +406,7 @@
 		});
 		@auth
 			@if(Auth::user()->hasRole('tono'))
-			/*
-			$(".tono").on('click', function(event){
-	    		var id = $(this).attr("id");
-	    		var url = "{{ URL::route('visor.tono','N') }}";
-				var url2 = url.replace('N',id);
 
-				$.ajaxSetup({
-			    	headers: 
-			    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-			    			});
-			    		
-				$.ajax({
-					url : url2,
-					});
-			});*/
 			$(".tono").on('click', function(event){
 				if($(this).hasClass("btn-danger")){
 		    		$(this).removeClass('btn-danger');
@@ -462,6 +417,57 @@
         		}
 				
 			});
+			var flag="";
+			$("#btn_estructural").on('click', function(event){
+				if($(this).hasClass("btn-success")){
+		    		$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+	        		flag='tono_estructural';
+	        		$("#btn_incendio").removeClass('btn-danger');
+	        		$("#btn_rescate").removeClass('btn-danger');
+	        		$("#btn_rescate").addClass('btn-success');
+	        		$("#btn_incendio").addClass('btn-success');
+        		}else{
+        			$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}
+				
+			});
+
+			$("#btn_rescate").on('click', function(event){
+				if($(this).hasClass("btn-danger")){
+		    		$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}else{
+        			flag="tono_rescate";
+        			$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+	        		$("#btn_incendio").removeClass('btn-danger');
+	        		$("#btn_estructural").removeClass('btn-danger');
+	        		$("#btn_estructural").addClass('btn-success');
+	        		$("#btn_incendio").addClass('btn-success');
+        		}
+				
+			});
+
+			$("#btn_incendio").on('click', function(event){
+				if($(this).hasClass("btn-danger")){
+		    		$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}else{
+        			flag="tono_incendio";
+        			$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+	        		$("#btn_rescate").removeClass('btn-danger');
+	        		$("#btn_estructural").removeClass('btn-danger');
+	        		$("#btn_estructural").addClass('btn-success');
+	        		$("#btn_rescate").addClass('btn-success');
+
+        		}
+				
+			});
+
+
 			$("#tono_cuartel").on('click', function(event){
 				 var opcion = confirm("¿Seguro en Enviar Tonos de Cuartel?");
 				  if (opcion == true) {
@@ -491,6 +497,28 @@
 								});
 		    				}
 		  				});
+							var url3 = "{{ URL::route('visor.tono','N') }}";
+							var url4 = url3.replace('N',flag);
+
+								$.ajaxSetup({
+							    	headers: 
+							    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+							    			});
+					    		
+								$.ajax({
+									url : url4,
+									success : function(data){
+										/*
+			    		 				$(".tono").each(function(){
+											if(this.id==data){
+												$(this).removeClass('btn-danger');
+		        								$(this).addClass('btn-success');
+											}															
+										});
+										*/
+									}
+								});					    		
+
 			    	}
 			});
 			@endif
@@ -733,6 +761,13 @@
 				    $(this).addClass('parpadea');
 					}															
 				});
+				$(".tono2").each(function(){
+					var n1= this.id;
+					var n2 = tono[index]; 
+					if(n1.split('_')[1]==n2.split('_')[1]){
+				    $(this).addClass('parpadea');
+					}															
+				});
 			@endif
 		@endauth
 	    audios[index].play();
@@ -741,6 +776,15 @@
 			@if(Auth::user()->hasRole('tono'))
 		    	$(".tono").each(function(){
 					if(this.id==tono[index]){
+				    $(this).removeClass('parpadea');
+				    $(this).removeClass('btn-danger');
+				    $(this).addClass('btn-success');
+					}															
+				});
+				$(".tono2").each(function(){
+					var n1= this.id;
+					var n2 = tono[index]; 
+					if(n1.split('_')[1]==n2.split('_')[1]){
 				    $(this).removeClass('parpadea');
 				    $(this).removeClass('btn-danger');
 				    $(this).addClass('btn-success');
