@@ -119,6 +119,7 @@ class FichaController extends Controller
             $usu->ficha->fono1 = ($request->fono1)? $request->fono1: null;
             $usu->ficha->contacto2 = ($request->contacto2)? $request->contacto2: null;
             $usu->ficha->fono2 = ($request->fono2)? $request->fono2: null;
+            dd("a");
             $usu->ficha->save();
         }
         dd("hola");
