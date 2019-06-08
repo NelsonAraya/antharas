@@ -108,6 +108,7 @@ class FichaController extends Controller
             $ficha->fono2 = $request->fono2;
             $usu->ficha()->save($ficha);
         }else{
+            dd("pase por aca");
             $usu->ficha->peso = $request->peso;
             $usu->ficha->talla = $request->talla;
             $usu->ficha->imc = $request->imc;
@@ -130,7 +131,7 @@ class FichaController extends Controller
               $usu->enfermedades()->attach($row);
         }
 
-        session()->flash('success', 'Se ha Modificado Ficha Clinica al Usuario :'.$usu->nombreSimple());
+        session()->flash('success', 'Se ha Modificado Ficha Clinica al Usuario : '.$usu->nombreSimple());
 
         return redirect()->route('ficha.index');
         
