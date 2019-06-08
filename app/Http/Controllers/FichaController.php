@@ -108,18 +108,17 @@ class FichaController extends Controller
             $ficha->fono2 = $request->fono2;
             $usu->ficha()->save($ficha);
         }else{
-            dd("pase por aca");
-            $usu->ficha->peso = $request->peso;
-            $usu->ficha->talla = $request->talla;
-            $usu->ficha->imc = $request->imc;
-            $usu->ficha->quirurgicos = $request->quiru;
-            $usu->ficha->alergias = $request->alergia;
-            $usu->ficha->tratamientos = $request->trata;
-            $usu->ficha->otras = $request->otras;
-            $usu->ficha->contacto1 = $request->contacto1;
-            $usu->ficha->fono1 = $request->fono1;
-            $usu->ficha->contacto2 = $request->contacto2;
-            $usu->ficha->fono2 = $request->fono2;
+            $usu->ficha->peso = ($request->peso)? $request->peso: null;
+            $usu->ficha->talla = ($request->talla)? $request->talla: null;
+            $usu->ficha->imc = ($request->imc)? $request->imc: null;
+            $usu->ficha->quirurgicos = ($request->quiru)? $request->quiru: null;
+            $usu->ficha->alergias = ($request->alergia)? $request->alergia: null;
+            $usu->ficha->tratamientos = ($request->trata)? $request->trata: null;
+            $usu->ficha->otras = ($request->otras)? $request->otras: null;
+            $usu->ficha->contacto1 = ($request->contacto1)? $request->contacto1: null; 
+            $usu->ficha->fono1 = ($request->fono1)? $request->fono1: null;
+            $usu->ficha->contacto2 = ($request->contacto2)? $request->contacto2: null;
+            $usu->ficha->fono2 = ($request->fono2)? $request->fono2: null;
             $usu->ficha->save();
         }
         
