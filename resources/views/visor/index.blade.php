@@ -147,18 +147,24 @@
 	</table>   	
 </div>
 <audio id="tono" src="{{ asset('sonidos/evento.ton') }}" preload="auto"></audio>
-<audio id="cuartel_1" src="{{ asset('sonidos/1.wav') }}" preload="auto"></audio>
-<audio id="cuartel_2" src="{{ asset('sonidos/2.wav') }}" preload="auto"></audio>
-<audio id="cuartel_4" src="{{ asset('sonidos/4.wav') }}" preload="auto"></audio>
-<audio id="cuartel_5" src="{{ asset('sonidos/5.wav') }}" preload="auto"></audio>
-<audio id="cuartel_6" src="{{ asset('sonidos/6.wav') }}" preload="auto"></audio>
-<audio id="cuartel_7" src="{{ asset('sonidos/7.wav') }}" preload="auto"></audio>
-<audio id="cuartel_11" src="{{ asset('sonidos/11.wav') }}" preload="auto"></audio>
-<audio id="cuartel_12" src="{{ asset('sonidos/12.wav') }}" preload="auto"></audio>
-<audio id="cuartel_14" src="{{ asset('sonidos/14.wav') }}" preload="auto"></audio>
+<audio id="cuartel_1x" src="{{ asset('sonidos/1.wav') }}" preload="auto"></audio>
+<audio id="cuartel_2x" src="{{ asset('sonidos/2.wav') }}" preload="auto"></audio>
+<audio id="cuartel_2Rx" src="{{ asset('sonidos/2R.wav') }}" preload="auto"></audio>
+<audio id="cuartel_4x" src="{{ asset('sonidos/4.wav') }}" preload="auto"></audio>
+<audio id="cuartel_5x" src="{{ asset('sonidos/5.wav') }}" preload="auto"></audio>
+<audio id="cuartel_6x" src="{{ asset('sonidos/6.wav') }}" preload="auto"></audio>
+<audio id="cuartel_6Rx" src="{{ asset('sonidos/6R.wav') }}" preload="auto"></audio>
+<audio id="cuartel_7x" src="{{ asset('sonidos/7.wav') }}" preload="auto"></audio>
+<audio id="cuartel_11x" src="{{ asset('sonidos/11.wav') }}" preload="auto"></audio>
+<audio id="cuartel_11Rx" src="{{ asset('sonidos/11R.wav') }}" preload="auto"></audio>
+<audio id="cuartel_12x" src="{{ asset('sonidos/12.wav') }}" preload="auto"></audio>
+<audio id="cuartel_14x" src="{{ asset('sonidos/14.wav') }}" preload="auto"></audio>
+<audio id="cuartel_14Rx" src="{{ asset('sonidos/14R.wav') }}" preload="auto"></audio>
+<audio id="cuartel_16x" src="{{ asset('sonidos/16.wav') }}" preload="auto"></audio>
 <audio id="tono_estructural" src="{{ asset('sonidos/estructural.mp3') }}" preload="auto"></audio>
 <audio id="tono_incendio" src="{{ asset('sonidos/incendio.mp3') }}" preload="auto"></audio>
 <audio id="tono_rescate" src="{{ asset('sonidos/rescate.mp3') }}" preload="auto"></audio>
+<audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>
 <div id="tabla_uni" class="table-responsive" style="display: none">
 	<table class="table">
 		<thead>
@@ -215,7 +221,7 @@
 				@foreach($cia as $row)
 					@if ($row->numero != 100)
 					<td>
-						<a id="cuartel_{{ $row->numero }}" href="#" 
+						<a id="cuartel_{{ $row->numero }}x" href="#" 
 							class="btn btn-success btn-group btn-lg tono" role="button">
 								Tono <span class="glyphicon glyphicon-bullhorn"></span>
 							</a>
@@ -230,6 +236,7 @@
 	  <a type="button" id="btn_estructural" class="btn btn-success tono2 btn-lg">ESTRUCTURAL</a>
 	  <a type="button" id="btn_rescate" class="btn btn-success tono2 btn-lg">RESCATE</a>
 	  <a type="button" id="btn_incendio" class="btn btn-success tono2 btn-lg">INCENDIO</a>
+	  <a type="button" id="btn_hazmat" class="btn btn-success tono2 btn-lg">HAZMAT</a>
 	</div>
 	<br>
 	<br>
@@ -424,6 +431,8 @@
 	        		$(this).addClass('btn-danger');
 	        		flag='tono_estructural';
 	        		$("#btn_incendio").removeClass('btn-danger');
+	        		$("#btn_hazmat").removeClass('btn-danger');
+	        		$("#btn_hazmat").addClass('btn-success');
 	        		$("#btn_rescate").removeClass('btn-danger');
 	        		$("#btn_rescate").addClass('btn-success');
 	        		$("#btn_incendio").addClass('btn-success');
@@ -443,6 +452,8 @@
         			$(this).removeClass('btn-success');
 	        		$(this).addClass('btn-danger');
 	        		$("#btn_incendio").removeClass('btn-danger');
+	        		$("#btn_hazmat").removeClass('btn-danger');
+	        		$("#btn_hazmat").addClass('btn-success');
 	        		$("#btn_estructural").removeClass('btn-danger');
 	        		$("#btn_estructural").addClass('btn-success');
 	        		$("#btn_incendio").addClass('btn-success');
@@ -462,7 +473,26 @@
 	        		$("#btn_estructural").removeClass('btn-danger');
 	        		$("#btn_estructural").addClass('btn-success');
 	        		$("#btn_rescate").addClass('btn-success');
+	        		$("#btn_hazmat").removeClass('btn-danger');
+	        		$("#btn_hazmat").addClass('btn-success');
+        		}
+				
+			});
 
+			$("#btn_hazmat").on('click', function(event){
+				if($(this).hasClass("btn-danger")){
+		    		$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}else{
+        			flag="tono_hazmat";
+        			$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+	        		$("#btn_rescate").removeClass('btn-danger');
+	        		$("#btn_estructural").removeClass('btn-danger');
+	        		$("#btn_estructural").addClass('btn-success');
+	        		$("#btn_rescate").addClass('btn-success');
+	        		$("#btn_incendio").removeClass('btn-danger');	        		
+	        		$("#btn_incendio").addClass('btn-success');
         		}
 				
 			});
@@ -473,7 +503,7 @@
 				  if (opcion == true) {
 			    		 $(".tono").each(function(){
 		    				if($(this).hasClass("btn-danger")){
-		    					var id = this.id
+		    					var id = this.id;
 					    		var url = "{{ URL::route('visor.tono','N') }}";
 								var url2 = url.replace('N',id);
 
@@ -522,10 +552,31 @@
 			    	}
 			});
 			@endif
-		 @endauth	
+		 @endauth
+		var getUrlParameter = function getUrlParameter(sParam) {
+			    var sPageURL = window.location.search.substring(1),
+			        sURLVariables = sPageURL.split('&'),
+			        sParameterName,
+			        i;
+
+			    for (i = 0; i < sURLVariables.length; i++) {
+			        sParameterName = sURLVariables[i].split('=');
+
+			        if (sParameterName[0] === sParam) {
+			            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+			        }
+			    }
+		};
+		var tech = getUrlParameter('x');
+		if(tech==1){
+
+			 	$("#tabla_vol").hide("slow");
+ 				$("#tabla_tono").hide("slow");
+ 				$("#tabla_uni").show("slow");
+		}
 
     	$('[data-toggle="popover"]').popover();  
-    	
+
     	var cia_x1=0;
 		var cia_x2=0;
 		var cia_x4=0;
@@ -736,10 +787,11 @@
             }
         });
     }
-    
+    var flag_x=false;
     var audios = [];
 	var index =0;
 	var tono = [];
+	var flag_rescate=false;
 	function tocar(t){
 		index=0;
 		audios = [];
@@ -748,9 +800,27 @@
 
     		var audio =document.getElementById(t[i]);
 		    audios.push(audio);
+		    if(flag_rescate ==true){
+
+		    	if(t[i]=='cuartel_2Rx'){
+		    		t[i]='cuartel_2x';
+		    	}
+		    	if(t[i]=='cuartel_6Rx'){
+		    		t[i]='cuartel_6x';
+		    	}
+		    	if(t[i]=='cuartel_11Rx'){
+		    		t[i]='cuartel_11x';
+		    	}
+		    	if(t[i]=='cuartel_14Rx'){
+		    		t[i]='cuartel_14x';
+		    	}
+		    }
 		    tono.push(t[i]); 	
     	}
+    	flag_rescate=false;
     	StartPlayingAll();
+    	flag_x=false;
+
     }
 
 	function playNext(index) {
@@ -795,7 +865,10 @@
 	        index++;
 	        if(index < audios.length){
 	            playNext(index);          
-	        }
+	        }else{
+	        	window.location.href='volActivos?x=1';
+				}
+
 	    });
 
 	}
@@ -827,7 +900,8 @@
              index = index + 1;
              if(index < audios.length){
                 playNext(index);          
-             }                      
+             }
+                    
         });
 	}
 
@@ -859,15 +933,38 @@
 					}
         				
         		});
+        		if(t.indexOf('tono_rescate')>0){
+        			flag_rescate=true;
+        			if(t.indexOf('cuartel_2x')>=0){
+        				var a =t.indexOf('cuartel_2x');
+        				t[a]='cuartel_2Rx';
+        			}
+        			if(t.indexOf('cuartel_6x')>=0){
+        				var b =t.indexOf('cuartel_6x');
+        				t[b]='cuartel_6Rx';
+        			}
+        			if(t.indexOf('cuartel_11x')>=0){
+        				var c =t.indexOf('cuartel_11x');
+        				t[c]='cuartel_11Rx';
+        			}
+        			if(t.indexOf('cuartel_14x')>=0){
+        				var d =t.indexOf('cuartel_14x');
+        				t[d]='cuartel_14Rx';
+        			}
+        		}
         		if(t.length>0){
+        			flag_x=true;
         			tocar(t);
         		}
+        		
             }
         });
     }
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
+    if(flag_x==false){
     setInterval(getTonos, 4000);
+	}
 });
    
 </script>

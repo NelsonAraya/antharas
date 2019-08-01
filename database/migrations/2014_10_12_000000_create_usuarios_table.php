@@ -38,7 +38,7 @@ class CreateUsuariosTable extends Migration
             $table->enum('operativo',['S','N'])->default('N');
             $table->enum('cronico',['S','N'])->default('N');
             $table->enum('tipo_conductor',['C','B'])->default('B');
-            $table->integer('sanguineo_id')->unsigned();
+            $table->integer('sanguineo_id')->unsigned()->nullable();
             $table->foreign('sanguineo_id')->references('id')->on('grupo_sanguineos');
             $table->rememberToken();
             $table->timestamps();
