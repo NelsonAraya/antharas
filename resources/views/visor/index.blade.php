@@ -88,13 +88,35 @@
 </style>
 @endsection
 @section('content')
-	<a id="btn" href="#" class="btn btn-info btn-lg linea" role="button">Ver Unidades</a>
+<div class="form-group row">
+	<div class="col-md-2">
+		<a id="btn" href="#" class="btn btn-info btn-lg linea" role="button">Ver Unidades</a>
+	</div>	
 	@auth
 		@if(Auth::user()->hasRole('tono'))
-		<a id="btn_tono" href="#" class="btn btn-danger btn-lg linea" role="button">Consola de Tonos</a>
+		<div class="col-md-2">
+			<a id="btn_tono" href="#" class="btn btn-danger btn-lg linea" role="button">Consola Tonos</a>
+		</div>		
 		@endif
 	@endauth
-<div id="tabla_vol" class="table-responsive">
+	<div class="col-md-3">
+		<select id="select_tono" class="form-control col-md-2">
+		  <option value="all">TODOS LOS TONOS</option>
+		  <option value="cuartel_1x">TONO 1 CIA</option>
+		  <option value="cuartel_2x">TONO 2 CIA</option>
+		  <option value="cuartel_4x">TONO 4 CIA</option>
+		  <option value="cuartel_5x">TONO 5 CIA</option>
+		  <option value="cuartel_6x">TONO 6 CIA</option>
+		  <option value="cuartel_7x">TONO 7 CIA</option>
+		  <option value="cuartel_11x">TONO 11 CIA</option>
+		  <option value="cuartel_12x">TONO 12 CIA</option>
+		  <option value="cuartel_14x">TONO 14 CIA</option>
+		  <option value="cuartel_16x">TONO 16 CIA</option>
+		</select>
+	</div>
+</div>
+<div class="form-group row">		
+<div id="tabla_vol" class="table-responsive col-md-12">
 	<table class="table">
 		<thead>
 			<tr>
@@ -164,8 +186,8 @@
 <audio id="tono_estructural" src="{{ asset('sonidos/estructural.mp3') }}" preload="auto"></audio>
 <audio id="tono_incendio" src="{{ asset('sonidos/incendio.mp3') }}" preload="auto"></audio>
 <audio id="tono_rescate" src="{{ asset('sonidos/rescate.mp3') }}" preload="auto"></audio>
-<audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>
-<div id="tabla_uni" class="table-responsive" style="display: none">
+<audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>	
+<div id="tabla_uni" class="table-responsive col-md-12" style="display: none">
 	<table class="table">
 		<thead>
 			<tr>
@@ -204,7 +226,7 @@
 </div>
 @auth
 @if(Auth::user()->hasRole('tono'))
-<div id="tabla_tono" class="table-responsive" style="display: none">
+<div id="tabla_tono" class="table-responsive col-md-12" style="display: none">
 	<table class="table">
 		<thead>
 			<tr>
@@ -244,8 +266,10 @@
 		<span class="glyphicon glyphicon-play"></span> Tocar
 	</a>
 </div>
+</div>
 @endif
-@endauth	
+@endauth
+
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -283,6 +307,10 @@
 <script src="{{ asset('js/timer.jquery.min.js') }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		var tono_select= $( "#select_tono option:selected" ).val();
+		$("#select_tono").change(function() {
+ 			tono_select=$( "#select_tono option:selected" ).val();
+		});
 		@auth
 	    	@if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 )
 
@@ -568,8 +596,31 @@
 			    }
 		};
 		var tech = getUrlParameter('x');
+		var tech1 = getUrlParameter('c');
 		if(tech==1){
-
+				if(tech1=='all'){
+					$("#select_tono").val('all').change();
+				}else if(tech1=='1x'){
+					$("#select_tono").val('cuartel_1x').change();
+				}else if(tech1=='2x'){
+					$("#select_tono").val('cuartel_2x').change();
+				}else if(tech1=='4x'){
+					$("#select_tono").val('cuartel_4x').change();
+				}else if(tech1=='5x'){
+					$("#select_tono").val('cuartel_5x').change();
+				}else if(tech1=='6x'){
+					$("#select_tono").val('cuartel_6x').change();
+				}else if(tech1=='7x'){
+					$("#select_tono").val('cuartel_7x').change();
+				}else if(tech1=='11x'){
+					$("#select_tono").val('cuartel_11x').change();
+				}else if(tech1=='12x'){
+					$("#select_tono").val('cuartel_12x').change();
+				}else if(tech1=='14x'){
+					$("#select_tono").val('cuartel_14x').change();
+				}else if(tech1=='16x'){
+					$("#select_tono").val('cuartel_16x').change();
+				}
 			 	$("#tabla_vol").hide("slow");
  				$("#tabla_tono").hide("slow");
  				$("#tabla_uni").show("slow");
@@ -798,24 +849,24 @@
 		tono = [];
     	for (var i = 0; i < t.length; i++) {
 
-    		var audio =document.getElementById(t[i]);
-		    audios.push(audio);
-		    if(flag_rescate ==true){
+    			var audio =document.getElementById(t[i]);
+			    audios.push(audio);
+			    if(flag_rescate ==true){
 
-		    	if(t[i]=='cuartel_2Rx'){
-		    		t[i]='cuartel_2x';
-		    	}
-		    	if(t[i]=='cuartel_6Rx'){
-		    		t[i]='cuartel_6x';
-		    	}
-		    	if(t[i]=='cuartel_11Rx'){
-		    		t[i]='cuartel_11x';
-		    	}
-		    	if(t[i]=='cuartel_14Rx'){
-		    		t[i]='cuartel_14x';
-		    	}
-		    }
-		    tono.push(t[i]); 	
+			    	if(t[i]=='cuartel_2Rx'){
+			    		t[i]='cuartel_2x';
+			    	}
+			    	if(t[i]=='cuartel_6Rx'){
+			    		t[i]='cuartel_6x';
+			    	}
+			    	if(t[i]=='cuartel_11Rx'){
+			    		t[i]='cuartel_11x';
+			    	}
+			    	if(t[i]=='cuartel_14Rx'){
+			    		t[i]='cuartel_14x';
+			    	}
+			    }
+			    tono.push(t[i]); 	
     	}
     	flag_rescate=false;
     	StartPlayingAll();
@@ -840,7 +891,19 @@
 				});
 			@endif
 		@endauth
-	    audios[index].play();
+		var c1 = tono[index]; 
+		if(tono_select=='all'){
+			audios[index].play();
+		}else if(tono[index]==tono_select){
+;
+			audios[index].play();
+		}else if(c1.split('_')[0]=='tono'){
+			audios[index].play();
+		}else{
+
+			audios[index].play();
+			audios[index].muted=true;
+		}
 	    $(audios[index]).bind("ended", function(){
 	    @auth
 			@if(Auth::user()->hasRole('tono'))
@@ -866,8 +929,12 @@
 	        if(index < audios.length){
 	            playNext(index);          
 	        }else{
-	        	window.location.href='volActivos?x=1';
-				}
+	        	if(tono_select=='all'){
+             		window.location.href='volActivos?x=1&c='+tono_select;
+             	}else{
+             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1];
+             	}
+			}
 
 	    });
 
@@ -884,7 +951,16 @@
 				});
 			@endif
 		@endauth
-   		audios[index].play();
+
+		if(tono_select=='all'){
+			audios[index].play();
+		}else if(tono[index]==tono_select){
+			audios[index].play();
+		}else{
+			audios[index].play();
+			audios[index].muted=true;
+		}
+   		
         $(audios[index]).bind("ended", function(){
 		@auth
 			@if(Auth::user()->hasRole('tono'))
@@ -901,6 +977,13 @@
              if(index < audios.length){
                 playNext(index);          
              }
+             else{
+             	if(tono_select=='all'){
+             		window.location.href='volActivos?x=1&c='+tono_select;
+             	}else{
+             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1];
+             	}	
+			}
                     
         });
 	}
