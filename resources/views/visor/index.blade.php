@@ -114,6 +114,12 @@
 		  <option value="cuartel_16x">TONO 16 CIA</option>
 		</select>
 	</div>
+	<div class="col-md-3">
+		<select id="tono_activacion" class="form-control col-md-2">
+		  <option value="si">ESCUCHAR ACTIVACION</option>
+		  <option value="no">SILENCIAR ACTIVACION</option>
+		</select>
+	</div>
 </div>
 <div class="form-group row">		
 <div id="tabla_vol" class="table-responsive col-md-12">
@@ -817,8 +823,14 @@
 					}else if(a==value.activacion){
 						
 					}else{
-						//document.getElementById('tono').play();
-						$('#tono').get(0).play();
+						
+						var tono_activacion= $( "#tono_activacion option:selected" ).val();
+						if(tono_activacion=='si'){
+							//$('#tono').get(0).play();
+							document.getElementById("tono").play().catch(function() {
+    						console.log("a");
+							});
+						}
 						$('#'+value.id2).data('estado',value.activacion).addClass('parpadea');
 						
 						$('#'+value.id2).click(function(e) {  
