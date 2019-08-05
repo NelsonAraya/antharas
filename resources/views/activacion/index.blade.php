@@ -109,6 +109,12 @@
 								href="{{ route('activacion.vehiculo',[$usu->getHashId(),$row->getHashId(),'N']) }}" 
 							@endif
 								class="btn btn-danger" role="button">Desactivar</a>
+						@if($row->activacion=='S' AND ($chofer!= Auth::user()->id))
+						<a href="{{ route('activacion.vehiculo',[$usu->getHashId(),$row->getHashId(),'S']) }}" 
+						 		class="btn btn-warning" role="button">
+						 		<span class="glyphicon glyphicon-resize-horizontal" aria-hidden="true"></span>	
+						 </a>
+						@endif		
 						@if($control)
 							<br><br>
 							<div class="alert alert-warning">

@@ -189,9 +189,9 @@
 <audio id="cuartel_14x" src="{{ asset('sonidos/14.wav') }}" preload="auto"></audio>
 <audio id="cuartel_14Rx" src="{{ asset('sonidos/14R.wav') }}" preload="auto"></audio>
 <audio id="cuartel_16x" src="{{ asset('sonidos/16.wav') }}" preload="auto"></audio>
-<audio id="tono_estructural" src="{{ asset('sonidos/estructural.mp3') }}" preload="auto"></audio>
-<audio id="tono_incendio" src="{{ asset('sonidos/incendio.mp3') }}" preload="auto"></audio>
-<audio id="tono_rescate" src="{{ asset('sonidos/rescate.mp3') }}" preload="auto"></audio>
+<audio id="tono_estructural" src="{{ asset('sonidos/estructural.wav') }}" preload="auto"></audio>
+<audio id="tono_incendio" src="{{ asset('sonidos/incendio.wav') }}" preload="auto"></audio>
+<audio id="tono_rescate" src="{{ asset('sonidos/rescate.wav') }}" preload="auto"></audio>
 <audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>	
 <div id="tabla_uni" class="table-responsive col-md-12" style="display: none">
 	<table class="table">
