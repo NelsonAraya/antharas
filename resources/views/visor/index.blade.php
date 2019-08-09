@@ -85,6 +85,12 @@
 	transform: translateY(-50%);
 	font-size: 20px;
 }
+.tocar-centro {
+  width: 100%;
+  height: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
 </style>
 @endsection
 @section('content')
@@ -193,6 +199,7 @@
 <audio id="tono_incendio" src="{{ asset('sonidos/incendio.wav') }}" preload="auto"></audio>
 <audio id="tono_rescate" src="{{ asset('sonidos/rescate.wav') }}" preload="auto"></audio>
 <audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>	
+<audio id="tono_otros" src="{{ asset('sonidos/otros.wav') }}" preload="auto"></audio>	
 <div id="tabla_uni" class="table-responsive col-md-12" style="display: none">
 	<table class="table">
 		<thead>
@@ -260,17 +267,20 @@
 		</tbody>
 	</table>
 	<br>
-	<div class="btn-group">
+	<div style="text-align: center;">
 	  <a type="button" id="btn_estructural" class="btn btn-success tono2 btn-lg">ESTRUCTURAL</a>
 	  <a type="button" id="btn_rescate" class="btn btn-success tono2 btn-lg">RESCATE</a>
 	  <a type="button" id="btn_incendio" class="btn btn-success tono2 btn-lg">INCENDIO</a>
 	  <a type="button" id="btn_hazmat" class="btn btn-success tono2 btn-lg">HAZMAT</a>
+	  <a type="button" id="btn_otros" class="btn btn-success tono2 btn-lg">OTROS Y COM</a>
 	</div>
 	<br>
 	<br>
-	<a id="tono_cuartel" href="#" class="btn btn-primary btn-group btn-lg" role="button">
-		<span class="glyphicon glyphicon-play"></span> Tocar
+	<div style="text-align: center;">
+			<a id="tono_cuartel" href="#" class="btn btn-primary btn-lg" role="button" style="width: 300px;height: 50px">
+		<span class="glyphicon glyphicon-play"></span> REPRODUCIR
 	</a>
+	</div>	
 </div>
 </div>
 @endif
@@ -316,6 +326,10 @@
 		var tono_select= $( "#select_tono option:selected" ).val();
 		$("#select_tono").change(function() {
  			tono_select=$( "#select_tono option:selected" ).val();
+		});
+		var t_activacion= $( "#tono_activacion option:selected" ).val();
+		$("#tono_activacion").change(function() {
+ 			t_activacion=$( "#tono_activacion option:selected" ).val();
 		});
 		@auth
 	    	@if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 )
@@ -467,6 +481,8 @@
 	        		$("#btn_incendio").removeClass('btn-danger');
 	        		$("#btn_hazmat").removeClass('btn-danger');
 	        		$("#btn_hazmat").addClass('btn-success');
+					$("#btn_otros").removeClass('btn-danger');
+	        		$("#btn_otros").addClass('btn-success');
 	        		$("#btn_rescate").removeClass('btn-danger');
 	        		$("#btn_rescate").addClass('btn-success');
 	        		$("#btn_incendio").addClass('btn-success');
@@ -491,6 +507,8 @@
 	        		$("#btn_estructural").removeClass('btn-danger');
 	        		$("#btn_estructural").addClass('btn-success');
 	        		$("#btn_incendio").addClass('btn-success');
+	        		$("#btn_otros").removeClass('btn-danger');
+	        		$("#btn_otros").addClass('btn-success');
         		}
 				
 			});
@@ -509,6 +527,8 @@
 	        		$("#btn_rescate").addClass('btn-success');
 	        		$("#btn_hazmat").removeClass('btn-danger');
 	        		$("#btn_hazmat").addClass('btn-success');
+	        		$("#btn_otros").removeClass('btn-danger');
+	        		$("#btn_otros").addClass('btn-success');
         		}
 				
 			});
@@ -527,6 +547,28 @@
 	        		$("#btn_rescate").addClass('btn-success');
 	        		$("#btn_incendio").removeClass('btn-danger');	        		
 	        		$("#btn_incendio").addClass('btn-success');
+	        		$("#btn_otros").removeClass('btn-danger');
+	        		$("#btn_otros").addClass('btn-success');
+        		}
+				
+			});
+
+			$("#btn_otros").on('click', function(event){
+				if($(this).hasClass("btn-danger")){
+		    		$(this).removeClass('btn-danger');
+	        		$(this).addClass('btn-success');
+        		}else{
+        			flag="tono_otros";
+        			$(this).removeClass('btn-success');
+	        		$(this).addClass('btn-danger');
+	        		$("#btn_rescate").removeClass('btn-danger');
+	        		$("#btn_estructural").removeClass('btn-danger');
+	        		$("#btn_estructural").addClass('btn-success');
+	        		$("#btn_rescate").addClass('btn-success');
+	        		$("#btn_incendio").removeClass('btn-danger');	        		
+	        		$("#btn_incendio").addClass('btn-success');
+	        		$("#btn_hazmat").removeClass('btn-danger');
+	        		$("#btn_hazmat").addClass('btn-success');
         		}
 				
 			});
@@ -603,6 +645,7 @@
 		};
 		var tech = getUrlParameter('x');
 		var tech1 = getUrlParameter('c');
+		var tech2 = getUrlParameter('tono');
 		if(tech==1){
 				if(tech1=='all'){
 					$("#select_tono").val('all').change();
@@ -630,6 +673,14 @@
 			 	$("#tabla_vol").hide("slow");
  				$("#tabla_tono").hide("slow");
  				$("#tabla_uni").show("slow");
+		}
+
+		if(tech2 != undefined){
+			if(tech2=='si'){
+				$("#tono_activacion").val('si').change();			
+			}else{
+				$("#tono_activacion").val('no').change();
+			}
 		}
 
     	$('[data-toggle="popover"]').popover();  
@@ -903,14 +954,42 @@
 				});
 			@endif
 		@endauth
-		var c1 = tono[index]; 
+
+		var c1 = tono[index];
+		var flag_tono=false; 
+		var flag_tono2=false; 
 		if(tono_select=='all'){
-			audios[index].play();
+			@auth
+				@if(Auth::user()->hasRole('tono'))
+					flag_tono=true;
+					if(c1.split('_')[0]=='tono'){
+						var r = confirm("Reproducir Tono Emergencia?");
+						if(r==true){
+							audios[index].play();
+						}
+					}else{
+						audios[index].play();
+					}
+				@endif	
+			@endauth
+			if(flag_tono==false){
+				audios[index].play();
+			}	
 		}else if(tono[index]==tono_select){
-;
 			audios[index].play();
 		}else if(c1.split('_')[0]=='tono'){
-			audios[index].play();
+			@auth
+				@if(Auth::user()->hasRole('tono'))
+				flag_tono2=true;
+					var r = confirm("Reproducir Tono Emergencia?");
+					if(r==true){
+						audios[index].play();
+					}
+				@endif
+			@endauth	
+			if(flag_tono2==false){
+				audios[index].play();
+			}
 		}else{
 
 			audios[index].play();
@@ -942,9 +1021,9 @@
 	            playNext(index);          
 	        }else{
 	        	if(tono_select=='all'){
-             		window.location.href='volActivos?x=1&c='+tono_select;
+             		window.location.href='volActivos?x=1&c='+tono_select+'&tono='+t_activacion;
              	}else{
-             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1];
+             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1]+'&tono='+t_activacion;
              	}
 			}
 
@@ -991,9 +1070,9 @@
              }
              else{
              	if(tono_select=='all'){
-             		window.location.href='volActivos?x=1&c='+tono_select;
+             		window.location.href='volActivos?x=1&c='+tono_select+'&tono='+t_activacion;
              	}else{
-             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1];
+             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1]+'&tono='+t_activacion;
              	}	
 			}
                     
