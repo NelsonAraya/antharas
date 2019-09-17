@@ -24,6 +24,7 @@ Route::post('password', 'RrhhController@nuevaPassword')->name('nuevaPassword');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/myactivacion/{usuario}/{estado}','HomeController@myActivacion')->name('home.activacion');
+Route::get('/home/myactivacioncbi/{usuario}/{estado}','HomeController@myActivacionCBI')->name('home.activacionCBI');
 Route::get('/home/myreporte/{usuario}/reporte','HomeController@reporte')->name('home.reporte');
 
 Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
@@ -87,7 +88,7 @@ Route::get('visor/operador/{usuario}/{estado}','HomeController@opActivacion')->n
 Route::get('visor/{usuario}','NotLogin@usuariosActivos')->name('visor.usuario');
 Route::get('visor/{usuario}/unidad','NotLogin@infoUnidad')->name('visor.info');
 Route::get('visor/{nombre}/tono','NotLogin@tonoCuartel')->name('visor.tono');
-
+Route::get('visor/{nombre}/mytono','NotLogin@myTonoCuartel')->name('visor.mytono');
 
 Route::get('visor/operadorUnidad/{usuario}/{unidad}/{estado}','HomeController@opActivacionUnidad')->name('visor.unidad');
 

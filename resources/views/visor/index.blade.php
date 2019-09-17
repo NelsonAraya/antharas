@@ -133,7 +133,10 @@
 		<thead>
 			<tr>
 				@foreach($cia as $row)
-					@if ($row->numero != 100)
+					@if ($row->numero == 100)
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">CBI<br>
+					En Cuartel : <span id="cia_{{ $row->id }}"></span>
+					@else
 					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
 					En Cuartel : <span id="cia_{{ $row->id }}"></span>
 					</th>
@@ -144,6 +147,7 @@
 		<tbody>
 			<tr>
 				@foreach($cia as $row)
+					@if($row->id!=11)
 					<td >
 						<table>
 						@foreach($row->usuariosCargoVisor as $usu)
@@ -175,6 +179,39 @@
 						@endforeach
 						</table>		
 					</td>
+					@else
+					<td>
+						<table>		
+						@foreach($usux as $row)
+							@if($row->estado=='A')
+							@php
+								$foto = URL::asset('/usuarios/') ;
+								$foto = $foto."/".$row->rol.".jpg"; 
+								$sinfoto = URL::asset('/usuarios/') ;
+								$sinfoto = $sinfoto."/avatar.jpg";
+								$control= public_path("usuarios/".$row->rol.'.jpg');
+							 @endphp
+							<tr>
+								<td id="x_{{ $row->id }}" style=" width: 10%; display: none;">
+									<div id="x__{{ $row->id }}" class="panel panel-default op"
+										@if (file_exists($control))
+										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%; cursor: pointer"
+										@else
+										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%; cursor: pointer"
+										@endif
+										>							 
+									</div>
+		  						</td>
+							</tr>
+							@endif
+						@endforeach
+						</table>
+					</td>
+					@endif
 				@endforeach
 			</tr>	
 		</tbody>
@@ -205,11 +242,8 @@
 		<thead>
 			<tr>
 				@foreach($cia as $row)
-					@if ($row->numero == 100)
-					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">CBI
-					</th>
-					@else
-					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
+					@if ($row->numero != 100)
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
 					@endif
 				@endforeach
 			</tr>
@@ -670,9 +704,20 @@
 				}else if(tech1=='16x'){
 					$("#select_tono").val('cuartel_16x').change();
 				}
-			 	$("#tabla_vol").hide("slow");
+				@auth
+					@if(Auth::user()->hasRole('tono'))
+			 			$("#tabla_vol").hide("slow");
+		 				$("#tabla_tono").hide("slow");
+		 				$("#tabla_uni").show("slow");
+			 		@else
+		 				$("#tabla_tono").hide("slow");
+		 				$("#tabla_uni").hide("slow");
+		 				$("#tabla_vol").show("slow");
+		 			@endif	
+				@endauth
  				$("#tabla_tono").hide("slow");
- 				$("#tabla_uni").show("slow");
+ 				$("#tabla_uni").hide("slow");
+ 				$("#tabla_vol").show("slow");
 		}
 
 		if(tech2 != undefined){
@@ -695,7 +740,7 @@
 		var cia_x12=0;
 		var cia_x14=0;
 		var cia_x16=0;
-
+		var cia_xx=0;
        $('#cia_1').text(cia_x1);
        $('#cia_2').text(cia_x2);
        $('#cia_3').text(cia_x4);
@@ -706,6 +751,7 @@
        $('#cia_8').text(cia_x12);
        $('#cia_9').text(cia_x14);
        $('#cia_10').text(cia_x16);
+       $('#cia_11').text(cia_xx);
 
     function getActivados(){
         
@@ -728,6 +774,7 @@
 					var cia_x12=0;
 					var cia_x14=0;
 					var cia_x16=0;
+					var cia_xx=0;
         		
         		$.each( data, function( key, value ) {
 
@@ -855,6 +902,74 @@
             }
         });
     }
+
+    function getActivadosCBI(){
+        
+        $.ajaxSetup({
+        	headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    	});	
+    $.ajax({
+        url : "{{ URL::route('visor.vol') }}",
+        success : function(data){
+
+					var cia_xx=0;
+        		
+        		$.each( data, function( key, value ) {
+
+        			var control_conductor=false;
+			       $('#cia_11').text(cia_xx);
+			    if(value.activado_cbi=='S'){
+			    		
+        			$('#x_'+value.id).show();
+        			
+        			if(value.cargo_id==9){
+        				$('#x__'+value.id).removeClass('voluntario');
+        				$('#x__'+value.id).removeClass('comandante');
+        				$('#x__'+value.id).removeClass('teniente');
+        				$('#x__'+value.id).removeClass('inspectores');
+        				$('#x__'+value.id).addClass('capitan');
+        			}else if(value.cargo_id== 5 || value.cargo_id== 6 || value.cargo_id== 7 || value.cargo_id== 8 ){
+        				$('#x__'+value.id).removeClass('voluntario');
+        				$('#x__'+value.id).removeClass('comandante');
+        				$('#x__'+value.id).removeClass('capitan');
+        				$('#x__'+value.id).removeClass('inspectores');
+        				$('#x__'+value.id).addClass('teniente');
+        			}else if(value.cargo_id== 13 || value.cargo_id== 14 || value.cargo_id== 15){
+        				$('#x__'+value.id).removeClass('voluntario');
+        				$('#x__'+value.id).removeClass('capitan');
+        				$('#x__'+value.id).removeClass('teniente');
+        				$('#x__'+value.id).removeClass('inspectores');
+        				$('#x__'+value.id).addClass('comandante');
+        			}else if(value.cargo_id == 17){
+        				$('#x__'+value.id).removeClass('capitan');
+        				$('#x__'+value.id).removeClass('comandante');
+        				$('#x__'+value.id).removeClass('teniente');
+        				$('#x__'+value.id).removeClass('voluntario');
+        				$('#x__'+value.id).addClass('inspectores');
+        			}
+        			else{
+        				$('#x__'+value.id).removeClass('capitan');
+        				$('#x__'+value.id).removeClass('comandante');
+        				$('#x__'+value.id).removeClass('teniente');
+        				$('#x__'+value.id).removeClass('inspectores');
+        				$('#x__'+value.id).addClass('voluntario');
+        			}
+						    cia_xx +=1;
+							
+						    $('#cia_11').text(cia_xx);
+					
+        		}else{
+        			$('#x_'+value.id).hide();
+        			//$('#__'+value.id).timer('reset');
+        		}
+        		});
+            }
+        });
+    }
+
+
     function getUnidades(){
         
         $.ajaxSetup({
@@ -951,7 +1066,7 @@
 					if(n1.split('_')[1]==n2.split('_')[1]){
 				    $(this).addClass('parpadea');
 					}															
-				});
+				});	
 			@endif
 		@endauth
 
@@ -1086,14 +1201,20 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     	});
-    		
+    	if(tono_select=='all'){
+    		var urlx="{{ URL::route('visor.evento') }}";
+    	}else{
+    		var url3 = "{{ URL::route('visor.mytono','N') }}";
+			var urlx = url3.replace('N',tono_select);
+    	}	
     $.ajax({
-        url : "{{ URL::route('visor.evento') }}",
+
+        url : urlx,
         success : function(data){
         		var t = [];
         		var ind=0;
         		$.each( data, function( key, value ) {
-
+        			console.log(data);	
         			var a = $('#'+value.nombre).data('estado');
         			
         			if(a === undefined || a === null){
@@ -1126,6 +1247,7 @@
         				t[d]='cuartel_14Rx';
         			}
         		}
+        		console.log(t);
         		if(t.length>0){
         			flag_x=true;
         			tocar(t);
@@ -1134,8 +1256,10 @@
             }
         });
     }
+
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
+    setInterval(getActivadosCBI, 3000);
     if(flag_x==false){
     setInterval(getTonos, 4000);
 	}

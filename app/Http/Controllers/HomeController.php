@@ -58,6 +58,31 @@ class HomeController extends Controller
 
     }
 
+
+    public function myActivacionCBI($id,$estado){
+
+        $id = Hashids::decode($id)[0];
+        $usu = Usuario::find($id);
+        $usu->activado_cbi = $estado;
+        $usu->save();
+        /*
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$id;
+        $log->estado=$estado;
+        $log->save();
+        */
+        if($estado=='S'){
+            $n ='ACTIVO';
+        }else{
+            $n ='INACTIVO';
+        }
+        session()->flash('info', 'Ha modificado su estado de CUARTEL GENERAL a: '.$n);
+
+        return redirect()->route('home');
+
+    }
+
     public function opActivacion($id,$estado){
 
         $estado='N';

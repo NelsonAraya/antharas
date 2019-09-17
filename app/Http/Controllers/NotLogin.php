@@ -17,12 +17,13 @@ class NotLogin extends Controller
     public function verVoluntarios(){
 
         $cia= Cia::get();
-        return view('visor.index')->with('cia',$cia);
+        $usu = Usuario::get();
+        return view('visor.index')->with('cia',$cia)->with('usux',$usu);
     }
 
     public function volActivos(){
         
-        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor','tipo_conductor']);
+        $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor','tipo_conductor','activado_cbi']);
 
         return response()->json($usu);
         
@@ -140,6 +141,14 @@ class NotLogin extends Controller
      
      $a = Tono::get();
      return response()->json($a);
+
+   }
+
+   public function myTonoCuartel($cia){
+        
+        $a = Tono::where('nombre','like','%tono%')
+        ->orWhere('nombre',$cia)->get();
+        return response()->json($a);
 
    }
 
