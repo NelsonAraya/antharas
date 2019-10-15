@@ -1182,7 +1182,7 @@
 			var urlx = url3.replace('N',tono_select);
     	}	
     $.ajax({
-    	cache :false;
+    	cache :false,
         url : urlx,
         success : function(data){
         		var t = [];
