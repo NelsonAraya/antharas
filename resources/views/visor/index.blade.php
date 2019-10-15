@@ -730,6 +730,7 @@
         }
     	});	
     $.ajax({
+    	cache:false,
         url : "{{ URL::route('visor.vol') }}",
         success : function(data){
 
@@ -880,6 +881,7 @@
         }
     	});	
     $.ajax({
+    	cache:false,
         url : "{{ URL::route('visor.vol') }}",
         success : function(data){
 
@@ -948,6 +950,7 @@
     	});
     		
     $.ajax({
+    	cache: false,
         url : "{{ URL::route('visor.cuartel') }}",
         success : function(data){
         		$.each( data, function( key, value ) {
@@ -1179,13 +1182,13 @@
 			var urlx = url3.replace('N',tono_select);
     	}	
     $.ajax({
-
+    	cache :false;
         url : urlx,
         success : function(data){
         		var t = [];
         		var ind=0;
         		$.each( data, function( key, value ) {
-        			console.log(data);	
+        			//console.log(data);	
         			var a = $('#'+value.nombre).data('estado');
         			
         			if(a === undefined || a === null){
@@ -1219,7 +1222,7 @@
         			}
         		}
 
-        		console.log(t);
+        		//console.log(t);
         		if(t.length>0){
         			flag_x=true;
         			tocar(t);
