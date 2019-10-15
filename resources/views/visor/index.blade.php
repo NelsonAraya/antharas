@@ -133,10 +133,7 @@
 		<thead>
 			<tr>
 				@foreach($cia as $row)
-					@if ($row->numero == 100)
-					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">CBI<br>
-					En Cuartel : <span id="cia_{{ $row->id }}"></span>
-					@else
+					@if ($row->numero != 100)
 					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
 					En Cuartel : <span id="cia_{{ $row->id }}"></span>
 					</th>
@@ -180,37 +177,7 @@
 						</table>		
 					</td>
 					@else
-					<td>
-						<table>		
-						@foreach($usux as $row)
-							@if($row->estado=='A')
-							@php
-								$foto = URL::asset('/usuarios/') ;
-								$foto = $foto."/".$row->rol.".jpg"; 
-								$sinfoto = URL::asset('/usuarios/') ;
-								$sinfoto = $sinfoto."/avatar.jpg";
-								$control= public_path("usuarios/".$row->rol.'.jpg');
-							 @endphp
-							<tr>
-								<td id="x_{{ $row->id }}" style=" width: 10%; display: none;">
-									<div id="x__{{ $row->id }}" class="panel panel-default op"
-										@if (file_exists($control))
-										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
-										background-repeat: no-repeat; background-position: center;
-										background-size:100% 100%; cursor: pointer"
-										@else
-										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
-										background-repeat: no-repeat; background-position: center;
-										background-size:100% 100%; cursor: pointer"
-										@endif
-										>							 
-									</div>
-		  						</td>
-							</tr>
-							@endif
-						@endforeach
-						</table>
-					</td>
+
 					@endif
 				@endforeach
 			</tr>	
@@ -358,9 +325,11 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		var tono_select= $( "#select_tono option:selected" ).val();
+		
 		$("#select_tono").change(function() {
  			tono_select=$( "#select_tono option:selected" ).val();
 		});
+		
 		var t_activacion= $( "#tono_activacion option:selected" ).val();
 		$("#tono_activacion").change(function() {
  			t_activacion=$( "#tono_activacion option:selected" ).val();
@@ -1136,10 +1105,11 @@
 	            playNext(index);          
 	        }else{
 	        	if(tono_select=='all'){
-             		window.location.href='volActivos?x=1&c='+tono_select+'&tono='+t_activacion;
+					window.location.href='volActivos?x=1&c='+tono_select+'&tono='+t_activacion;
              	}else{
-             		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1]+'&tono='+t_activacion;
+					window.location.href='volActivos?x=1&c='+tono_select.split('_')[1]+'&tono='+t_activacion;
              	}
+             	
 			}
 
 	    });
@@ -1188,7 +1158,8 @@
              		window.location.href='volActivos?x=1&c='+tono_select+'&tono='+t_activacion;
              	}else{
              		window.location.href='volActivos?x=1&c='+tono_select.split('_')[1]+'&tono='+t_activacion;
-             	}	
+             	}
+             		
 			}
                     
         });
@@ -1247,6 +1218,7 @@
         				t[d]='cuartel_14Rx';
         			}
         		}
+
         		console.log(t);
         		if(t.length>0){
         			flag_x=true;
@@ -1259,7 +1231,7 @@
 
     setInterval(getUnidades, 3000);
     setInterval(getActivados, 3000);
-    setInterval(getActivadosCBI, 3000);
+   // setInterval(getActivadosCBI, 3000);
     if(flag_x==false){
     setInterval(getTonos, 4000);
 	}
