@@ -731,7 +731,6 @@
         }
     	});	
     $.ajax({
-    	cache:false,
     	contentType: "application/json; charset=utf-8",
         url : "{{ URL::route('visor.vol') }}",
         success : function(data){
@@ -883,7 +882,6 @@
         }
     	});	
     $.ajax({
-    	cache:false,
         url : "{{ URL::route('visor.vol') }}",
         success : function(data){
 
@@ -952,7 +950,6 @@
     	});
     		
     $.ajax({
-    	cache: false,
     	contentType: "application/json; charset=utf-8",
         url : "{{ URL::route('visor.cuartel') }}",
         success : function(data){
@@ -1185,7 +1182,6 @@
 			var urlx = url3.replace('N',tono_select);
     	}	
     $.ajax({
-    	cache :false,
     	contentType: "application/json; charset=utf-8",
         url : urlx,
         success : function(data){
