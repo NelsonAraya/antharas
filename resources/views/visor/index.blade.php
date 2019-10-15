@@ -155,12 +155,13 @@
 								$sinfoto = URL::asset('/usuarios/') ;
 								$sinfoto = $sinfoto."/avatar.jpg";
 								$control= public_path("usuarios/".$usu->rol.'.jpg');
+								/*background-image: url('{{$foto}}')*/
 							 @endphp
 							<tr>
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
 									<div id="_{{ $usu->id }}" class="panel panel-default op"
 										@if (file_exists($control))
-										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
+										style="width: 100px; height: 70px;
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@else
@@ -731,6 +732,7 @@
     	});	
     $.ajax({
     	cache:false,
+    	contentType: "application/json; charset=utf-8",
         url : "{{ URL::route('visor.vol') }}",
         success : function(data){
 
@@ -951,6 +953,7 @@
     		
     $.ajax({
     	cache: false,
+    	contentType: "application/json; charset=utf-8",
         url : "{{ URL::route('visor.cuartel') }}",
         success : function(data){
         		$.each( data, function( key, value ) {
@@ -1183,6 +1186,7 @@
     	}	
     $.ajax({
     	cache :false,
+    	contentType: "application/json; charset=utf-8",
         url : urlx,
         success : function(data){
         		var t = [];
