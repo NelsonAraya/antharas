@@ -165,7 +165,7 @@
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@else
-										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
+										style=" width: 100px; height: 70px; 
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@endif
