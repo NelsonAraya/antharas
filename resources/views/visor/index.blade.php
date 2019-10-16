@@ -161,11 +161,11 @@
 								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
 									<div id="_{{ $usu->id }}" class="panel panel-default op"
 										@if (file_exists($control))
-										style="width: 100px; height: 70px;
+										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@else
-										style=" width: 100px; height: 70px; 
+										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
 										background-repeat: no-repeat; background-position: center;
 										background-size:100% 100%; cursor: pointer"
 										@endif
