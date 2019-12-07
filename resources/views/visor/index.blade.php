@@ -1026,7 +1026,8 @@
 
 	function playNext(index) {
 		@auth
-			@if(Auth::user()->hasRole('tono'))		
+			@if(Auth::user()->hasRole('tono'))
+				audios[index].muted=true;		
 				$(".tono").each(function(){
 					if(this.id==tono[index]){
 				    $(this).addClass('parpadea');
@@ -1052,6 +1053,7 @@
 					if(c1.split('_')[0]=='tono'){
 						var r = confirm("Reproducir Tono Emergencia?");
 						if(r==true){
+							audios[index].muted=false;
 							audios[index].play();
 						}
 					}else{
@@ -1128,6 +1130,7 @@
 				    $(this).addClass('parpadea');
 					}															
 				});
+				audios[index].muted=true;
 			@endif
 		@endauth
 
@@ -1169,67 +1172,67 @@
 	}
 
     function getTonos(){
-        
-        $.ajaxSetup({
-        	headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    	});
-    	if(tono_select=='all'){
-    		var urlx="{{ URL::route('visor.evento') }}";
-    	}else{
-    		var url3 = "{{ URL::route('visor.mytono','N') }}";
-			var urlx = url3.replace('N',tono_select);
-    	}	
-    $.ajax({
-    	contentType: "application/json; charset=utf-8",
-        url : urlx,
-        success : function(data){
-        		var t = [];
-        		var ind=0;
-        		$.each( data, function( key, value ) {
-        			//console.log(data);	
-        			var a = $('#'+value.nombre).data('estado');
-        			
-        			if(a === undefined || a === null){
-  						$('#'+value.nombre).data('estado',value.estado);
-					}else if(a==value.estado){
-						
-					}else{
-						t[ind]=value.nombre;						
-						ind++;
-						$('#'+value.nombre).data('estado',value.estado);						
-					}
-        				
-        		});
-        		if(t.indexOf('tono_rescate')>0){
-        			flag_rescate=true;
-        			if(t.indexOf('cuartel_2x')>=0){
-        				var a =t.indexOf('cuartel_2x');
-        				t[a]='cuartel_2Rx';
+        	$.ajaxSetup({
+        		headers: {
+            		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         			}
-        			if(t.indexOf('cuartel_6x')>=0){
-        				var b =t.indexOf('cuartel_6x');
-        				t[b]='cuartel_6Rx';
-        			}
-        			if(t.indexOf('cuartel_11x')>=0){
-        				var c =t.indexOf('cuartel_11x');
-        				t[c]='cuartel_11Rx';
-        			}
-        			if(t.indexOf('cuartel_14x')>=0){
-        				var d =t.indexOf('cuartel_14x');
-        				t[d]='cuartel_14Rx';
-        			}
-        		}
+    			});
+		    	if(tono_select=='all'){
+		    		var urlx="{{ URL::route('visor.evento') }}";
+		    	}else{
+		    		var url3 = "{{ URL::route('visor.mytono','N') }}";
+					var urlx = url3.replace('N',tono_select);
+		    	}	
+	    	$.ajax({
+	    	contentType: "application/json; charset=utf-8",
+	        url : urlx,
+	        success : function(data){
+	        		var t = [];
+	        		var ind=0;
+	        		$.each( data, function( key, value ) {
+	        			//console.log(data);	
+	        			var a = $('#'+value.nombre).data('estado');
+	        			
+	        			if(a === undefined || a === null){
+	  						$('#'+value.nombre).data('estado',value.estado);
+						}else if(a==value.estado){
+							
+						}else{
+							t[ind]=value.nombre;						
+							ind++;
+							$('#'+value.nombre).data('estado',value.estado);						
+						}
+	        				
+	        		});
+	        		if(t.indexOf('tono_rescate')>0){
+	        			flag_rescate=true;
+	        			if(t.indexOf('cuartel_2x')>=0){
+	        				var a =t.indexOf('cuartel_2x');
+	        				t[a]='cuartel_2Rx';
+	        			}
+	        			if(t.indexOf('cuartel_6x')>=0){
+	        				var b =t.indexOf('cuartel_6x');
+	        				t[b]='cuartel_6Rx';
+	        			}
+	        			if(t.indexOf('cuartel_11x')>=0){
+	        				var c =t.indexOf('cuartel_11x');
+	        				t[c]='cuartel_11Rx';
+	        			}
+	        			if(t.indexOf('cuartel_14x')>=0){
+	        				var d =t.indexOf('cuartel_14x');
+	        				t[d]='cuartel_14Rx';
+	        			}
+	        		}
 
-        		//console.log(t);
-        		if(t.length>0){
-        			flag_x=true;
-        			tocar(t);
-        		}
-        		
-            }
-        });
+	        		//console.log(t);
+	        		if(t.length>0){
+	        			flag_x=true;
+	        			tocar(t);
+	        		}
+	        		
+	            }
+	        });
+
     }
 
     setInterval(getUnidades, 3000);
