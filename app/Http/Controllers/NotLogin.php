@@ -242,7 +242,7 @@ class NotLogin extends Controller
 public function infoxCia($id){
 
          $cia = Cia::find($id);
-         $count = Usuario::where('activado', '=', 'S')->where('cia_id','=',$id)->where('activado_conductor','=','N')->count();
+         $count = Usuario::where('activado', '=', 'S')->where('estado','A')->where('cia_id','=',$id)->where('activado_conductor','=','N')->count();
          $usu = Usuario::where('activado', '=', 'S')->where('cia_id','=',$id)->where('activado_conductor','=','N')->get();
          $countTotal = Usuario::where('cia_id','=',$id)->count();
          $esp = Especialidad::get();   
