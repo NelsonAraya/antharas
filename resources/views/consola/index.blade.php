@@ -384,14 +384,20 @@
 	}
 
 	function StartPlayingAll() {
-	
+
 			$(".tono").each(function(){
 				if(this.id==tono[index]){
 				    $(this).addClass('parpadea');
 				}															
 			});
-			audios[index].muted=true;				
-			audios[index].play();		
+
+			if(tono[index]=='tono_otros'){
+				audios[index].muted=false;				
+				audios[index].play();		
+			}else{
+				audios[index].muted=true;				
+				audios[index].play();
+			}		
    		
         $(audios[index]).bind("ended", function(){
 		    	$(".tono").each(function(){
