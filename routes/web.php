@@ -89,6 +89,7 @@ Route::get('visor/{usuario}','NotLogin@usuariosActivos')->name('visor.usuario');
 Route::get('visor/{usuario}/unidad','NotLogin@infoUnidad')->name('visor.info');
 Route::get('visor/{nombre}/tono','NotLogin@tonoCuartel')->name('visor.tono');
 Route::get('visor/{nombre}/mytono','NotLogin@myTonoCuartel')->name('visor.mytono');
+Route::get('visor/{cia}/visor','NotLogin@infoxCia')->name('visor.xcia');
 
 Route::get('visor/operadorUnidad/{usuario}/{unidad}/{estado}','HomeController@opActivacionUnidad')->name('visor.unidad');
 
@@ -107,3 +108,5 @@ Route::match(['put','patch'],'cia/busqueda/{cia}', 'CiaController@busquedalista'
 Route::resource('cia','CiaController',['middleware' => ['role:adminCIA', 'auth']]);
 
 Route::resource('ficha','FichaController',['middleware' => ['role:ficha', 'auth']]);
+
+Route::get('consola', 'ConsolaController@index')->name('consola.index')->middleware('auth','role:tono');

@@ -158,7 +158,19 @@
                       <li><a href="{{ route('partesonline.index') }}">Ver / Ingresar</a></li>   
                     </ul>
                   </li>
-                @endif          
+                @endif
+                @if(Auth::user()->hasRole('tono'))
+                  <li class="dropdown
+                  @if(Route::currentRouteName()=='consola.index') active @endif">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
+                      role="button" aria-haspopup="true" aria-expanded="false">Consola
+                       <span class="caret"></span>
+                      </a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ route('consola.index') }}">Ver Consola</a></li>   
+                    </ul>
+                  </li>
+                @endif                
             </ul>
             @endauth
             <!-- Right Side Of Navbar -->

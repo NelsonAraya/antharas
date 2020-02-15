@@ -9,6 +9,7 @@ use App\Vehiculo;
 use App\Activacion;
 use App\Tono;
 use App\RevicionTecnica;
+use App\Especialidad;
 use Illuminate\Support\Facades\Auth;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -235,6 +236,56 @@ class NotLogin extends Controller
                             </div>
                         </div>";   
              }
+               
+   }
+    
+public function infoxCia($id){
+
+         $cia = Cia::find($id);
+         $count = Usuario::where('activado', '=', 'S')->where('cia_id','=',$id)->where('activado_conductor','=','N')->count();
+         $usu = Usuario::where('activado', '=', 'S')->where('cia_id','=',$id)->where('activado_conductor','=','N')->get();
+         $countTotal = Usuario::where('cia_id','=',$id)->count();
+         $esp = Especialidad::get();   
+         $stringEspecialidades="";
+
+            foreach ($esp as $key) {
+                $total = 0;
+                $flag = false;
+                    foreach ($usu as $k  => $row) {
+                        $flag=true;
+                        foreach ($row->especialidades as $key_esp) {
+                            if($key_esp->id == $key->id){
+                                $total++;
+                                $flag=false;
+                                break;
+                            }else{
+                                $flag=true;
+                            }
+                        }
+                    }
+                 $stringEspecialidades=$stringEspecialidades.$key->descripcion.' (<b>'.$key->clave.'</b>) = <b>'.$total.'</b> <br>';   
+                }
+
+
+                $control= public_path("img/cia_".$cia->numero.'.png');
+                if (file_exists($control)){
+                    $foto=url('img/cia_').$cia->numero.'.png';
+                }else{
+                     $foto=url('/usuarios').'/avatar.jpg'; 
+                }
+
+        return "<div class='row'>
+                    <div class='col-md-6'>
+                         <img src='$foto' width='200px' height='200px' class='img-responsive'>
+                    </div>
+                    <div class='col-md-6'>
+                         <b> ".$cia->nombreCompleto()."</b><br>
+                         <b>En Cuartel : ".$count." / ".$countTotal."</b> 
+                        <hr>
+                        <b>ESPECIALIDADES:</b><br>
+                        ".$stringEspecialidades."
+                    </div>
+                </div>";
                
    }
 }

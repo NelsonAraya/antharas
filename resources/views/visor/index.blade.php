@@ -98,13 +98,6 @@
 	<div class="col-md-2">
 		<a id="btn" href="#" class="btn btn-info btn-lg linea" role="button">Ver Unidades</a>
 	</div>	
-	@auth
-		@if(Auth::user()->hasRole('tono'))
-		<div class="col-md-2">
-			<a id="btn_tono" href="#" class="btn btn-danger btn-lg linea" role="button">Consola Tonos</a>
-		</div>		
-		@endif
-	@endauth
 	<div class="col-md-3">
 		<select id="select_tono" class="form-control col-md-2">
 		  <option value="all">TODOS LOS TONOS</option>
@@ -134,8 +127,11 @@
 			<tr>
 				@foreach($cia as $row)
 					@if ($row->numero != 100)
-					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }} <br>
-					En Cuartel : <span id="cia_{{ $row->id }}"></span>
+					<th style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">
+						<div id="xcia_{{ $row->id }}" class="xcia" style="cursor: pointer;">
+							Cia N°{{ $row->numero }}<br>
+							En Cuartel : <span id="cia_{{ $row->id }}"></span>
+						</div>	
 					</th>
 					@endif
 				@endforeach
@@ -239,54 +235,7 @@
 		</tbody>
 	</table>   	
 </div>
-@auth
-@if(Auth::user()->hasRole('tono'))
-<div id="tabla_tono" class="table-responsive col-md-12" style="display: none">
-	<table class="table">
-		<thead>
-			<tr>
-				@foreach($cia as $row)
-					@if ($row->numero != 100)
-					<th  style="width: 10px; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}
-					</th>
-					@endif
-				@endforeach
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				@foreach($cia as $row)
-					@if ($row->numero != 100)
-					<td>
-						<a id="cuartel_{{ $row->numero }}x" href="#" 
-							class="btn btn-success btn-group btn-lg tono" role="button">
-								Tono <span class="glyphicon glyphicon-bullhorn"></span>
-							</a>
-					</td>
-					@endif
-				@endforeach
-			</tr>	
-		</tbody>
-	</table>
-	<br>
-	<div style="text-align: center;">
-	  <a type="button" id="btn_estructural" class="btn btn-success tono2 btn-lg">ESTRUCTURAL</a>
-	  <a type="button" id="btn_rescate" class="btn btn-success tono2 btn-lg">RESCATE</a>
-	  <a type="button" id="btn_incendio" class="btn btn-success tono2 btn-lg">INCENDIO</a>
-	  <a type="button" id="btn_hazmat" class="btn btn-success tono2 btn-lg">HAZMAT</a>
-	  <a type="button" id="btn_otros" class="btn btn-success tono2 btn-lg">OTROS Y COM</a>
-	</div>
-	<br>
-	<br>
-	<div style="text-align: center;">
-			<a id="tono_cuartel" href="#" class="btn btn-primary btn-lg" role="button" style="width: 300px;height: 50px">
-		<span class="glyphicon glyphicon-play"></span> REPRODUCIR
-	</a>
-	</div>	
 </div>
-</div>
-@endif
-@endauth
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
   <div class="modal-dialog" role="document">
@@ -310,6 +259,22 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="Mnombre">DATOS DE MATERIAL MAYOR</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="modal3" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="Mnombre">DATOS GENERAL CIA</h4>
       </div>
       <div class="modal-body">
 
@@ -419,220 +384,34 @@
     		 $('.modal-body').load(x2,function(){});
 		});
 
+		$(".xcia").on('click', function(event){
+    		var id = $(this).attr("id");
+    		id = id.substring(5);
+    		 $('#modal3').modal('show');
+			 var x = "{{ URL::route('visor.xcia','id') }}";
+			 var x2 = x.replace('id',id);
+    	   $('.modal-body').load(x2,function(){});
+		});
+
 
     	$('.modal').on('hidden.bs.modal', function(){
     		 $("#modal .modal-body").html('');
 		});
 
-		function imageExists(url){
-
-    		var image = new Image();
-
-    		image.src = url;
-
-		    if (!image.complete) {
-		        return false;
-		    }
-		    else if (image.height === 0) {
-		        return false;
-		    }
-
-    		return true;
-		}
-
  		$( "#btn" ).click(function() {
  			if(document.getElementById('tabla_uni').style.display=="none"){
  				$("#tabla_vol").hide("slow");
- 				$("#tabla_tono").hide("slow");
  				$("#tabla_uni").show("slow");
  				$(this).html("Ver Voluntarios");
  				$(this).removeClass( "btn-info" ).addClass( "btn-primary" );
  			}else{
  				$("#tabla_uni").hide("slow");
- 				$("#tabla_tono").hide("slow");
  				$("#tabla_vol").show("slow");
  				$(this).html("Ver Unidades");
  				$(this).removeClass( "btn-primary" ).addClass( "btn-info" );
  			}
 		});
 
-		$( "#btn_tono" ).click(function() {
- 			if(document.getElementById('tabla_tono').style.display=="none"){
- 				$("#tabla_vol").hide("slow");
- 				$("#tabla_uni").hide("slow");
- 				$("#tabla_tono").show("slow");
- 			}
-		});
-		@auth
-			@if(Auth::user()->hasRole('tono'))
-
-			$(".tono").on('click', function(event){
-				if($(this).hasClass("btn-danger")){
-		    		$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}else{
-        			$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-        		}
-				
-			});
-			var flag="";
-			$("#btn_estructural").on('click', function(event){
-				if($(this).hasClass("btn-success")){
-		    		$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-	        		flag='tono_estructural';
-	        		$("#btn_incendio").removeClass('btn-danger');
-	        		$("#btn_hazmat").removeClass('btn-danger');
-	        		$("#btn_hazmat").addClass('btn-success');
-					$("#btn_otros").removeClass('btn-danger');
-	        		$("#btn_otros").addClass('btn-success');
-	        		$("#btn_rescate").removeClass('btn-danger');
-	        		$("#btn_rescate").addClass('btn-success');
-	        		$("#btn_incendio").addClass('btn-success');
-        		}else{
-        			$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}
-				
-			});
-
-			$("#btn_rescate").on('click', function(event){
-				if($(this).hasClass("btn-danger")){
-		    		$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}else{
-        			flag="tono_rescate";
-        			$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-	        		$("#btn_incendio").removeClass('btn-danger');
-	        		$("#btn_hazmat").removeClass('btn-danger');
-	        		$("#btn_hazmat").addClass('btn-success');
-	        		$("#btn_estructural").removeClass('btn-danger');
-	        		$("#btn_estructural").addClass('btn-success');
-	        		$("#btn_incendio").addClass('btn-success');
-	        		$("#btn_otros").removeClass('btn-danger');
-	        		$("#btn_otros").addClass('btn-success');
-        		}
-				
-			});
-
-			$("#btn_incendio").on('click', function(event){
-				if($(this).hasClass("btn-danger")){
-		    		$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}else{
-        			flag="tono_incendio";
-        			$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-	        		$("#btn_rescate").removeClass('btn-danger');
-	        		$("#btn_estructural").removeClass('btn-danger');
-	        		$("#btn_estructural").addClass('btn-success');
-	        		$("#btn_rescate").addClass('btn-success');
-	        		$("#btn_hazmat").removeClass('btn-danger');
-	        		$("#btn_hazmat").addClass('btn-success');
-	        		$("#btn_otros").removeClass('btn-danger');
-	        		$("#btn_otros").addClass('btn-success');
-        		}
-				
-			});
-
-			$("#btn_hazmat").on('click', function(event){
-				if($(this).hasClass("btn-danger")){
-		    		$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}else{
-        			flag="tono_hazmat";
-        			$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-	        		$("#btn_rescate").removeClass('btn-danger');
-	        		$("#btn_estructural").removeClass('btn-danger');
-	        		$("#btn_estructural").addClass('btn-success');
-	        		$("#btn_rescate").addClass('btn-success');
-	        		$("#btn_incendio").removeClass('btn-danger');	        		
-	        		$("#btn_incendio").addClass('btn-success');
-	        		$("#btn_otros").removeClass('btn-danger');
-	        		$("#btn_otros").addClass('btn-success');
-        		}
-				
-			});
-
-			$("#btn_otros").on('click', function(event){
-				if($(this).hasClass("btn-danger")){
-		    		$(this).removeClass('btn-danger');
-	        		$(this).addClass('btn-success');
-        		}else{
-        			flag="tono_otros";
-        			$(this).removeClass('btn-success');
-	        		$(this).addClass('btn-danger');
-	        		$("#btn_rescate").removeClass('btn-danger');
-	        		$("#btn_estructural").removeClass('btn-danger');
-	        		$("#btn_estructural").addClass('btn-success');
-	        		$("#btn_rescate").addClass('btn-success');
-	        		$("#btn_incendio").removeClass('btn-danger');	        		
-	        		$("#btn_incendio").addClass('btn-success');
-	        		$("#btn_hazmat").removeClass('btn-danger');
-	        		$("#btn_hazmat").addClass('btn-success');
-        		}
-				
-			});
-
-
-			$("#tono_cuartel").on('click', function(event){
-				 var opcion = confirm("¿Seguro en Enviar Tonos de Cuartel?");
-				  if (opcion == true) {
-			    		 $(".tono").each(function(){
-		    				if($(this).hasClass("btn-danger")){
-		    					var id = this.id;
-					    		var url = "{{ URL::route('visor.tono','N') }}";
-								var url2 = url.replace('N',id);
-
-								$.ajaxSetup({
-							    	headers: 
-							    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-							    			});
-					    		
-								$.ajax({
-									url : url2,
-									success : function(data){
-										/*
-			    		 				$(".tono").each(function(){
-											if(this.id==data){
-												$(this).removeClass('btn-danger');
-		        								$(this).addClass('btn-success');
-											}															
-										});
-										*/
-									}
-								});
-		    				}
-		  				});
-							var url3 = "{{ URL::route('visor.tono','N') }}";
-							var url4 = url3.replace('N',flag);
-
-								$.ajaxSetup({
-							    	headers: 
-							    	{'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
-							    			});
-					    		
-								$.ajax({
-									url : url4,
-									success : function(data){
-										/*
-			    		 				$(".tono").each(function(){
-											if(this.id==data){
-												$(this).removeClass('btn-danger');
-		        								$(this).addClass('btn-success');
-											}															
-										});
-										*/
-									}
-								});					    		
-
-			    	}
-			});
-			@endif
-		 @endauth
 		var getUrlParameter = function getUrlParameter(sParam) {
 			    var sPageURL = window.location.search.substring(1),
 			        sURLVariables = sPageURL.split('&'),
@@ -674,20 +453,22 @@
 				}else if(tech1=='16x'){
 					$("#select_tono").val('cuartel_16x').change();
 				}
+				var flag_refresh=false;
 				@auth
 					@if(Auth::user()->hasRole('tono'))
-			 			$("#tabla_vol").hide("slow");
-		 				$("#tabla_tono").hide("slow");
+			 			$("#tabla_vol").hide();
 		 				$("#tabla_uni").show("slow");
+		 				flag_refresh=true;
 			 		@else
-		 				$("#tabla_tono").hide("slow");
-		 				$("#tabla_uni").hide("slow");
+		 				$("#tabla_uni").hide();
 		 				$("#tabla_vol").show("slow");
+		 				flag_refresh=true;
 		 			@endif	
 				@endauth
- 				$("#tabla_tono").hide("slow");
- 				$("#tabla_uni").hide("slow");
- 				$("#tabla_vol").show("slow");
+				if(flag_refresh==false){
+ 					$("#tabla_uni").hide();
+ 					$("#tabla_vol").show("slow");
+ 				}
 		}
 
 		if(tech2 != undefined){
@@ -1025,57 +806,17 @@
     }
 
 	function playNext(index) {
-		@auth
-			@if(Auth::user()->hasRole('tono'))
-				audios[index].muted=true;		
-				$(".tono").each(function(){
-					if(this.id==tono[index]){
-				    $(this).addClass('parpadea');
-					}															
-				});
-				$(".tono2").each(function(){
-					var n1= this.id;
-					var n2 = tono[index]; 
-					if(n1.split('_')[1]==n2.split('_')[1]){
-				    $(this).addClass('parpadea');
-					}															
-				});	
-			@endif
-		@endauth
 
 		var c1 = tono[index];
 		var flag_tono=false; 
 		var flag_tono2=false; 
 		if(tono_select=='all'){
-			@auth
-				@if(Auth::user()->hasRole('tono'))
-					flag_tono=true;
-					if(c1.split('_')[0]=='tono'){
-						var r = confirm("Reproducir Tono Emergencia?");
-						if(r==true){
-							audios[index].muted=false;
-							audios[index].play();
-						}
-					}else{
-						audios[index].play();
-					}
-				@endif	
-			@endauth
 			if(flag_tono==false){
 				audios[index].play();
 			}	
 		}else if(tono[index]==tono_select){
 			audios[index].play();
-		}else if(c1.split('_')[0]=='tono'){
-			@auth
-				@if(Auth::user()->hasRole('tono'))
-				flag_tono2=true;
-					var r = confirm("Reproducir Tono Emergencia?");
-					if(r==true){
-						audios[index].play();
-					}
-				@endif
-			@endauth	
+		}else if(c1.split('_')[0]=='tono'){	
 			if(flag_tono2==false){
 				audios[index].play();
 			}
@@ -1084,27 +825,7 @@
 			audios[index].play();
 			audios[index].muted=true;
 		}
-	    $(audios[index]).bind("ended", function(){
-	    @auth
-			@if(Auth::user()->hasRole('tono'))
-		    	$(".tono").each(function(){
-					if(this.id==tono[index]){
-				    $(this).removeClass('parpadea');
-				    $(this).removeClass('btn-danger');
-				    $(this).addClass('btn-success');
-					}															
-				});
-				$(".tono2").each(function(){
-					var n1= this.id;
-					var n2 = tono[index]; 
-					if(n1.split('_')[1]==n2.split('_')[1]){
-				    $(this).removeClass('parpadea');
-				    $(this).removeClass('btn-danger');
-				    $(this).addClass('btn-success');
-					}															
-				});
-			@endif
-		@endauth		
+	    $(audios[index]).bind("ended", function(){		
 	        index++;
 	        if(index < audios.length){
 	            playNext(index);          
@@ -1123,16 +844,6 @@
 
 	function StartPlayingAll() {
 
-		@auth
-			@if(Auth::user()->hasRole('tono'))		
-				$(".tono").each(function(){
-					if(this.id==tono[index]){
-				    $(this).addClass('parpadea');
-					}															
-				});
-				audios[index].muted=true;
-			@endif
-		@endauth
 
 		if(tono_select=='all'){
 			audios[index].play();
@@ -1144,17 +855,7 @@
 		}
    		
         $(audios[index]).bind("ended", function(){
-		@auth
-			@if(Auth::user()->hasRole('tono'))
-		    	$(".tono").each(function(){
-					if(this.id==tono[index]){
-				    $(this).removeClass('parpadea');
-				    $(this).removeClass('btn-danger');
-				    $(this).addClass('btn-success');
-					}															
-				});
-			@endif
-		@endauth		
+		
              index = index + 1;
              if(index < audios.length){
                 playNext(index);          
