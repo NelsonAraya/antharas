@@ -502,6 +502,6 @@ class PartesController extends Controller
     $ind=58;
                 
     $pdf_fecha=date('d-m-Y',strtotime($emergencia->fecha_emergencia));            
-    $pdf->Output($pdf_fecha.'_'.$emergencia->clave->clave.'_'.($parte->cia->numero.".pdf","D");
+    $pdf->Output($pdf_fecha.'_'.$emergencia->clave->clave.'_'.$parte->cia->numero.".pdf","D");
     }
 }
