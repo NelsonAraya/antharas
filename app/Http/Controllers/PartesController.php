@@ -501,6 +501,7 @@ class PartesController extends Controller
     $pdf->Cell(90,0, utf8_decode("NOMINA VOLUNTARIOS ASISTIDO"), 0, 0, 'C');
     $ind=58;
                 
-    $pdf->Output("PARTEONLINE.pdf","D");
+    $pdf_fecha=date('d-m-Y',strtotime($emergencia->fecha_emergencia));            
+    $pdf->Output($pdf_fecha.'_'.$emergencia->clave->clave.'_'.($parte->cia->numero.".pdf","D");
     }
 }
