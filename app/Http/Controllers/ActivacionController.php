@@ -23,7 +23,7 @@ class ActivacionController extends Controller
         $usu = Usuario::find(Auth::user()->id);
         if($usu->conductor=='S'){
             if(count($usu->vehiculos)>=1){
-                foreach ($usu->vehiculos as $key =>  $row) {
+                foreach ($usu->vehiculos as $key =>  $row) {              
                     $b[$key]=RevicionTecnica::where('vehiculo_id',$row->id)->latest()->first();
                     if($row->activacion=='S'){
                         $a[$key]=Activacion::where('vehiculo_id',$row->id)->latest()->first();

@@ -28,15 +28,7 @@ class CargosTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cargo();
-        $a->nombre="CAPITAN";
-        $a->save();
-
-        $a = new App\Cargo();
-        $a->nombre="TTE PRIMERO";
-        $a->save();
-
-        $a = new App\Cargo();
-        $a->nombre="TTE SEGUNDO";
+        $a->nombre="TTE CUARTO";
         $a->save();
 
         $a = new App\Cargo();
@@ -44,7 +36,15 @@ class CargosTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cargo();
-        $a->nombre="TTE CUARTO";
+        $a->nombre="TTE SEGUNDO";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="TTE PRIMERO";
+        $a->save();
+
+        $a = new App\Cargo();
+        $a->nombre="CAPITAN";
         $a->save();
 
         $a = new App\Cargo();
@@ -60,7 +60,7 @@ class CargosTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cargo();
-        $a->nombre="COMANDANTE";
+        $a->nombre="3° COMANDANTE";
         $a->save();
 
         $a = new App\Cargo();
@@ -68,7 +68,7 @@ class CargosTableSeeder extends Seeder
         $a->save();
 
         $a = new App\Cargo();
-        $a->nombre="3° COMANDANTE";
+        $a->nombre="COMANDANTE";
         $a->save();
 
         $a = new App\Cargo();

@@ -60,7 +60,6 @@
                       </a>
                     <ul class="dropdown-menu">
                       <li><a href="{{ route('activacion.index') }}">Activacion</a></li>   
-                      <li><a href="{{ route('activacion.cuarteles') }}">Ver Activaciones</a></li>
                     </ul>
                   </li>
                 @endif

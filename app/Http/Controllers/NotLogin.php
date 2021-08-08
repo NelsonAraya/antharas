@@ -22,6 +22,12 @@ class NotLogin extends Controller
         return view('visor.index')->with('cia',$cia)->with('usux',$usu);
     }
 
+    public function verUniCentral(){
+
+        $cia= Cia::get();
+        return view('visor.central')->with('cia',$cia);
+    }
+
     public function volActivos(){
         
         $usu = Usuario::where('estado','A')->get(['id','rol','cia_id','cargo_id','activado','activado_conductor','tipo_conductor','activado_cbi']);

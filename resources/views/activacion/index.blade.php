@@ -58,10 +58,12 @@
 		  		<strong>Atencion!</strong> Su licencia esta por Vencer.
 			</div>
 		</div>
-		@endif	
+		@endif
 			@foreach($usu->vehiculos as $row)
-				@php $control=true; @endphp
-				@php $id=$row->id; @endphp 
+				@php 
+					$control=true;
+				 	$id=$row->id;
+				@endphp 
 				@if($row->estado=='A')
 						@php 
 					  		$nom = "";
@@ -78,19 +80,20 @@
 					  		@endif
 						@endforeach
 					@endisset
-					@isset ($rev)
-						@foreach ($rev as $revision)
+
+					@isset($rev)
+						@foreach($rev as $revision)
 							@if($id == $revision['vehiculo_id'])
 								@if($revision['fecha_vencimiento']<= date('Y-m-d'))
 									@php $control=true; @endphp
 								@else
 									@php $control=false; @endphp
-								@endif	
-							@else
-								
+								@endif					
+							
 							@endif
 						@endforeach
 					@endisset
+
 					<div class="col-md-3">
 						<label for="conductor">{{ $row->clave }}</label>
 						<input type="text" id="conductor" class="form-control" readonly="" value="{{ @$nom }}">

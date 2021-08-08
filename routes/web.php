@@ -81,6 +81,7 @@ Route::get('emergencia/listar','EmergenciaController@showEmergencia')->name('eme
 Route::get('emergencia/viewActivos', 'EmergenciaController@volActivos')->name('emergencia.vista')->middleware('auth','role:emergencia');
 
 Route::get('visor/volActivos','NotLogin@verVoluntarios')->name('visor');
+Route::get('visor/visorCentral','NotLogin@verUniCentral')->name('visor.central');
 Route::get('visor/viewActivos', 'NotLogin@volActivos')->name('visor.vol');
 Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.cuartel');
 Route::get('visor/evento','NotLogin@eventoCuartel')->name('visor.evento');
