@@ -112,9 +112,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    ANTHARAS 
+                    ANTHARAS SYSTEM
                 </div>
-                <footer>© Sistema de administración para el. {{config('app.bombero')}} </footer>
+                <footer>© Sistema de administración para los Cuerpos de Bomberos </footer>
             </div>
         </div>
         

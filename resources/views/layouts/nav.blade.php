@@ -76,7 +76,7 @@
                        Route::currentRouteName()=='especialidades.show'
                         )active  @endif">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" 
-                      role="button" aria-haspopup="true" aria-expanded="false">AdminCBI
+                      role="button" aria-haspopup="true" aria-expanded="false">AdminCB
                        <span class="caret"></span>
                       </a>
                     <ul class="dropdown-menu">
