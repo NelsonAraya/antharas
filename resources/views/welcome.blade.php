@@ -112,7 +112,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    ANTHARAS SYSTEM
+                    ANTHARAS
                 </div>
                 <footer>© Sistema de administración para los Cuerpos de Bomberos </footer>
             </div>
