@@ -120,34 +120,6 @@
 		</select>
 	</div>
 </div>
-
-<div class="row">
-
-		@foreach($cia as $row)
-			@if ($row->numero != 100)
-			<div class="col-xs-4">
-			 @php
-			 $control= public_path("img/cia_".$cia->numero.'.png');
-			 @endphp
-				<div class="panel panel-primary">
-					<div class="panel-heading">Cia N°{{ $row->numero }}</div>
-					<div class="panel-body">
-					<img src="http://placehold.it/150x150" alt="" class="img-responsive center-block" />
-					</div>
-				</div>
-			</div>					
-			@endif
-		@endforeach
-</div>
-
-
-
-
-
-
-
-
-
 <div class="form-group row">		
 	<div id="tabla_vol" class="table-responsive col-md-12">
 		<table class="table">
@@ -182,10 +154,10 @@
 									/*background-image: url('{{$foto}}')*/
 								@endphp
 								<tr>
-									<td id="{{ $usu->id }}" style=" width: 100%; display: none;">
+									<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
 										<div id="_{{ $usu->id }}" class="panel panel-default op"
 											@if (file_exists($control))
-											style="background-image: url('{{$foto}}'); width: 300px; height: 70px;
+											style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
 											background-repeat: no-repeat; background-position: center;
 											background-size:100% 100%; cursor: pointer"
 											@else

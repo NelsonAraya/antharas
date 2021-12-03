@@ -47,6 +47,9 @@
             html, body {
                 background-color: #fff;
                 color: #636b6f;
+                background-image: url({{ asset('img/logo-clean.png') }});
+                background-position: 50% 50%;
+                background-repeat: repeat-x;
                 font-family: 'Raleway', sans-serif;
                 font-weight: 100;
                 height: 100vh;
@@ -81,6 +84,15 @@
 
             .title {
                 font-size: 65px;
+              /*  color: red; */
+                text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+                font-family: sans; color: yellow;
+                font-weight: bold;
+            }
+            .title2 {
+                text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
+                font-family: sans; color: yellow;
+                font-weight: bold;
             }
 
             .links > a {
@@ -114,7 +126,7 @@
                 <div class="title m-b-md">
                     ANTHARAS
                 </div>
-                <footer>© Sistema de administración para los Cuerpos de Bomberos </footer>
+                <footer class="title2">© Sistema de Administración y Control de Bomberos </footer>
             </div>
         </div>
         
