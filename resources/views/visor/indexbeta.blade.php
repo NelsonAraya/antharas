@@ -140,7 +140,7 @@ text-align: center;
 			 @php
 			 $foto_cia = URL::asset('/img/') ;
 			 //$foto_cia = $foto_cia."/cia_".$row->numero.".png"; 
-			 $foto_cia = $foto_cia."/cia_1.png"; 
+			 $foto_cia = $foto_cia."/cia_2.png"; 
 			 @endphp
 				<div class="panel panel-primary">
 					<div class="panel-heading">CIA N°{{ $row->numero }}</div>
