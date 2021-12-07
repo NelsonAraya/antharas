@@ -155,4 +155,57 @@ class HomeController extends Controller
         return view('visor.reporte')->with('acti',$paginated)->with('usu',$usu);
         
     }
+
+    
+    public function comandanteGuardia($id,$estado){
+
+        $id = Hashids::decode($id)[0];
+        Usuario::where('comandante_guardia','S')->update(['comandante_guardia'=>'N']);
+        $usu = Usuario::find($id);
+        $usu->comandante_guardia = $estado;
+        $usu->save();
+        
+        /*
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$id;
+        $log->estado=$estado;
+        $log->save();
+        */
+        if($estado=='S'){
+            $n ='ACTIVO';
+        }else{
+            $n ='INACTIVO';
+        }
+        session()->flash('info', 'Ha modificado su estado de COMANDANTE DE GUARDIA a: '.$n);
+
+        return redirect()->route('home');
+
+    }
+
+    public function capitanGuardia($id,$estado){
+
+        $id = Hashids::decode($id)[0];
+        Usuario::where('capitan_guardia','S')->update(['capitan_guardia'=>'N']);
+        $usu = Usuario::find($id);
+        $usu->capitan_guardia = $estado;
+        $usu->save();
+        
+        /*
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$id;
+        $log->estado=$estado;
+        $log->save();
+        */
+        if($estado=='S'){
+            $n ='ACTIVO';
+        }else{
+            $n ='INACTIVO';
+        }
+        session()->flash('info', 'Ha modificado su estado de CAPITAN DE GUARDIA a: '.$n);
+
+        return redirect()->route('home');
+
+    }
 }

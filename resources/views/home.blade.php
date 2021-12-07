@@ -27,7 +27,44 @@
                      @else
                         <span><b>USTED NO ES OPERATIVO NO PUEDE ACTIVARSE EN CUARTEL</b></span>       
                      @endif
+                    @if($usu->cargo_id ==13 || $usu->cargo_id ==14 || $usu->cargo_id ==15)
                     <br>
+                    <br>
+                    <div class="alert alert-warning">
+                            <b>No</b> ocupar la funcion de <b>OFICIAL DE GUARDIA</b> HASTA QUE SALGA EL <b>VISOR 2.0</b>
+                            <br>
+                            <br>
+                            atte. <b>Equipo Antharas</b>
+	                </div>
+                        COMANDANTE DE  <b>GUARDIA</b> 
+                            <br>
+                                <a @if($usu->comandante_guardia=='S') 
+                                    href="#"
+                                    disabled   
+                                    @else 
+                                    href="{{ route('home.activacionComandante',[$usu->getHashId(),'S']) }}" 
+                                    @endif class="btn btn-success" role="button">Comandante de Guardia</a>
+                    @endif                   
+                    @if($usu->cargo_id ==9)
+                    <br>
+                    <br> 
+                    <div class="alert alert-warning">
+                            <b>No</b> ocupar la funcion de <b>OFICIAL DE GUARDIA</b> HASTA QUE SALGA EL <b>VISOR 2.0</b>
+                            <br>
+                            <br>
+                            atte. <b>Equipo Antharas</b>
+	                </div>
+                        CAPITAN DE  <b>GUARDIA</b> 
+                            <br>
+                                <a @if($usu->capitan_guardia=='S') 
+                                    href="#"
+                                    disabled   
+                                    @else 
+                                    href="{{ route('home.activacionCapitan',[$usu->getHashId(),'S']) }}" 
+                                    @endif class="btn btn-success" role="button">Capitan de Guardia</a>
+                    @endif
+
+
                      <!-- 
                     Mi Activacion en <b>CUARTEL GENERAL</b>
                     <br>

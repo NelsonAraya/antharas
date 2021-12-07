@@ -378,7 +378,8 @@ public function infoxCia($id){
                     $operador="<br><a id='$key->id' class='btn btn-danger op'>Desactivar</a>";
                 }
                 }
-                $imp=$imp."<div class='row'>
+                $imp=$imp."
+                <div class='row'>
                     <div class='col-md-6'>
                         <img src='$foto' width='200px' height='150px' class=' $cargo $conductor'>".$operador."
                     </div>
@@ -389,7 +390,9 @@ public function infoxCia($id){
                         <b>ESPECIALIDADES:</b><br>
                         ".$stringEspecialidades."
                     </div>
-                </div> <br>";        
+                </div>
+                <hr> 
+                <br>";        
             }
         }
             return $imp;

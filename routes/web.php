@@ -25,6 +25,8 @@ Route::post('password', 'RrhhController@nuevaPassword')->name('nuevaPassword');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/myactivacion/{usuario}/{estado}','HomeController@myActivacion')->name('home.activacion');
 Route::get('/home/myactivacioncbi/{usuario}/{estado}','HomeController@myActivacionCBI')->name('home.activacionCBI');
+Route::get('/home/myactivacioncoman/{usuario}/{estado}','HomeController@comandanteGuardia')->name('home.activacionComandante');
+Route::get('/home/myactivacioncapi/{usuario}/{estado}','HomeController@capitanGuardia')->name('home.activacionCapitan');
 Route::get('/home/myreporte/{usuario}/reporte','HomeController@reporte')->name('home.reporte');
 
 Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
