@@ -136,20 +136,20 @@ text-align: center;
 
 		@foreach($cia as $row)
 			@if ($row->numero != 100)
-			<div class="col-xs-3">
-			 @php
-			 $foto_cia = URL::asset('/img/') ;
-			 //$foto_cia = $foto_cia."/cia_".$row->numero.".png"; 
-			 $foto_cia = $foto_cia."/cia_2.png"; 
-			 @endphp
-				<div class="panel panel-primary">
-					<div class="panel-heading">CIA N°{{ $row->numero }}</div>
-					<div class="panel-body">
-					<img id="xcia_{{ $row->id }}" src="{{ $foto_cia }}" alt="" class="img-responsive foto_cia" style="cursor: pointer;" />
-					<span id="cia_{{ $row->id }}" class="contador" ></span> 
+				<div class="col-xs-3">
+				@php
+				$foto_cia = URL::asset('/img/') ;
+				//$foto_cia = $foto_cia."/cia_".$row->numero.".png"; 
+				$foto_cia = $foto_cia."/cia_2.png"; 
+				@endphp
+					<div class="panel panel-primary">
+						<div class="panel-heading">CIA N°{{ $row->numero }}</div>
+						<div class="panel-body">
+						<img id="xcia_{{ $row->id }}" src="{{ $foto_cia }}" alt="" class="img-responsive foto_cia" style="cursor: pointer;" />
+						<span id="cia_{{ $row->id }}" class="contador" ></span> 
+						</div>
 					</div>
-				</div>
-			</div>					
+				</div>					
 			@endif
 		@endforeach
 </div>

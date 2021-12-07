@@ -343,7 +343,7 @@ public function infoxCia($id){
             <br><br>";
 
          $cia->usuarios();
-        foreach($cia->usuarios as $key){
+        foreach($cia->usuariosCargoVisor as $key){
            if($key->activado=='S'){     
                 $stringEspecialidades="";
                     foreach($key->especialidades as $esp){
