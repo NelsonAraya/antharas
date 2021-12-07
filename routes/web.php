@@ -85,6 +85,9 @@ Route::get('visor/visorCentral','NotLogin@verUniCentral')->name('visor.central')
 Route::get('visor/viewActivos', 'NotLogin@volActivos')->name('visor.vol');
 Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.cuartel');
 Route::get('visor/evento','NotLogin@eventoCuartel')->name('visor.evento');
+/* PARA HACER TEST CON VISOR */
+Route::get('visor/volActivosTest','NotLogin@verVoluntariosTest')->name('visor.test');
+/** */
 Route::get('visor/operador/{usuario}/{estado}','HomeController@opActivacion')->name('visor.activacion');
 Route::get('visor/{usuario}','NotLogin@usuariosActivos')->name('visor.usuario');
 Route::get('visor/{usuario}/unidad','NotLogin@infoUnidad')->name('visor.info');
@@ -92,6 +95,11 @@ Route::get('visor/{nombre}/tono','NotLogin@tonoCuartel')->name('visor.tono');
 Route::get('visor/{nombre}/mytono','NotLogin@myTonoCuartel')->name('visor.mytono');
 Route::get('visor/{cia}/visor','NotLogin@infoxCia')->name('visor.xcia');
 
+/**RUTAS NUEVO VISOR */
+
+Route::get('visor/{cia}/nuevo','NotLogin@usuariosActivosNuevoVisor')->name('visor.ciavol');
+
+/** */
 Route::get('visor/operadorUnidad/{usuario}/{unidad}/{estado}','HomeController@opActivacionUnidad')->name('visor.unidad');
 
 Route::get('emergencia/{id}/pdf','EmergenciaController@partePDF')->name('emergencia.pdf')->middleware('auth','role:emergencia');

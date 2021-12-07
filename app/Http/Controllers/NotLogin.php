@@ -22,6 +22,14 @@ class NotLogin extends Controller
         return view('visor.index')->with('cia',$cia)->with('usux',$usu);
     }
 
+    public function verVoluntariosTest(){
+
+        $cia= Cia::get();
+        $usu = Usuario::get();
+        return view('visor.indexbeta')->with('cia',$cia)->with('usux',$usu);
+    }
+
+
     public function verUniCentral(){
 
         $cia= Cia::get();
@@ -294,4 +302,97 @@ public function infoxCia($id){
                 </div>";
                
    }
+
+   public function usuariosActivosNuevoVisor($id){
+
+         $cia = Cia::find($id);
+         $count = Usuario::where('activado', '=', 'S')->where('estado','A')->where('cia_id','=',$id)->where('activado_conductor','=','N')->count();
+         $usu = Usuario::where('activado', '=', 'S')->where('cia_id','=',$id)->where('activado_conductor','=','N')->get();
+         $countTotal = Usuario::where('cia_id','=',$id)->count();
+         $especial = Especialidad::get();  
+         $totalespecialidades="";
+         foreach ($especial as $key) {
+            $total = 0;
+            $flag = false;
+                foreach ($usu as $k  => $row) {
+                    $flag=true;
+                    foreach ($row->especialidades as $key_esp) {
+                        if($key_esp->id == $key->id){
+                            $total++;
+                            $flag=false;
+                            break;
+                        }else{
+                            $flag=true;
+                        }
+                    }
+                }
+             $totalespecialidades=$totalespecialidades.$key->descripcion.' (<b>'.$key->clave.'</b>) = <b>'.$total.'</b> <br>';   
+            }
+
+
+    $imp= "<div class='row'>
+                <div class='col-md-12 modal_visor'>
+                     <b> ".strtoupper($cia->nombreCompleto())."</b>
+                     <br>
+                     <b>EN CUARTEL : ".$count." / ".$countTotal."</b> 
+                    <hr>
+                    <b>ESPECIALIDADES:</b><br>
+                    ".$totalespecialidades."
+                </div>
+            </div>
+            <br><br>";
+
+         $cia->usuarios();
+        foreach($cia->usuarios as $key){
+           if($key->activado=='S'){     
+                $stringEspecialidades="";
+                    foreach($key->especialidades as $esp){
+                    $stringEspecialidades=$stringEspecialidades.$esp->descripcion.' (<b>'.$esp->clave.'</b>) <br>';
+                    }
+                $stringEspecialidades=strtoupper($stringEspecialidades);
+                if($key->cargo_id==9){
+                    $cargo ="capitan";
+                }elseif($key->cargo_id==5 OR $key->cargo_id==6 OR $key->cargo_id==7 OR $key->cargo_id==8 ){
+                    $cargo="teniente";
+                }elseif($key->cargo_id==13 OR $key->cargo_id==14 OR $key->cargo_id==15){
+                    $cargo="comandante";
+                }elseif($key->cargo_id==17){
+                    $cargo="inspectores";
+                }else{
+                    $cargo="voluntario";
+                }
+                if($key->activado_conductor=='S'){
+                    $conductor="conductor";
+                }else{
+                    $conductor="";
+                }
+                $control= public_path("usuarios/".$key->rol.'.jpg');
+                if (file_exists($control)){
+                    $foto=url('/usuarios').'/'.$key->rol.'.jpg';
+                }else{
+                    $foto=url('/usuarios').'/avatar.jpg'; 
+                }
+                $operador='';
+                if (Auth::check()) {
+                if(Auth::user()->cargo_id == 24 || Auth::user()->cargo_id == 9 ){
+                    $operador="<br><a id='$key->id' class='btn btn-danger op'>Desactivar</a>";
+                }
+                }
+                $imp=$imp."<div class='row'>
+                    <div class='col-md-6'>
+                        <img src='$foto' width='200px' height='150px' class=' $cargo $conductor'>".$operador."
+                    </div>
+                    <div class='col-md-6'>
+                        <b>NOMBRE :</b>".$key->nombreSimple()."<br>
+                        <b> CARGO :</b>".$key->cargo->nombre." <b>ROL :</b>".$key->rol."<br>
+                        <hr>
+                        <b>ESPECIALIDADES:</b><br>
+                        ".$stringEspecialidades."
+                    </div>
+                </div> <br>";        
+            }
+        }
+            return $imp;
+                   
+    }
 }

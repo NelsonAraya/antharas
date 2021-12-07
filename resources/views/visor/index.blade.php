@@ -120,96 +120,67 @@
 		</select>
 	</div>
 </div>
-
-<div class="row">
-
-		@foreach($cia as $row)
-			@if ($row->numero != 100)
-			<div class="col-xs-4">
-			 @php
-			 $control= public_path("img/cia_".$cia->numero.'.png');
-			 @endphp
-				<div class="panel panel-primary">
-					<div class="panel-heading">Cia N°{{ $row->numero }}</div>
-					<div class="panel-body">
-					<img src="http://placehold.it/150x150" alt="" class="img-responsive center-block" />
-					</div>
-				</div>
-			</div>					
-			@endif
-		@endforeach
-</div>
-
-
-
-
-
-
-
-
-
 <div class="form-group row">		
-	<div id="tabla_vol" class="table-responsive col-md-12">
-		<table class="table">
-			<thead>
-				<tr>
-					@foreach($cia as $row)
-						@if ($row->numero != 100)
-						<th style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">
-							<div id="xcia_{{ $row->id }}" class="xcia" style="cursor: pointer;">
-								Cia N°{{ $row->numero }}<br>
-								En Cuartel : <span id="cia_{{ $row->id }}"></span>
-							</div>	
-						</th>
-						@endif
-					@endforeach
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					@foreach($cia as $row)
-						@if($row->id!=11)
-						<td >
-							<table>
-							@foreach($row->usuariosCargoVisor as $usu)
-								@if($usu->estado=='A' && $usu->cia_id!=11)
-								@php
-									$foto = URL::asset('/usuarios/') ;
-									$foto = $foto."/".$usu->rol.".jpg"; 
-									$sinfoto = URL::asset('/usuarios/') ;
-									$sinfoto = $sinfoto."/avatar.jpg";
-									$control= public_path("usuarios/".$usu->rol.'.jpg');
-									/*background-image: url('{{$foto}}')*/
-								@endphp
-								<tr>
-									<td id="{{ $usu->id }}" style=" width: 100%; display: none;">
-										<div id="_{{ $usu->id }}" class="panel panel-default op"
-											@if (file_exists($control))
-											style="background-image: url('{{$foto}}'); width: 300px; height: 70px;
-											background-repeat: no-repeat; background-position: center;
-											background-size:100% 100%; cursor: pointer"
-											@else
-											style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
-											background-repeat: no-repeat; background-position: center;
-											background-size:100% 100%; cursor: pointer"
-											@endif
-											>							 
-										</div>
-									</td>
-								</tr>
-								@endif
-							@endforeach
-							</table>		
-						</td>
-						@else
+<div id="tabla_vol" class="table-responsive col-md-12">
+	<table class="table">
+		<thead>
+			<tr>
+				@foreach($cia as $row)
+					@if ($row->numero != 100)
+					<th style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">
+						<div id="xcia_{{ $row->id }}" class="xcia" style="cursor: pointer;">
+							Cia N°{{ $row->numero }}<br>
+							En Cuartel : <span id="cia_{{ $row->id }}"></span>
+						</div>	
+					</th>
+					@endif
+				@endforeach
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@foreach($cia as $row)
+					@if($row->id!=11)
+					<td >
+						<table>
+						@foreach($row->usuariosCargoVisor as $usu)
+							@if($usu->estado=='A' && $usu->cia_id!=11)
+							@php
+								$foto = URL::asset('/usuarios/') ;
+								$foto = $foto."/".$usu->rol.".jpg"; 
+								$sinfoto = URL::asset('/usuarios/') ;
+								$sinfoto = $sinfoto."/avatar.jpg";
+								$control= public_path("usuarios/".$usu->rol.'.jpg');
+								/*background-image: url('{{$foto}}')*/
+							 @endphp
+							<tr>
+								<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
+									<div id="_{{ $usu->id }}" class="panel panel-default op"
+										@if (file_exists($control))
+										style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%; cursor: pointer"
+										@else
+										style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
+										background-repeat: no-repeat; background-position: center;
+										background-size:100% 100%; cursor: pointer"
+										@endif
+										>							 
+									</div>
+		  						</td>
+							</tr>
+							@endif
+						@endforeach
+						</table>		
+					</td>
+					@else
 
-						@endif
-					@endforeach
-				</tr>	
-			</tbody>
-		</table>   	
-	</div>
-</div>	
+					@endif
+				@endforeach
+			</tr>	
+		</tbody>
+	</table>   	
+</div>
 <audio id="tono" src="{{ asset('sonidos/evento.ton') }}" preload="auto"></audio>
 <audio id="cuartel_1x" src="{{ asset('sonidos/1.wav') }}" preload="auto"></audio>
 <audio id="cuartel_2x" src="{{ asset('sonidos/2.wav') }}" preload="auto"></audio>
@@ -229,45 +200,41 @@
 <audio id="tono_incendio" src="{{ asset('sonidos/incendio.wav') }}" preload="auto"></audio>
 <audio id="tono_rescate" src="{{ asset('sonidos/rescate.wav') }}" preload="auto"></audio>
 <audio id="tono_hazmat" src="{{ asset('sonidos/hazmat.wav') }}" preload="auto"></audio>	
-<audio id="tono_otros" src="{{ asset('sonidos/otros.wav') }}" preload="auto"></audio>
-
-<div class="form-group row">
-	<div id="tabla_uni" class="table-responsive col-md-12" style="display: none">
-		<table class="table">
-			<thead>
-				<tr>
-					@foreach($cia as $row)
-						@if ($row->numero != 100)
-						<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">
-							Cia N°{{ $row->numero }}	
-						</th>
-						@endif
-					@endforeach
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					@foreach($cia as $row)
-						<td style="width: 10%;" >
-							<table>
-							@foreach($row->vehiculos as $mat)
-								@if($mat->estado=='A')
-								<tr>
-								<!--	<td> -->
-										<div id="{{ $mat->getHashId() }}" class="panel panel-default un material">
-										<p><b>{{ $mat->clave }}</b></p>  
-										</div>
-								<!--	</td> -->
-								</tr>
-								@endif
-							@endforeach
-							</table>		
-						</td>
-					@endforeach
-				</tr>	
-			</tbody>
-		</table>   	
-	</div>
+<audio id="tono_otros" src="{{ asset('sonidos/otros.wav') }}" preload="auto"></audio>	
+<div id="tabla_uni" class="table-responsive col-md-12" style="display: none">
+	<table class="table">
+		<thead>
+			<tr>
+				@foreach($cia as $row)
+					@if ($row->numero != 100)
+					<th  style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">Cia N°{{ $row->numero }}</th>
+					@endif
+				@endforeach
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@foreach($cia as $row)
+					<td >
+						<table>
+						@foreach($row->vehiculos as $mat)
+							@if($mat->estado=='A')
+							<tr style="width: 10px;">
+							<!--	<td> -->
+									<div id="{{ $mat->getHashId() }}" class="panel panel-default un material">
+									   <p><b>{{ $mat->clave }}</b></p>  
+									</div>
+		  					<!--	</td> -->
+							</tr>
+							@endif
+						@endforeach
+						</table>		
+					</td>
+				@endforeach
+			</tr>	
+		</tbody>
+	</table>   	
+</div>
 </div>
 
 <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">

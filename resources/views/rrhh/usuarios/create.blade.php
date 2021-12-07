@@ -76,7 +76,7 @@
 					<input type="date" name="fecha_licencia" id="licencia" class="form-control">	
 				</div>
 				<div class="col-md-2">
-					<label for="ingreso">INGRESO CBI</label>
+					<label for="ingreso">INGRESO CB</label>
 					<input type="date" name="fecha_ingresocbi" id="ingreso" class="form-control">	
 				</div>
 				<div class="col-md-2">

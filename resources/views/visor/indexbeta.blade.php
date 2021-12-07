@@ -91,6 +91,14 @@
   margin: 0 auto;
   text-align: center;
 }
+.contador {
+  font-size: 100px;
+  text-align: center;
+  display:block;
+}
+.modal_visor {
+text-align: center;
+}
 </style>
 @endsection
 @section('content')
@@ -114,74 +122,39 @@
 		</select>
 	</div>
 	<div class="col-md-3">
-		<select id="tono_activacion" class="form-control col-md-2">
+	<select id="tono_activacion" class="form-control col-md-2">
 		  <option value="si">ESCUCHAR ACTIVACION</option>
 		  <option value="no">SILENCIAR ACTIVACION</option>
 		</select>
 	</div>
-</div>
-<div class="form-group row">		
-	<div id="tabla_vol" class="table-responsive col-md-12">
-		<table class="table">
-			<thead>
-				<tr>
-					@foreach($cia as $row)
-						@if ($row->numero != 100)
-						<th style="width: 10%; text-align: center; border: 1px solid green; background-color: white;">
-							<div id="xcia_{{ $row->id }}" class="xcia" style="cursor: pointer;">
-								Cia N°{{ $row->numero }}<br>
-								En Cuartel : <span id="cia_{{ $row->id }}"></span>
-							</div>	
-						</th>
-						@endif
-					@endforeach
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					@foreach($cia as $row)
-						@if($row->id!=11)
-						<td >
-							<table>
-							@foreach($row->usuariosCargoVisor as $usu)
-								@if($usu->estado=='A' && $usu->cia_id!=11)
-								@php
-									$foto = URL::asset('/usuarios/') ;
-									$foto = $foto."/".$usu->rol.".jpg"; 
-									$sinfoto = URL::asset('/usuarios/') ;
-									$sinfoto = $sinfoto."/avatar.jpg";
-									$control= public_path("usuarios/".$usu->rol.'.jpg');
-									/*background-image: url('{{$foto}}')*/
-								@endphp
-								<tr>
-									<td id="{{ $usu->id }}" style=" width: 10%; display: none;">
-										<div id="_{{ $usu->id }}" class="panel panel-default op"
-											@if (file_exists($control))
-											style="background-image: url('{{$foto}}'); width: 100px; height: 70px;
-											background-repeat: no-repeat; background-position: center;
-											background-size:100% 100%; cursor: pointer"
-											@else
-											style="background-image: url('{{$sinfoto}}'); width: 100px; height: 70px; 
-											background-repeat: no-repeat; background-position: center;
-											background-size:100% 100%; cursor: pointer"
-											@endif
-											>							 
-										</div>
-									</td>
-								</tr>
-								@endif
-							@endforeach
-							</table>		
-						</td>
-						@else
-
-						@endif
-					@endforeach
-				</tr>	
-			</tbody>
-		</table>   	
+	<div class="col-md-2">
+		<a id="btn_oficial" href="#" class="btn btn-danger btn-lg linea" role="button">OFICIAL DE GUARDIA</a>
 	</div>
-</div>	
+</div>
+
+<div id="tabla_vol" class="row">
+
+		@foreach($cia as $row)
+			@if ($row->numero != 100)
+			<div class="col-xs-3">
+			 @php
+			 $foto_cia = URL::asset('/img/') ;
+			 //$foto_cia = $foto_cia."/cia_".$row->numero.".png"; 
+			 $foto_cia = $foto_cia."/cia_1.png"; 
+			 @endphp
+				<div class="panel panel-primary">
+					<div class="panel-heading">CIA N°{{ $row->numero }}</div>
+					<div class="panel-body">
+					<img id="xcia_{{ $row->id }}" src="{{ $foto_cia }}" alt="" class="img-responsive foto_cia" style="cursor: pointer;" />
+					<span id="cia_{{ $row->id }}" class="contador" ></span> 
+					</div>
+				</div>
+			</div>					
+			@endif
+		@endforeach
+</div>
+
+	
 <audio id="tono" src="{{ asset('sonidos/evento.ton') }}" preload="auto"></audio>
 <audio id="cuartel_1x" src="{{ asset('sonidos/1.wav') }}" preload="auto"></audio>
 <audio id="cuartel_2x" src="{{ asset('sonidos/2.wav') }}" preload="auto"></audio>
@@ -247,7 +220,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="Mnombre">DATOS DE USUARIO</h4>
+        <h4 class="modal-title" id="Mnombre">OFICIAL DE GUARDIA</h4>
       </div>
       <div class="modal-body">
 
@@ -279,7 +252,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="Mnombre">DATOS GENERAL CIA</h4>
+        <h4 class="modal-title" id="Mnombre">BOMBEROS EN CUARTEL</h4>
       </div>
       <div class="modal-body">
 
@@ -372,14 +345,6 @@
 				})
 			@endif
     	@endauth
-    	$(".op").on('click', function(event){
-    		var id = $(this).attr("id");
-    		id = id.substring(1);
-    		 $('#modal').modal('show');
-    		 var x = "{{ URL::route('visor.usuario','id') }}";
-			 var x2 = x.replace('id',id);
-    		 $('.modal-body').load(x2,function(){});
-		});
 
     	$(".un").on('click', function(event){
     		var id = $(this).attr("id");
@@ -389,14 +354,17 @@
     		 $('.modal-body').load(x2,function(){});
 		});
 
-		$(".xcia").on('click', function(event){
+		/**	 este ocupo ahora  */
+		
+		$(".foto_cia").on('click', function(event){
     		var id = $(this).attr("id");
-    		id = id.substring(5);
+    		id = id.substring(5);		
     		 $('#modal3').modal('show');
-			 var x = "{{ URL::route('visor.xcia','id') }}";
-			 var x2 = x.replace('id',id);
-    	   $('.modal-body').load(x2,function(){});
+		    var x = "{{ URL::route('visor.ciavol','id') }}";
+		    var x2 = x.replace('id',id);
+    	   $('.modal-body').load(x2,function(){}); 
 		});
+
 
 
     	$('.modal').on('hidden.bs.modal', function(){
@@ -416,6 +384,14 @@
  				$(this).removeClass( "btn-primary" ).addClass( "btn-info" );
  			}
 		});
+
+		$( "#btn_oficial" ).click(function() {
+			$('#modal').modal('show');
+		   // var x = "{{ URL::route('visor.ciavol','id') }}";
+		   // var x2 = x.replace('id',id);
+    	   //$('.modal-body').load(x2,function(){}); 
+		});
+
 
 		var getUrlParameter = function getUrlParameter(sParam) {
 			    var sPageURL = window.location.search.substring(1),
