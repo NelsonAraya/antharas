@@ -17,7 +17,7 @@ class Pdf extends Fpdf
 		$this->Image('img/logo_pdf.jpg', 190, 10, 20);
 		$this->Image('img/marcadeagua.png', 40, 80, 130, 150);
 		$this->SetXY(35,15);
-		$this->Cell(150, 7, 'Informe de Servicio Cuerpo de Bomberos de Iquique', 1, 2, 'C');
+		$this->Cell(150, 7, 'Informe de Servicio '.str_replace('_',' ',env('APP_NAMECB')), 1, 2, 'C');
 		$this->Ln(13);
 	}
 
@@ -25,6 +25,6 @@ class Pdf extends Fpdf
 	
 		$this->SetY(-14);
 	    $this->SetFont('Arial','B',8);
-	    $this->Cell(0,10,utf8_decode('Cuerpo Bomberos de Iquique - Página ').$this->PageNo(),0,0,'C');
+	    $this->Cell(0,10,utf8_decode(str_replace('_',' ',env('APP_NAMECB')).' - Página ').$this->PageNo(),0,0,'C');
     }
 }

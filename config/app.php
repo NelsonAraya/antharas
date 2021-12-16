@@ -15,6 +15,8 @@ return [
 
     'name' => env('APP_NAME', 'Antharas'),
     'bombero' => env('APP_BOMBERO', 'CBI'),
+    'name_cb' => env('APP_NAMECB', 'Cuerpo de Bomberos de Iquique'),
+    
 
     /*
     |--------------------------------------------------------------------------

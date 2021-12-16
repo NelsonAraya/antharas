@@ -86,7 +86,7 @@
          <div class="panel panel-danger">
             <div class="panel-heading">ANTHARAS INFORMA</div>
                  <div class="panel-body">
-                    El Staff De desarollo <b>ANTHARAS</b> junto con la <b>Comandancia</b> del <b>Cuerpo de bomberos de Iquique</b> les Informa.
+                    El Staff De desarollo <b>ANTHARAS</b> junto con la <b>Comandancia</b> del <b>{{ str_replace('_',' ',env('APP_NAMECB')) }} </b> les Informa.
                          <img src="{{ asset('img/foto1.jpg') }}" class="img-responsive" alt="Responsive image">
                           <!-- 
                            <ol>

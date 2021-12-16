@@ -4,6 +4,7 @@
 /public/img
 /public/plugins/icon
 /public/usuarios
+/public
 /storage/*.key
 /vendor
 /.idea
