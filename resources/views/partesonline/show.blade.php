@@ -20,7 +20,7 @@
 				</div>
 				<div class="col-md-4">
 					<label for="obac_cbi">OBAC CB</label>
-					<select id="obac_cbi" data-placeholder="Seleccione OBAC CBI" name="obac_cbi" multiple 
+					<select id="obac_cbi" data-placeholder="Seleccione OBAC CB" name="obac_cbi" multiple 
 					class=" form-control chosen-select">
 						@foreach($obac_cbi as $row)
 								<option  value="{{ $row->id }}"> {{ $row->nombreSimple() }}</option>

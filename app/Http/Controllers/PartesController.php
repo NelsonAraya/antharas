@@ -328,7 +328,7 @@ class PartesController extends Controller
     $pdf->Line(122,157, 200,157);
     $pdf->SetXY(123,165);
     $pdf->SetFont('Arial', 'B', 12);
-    $pdf->Cell(0,0, utf8_decode("OBAC CBI "), 0, 0, 'C');
+    $pdf->Cell(0,0, utf8_decode("OBAC CB "), 0, 0, 'C');
     $pdf->SetXY(123,175);
     $pdf->SetFont('Arial','',11);
     $pdf->Cell(75,0, utf8_decode($parte->obacCbi->rol.' '.$parte->obacCbi->nombreSimple()), 0, 0, 'C');
