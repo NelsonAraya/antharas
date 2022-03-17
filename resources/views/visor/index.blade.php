@@ -100,7 +100,7 @@
 	</div>	
 	<div class="col-md-3">
 		<select id="select_tono" class="form-control col-md-2">
-		  <option value="all">TODOS LOS TONOS</option>
+		  <option value="all">TODOS LOS TONO</option>
 		  <option value="cuartel_1x">TONO 1 CIA</option>
 		  <option value="cuartel_2x">TONO 2 CIA</option>
 		  <option value="cuartel_4x">TONO 3 CIA</option>
