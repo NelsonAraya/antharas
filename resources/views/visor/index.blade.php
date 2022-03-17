@@ -103,14 +103,7 @@
 		  <option value="all">TODOS LOS TONOS</option>
 		  <option value="cuartel_1x">TONO 1 CIA</option>
 		  <option value="cuartel_2x">TONO 2 CIA</option>
-		  <option value="cuartel_4x">TONO 4 CIA</option>
-		  <option value="cuartel_5x">TONO 5 CIA</option>
-		  <option value="cuartel_6x">TONO 6 CIA</option>
-		  <option value="cuartel_7x">TONO 7 CIA</option>
-		  <option value="cuartel_11x">TONO 11 CIA</option>
-		  <option value="cuartel_12x">TONO 12 CIA</option>
-		  <option value="cuartel_14x">TONO 14 CIA</option>
-		  <option value="cuartel_16x">TONO 16 CIA</option>
+		  <option value="cuartel_4x">TONO 3 CIA</option>
 		</select>
 	</div>
 	<div class="col-md-3">
