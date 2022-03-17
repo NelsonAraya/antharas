@@ -90,8 +90,8 @@
 	  <a type="button" id="btn_estructural" class="btn btn-success tono2 btn-lg">ESTRUCTURAL</a>
 	  <a type="button" id="btn_rescate" class="btn btn-success tono2 btn-lg">RESCATE</a>
 	  <a type="button" id="btn_incendio" class="btn btn-success tono2 btn-lg">INCENDIO</a>
-	  <a type="button" id="btn_hazmat" class="btn btn-success tono2 btn-lg">HAZMAT</a>
-	  <a type="button" id="btn_otros" class="btn btn-success tono2 btn-lg">OTROS Y COM</a>
+	  <a type="button" id="btn_hazmat" class="btn btn-success tono2 btn-lg">HAZMAT(10-6/10-1)</a>
+	  <a type="button" id="btn_otros" class="btn btn-success tono2 btn-lg">OTROS(10-7/10-2/10-4)</a>
 	</div>
 	<br>
 	<br>
