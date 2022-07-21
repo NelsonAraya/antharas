@@ -27,6 +27,7 @@ Route::get('/home/myactivacion/{usuario}/{estado}','HomeController@myActivacion'
 Route::get('/home/myactivacioncbi/{usuario}/{estado}','HomeController@myActivacionCBI')->name('home.activacionCBI');
 Route::get('/home/myactivacioncoman/{usuario}/{estado}','HomeController@comandanteGuardia')->name('home.activacionComandante');
 Route::get('/home/myactivacioncapi/{usuario}/{estado}','HomeController@capitanGuardia')->name('home.activacionCapitan');
+Route::get('/home/myactivacionoperador/{usuario}/{estado}','HomeController@operadorActivo')->name('home.activacionOperador');
 Route::get('/home/myreporte/{usuario}/reporte','HomeController@reporte')->name('home.reporte');
 
 Route::prefix('rrhh')->middleware(['auth','role:rrhh'])->group(function () {
@@ -87,6 +88,8 @@ Route::get('visor/visorCentral','NotLogin@verUniCentral')->name('visor.central')
 Route::get('visor/viewActivos', 'NotLogin@volActivos')->name('visor.vol');
 Route::get('visor/CuartelesActivos', 'NotLogin@cuartelesActivos')->name('visor.cuartel');
 Route::get('visor/evento','NotLogin@eventoCuartel')->name('visor.evento');
+Route::get('visor/operador','NotLogin@operadorActivo')->name('visor.operador');
+Route::get('visor/ofiguardia','NotLogin@oficialGuardia')->name('visor.ofiguardia');
 /* PARA HACER TEST CON VISOR */
 Route::get('visor/volActivosTest','NotLogin@verVoluntariosTest')->name('visor.test');
 /** */
@@ -96,6 +99,7 @@ Route::get('visor/{usuario}/unidad','NotLogin@infoUnidad')->name('visor.info');
 Route::get('visor/{nombre}/tono','NotLogin@tonoCuartel')->name('visor.tono');
 Route::get('visor/{nombre}/mytono','NotLogin@myTonoCuartel')->name('visor.mytono');
 Route::get('visor/{cia}/visor','NotLogin@infoxCia')->name('visor.xcia');
+
 
 /**RUTAS NUEVO VISOR */
 

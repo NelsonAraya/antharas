@@ -398,4 +398,71 @@ public function infoxCia($id){
             return $imp;
                    
     }
+    public function operadorActivo(){
+ 
+        //$id = Hashids::decode($id)[0];
+        $usu=Usuario::where('operador_activo', '=', 'S')->get();
+                $control= public_path("usuarios/".$usu[0]->rol.'.jpg');
+                if (file_exists($control)){
+                    $foto=url('/usuarios').'/'.$usu[0]->rol.'.jpg';
+                }else{
+                     $foto=url('/usuarios').'/avatar.jpg'; 
+                }
+        return "<div class='row'>
+                    <div class='col-md-6'>
+                         <img src='$foto' width='200px' height='200px' class='img-responsive voluntario'>
+                    </div>
+                    <div class='col-md-6'>
+                         <b>NOMBRE :</b>".$usu[0]->nombreSimple()."<br>
+                        <hr>
+                    </div>
+                </div>";
+                
+                
+               
+   }
+   public function oficialGuardia(){
+ 
+    //$id = Hashids::decode($id)[0];
+        $usu=Usuario::where('comandante_guardia', '=', 'S')->get();
+            $control= public_path("usuarios/".$usu[0]->rol.'.jpg');
+            if (file_exists($control)){
+                $foto=url('/usuarios').'/'.$usu[0]->rol.'.jpg';
+            }else{
+                 $foto=url('/usuarios').'/avatar.jpg'; 
+            }
+
+        $usu2=Usuario::where('capitan_guardia', '=', 'S')->get();
+            $control2= public_path("usuarios/".$usu2[0]->rol.'.jpg');
+            if (file_exists($control2)){
+                $foto2=url('/usuarios').'/'.$usu2[0]->rol.'.jpg';
+            }else{
+                 $foto2=url('/usuarios').'/avatar.jpg'; 
+            }   
+
+    return "<div class='row'>
+                <div class='col-md-6'>
+                     <img src='$foto' width='200px' height='200px' class='img-responsive comandante'>
+                </div>
+                <div class='col-md-6'>
+                     <b>NOMBRE :</b>".$usu[0]->nombreSimple()."<br>
+                     <b> CARGO :</b>".$usu[0]->cargo->nombre." <b>ROL :</b>".$usu[0]->rol."<br>
+                    <hr>
+                </div>
+            </div>
+            <hr>
+            <div class='row'>
+                <div class='col-md-6'>
+                     <img src='$foto2' width='200px' height='200px' class='img-responsive capitan'>
+                </div>
+                <div class='col-md-6'>
+                     <b>NOMBRE :</b>".$usu2[0]->nombreSimple()."<br>
+                     <b> CARGO :</b>".$usu2[0]->cargo->nombre." <b>ROL :</b>".$usu2[0]->rol."<br>
+                    <hr>
+                </div>
+            </div>";
+            
+            
+           
+}
 }

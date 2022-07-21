@@ -208,4 +208,29 @@ class HomeController extends Controller
         return redirect()->route('home');
 
     }
+    public function operadorActivo($id,$estado){
+
+        $id = Hashids::decode($id)[0];
+        Usuario::where('operador_activo','S')->update(['operador_activo'=>'N']);
+        $usu = Usuario::find($id);
+        $usu->operador_activo = $estado;
+        $usu->save();
+        
+        /*
+        $log = new  Logactivacion();
+
+        $log->usuario_id=$id;
+        $log->estado=$estado;
+        $log->save();
+        */
+        if($estado=='S'){
+            $n ='ACTIVO';
+        }else{
+            $n ='INACTIVO';
+        }
+        session()->flash('info', 'Ha modificado su estado de OPERADOR EN TURNO a: '.$n);
+
+        return redirect()->route('home');
+
+    }
 }

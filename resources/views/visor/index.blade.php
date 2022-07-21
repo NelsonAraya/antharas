@@ -97,7 +97,13 @@
 <div class="form-group row">
 	<div class="col-md-2">
 		<a id="btn" href="#" class="btn btn-info btn-lg linea" role="button">Ver Unidades</a>
-	</div>	
+	</div>
+	<div class="col-md-2">
+		<a id="btn_op" href="#" class="btn btn-warning btn-lg" role="button">Ver Operador</a>
+	</div>
+		<div class="col-md-2">
+		<a id="btn_guardia" href="#" class="btn btn-success btn-lg" role="button">Oficial de Guardia</a>
+	</div>			
 	<div class="col-md-3">
 		<select id="select_tono" class="form-control col-md-2">
 		  <option value="all">TODOS LOS TONO</option>
@@ -278,6 +284,38 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<div id="modal4" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="Mnombre">OPERADOR EN TURNO</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<div id="modal5" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="Mnombre">OFICIAL DE GUARDIA</h4>
+      </div>
+      <div class="modal-body">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 @endsection
 @section('js')
 <script src="{{ asset('js/timer.jquery.min.js') }}"></script>
@@ -404,6 +442,21 @@
  				$(this).removeClass( "btn-primary" ).addClass( "btn-info" );
  			}
 		});
+
+
+ 		$( "#btn_op" ).click(function() {
+    		 $('#modal4').modal('show');
+    		 var x = "{{ URL::route('visor.operador') }}";
+    		$('.modal-body').load(x,function(){});
+		});
+
+		$( "#btn_guardia" ).click(function() {
+ 			$('#modal5').modal('show');
+    		 var x = "{{ URL::route('visor.ofiguardia') }}";
+    		$('.modal-body').load(x,function(){});
+		});
+
+
 
 		var getUrlParameter = function getUrlParameter(sParam) {
 			    var sPageURL = window.location.search.substring(1),

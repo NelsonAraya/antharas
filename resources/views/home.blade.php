@@ -31,7 +31,8 @@
                     <br>
                     <br>
                     <div class="alert alert-warning">
-                            <b>No</b> ocupar la funcion de <b>OFICIAL DE GUARDIA</b> HASTA QUE SALGA EL <b>VISOR 2.0</b>
+                            <b>Version 1.0</b> <b>CAPITAN DE GUARDIA</b> Actualmente modulo se encuentra operativo y bajo constante monitoreo en caso de alguna 
+                             incidencia favor de comunicarlo al equipo de Desarrollo</b>
                             <br>
                             <br>
                             atte. <b>Equipo Antharas</b>
@@ -49,7 +50,8 @@
                     <br>
                     <br> 
                     <div class="alert alert-warning">
-                            <b>No</b> ocupar la funcion de <b>OFICIAL DE GUARDIA</b> HASTA QUE SALGA EL <b>VISOR 2.0</b>
+                             <b>Version 1.0</b> <b>CAPITAN DE GUARDIA</b> Actualmente modulo se encuentra operativo y bajo constante monitoreo en caso de alguna 
+                             incidencia favor de comunicarlo al equipo de Desarrollo</b>
                             <br>
                             <br>
                             atte. <b>Equipo Antharas</b>
@@ -63,6 +65,30 @@
                                     href="{{ route('home.activacionCapitan',[$usu->getHashId(),'S']) }}" 
                                     @endif class="btn btn-success" role="button">Capitan de Guardia</a>
                     @endif
+                    
+
+
+                    @if($usu->cargo_id ==24 || $usu->cargo_id ==25)
+                    <br>
+                    <br> 
+                    <div class="alert alert-warning">
+                             <b>Version 1.0</b> <b>OPERADOR DE TURNO</b> Actualmente modulo se encuentra operativo y bajo constante monitoreo en caso de alguna 
+                             incidencia favor de comunicarlo al equipo de Desarrollo</b>
+                            <br>
+                            <br>
+                            atte. <b>Equipo Antharas</b>
+	                </div>
+                        OPERADOR DE  <b>TURNO</b> 
+                            <br>
+                                <a @if($usu->operador_activo=='S') 
+                                    href="#"
+                                    disabled   
+                                    @else 
+                                    href="{{ route('home.activacionOperador',[$usu->getHashId(),'S']) }}" 
+                                    @endif class="btn btn-success" role="button">Operador en Turno</a>
+                    @endif
+
+
 
 
                      <!-- 
